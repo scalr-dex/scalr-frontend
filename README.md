@@ -1,21 +1,19 @@
-# Frontend code template in `preact`
-
-This template is to be used for frontend applications.
-
-## Features
-
-- State management with `jotai`
-- Around 13.53kb after brotli compression (this includes **everything**) 😱
-- `preact` under the hood with `preact/compat` makes it compatible with virtually any `react` library but still makes it faster
-- Full TypeScript support — no dangling types
-- `vite` packager and devtools make building and development lightning fast
-- `tailwind-css` built-in with 'daisyui'
-- GitHub Actions that lint and check the code on pull requests
-- `prettier` and `eslint` configured, enabled and formatting your code on save
-- List of recommended extensions for VSCode
-- It is important to keep the bundle small, so a `stats.html` file is generated on `yarn build` to visually show you the bundle size
+# Frontend code for scalr telegram mini app
 
 ## Local launch
 
 1. Install dependencies with `yarn`
-2. Run the server with `yarn start`
+2. Check `.env.sample` and create a `.env` file in project root
+3. Run the server with `yarn start`
+
+## Backend
+
+1. [Endpoints description](https://twisty-hour-7d6.notion.site/Mini-app-backend-e6a232073f114ed3913c66f4a76512fd)
+
+## Testing with HMR
+
+Here are some links:
+
+1. [Article](https://habr.com/ru/articles/789442/) just in case about Hot Module Reload
+2. [Article](https://docs.ton.org/develop/dapps/telegram-apps/testing-apps) about testing the app on mobile
+3. We use `tg-mini-app.local` to host the app

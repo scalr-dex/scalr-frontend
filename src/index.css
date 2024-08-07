@@ -2,8 +2,39 @@
 @tailwind components;
 @tailwind utilities;
 
+@font-face {
+  font-family: 'SF Pro Rounded';
+  src: url(/fonts/SfProRounded.woff2) format('woff2-variations');
+  src: url(/fonts/SfProRounded.woff2) format('woff2') tech('variations');
+  font-weight: 100 1000;
+  font-stretch: 25% 151%;
+}
+
+:root {
+  --accent: #4374ec;
+  --accent-hover: #6d9efc;
+  --selection: #6d9efc4d;
+
+  --safe-area-inset-bottom: calc(
+    100vh - var(--tg-viewport-stable-height, 100vh)
+  );
+}
+
+html {
+  scroll-behavior: smooth;
+  scrollbar-color: var(--accent) transparent;
+  scrollbar-width: thin;
+}
+
 body {
   margin: 0;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+::selection {
+  background-color: var(--selection);
+}
+::moz-selection {
+  background-color: var(--selection);
 }
