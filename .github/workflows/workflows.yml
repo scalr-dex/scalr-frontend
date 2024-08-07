@@ -2,21 +2,12 @@ name: Build and lint code
 on:
   pull_request:
     types: [synchronize, opened]
-runs:
-  using: 'composite'
-  steps:
-    - uses: actions/checkout@v3
-    - name: Setup Node.js
-      uses: actions/setup-node@v3
-      with:
-        node-version: '20'
-        cache: 'yarn'
-    - name: Install modules
-      run: yarn
-      shell: bash
-    - name: Build code
-      run: yarn build
-      shell: bash
-    - name: Lint code
-      run: yarn lint
-      shell: bash
+jobs:
+  build-and-lint-code:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          persist-credentials: false
+      - uses: ./.github/workflows/buildLint.yml
