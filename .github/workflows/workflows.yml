@@ -1,14 +1,27 @@
 name: Build and lint code
+description: Action that installs dependencies, builds and lints the code
+branding:
+  icon: 'check'
+  color: 'green'
 on:
   pull_request:
     types: [synchronize, opened]
 jobs:
   build-and-lint-code:
     runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v2
+      steps:
+      - uses: actions/checkout@v3
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
         with:
-          persist-credentials: false
-      - name: buildLint
-        uses: /.github/workflows/buildLint.yml
+          node-version: '20'
+          cache: 'yarn'
+      - name: Install modules
+        run: yarn
+        shell: bash
+      - name: Build code
+        run: yarn build
+        shell: bash
+      - name: Lint code
+        run: yarn lint
+        shell: bash
