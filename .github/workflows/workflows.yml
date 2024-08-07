@@ -10,4 +10,5 @@ jobs:
         uses: actions/checkout@v2
         with:
           persist-credentials: false
-      - uses: ./.github/workflows/buildLint.yml
+      - name: buildLint
+        uses: /.github/workflows/buildLint.yml
