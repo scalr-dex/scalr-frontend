@@ -33,8 +33,7 @@ export const buttonClassNames = {
     'bg-transparent hover:text-opacity-90 focus:text-opacity-70 disabled:text-opacity-60',
   [ButtonTypes.neutral]: 'bg-neutral active:bg-neutral-active',
   [ButtonTypes.outline]: 'bg-transparent border border-white-16',
-  [ButtonTypes.special]:
-    'bg-gradient-to-r from-[#3AF3FF] via-[#4986FB] to-[#8160E1] hover:opacity-90 font-medium',
+  [ButtonTypes.special]: 'bg-special-gradient hover:opacity-90 font-medium',
 }
 
 export default ButtonTypes

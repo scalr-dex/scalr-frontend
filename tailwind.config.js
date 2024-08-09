@@ -11,9 +11,27 @@ module.exports = {
       accent: ['-apple-system, BlinkMacSystemFont'],
     },
     extend: {
+      keyframes: {
+        hovering: {
+          '0%, 100%': { transform: 'translateY(0rem)' },
+          '50%': { transform: 'translateY(0.5rem)' },
+        },
+      },
+      animation: {
+        hovering: 'hovering 4s ease-in-out infinite',
+      },
+      fontSize: {
+        '4.5xl': ['2.5rem', { lineHeight: '3rem' }],
+      },
+      spacing: {
+        '1/10': '10%',
+        '1/7': '15%',
+        '1/5': '20%',
+      },
       boxShadow: {
         super:
-          '0px 15px 40px 0px #00000066, 0px 5px 10px 0px #00000033, 0px 0px 0px 1px #0000001a;',
+          '0px 15px 40px 0px #00000066, 0px 5px 10px 0px #00000033, 0px 0px 0px 1px #0000001a',
+        onboarding: '0px 16px 32px -8px #0C0C0D66',
       },
       screens: {
         se: '375px',
@@ -21,6 +39,7 @@ module.exports = {
       inset: {
         'safe-bottom': 'var(--safe-area-inset-bottom)',
       },
+      margin: { 'safe-bottom': 'var(--safe-area-inset-bottom)' },
       colors: {
         primary: '#0E121B',
         secondary: '#171D26',
@@ -36,6 +55,7 @@ module.exports = {
         'accent-focus': '#427AE4',
         'accent-disabled': '#345FB2',
         success: '#23CFB2',
+        'success-light': '#CBECDE',
         error: '#F3617D',
 
         'white-16': '#ffffff16',

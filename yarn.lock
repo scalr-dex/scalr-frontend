@@ -838,6 +838,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@formkit/auto-animate@npm:^0.8.2":
+  version: 0.8.2
+  resolution: "@formkit/auto-animate@npm:0.8.2"
+  checksum: c8233a9dda70d4b40f1239bb1b0d60ebf8187553e680f1cbde4f28f329b9cf12d0eb4cca99d5adc620087c1f1e0fb1d44909db9bd0ef87d521b51e69d331ae56
+  languageName: node
+  linkType: hard
+
 "@gar/promisify@npm:^1.0.1":
   version: 1.1.2
   resolution: "@gar/promisify@npm:1.1.2"
@@ -5925,6 +5932,7 @@ __metadata:
     "@eslint/compat": ^1.1.1
     "@eslint/eslintrc": ^3.1.0
     "@eslint/js": ^9.8.0
+    "@formkit/auto-animate": ^0.8.2
     "@preact/preset-vite": ^2.8.2
     "@tailwindcss/typography": ^0.5.13
     "@telegram-apps/sdk-react": ^1.1.3

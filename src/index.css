@@ -38,3 +38,7 @@ body {
 ::moz-selection {
   background-color: var(--selection);
 }
+
+.bg-special-gradient {
+  background: linear-gradient(to right, #3af3ff, #4986fb, #8160e1);
+}

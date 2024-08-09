@@ -1,16 +1,21 @@
 import MainSquare from 'components/icons/MainSquare'
-import Layers from 'components/icons/Layers'
-import User from 'components/icons/User'
 import { useLocation } from 'wouter-preact'
+import { useAtomValue } from 'jotai'
+import didOnboardAtom from 'helpers/atoms/UserStates'
+import Cup from 'components/icons/Cup'
+import Gift from 'components/icons/Gift'
 
 const buttons = [
   { path: '/', component: <MainSquare /> },
-  { path: 'tasks', component: <Layers /> },
-  { path: 'profile', component: <User /> },
+  { path: 'tasks', component: <Cup /> },
+  { path: 'profile', component: <Gift /> },
 ]
 
 export default function () {
+  const didOnboard = useAtomValue(didOnboardAtom)
   const [location, setLocation] = useLocation()
+
+  if (!didOnboard) return null
 
   const latest = location.split('/')[1] || '/'
 
