@@ -36,4 +36,11 @@ export const buttonClassNames = {
   [ButtonTypes.special]: 'bg-special-gradient hover:opacity-90 font-medium',
 }
 
+export enum ButtonStatus {
+  default,
+  loading,
+  intermediateAction,
+  success,
+}
+
 export default ButtonTypes

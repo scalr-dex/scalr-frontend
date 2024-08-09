@@ -58,7 +58,15 @@ export default function () {
         ref={parent}
       >
         {stepToBg[step]}
-        <img src="img/onboarding-utya.png" width={155} height={155} />
+        <video
+          playsinline
+          autoplay
+          muted
+          loop
+          src="img/onboarding-utya.webm"
+          width={155}
+          height={155}
+        />
         {stepToComponent[step]}
       </div>
       <Button className="!w-56 !rounded-full mb-2" onClick={onClick}>

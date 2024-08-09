@@ -4,7 +4,7 @@ export default function () {
       viewBox="0 0 393 263"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
-      className="absolute top-0 left-0 w-full -z-10"
+      className="absolute top-5 left-0 w-full -z-10"
     >
       <g opacity="0.24">
         <rect

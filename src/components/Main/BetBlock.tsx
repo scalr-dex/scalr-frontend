@@ -5,6 +5,7 @@ import Button from 'components/Button'
 import StonksArrow from 'components/icons/StonksArrow'
 import ButtonTypes from 'type/Button'
 import { useState } from 'preact/hooks'
+import { toast } from 'react-toastify'
 
 export default function () {
   const [betValue, setBetValue] = useState(0)
@@ -24,6 +25,7 @@ export default function () {
           buttonType={ButtonTypes.success}
           iconRight={<StonksArrow size={16} />}
           disabled={disabled}
+          onClick={() => toast('Niiiice')}
         >
           Higher
         </Button>

@@ -4,6 +4,7 @@ import Main from 'pages/Main'
 import NotFound from 'pages/NotFound'
 import Profile from 'pages/Profile'
 import Tasks from 'pages/Tasks'
+import { ToastContainer } from 'react-toastify'
 import { Router, Switch, Route } from 'wouter-preact'
 
 export default function () {
@@ -12,7 +13,7 @@ export default function () {
   return (
     <Router>
       <div
-        className="relative min-h-[94dvh] flex flex-col justify-between container mx-auto max-w-prose text-white"
+        className="relative min-h-[94dvh] flex flex-col container mx-auto max-w-prose text-white"
         ref={parent}
       >
         <Switch>
@@ -23,6 +24,17 @@ export default function () {
         </Switch>
       </div>
       <BottomTabNavigator />
+      <ToastContainer
+        draggable
+        position="bottom-center"
+        pauseOnHover
+        pauseOnFocusLoss
+        closeOnClick
+        closeButton={false}
+        stacked
+        theme="dark"
+        hideProgressBar
+      />
     </Router>
   )
 }

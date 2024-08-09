@@ -1,11 +1,5 @@
-import { TonConnectUIProvider, TonConnectButton } from '@tonconnect/ui-react'
+import { Header1 } from 'components/icons/Text'
 
 export default function () {
-  return (
-    <div>
-      <TonConnectUIProvider manifestUrl="/tonconnect-manifest.json">
-        <TonConnectButton />
-      </TonConnectUIProvider>
-    </div>
-  )
+  return <Header1>LEADERBOARDS</Header1>
 }
