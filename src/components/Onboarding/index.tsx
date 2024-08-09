@@ -11,7 +11,7 @@ import Step3 from 'components/Onboarding/Step3'
 import Step2Background from 'components/Onboarding/Step2Background'
 import Step3Background from 'components/Onboarding/Step3Background'
 
-type StepToElement = { [step: number]: JSX.Element }
+type StepToElement = { [step: number]: JSX.Element | string }
 
 const stepToComponent: StepToElement = {
   0: <Step1 />,
@@ -25,12 +25,16 @@ const stepToBg: StepToElement = {
   2: <Step3Background />,
 }
 
+const stepToText: StepToElement = {
+  0: 'Ok. All clear  🫡',
+  1: 'Cool 😎',
+  2: 'Wooow. I’m in  🔥🚀',
+}
+
 export default function () {
   const setDidOnboard = useSetAtom(didOnboardAtom)
   const [parent] = useAutoAnimate()
   const [step, setStep] = useState(0)
-
-  const buttonText = step ? 'Wooow. I’m in  🔥🚀' : 'Ok. All clear  🫡'
 
   const onClick = useCallback(() => {
     if (step === 2) {
@@ -58,7 +62,7 @@ export default function () {
         {stepToComponent[step]}
       </div>
       <Button className="!w-56 !rounded-full mb-2" onClick={onClick}>
-        {buttonText}
+        {stepToText[step]}
       </Button>
     </div>
   )
