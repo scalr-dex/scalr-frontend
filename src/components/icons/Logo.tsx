@@ -3,7 +3,7 @@ export default function ({
   className,
 }: {
   size: number
-  className: string
+  className?: string
 }) {
   return (
     <svg
