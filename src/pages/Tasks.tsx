@@ -1,15 +1,16 @@
 import Logo from 'components/icons/Logo'
 import X from 'components/icons/socials/X'
 import { BodyText, Header2 } from 'components/icons/Text'
+import InviteFriends from 'components/Tasks/InviteFriends'
 import TaskBlock from 'components/Tasks/TaskBlock'
 
 export default function () {
   const taskList = [{}]
 
   return (
-    <>
+    <div className="flex flex-col justify-between flex-1">
       <div className="flex flex-col items-center text-center">
-        <Logo size={68} />
+        <Logo size={68} className="p-1 rounded-lg bg-secondary" />
         <Header2>Tasks available</Header2>
         <BodyText>
           We’ll reward you immediately with points after each task completion
@@ -18,6 +19,7 @@ export default function () {
       {taskList.map(() => (
         <TaskBlock icon={<X />} text="Follow X" rewardAmount={1000} />
       ))}
-    </>
+      <InviteFriends />
+    </div>
   )
 }

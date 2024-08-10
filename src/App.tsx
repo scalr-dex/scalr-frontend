@@ -13,7 +13,7 @@ export default function () {
   return (
     <Router>
       <div
-        className="relative min-h-[94dvh] flex flex-col container mx-auto max-w-prose text-white"
+        className="relative min-h-[94dvh] flex flex-col pt-1 container mx-auto max-w-prose text-white"
         ref={parent}
       >
         <Switch>

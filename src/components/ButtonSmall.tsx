@@ -23,7 +23,7 @@ export default function ({
   return (
     <button
       {...buttonProps}
-      className={`flex flex-row gap-x-1 items-center justify-center w-fit min-w-16 rounded-3xl px-4 py-2 transition-all font-semibold ${buttonStyles} ${className}`}
+      className={`flex flex-row gap-x-1 items-center justify-center w-fit min-w-16 rounded-3xl transition-all font-semibold ${buttonStyles} ${className}`}
     >
       {loading ? <Loader /> : content}
     </button>

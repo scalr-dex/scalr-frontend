@@ -1,5 +1,5 @@
 import { JSX } from 'preact/jsx-runtime'
-import ChildrenProp from 'type/ChildrenProp'
+import { ChildrenProp } from 'type/Props'
 
 export function Header1({
   children,

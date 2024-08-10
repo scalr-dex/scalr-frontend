@@ -29,7 +29,12 @@ export default function ({
           <AccentText>+{rewardAmount} pts</AccentText>
         </div>
       </div>
-      <ButtonSmall buttonType={status}>{statusToText[status]}</ButtonSmall>
+      <ButtonSmall
+        buttonType={status}
+        className="text-sm font-accent px-2.5 py-1.5"
+      >
+        {statusToText[status]}
+      </ButtonSmall>
     </div>
   )
 }
