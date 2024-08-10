@@ -31,9 +31,9 @@ export default function () {
         pauseOnFocusLoss
         closeOnClick
         closeButton={false}
-        stacked
         theme="dark"
         hideProgressBar
+        draggableDirection="y"
       />
     </Router>
   )

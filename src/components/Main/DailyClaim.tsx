@@ -4,7 +4,11 @@ import ButtonTypes from 'type/Button'
 
 export default function () {
   return (
-    <ButtonSmall buttonType={ButtonTypes.special} iconRight={<ChevronRight />}>
+    <ButtonSmall
+      buttonType={ButtonTypes.special}
+      iconRight={<ChevronRight />}
+      className="px-4 py-1.5"
+    >
       Daily Claim
     </ButtonSmall>
   )
