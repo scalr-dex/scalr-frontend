@@ -1,3 +1,12 @@
-export default function ({ e }: { e: unknown }) {
+import { toast } from 'react-toastify'
+
+export default function ({
+  e,
+  toastMessage,
+}: {
+  e: unknown
+  toastMessage?: string
+}) {
   console.error(e)
+  if (toastMessage) toast.error(toastMessage)
 }

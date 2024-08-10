@@ -10,6 +10,7 @@ import Step1Background from 'components/Onboarding/Step1Background'
 import Step3 from 'components/Onboarding/Step3'
 import Step2Background from 'components/Onboarding/Step2Background'
 import Step3Background from 'components/Onboarding/Step3Background'
+import 'stacked-alpha-video'
 
 type StepToElement = { [step: number]: JSX.Element | string }
 
@@ -28,7 +29,7 @@ const stepToBg: StepToElement = {
 const stepToText: StepToElement = {
   0: 'Ok. All clear  🫡',
   1: 'Cool 😎',
-  2: 'Wooow. I’m in  🔥🚀',
+  2: 'Wooow 🔥 I’m in  🚀',
 }
 
 export default function () {
@@ -47,7 +48,7 @@ export default function () {
 
   return (
     <div
-      className="flex flex-col items-center justify-between h-screen shadow-onboarding"
+      className="flex flex-col items-center justify-between h-[94dvh] shadow-onboarding"
       style={{
         background:
           'radial-gradient(ellipse at left, #133D8D60, transparent 50%), radial-gradient(circle at right, #133D8D70, transparent 60%)',
@@ -58,15 +59,7 @@ export default function () {
         ref={parent}
       >
         {stepToBg[step]}
-        <video
-          playsinline
-          autoplay
-          muted
-          loop
-          src="img/onboarding-utya.webm"
-          width={155}
-          height={155}
-        />
+        <img width={155} height={155} src="/img/utya.png" />
         {stepToComponent[step]}
       </div>
       <Button className="!w-56 !rounded-full mb-2" onClick={onClick}>

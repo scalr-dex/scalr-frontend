@@ -5,7 +5,7 @@ import { visualizer } from 'rollup-plugin-visualizer'
 import basicSsl from '@vitejs/plugin-basic-ssl'
 
 export default defineConfig({
-  plugins: [preact(), tsconfigPaths(), basicSsl()],
+  plugins: [preact(), tsconfigPaths()],
   build: {
     rollupOptions: {
       plugins: [

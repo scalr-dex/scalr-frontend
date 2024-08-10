@@ -4,14 +4,16 @@ import { useAtomValue } from 'jotai'
 import didOnboardAtom from 'helpers/atoms/UserStates'
 import Cup from 'components/icons/Cup'
 import Gift from 'components/icons/Gift'
+import { useHapticFeedback } from '@telegram-apps/sdk-react'
 
 const buttons = [
   { path: '/', component: <MainSquare /> },
   { path: 'tasks', component: <Cup /> },
-  { path: 'profile', component: <Gift /> },
+  { path: 'leaderboards', component: <Gift /> },
 ]
 
 export default function () {
+  const haptic = useHapticFeedback()
   const didOnboard = useAtomValue(didOnboardAtom)
   const [location, setLocation] = useLocation()
 
@@ -26,6 +28,7 @@ export default function () {
           <button
             onClick={() => {
               setLocation(path)
+              haptic.impactOccurred('light')
             }}
             className={`pointer-events-auto w-6 h-6 ${latest.match(path) ? 'text-white' : 'text-opacity-50'} hover:text-gray-300 transition-colors hover:drop-shadow`}
             key={'nav-link-' + index}

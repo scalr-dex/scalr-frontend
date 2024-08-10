@@ -1,4 +1,4 @@
-/** @type {import("@types/tailwindcss/tailwind-config").TailwindConfig } */
+/** @type {import('tailwindcss/defaultConfig')} */
 module.exports = {
   content: ['./index.html', './src/**/!(tailwind).{ts,tsx}'],
   plugins: [require('@tailwindcss/typography'), require('daisyui')],
@@ -39,6 +39,10 @@ module.exports = {
       inset: {
         'safe-bottom': 'var(--safe-area-inset-bottom)',
       },
+      background: {
+        'border-gradient':
+          'linear-gradient(white, white) padding-box, linear-gradient(to right, darkblue, darkorchid) border-box',
+      },
       margin: { 'safe-bottom': 'var(--safe-area-inset-bottom)' },
       colors: {
         primary: '#0E121B',
@@ -59,6 +63,7 @@ module.exports = {
         error: '#F3617D',
 
         'white-16': '#ffffff16',
+        skelton: '#DDDDDD60',
       },
     },
   },

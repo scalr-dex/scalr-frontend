@@ -7,7 +7,7 @@ export default function () {
         viewBox="0 0 95 55"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
-        className="absolute left-1/4 top-1/5 animate-hovering"
+        className="absolute top-1/10 left-1/10 animate-hovering"
       >
         <path
           d="M4.23304 38.7579C1.8952 30.0329 7.07297 21.0648 15.7979 18.7269L69.8898 4.23305C78.6147 1.89521 87.5829 7.07299 89.9207 15.7979C92.2586 24.5229 87.0808 33.491 78.3558 35.8289L24.264 50.3228C15.539 52.6606 6.57088 47.4828 4.23304 38.7579Z"
@@ -48,7 +48,7 @@ export default function () {
         viewBox="0 0 104 53"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
-        className="absolute right-1/4 top-1/4 animate-hovering"
+        className="absolute right-1/10 top-1/7 animate-hovering"
       >
         <path
           d="M3.32233 15.8213C5.15713 7.08345 13.728 1.4874 22.4659 3.3222L88.0359 17.0907C96.7738 18.9255 102.37 27.4964 100.535 36.2343C98.7002 44.9721 90.1294 50.5682 81.3915 48.7334L15.8215 34.9649C7.08359 33.1301 1.48753 24.5592 3.32233 15.8213Z"

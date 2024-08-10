@@ -1,7 +1,16 @@
-export default interface User {
+import { LaunchParams } from '@telegram-apps/sdk-react'
+
+export interface ServerUser {
   can_claim_daily_reward: string
   points: number
   telegram_id: number
   ticket: string
   ton_address: string
+}
+
+export interface ClientUser {
+  ticket: string
+  balance: number
+  timeToReward: string
+  launchParams: LaunchParams
 }

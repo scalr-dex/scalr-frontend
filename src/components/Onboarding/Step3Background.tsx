@@ -6,7 +6,7 @@ export default function () {
       viewBox="0 0 219 108"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
-      className="absolute top-1/10 animate-hovering"
+      className="absolute top-0 animate-hovering"
     >
       <g filter="url(#filter0_d_1931_20427)">
         <rect

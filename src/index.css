@@ -15,6 +15,7 @@
   --accent-hover: #6d9efc;
   --selection: #6d9efc4d;
 
+  --primary: #0e121b;
   --controls-tertiary: #2e3442;
 
   --safe-area-inset-bottom: calc(
@@ -40,7 +41,31 @@ body {
 ::moz-selection {
   background-color: var(--selection);
 }
-
 .bg-special-gradient {
   background: linear-gradient(to right, #3af3ff, #4986fb, #8160e1);
+}
+
+.bg-border-gradient {
+  background:
+    linear-gradient(var(--primary), var(--primary)) padding-box,
+    linear-gradient(to right, #3af3ff, #4986fb, #8160e1) border-box;
+  border: 1.5px solid transparent;
+}
+
+.dots-loader::before {
+  animation: dots 1s linear infinite;
+  content: '.';
+}
+
+@keyframes dots {
+  0%,
+  30% {
+    content: '.';
+  }
+  60% {
+    content: '..';
+  }
+  90% {
+    content: '...';
+  }
 }

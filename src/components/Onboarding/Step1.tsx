@@ -8,7 +8,7 @@ export default function () {
       <Header1 className="text-center">
         <SpecialText
           withShadow
-          className="bg-white text-primary !py-0 !rounded-2xl -rotate-6"
+          className="bg-white text-primary !py-0 -rotate-6"
         >
           Bet
         </SpecialText>

@@ -2364,6 +2364,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"dayjs@npm:^1.11.12":
+  version: 1.11.12
+  resolution: "dayjs@npm:1.11.12"
+  checksum: 40a4f67c2df3af125ae0ddec68d3a6d806d3009a7414bf45479aaf82f1dd82f3e139e6642e72391abccc37488897830c56afcabb4c819014130d283644df8128
+  languageName: node
+  linkType: hard
+
 "debug@npm:4, debug@npm:^4.1.0, debug@npm:^4.1.1, debug@npm:^4.3.1, debug@npm:^4.3.2":
   version: 4.3.2
   resolution: "debug@npm:4.3.2"
@@ -5459,6 +5466,18 @@ __metadata:
   languageName: node
   linkType: hard
 
+"react-device-detect@npm:^2.2.3":
+  version: 2.2.3
+  resolution: "react-device-detect@npm:2.2.3"
+  dependencies:
+    ua-parser-js: ^1.0.33
+  peerDependencies:
+    react: ">= 0.14.0"
+    react-dom: ">= 0.14.0"
+  checksum: 42d9b3182b9d2495bf0d7914c9f370da51d8bdb853a3eba2acaf433894ae760386a075ba103185be825b33d42f50d85ef462087f261656d433f4c74dab23861f
+  languageName: node
+  linkType: hard
+
 "react-is@npm:^16.13.1":
   version: 16.13.1
   resolution: "react-is@npm:16.13.1"
@@ -5872,6 +5891,7 @@ __metadata:
     autoprefixer: ^10.4.19
     cross-env: ^7.0.3
     daisyui: ^4.12.10
+    dayjs: ^1.11.12
     envalid: ^8.0.0
     eslint: ^9.3.0
     eslint-config-prettier: ^9.1.0
@@ -5888,8 +5908,10 @@ __metadata:
     postcss: ^8.4.38
     preact: ^10.22.0
     prettier: ^3.2.5
+    react-device-detect: ^2.2.3
     react-toastify: ^10.0.5
     rollup-plugin-visualizer: ^5.12.0
+    stacked-alpha-video: ^1.0.8
     tailwindcss: ^3.4.3
     ts-node: ^10.9.2
     typescript: ^5.4.5
@@ -6099,6 +6121,13 @@ __metadata:
   version: 1.0.0-pre2
   resolution: "stack-trace@npm:1.0.0-pre2"
   checksum: 036a7a7edafae602b15e4c26a79ad9752d97d87be648b9c921a5d98c1426219c21784ee6aee3cff06ba555d238c30cd87b78b2d9ad537ac94df8b689ffc6b4b6
+  languageName: node
+  linkType: hard
+
+"stacked-alpha-video@npm:^1.0.8":
+  version: 1.0.8
+  resolution: "stacked-alpha-video@npm:1.0.8"
+  checksum: 4b3a01ebfcae3debcde51ed8d966581562ded1556184813f3a3204810885c672d41d66efe4da1ce28fc16bf856c05bdd711fae1aa65329770ed8085b4b9127b0
   languageName: node
   linkType: hard
 
@@ -6619,6 +6648,13 @@ __metadata:
     tsc: bin/tsc
     tsserver: bin/tsserver
   checksum: 2373c693f3b328f3b2387c3efafe6d257b057a142f9a79291854b14ff4d5367d3d730810aee981726b677ae0fd8329b23309da3b6aaab8263dbdccf1da07a3ba
+  languageName: node
+  linkType: hard
+
+"ua-parser-js@npm:^1.0.33":
+  version: 1.0.38
+  resolution: "ua-parser-js@npm:1.0.38"
+  checksum: d0772b22b027338d806ab17d1ac2896ee7485bdf9217c526028159f3cd6bb10272bb18f6196d2f94dde83e3b36dc9d2533daf08a414764f6f4f1844842383838
   languageName: node
   linkType: hard
 
