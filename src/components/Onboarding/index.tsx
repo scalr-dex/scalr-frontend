@@ -10,7 +10,7 @@ import Step1Background from 'components/Onboarding/Step1Background'
 import Step3 from 'components/Onboarding/Step3'
 import Step2Background from 'components/Onboarding/Step2Background'
 import Step3Background from 'components/Onboarding/Step3Background'
-import 'stacked-alpha-video'
+import AlphaVideo from 'components/AlphaVideo.js'
 
 type StepToElement = { [step: number]: JSX.Element | string }
 
@@ -59,7 +59,14 @@ export default function () {
         ref={parent}
       >
         {stepToBg[step]}
-        <img width={155} height={155} src="/img/utya.png" />
+        <AlphaVideo
+          srcAv1="/img/utya-av1.mp4"
+          srcHevc="/img/utya-hevc.mp4"
+          poster="/img/utya.png"
+          src="/img/utya.webm"
+          width={155}
+          height={155}
+        />
         {stepToComponent[step]}
       </div>
       <Button className="!w-56 !rounded-full mb-2" onClick={onClick}>
