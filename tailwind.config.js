@@ -8,7 +8,7 @@ module.exports = {
   theme: {
     fontFamily: {
       sans: ['SF Pro Rounded', 'sans'],
-      accent: ['-apple-system, BlinkMacSystemFont'],
+      accent: ['SF Pro', 'sans'],
     },
     extend: {
       keyframes: {

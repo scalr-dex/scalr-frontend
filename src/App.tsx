@@ -20,19 +20,18 @@ export default function () {
   return (
     <SDKProvider debug={env.DEV}>
       <Router>
-        <div
-          className="relative min-h-[94dvh] overflow-x-hidden flex flex-col pt-1 container mx-auto max-w-prose text-white"
-          ref={parent}
-        >
-          <Switch>
-            <Route path="/" component={Main} />
-            <Route path="/tasks" component={Tasks} />
-            <Route path="/leaderboards" component={Leaderboards} />
+        <div className="relative min-h-[100dvh] overflow-x-hidden flex flex-col pt-1 container mx-auto max-w-prose text-white">
+          <div ref={parent}>
+            <Switch>
+              <Route path="/" component={Main} />
+              <Route path="/tasks" component={Tasks} />
+              <Route path="/leaderboards" component={Leaderboards} />
 
-            <Route component={NotFound} />
-          </Switch>
+              <Route component={NotFound} />
+            </Switch>
+          </div>
+          <BottomTabNavigator />
         </div>
-        <BottomTabNavigator />
         <ToastContainer
           draggable
           position="bottom-center"

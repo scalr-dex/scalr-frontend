@@ -10,6 +10,14 @@
   font-stretch: 25% 151%;
 }
 
+@font-face {
+  font-family: 'SF Pro';
+  src: url(/fonts/SfPro.woff2) format('woff2-variations');
+  src: url(/fonts/SfPro.woff2) format('woff2') tech('variations');
+  font-weight: 100 1000;
+  font-stretch: 25% 151%;
+}
+
 :root {
   --accent: #4374ec;
   --accent-hover: #6d9efc;

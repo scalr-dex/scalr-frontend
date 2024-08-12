@@ -5,7 +5,7 @@ import ButtonTypes from 'type/Button'
 
 export default function () {
   return (
-    <div>
+    <div className="flex flex-col justify-end flex-1">
       <Header4>Invite frens</Header4>
       <CardWrapper className="gap-y-4">
         <AccentText>Receive 5% of their rewards</AccentText>
