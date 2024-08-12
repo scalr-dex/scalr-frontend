@@ -58,6 +58,7 @@ module.exports = {
         'accent-hover': '#6D9EFC',
         'accent-focus': '#427AE4',
         'accent-disabled': '#345FB2',
+        'accent-dimmed': '#B1C9F7',
         success: '#23CFB2',
         'success-light': '#CBECDE',
         error: '#F3617D',

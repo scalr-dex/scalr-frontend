@@ -5,15 +5,15 @@ import Button from 'components/Button'
 import StonksArrow from 'components/icons/StonksArrow'
 import ButtonTypes from 'type/Button'
 import { useState } from 'preact/hooks'
-import { toast } from 'react-toastify'
 import { useAtomValue } from 'jotai'
 import UserAtom from 'helpers/atoms/UserAtom'
+import placeBet from 'helpers/api/placeBet'
 
-export default function () {
+export default function ({ loading }: { loading?: boolean }) {
   const [betValue, setBetValue] = useState(0)
   const user = useAtomValue(UserAtom)
 
-  const disabled = betValue <= 0
+  const disabled = betValue <= 0 || loading
 
   return (
     <div className="flex flex-col px-4 gap-y-5">
@@ -22,15 +22,18 @@ export default function () {
         <DailyClaim timeToReward={user?.timeToReward} />
       </div>
 
-      <SelectBet value={betValue} setValue={setBetValue} max={user?.balance} />
+      <SelectBet
+        value={betValue}
+        setValue={setBetValue}
+        max={user?.balance}
+        disabled={loading}
+      />
       <div className="flex flex-row gap-x-1">
         <Button
           buttonType={ButtonTypes.success}
           iconRight={<StonksArrow size={16} />}
           disabled={disabled}
-          onClick={() => {
-            toast('Niiiice')
-          }}
+          onClick={() => placeBet({ amount: betValue, direction: 'long' })}
         >
           Higher
         </Button>
@@ -38,9 +41,7 @@ export default function () {
           buttonType={ButtonTypes.error}
           iconRight={<StonksArrow rotate={90} size={16} />}
           disabled={disabled}
-          onClick={() => {
-            toast('Doooown')
-          }}
+          onClick={() => placeBet({ amount: betValue, direction: 'short' })}
         >
           Lower
         </Button>

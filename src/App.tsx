@@ -9,6 +9,7 @@ import { SDKProvider } from '@telegram-apps/sdk-react'
 import useSetup from 'helpers/hooks/useSetup'
 import BrowserInvite from 'pages/BrowserInvite'
 import Leaderboards from 'pages/Leaderboards'
+import env from 'helpers/env'
 
 export default function () {
   const isTma = useSetup()
@@ -17,10 +18,10 @@ export default function () {
   if (!isTma) return <BrowserInvite />
 
   return (
-    <SDKProvider debug>
+    <SDKProvider debug={env.DEV}>
       <Router>
         <div
-          className="relative min-h-[94dvh] flex flex-col pt-1 container mx-auto max-w-prose text-white"
+          className="relative min-h-[94dvh] overflow-x-hidden flex flex-col pt-1 container mx-auto max-w-prose text-white"
           ref={parent}
         >
           <Switch>

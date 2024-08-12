@@ -33,6 +33,7 @@ async function setupUser() {
 
   const { initData, initDataRaw } = launchParams
 
+  console.log(initData)
   if (!initData || !initDataRaw) return
 
   try {
