@@ -31,7 +31,7 @@ export default function ({
       setLoading(false)
       refetch()
     })
-  }, [Status, TaskID, URL])
+  }, [Status, TaskID, URL, refetch, utils])
 
   return (
     <div className="flex flex-row items-center justify-between">
