@@ -1,7 +1,8 @@
-import { useCallback, useEffect, useMemo, useState } from 'preact/hooks'
-import useWebSocket from 'helpers/hooks/useWebSocket'
+import { useCallback, useEffect, useMemo } from 'preact/hooks'
 import { EventData, EventDataPriceChangeSingle } from 'type/WebsocketEvents'
 import { TokenStates } from 'type/TokenState'
+import { useAtom } from 'jotai'
+import priceHistoryAtom from 'helpers/atoms/priceHistoryAtom'
 
 const dataMaxLength = 30
 
@@ -21,9 +22,8 @@ function normalizeEventData(data: EventData): TokenStates {
   return []
 }
 
-export default function () {
-  const socket = useWebSocket()
-  const [data, setData] = useState<TokenStates>([])
+export default function (socket: WebSocket) {
+  const [data, setData] = useAtom(priceHistoryAtom)
   const queue = useMemo(() => new Set<string>(), [])
 
   const flush = useCallback(() => {
@@ -34,7 +34,7 @@ export default function () {
         )
       )
     queue.clear()
-  }, [queue])
+  }, [queue, setData])
 
   useEffect(() => {
     if (!socket) return

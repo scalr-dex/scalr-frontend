@@ -4,28 +4,34 @@ import {
   retrieveLaunchParams,
 } from '@telegram-apps/sdk-react'
 import backendKy from 'helpers/api/backendKy'
-import { isBrowser } from 'react-device-detect'
 import { ServerUser } from 'type/User'
 import { useEffect, useState } from 'preact/hooks'
 import { writeAtom } from 'helpers/atoms/atomStore'
 import UserAtom from 'helpers/atoms/UserAtom'
 import handleError from 'helpers/handleError'
+import { setupWebSocket } from 'helpers/api/webSocket'
+import AppStatus from 'type/AppStatus'
 
 export default function () {
-  const [isTgMiniApp, setIsTgMiniApp] = useState(!isBrowser)
+  const [appStatus, setAppStatus] = useState(AppStatus.loading)
+  const [socket, setSocket] = useState<WebSocket>()
 
   useEffect(() => {
-    void isTMA().then(setIsTgMiniApp)
+    const start = async () => {
+      const isMini = await isTMA()
+      setAppStatus(isMini ? AppStatus.isTma : AppStatus.isElse)
+
+      if (!isMini) return
+
+      const user = await setupUser()
+      if (user) setSocket(setupWebSocket(user.ticket))
+      setupMiniApp()
+    }
+
+    void start()
   }, [])
 
-  useEffect(() => {
-    if (!isTgMiniApp) return
-
-    void setupUser()
-    void setupMiniApp()
-  }, [isTgMiniApp])
-
-  return isTgMiniApp
+  return { appStatus, socket }
 }
 
 async function setupUser() {
@@ -33,7 +39,6 @@ async function setupUser() {
 
   const { initData, initDataRaw } = launchParams
 
-  console.log(initData)
   if (!initData || !initDataRaw) return
 
   try {
@@ -42,13 +47,15 @@ async function setupUser() {
     })
 
     const user = await response.json<ServerUser>()
-
-    writeAtom(UserAtom, {
+    const clientUser = {
       ticket: user.ticket,
       balance: user.points,
       timeToReward: user.can_claim_daily_reward,
       launchParams,
-    })
+    }
+
+    writeAtom(UserAtom, clientUser)
+    return clientUser
   } catch (e) {
     handleError({ e, toastMessage: 'Unauthorized' })
   }

@@ -6,8 +6,8 @@ import didOnboardAtom from 'helpers/atoms/UserStates'
 import useGraph from 'helpers/hooks/useGraph'
 import { useAtomValue } from 'jotai'
 
-function InnerMain() {
-  const data = useGraph()
+function InnerMain({ socket }: { socket: WebSocket }) {
+  const data = useGraph(socket)
 
   const lastIndex = data.length - 1
   const lastPrice = data[lastIndex]?.y
@@ -22,10 +22,10 @@ function InnerMain() {
   )
 }
 
-export default function () {
+export default function ({ socket }: { socket: WebSocket }) {
   const didOnboard = useAtomValue(didOnboardAtom)
 
   if (!didOnboard) return <Onboarding />
 
-  return <InnerMain />
+  return <InnerMain socket={socket} />
 }

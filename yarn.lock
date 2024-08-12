@@ -1491,6 +1491,24 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@tanstack/query-core@npm:5.51.21":
+  version: 5.51.21
+  resolution: "@tanstack/query-core@npm:5.51.21"
+  checksum: a602e70bfbfa1fa28333be8c1b9ac9c9b97937b236d3997a757079ae04086fe59c2688cb6406fd82dcf9ef07f73e7a4ba1d373040f6cad340e1f64bceafe0e07
+  languageName: node
+  linkType: hard
+
+"@tanstack/react-query@npm:^5.51.23":
+  version: 5.51.23
+  resolution: "@tanstack/react-query@npm:5.51.23"
+  dependencies:
+    "@tanstack/query-core": 5.51.21
+  peerDependencies:
+    react: ^18.0.0
+  checksum: d1d8131232430635923694befff9bdabc8d18ca2392789456a28191020d489671577e02ee5b0107e0064fea981c74c99cea3077a4e34cc1ac7438175bd50effe
+  languageName: node
+  linkType: hard
+
 "@telegram-apps/sdk-react@npm:^1.1.3":
   version: 1.1.3
   resolution: "@telegram-apps/sdk-react@npm:1.1.3"
@@ -6371,6 +6389,7 @@ __metadata:
     "@nivo/line": ^0.87.0
     "@preact/preset-vite": ^2.8.2
     "@tailwindcss/typography": ^0.5.13
+    "@tanstack/react-query": ^5.51.23
     "@telegram-apps/sdk-react": ^1.1.3
     "@types/lodash": ^4.17.7
     "@types/node": ^20.12.12

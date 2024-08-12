@@ -39,11 +39,4 @@ export const buttonClassNames = (disabled?: boolean) => ({
   [ButtonTypes.special]: `text-white ${disabled ? 'bg-border-gradient' : 'bg-special-gradient'} hover:opacity-90 active:opacity-90 font-medium disabled:bg-primary disabled:text-opacity-50`,
 })
 
-export enum ButtonStatus {
-  default,
-  loading,
-  intermediateAction,
-  success,
-}
-
 export default ButtonTypes

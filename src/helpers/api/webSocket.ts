@@ -1,3 +1,4 @@
+import env from 'helpers/env'
 import {
   EventDataBetLost,
   EventDataPriceChange,
@@ -32,4 +33,12 @@ export default function ({ data }: { data: EventData }) {
   console.log(data)
   return
   //   return { balance: getBalanceChangeFromWsEventData(data).b }
+}
+
+export function setupWebSocket(ticket: string) {
+  const io = (url: URL) => new WebSocket(url)
+  const url = new URL(`${env.VITE_BACKEND_URL.replace('https', 'wss')}/ws`)
+  url.searchParams.set('ticket', ticket)
+
+  return io(url)
 }

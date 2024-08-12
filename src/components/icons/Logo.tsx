@@ -1,10 +1,14 @@
 export default function ({
   size,
+  withBackground,
   className,
 }: {
   size: number
+  withBackground?: boolean
   className?: string
 }) {
+  const background = withBackground ? 'p-1 rounded-lg bg-secondary ' : ''
+
   return (
     <svg
       width={size}
@@ -12,7 +16,7 @@ export default function ({
       viewBox="0 0 52 52"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
-      className={className}
+      className={background + className}
     >
       <circle cx="26.1055" cy="26.104" r="10.0435" fill="currentColor" />
       <path

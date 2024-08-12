@@ -1,39 +1,55 @@
 import ButtonSmall from 'components/ButtonSmall'
-import CheckMark from 'components/icons/CheckMark'
 import { AccentText } from 'components/icons/Text'
-import { JSX } from 'preact/jsx-runtime'
-import ButtonTypes from 'type/Button'
-
-const statusToText = {
-  [ButtonTypes.success]: <CheckMark />,
-  [ButtonTypes.neutral]: 'Claim',
-}
+import UserTask, {
+  iconNumberToIcon,
+  taskStatusToButtonText,
+  taskStatusToButtonType,
+  taskStatusToCallback,
+} from 'type/UserTask'
+import { useCallback, useState } from 'preact/hooks'
+import { useUtils } from '@telegram-apps/sdk-react'
 
 export default function ({
-  icon,
-  text,
-  status = ButtonTypes.neutral,
-  rewardAmount,
-}: {
-  icon: JSX.Element
-  text: string
-  rewardAmount: number
-  status?: ButtonTypes.success | ButtonTypes.neutral
-}) {
+  IconNumber,
+  Name,
+  RewardAmount,
+  Status,
+  TaskID,
+  URL,
+  refetch,
+}: UserTask & { refetch: () => void }) {
+  const utils = useUtils()
+  const [loading, setLoading] = useState(false)
+  const buttonType = taskStatusToButtonType[Status]
+
+  const onClick = useCallback(() => {
+    setLoading(true)
+
+    // TODO: add stale period before canClaim
+    utils.openLink(URL)
+    void taskStatusToCallback[Status](TaskID).finally(() => {
+      setLoading(false)
+      refetch()
+    })
+  }, [Status, TaskID, URL])
+
   return (
     <div className="flex flex-row items-center justify-between">
       <div className="flex flex-row gap-x-1">
-        <div className="w-6 h-6">{icon}</div>
+        <div className="w-6 h-6">{iconNumberToIcon[IconNumber]}</div>
         <div>
-          <AccentText className="font-bold">{text} </AccentText>
-          <AccentText>+{rewardAmount} pts</AccentText>
+          <AccentText className="font-bold">{Name} </AccentText>
+          <AccentText>+{RewardAmount} pts</AccentText>
         </div>
       </div>
       <ButtonSmall
-        buttonType={status}
+        buttonType={buttonType}
         className="text-sm font-accent px-2.5 py-1.5"
+        onClick={onClick}
+        isLoading={loading}
+        disabled={Status === 'Claimed'}
       >
-        {statusToText[status]}
+        {taskStatusToButtonText[Status]}
       </ButtonSmall>
     </div>
   )
