@@ -5,7 +5,7 @@ import { claimTask, markTaskDone } from 'helpers/api/userTasks'
 import { JSX } from 'preact/jsx-runtime'
 import ButtonTypes from 'type/Button'
 
-type TaskStatus = 'NotStarted' | 'ReadyToClaim' | 'Claimed'
+export type TaskStatus = 'NotStarted' | 'ReadyToClaim' | 'Claimed'
 
 export default interface UserTask {
   IconNumber: number

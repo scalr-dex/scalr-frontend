@@ -25,8 +25,9 @@ export default function ({
   const onClick = useCallback(() => {
     setLoading(true)
 
-    // TODO: add stale period before canClaim
-    utils.openLink(URL)
+    if (Status === 'NotStarted') {
+      utils.openLink(URL)
+    }
     void taskStatusToCallback[Status](TaskID).finally(() => {
       setLoading(false)
       refetch()
