@@ -11,6 +11,13 @@ import UserAtom from 'helpers/atoms/UserAtom'
 import handleError from 'helpers/handleError'
 import { setupWebSocket } from 'helpers/api/webSocket'
 import AppStatus from 'type/AppStatus'
+import {
+  init as initAnalytics,
+  identify,
+  Identify,
+} from '@amplitude/analytics-browser'
+import { LogLevel } from '@amplitude/analytics-types'
+import env from 'helpers/env'
 
 export default function () {
   const [appStatus, setAppStatus] = useState(AppStatus.loading)
@@ -21,15 +28,38 @@ export default function () {
       const isMini = await isTMA()
       setAppStatus(isMini ? AppStatus.isTma : AppStatus.isElse)
 
-      if (!isMini) return
+      initAnalytics(env.VITE_AMPLITUDE_API_KEY, {
+        appVersion: env.DEV ? 'DEV' : 'PROD',
+        logLevel: env.DEV ? LogLevel.Debug : LogLevel.None,
+        serverZone: 'EU',
+        autocapture: {
+          attribution: false,
+          pageViews: false,
+          sessions: true,
+          formInteractions: false,
+          fileDownloads: false,
+          elementInteractions: false,
+        },
+      })
 
-      const user = await setupUser()
-      if (user) setSocket(setupWebSocket(user.ticket))
-      setupMiniApp()
+      if (isMini) {
+        const user = await setupUser()
+        if (user) {
+          setSocket(setupWebSocket(user.ticket))
+
+          identify(new Identify(), {
+            user_id: String(user.launchParams.initData?.user?.id),
+          })
+        }
+        setupMiniApp()
+        setAppStatus(AppStatus.isTma)
+      } else {
+        setAppStatus(AppStatus.isElse)
+      }
     }
 
     void start()
-  }, [])
+  }, [setSocket])
 
   return { appStatus, socket }
 }
@@ -66,4 +96,5 @@ function setupMiniApp() {
   postEvent('web_app_set_header_color', { color: '#0e121b' })
   postEvent('web_app_set_background_color', { color: '#0e121b' })
   postEvent('web_app_expand')
+  postEvent('web_app_setup_swipe_behavior', { allow_vertical_swipe: false })
 }

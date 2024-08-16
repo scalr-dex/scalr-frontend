@@ -8,8 +8,8 @@ import { useHapticFeedback } from '@telegram-apps/sdk-react'
 
 const buttons = [
   { path: '/', component: <MainSquare /> },
-  { path: 'tasks', component: <Cup /> },
-  { path: 'leaderboards', component: <Gift /> },
+  { path: 'leaderboards', component: <Cup /> },
+  { path: 'tasks', component: <Gift /> },
 ]
 
 export default function () {
@@ -22,7 +22,7 @@ export default function () {
   const latest = location.split('/')[1] || '/'
 
   return (
-    <div className="sticky flex justify-center items-center bottom-1 mb-safe-bottom pointer-events-none">
+    <div className="sticky flex justify-center items-center bottom-safe-bottom my-4 pointer-events-none">
       <div className="w-fit shadow-super flex flex-row gap-x-8 items-center justify-center px-8 py-3 border border-white-16 bg-primary text-gray-500 rounded-3xl">
         {buttons.map(({ path, component }, index) => (
           <button

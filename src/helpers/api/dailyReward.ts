@@ -1,3 +1,4 @@
+import { track } from '@amplitude/analytics-browser'
 import backendKy from 'helpers/api/backendKy'
 import { writeAtom } from 'helpers/atoms/atomStore'
 import UserAtom from 'helpers/atoms/UserAtom'
@@ -14,6 +15,9 @@ export default async function () {
       if (prev) return { ...prev, timeToReward }
       return null
     })
+
+    track('claimDailyReward')
+
     return timeToReward
   } catch (e) {
     handleError({ e, toastMessage: 'Failed to claim daily reward 🙇' })

@@ -26,6 +26,18 @@ export function Header2({
   )
 }
 
+export function Header3({
+  children,
+  className,
+  ...props
+}: ChildrenProp & JSX.HTMLAttributes<HTMLHeadingElement>) {
+  return (
+    <h2 {...props} className={`text-2xl leading-7 font-bold ${className}`}>
+      {children}
+    </h2>
+  )
+}
+
 export function Header4({
   children,
   className,
@@ -74,8 +86,8 @@ export function SpecialText({
     withShadow?: boolean
   }) {
   const haptic = useHapticFeedback()
-
   const shadow = withShadow ? 'shadow-special' : ''
+
   return (
     <span
       {...props}

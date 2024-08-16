@@ -10,16 +10,16 @@ export type EventDataPriceChangeSingle = {
   r: boolean
 }
 
-export type EventDataPriceChangeInitial = Array<EventDataPriceChangeSingle>
-
 export type EventDataPriceChange =
   | EventDataPriceChangeSingle
-  | EventDataPriceChangeInitial
+  | EventDataPriceChangeSingle[]
+
+export type BalanceChangeEvent = 'BetWon' | 'Claim'
 
 export type EventDataBalanceChange = {
   _: 'b'
   b: string
-  e: 'BetWon' | 'Claim'
+  e: BalanceChangeEvent
   d: number
 }
 export type EventDataBetLost = {

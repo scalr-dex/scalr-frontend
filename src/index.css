@@ -26,17 +26,26 @@
   --selection: #6d9efc4d;
 
   --primary: #0e121b;
+  --secondary: #171d26;
   --controls-tertiary: #2e3442;
+  --success: #23cfb2;
+  --error: #f3617d;
 
-  --safe-area-inset-bottom: calc(
-    100vh - var(--tg-viewport-stable-height, 100vh)
-  );
+  --safe-area-bottom: 1.2rem;
+
+  --toastify-color-success: var(--success);
+  --toastify-color-error: var(--error);
 }
 
 html {
   scroll-behavior: smooth;
   scrollbar-color: var(--accent) transparent;
   scrollbar-width: thin;
+}
+::-webkit-scrollbar {
+  display: none;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
 
 body {

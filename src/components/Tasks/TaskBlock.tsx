@@ -8,6 +8,7 @@ import UserTask, {
 } from 'type/UserTask'
 import { useCallback, useState } from 'preact/hooks'
 import { useUtils } from '@telegram-apps/sdk-react'
+import { successConfetti } from 'helpers/shootConfetti'
 
 export default function ({
   IconNumber,
@@ -31,14 +32,17 @@ export default function ({
     void taskStatusToCallback[Status](TaskID).finally(() => {
       setLoading(false)
       refetch()
+      void successConfetti()
     })
   }, [Status, TaskID, URL, refetch, utils])
 
+  const opacity = Status === 'Claimed' ? 'opacity-50' : 'opacity-100'
+
   return (
-    <div className="flex flex-row items-center justify-between">
-      <div className="flex flex-row gap-x-1">
+    <div className={`flex flex-row items-center justify-between ${opacity}`}>
+      <div className="flex flex-row items-center gap-x-3">
         <div className="w-6 h-6">{iconNumberToIcon[IconNumber]}</div>
-        <div>
+        <div className="flex flex-col gap-y-1">
           <AccentText className="font-bold">{Name} </AccentText>
           <AccentText>+{RewardAmount} pts</AccentText>
         </div>

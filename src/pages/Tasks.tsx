@@ -27,7 +27,7 @@ export default function () {
           ? data.map((taskData) => (
               <TaskBlock {...taskData} refetch={refetch} />
             ))
-          : [...Array(3)].map(() => <TaskSkeleton />)}
+          : [...Array(5)].map(() => <TaskSkeleton />)}
       </div>
       <InviteFriends />
     </div>

@@ -3,7 +3,10 @@ import ChevronRight from 'components/icons/ChevronRight'
 import dayjs from 'dayjs'
 import claimDailyReward from 'helpers/api/dailyReward'
 import { useCallback, useState } from 'preact/hooks'
+import objectSupport from 'dayjs/plugin/objectSupport'
 import ButtonTypes from 'type/Button'
+
+dayjs.extend(objectSupport)
 
 export default function ({
   timeToReward,
@@ -11,7 +14,10 @@ export default function ({
   timeToReward: string | undefined
 }) {
   const [loading, setLoading] = useState(false)
-  const canClaim = timeToReward ? new Date(timeToReward) <= new Date() : false
+
+  const seconds = dayjs(timeToReward).diff(dayjs(), 'seconds')
+  const diff = dayjs({ seconds })
+  const canClaim = seconds < 0
 
   const onClick = useCallback(() => {
     setLoading(true)
@@ -27,7 +33,7 @@ export default function ({
       isLoading={loading}
       className="px-4 py-1.5"
     >
-      {canClaim ? 'Daily Claim' : dayjs(timeToReward).format('HH[h] mm[m]')}
+      {canClaim ? 'Daily Claim' : diff.format('HH[h] mm[m]')}
     </ButtonSmall>
   )
 }

@@ -2,15 +2,16 @@
 module.exports = {
   content: ['./index.html', './src/**/!(tailwind).{ts,tsx}'],
   plugins: [require('@tailwindcss/typography'), require('daisyui')],
-  future: {
-    hoverOnlyWhenSupported: true,
-  },
+
   theme: {
     fontFamily: {
       sans: ['SF Pro Rounded', 'sans'],
       accent: ['SF Pro', 'sans'],
     },
     extend: {
+      borderRadius: {
+        '4xl': '2rem',
+      },
       keyframes: {
         hovering: {
           '0%, 100%': { transform: 'translateY(0rem)' },
@@ -37,13 +38,13 @@ module.exports = {
         se: '375px',
       },
       inset: {
-        'safe-bottom': 'var(--safe-area-inset-bottom)',
+        'safe-bottom': 'var(--safe-area-bottom)',
       },
       background: {
         'border-gradient':
           'linear-gradient(white, white) padding-box, linear-gradient(to right, darkblue, darkorchid) border-box',
       },
-      margin: { 'safe-bottom': 'var(--safe-area-inset-bottom)' },
+      margin: { 'safe-bottom': 'var(--safe-area-bottom)' },
       colors: {
         primary: '#0E121B',
         secondary: '#171D26',
@@ -61,6 +62,7 @@ module.exports = {
         'accent-dimmed': '#B1C9F7',
         success: '#23CFB2',
         'success-light': '#CBECDE',
+        'success-alt': '#E5FCB4',
         error: '#F3617D',
 
         'white-16': '#ffffff16',

@@ -4,4 +4,6 @@ export default new QueryClient()
 
 export enum QueryKeys {
   userTasks,
+  leaderBoard,
+  user,
 }
