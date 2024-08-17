@@ -8,6 +8,8 @@
   src: url(/fonts/SfProRounded.woff2) format('woff2') tech('variations');
   font-weight: 100 1000;
   font-stretch: 25% 151%;
+  /* Latin only */
+  unicode-range: U+000-5FF;
 }
 
 @font-face {
