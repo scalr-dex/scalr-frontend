@@ -62,13 +62,13 @@ export default function () {
 }
 
 async function setupUser() {
-  const launchParams = retrieveLaunchParams()
-
-  const { initData, initDataRaw } = launchParams
-
-  if (!initData || !initDataRaw) return
-
   try {
+    const launchParams = retrieveLaunchParams()
+
+    const { initData, initDataRaw } = launchParams
+
+    if (!initData || !initDataRaw) return
+
     const response = await backendKy(initDataRaw).post('user', {
       searchParams: { code: initData.startParam || '' },
     })
