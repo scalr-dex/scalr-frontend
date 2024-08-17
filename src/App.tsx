@@ -17,15 +17,15 @@ import SplashScreen from 'components/SplashScreen'
 import Onboarding from 'components/Onboarding'
 import { useAtomValue } from 'jotai'
 import didOnboardAtom from 'helpers/atoms/UserStates'
-import useWebSocket from 'helpers/hooks/useWebSocket'
+import useWebSocketData from 'helpers/hooks/useWebSocketData'
 
 function AppInner({ socket }: { socket: WebSocket }) {
-  useWebSocket(socket)
+  useWebSocketData(socket)
   const [parent] = useAutoAnimate()
   const didOnboard = useAtomValue(didOnboardAtom)
 
   return (
-    <SDKProvider debug={env.DEV}>
+    <SDKProvider debug={env.DEV} acceptCustomStyles>
       <QueryClientProvider client={queryClient}>
         <Router>
           <div

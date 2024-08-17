@@ -24,11 +24,11 @@ export default function (socket: WebSocket) {
       if (balance?.balance && user)
         setUser({ ...user, balance: balance.balance })
       if (balance?.event === 'BetWon') {
-        balanceChangeToast(balance.delta)
+        balanceChangeToast(balance.delta, false)
         setUserBet(null)
       }
       if (lost) {
-        balanceChangeToast(lost.l)
+        balanceChangeToast(lost.l, true)
         setUserBet(null)
       }
 
@@ -36,6 +36,7 @@ export default function (socket: WebSocket) {
         const processedPrice = price.map((data) => ({
           name: String(data.t),
           value: [data.t * 1000, Number(data.p) / 10000],
+          roundSeparator: data.r,
         }))
         setPrice((prev) => [...prev, ...processedPrice].slice(-dataMaxLength))
 
