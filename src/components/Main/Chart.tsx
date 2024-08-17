@@ -1,19 +1,40 @@
 import { SVGRenderer } from 'echarts/renderers'
-import { GridComponent } from 'echarts/components'
+import {
+  GridComponent,
+  MarkLineComponent,
+  MarkPointComponent,
+} from 'echarts/components'
 import { LineChart } from 'echarts/charts'
 import { EChart } from '@kbox-labs/react-echarts'
 import dayjs from 'dayjs'
 import { UniversalTransition } from 'echarts/features'
 import { GraphTokenData } from 'type/TokenState'
+import { UserBet } from 'type/User'
 
 export default function ({
   data,
   loading,
+  userBet,
 }: {
-  data: GraphTokenData
-  loading?: boolean
+  data: GraphTokenData[]
+  userBet: UserBet | null
+  loading: boolean
 }) {
   const loadingAnimation = loading ? 'animate-pulse' : ''
+
+  const betPoint = {
+    name: 'User Bet',
+    yAxis: userBet?.priceAt || 0,
+    xAxis: Number(userBet?.date) || 0,
+  }
+
+  const roundLines = data
+    .filter(({ roundSeparator }) => Boolean(roundSeparator))
+    .map(({ value }, index) => ({
+      xAxis: value[0],
+      name: 'Round Separator' + index,
+      label: { show: false },
+    }))
 
   return (
     <div
@@ -34,7 +55,14 @@ export default function ({
         }}
         width={400}
         height={400}
-        use={[GridComponent, LineChart, SVGRenderer, UniversalTransition]}
+        use={[
+          GridComponent,
+          MarkLineComponent,
+          MarkPointComponent,
+          LineChart,
+          SVGRenderer,
+          UniversalTransition,
+        ]}
         renderer="svg"
         xAxis={{
           type: 'time',
@@ -64,19 +92,43 @@ export default function ({
             height: 20,
             formatter: (num) => num.toFixed(4),
           },
-          animation: true,
-          min: (val) => val.min - 0.01,
-          max: (val) => val.max + 0.01,
+          min: (val) => val.min - 0.0005,
+          max: (val) => val.max + 0.0005,
         }}
         series={{
           name: 'Token price',
           id: 'token',
           type: 'line',
           data,
-          showSymbol: false,
 
+          markLine: {
+            data: roundLines,
+
+            symbol: ['diamond', 'diamond'],
+            symbolSize: 7,
+            lineStyle: {
+              type: 'dotted',
+              color: '#ffffff',
+              width: 2,
+            },
+          },
+
+          markPoint: {
+            data: [betPoint],
+            itemStyle: {
+              color: '#fff',
+              borderColor: '#fff',
+              shadowBlur: 10,
+              shadowColor: '#fff',
+              shadowOffsetX: 1,
+              shadowOffsetY: 0,
+            },
+            symbolSize: 10,
+            symbol: 'circle',
+          },
+
+          showSymbol: false,
           universalTransition: true,
-          smooth: true,
           animation: true,
           animationEasing: 'cubicInOut',
           animationDuration: 500,
