@@ -84,6 +84,6 @@ async function setupUser() {
     writeAtom(UserAtom, clientUser)
     return clientUser
   } catch (e) {
-    handleError({ e, toastMessage: 'Unauthorized' })
+    handleError({ e })
   }
 }
