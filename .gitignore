@@ -1,7 +1,5 @@
 .DS_Store
 node_modules
-dist
-stats.html
 
 # local env files
 .env
@@ -29,3 +27,9 @@ yarn-error.log*
 !.yarn/releases
 !.yarn/sdks
 !.yarn/versions
+
+# deploymetns
+.cert/*
+dist
+stats.html
+vercer/*

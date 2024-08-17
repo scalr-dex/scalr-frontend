@@ -2,8 +2,89 @@
 @tailwind components;
 @tailwind utilities;
 
+@font-face {
+  font-family: 'SF Pro Rounded';
+  src: url(/fonts/SfProRounded.woff2) format('woff2-variations');
+  src: url(/fonts/SfProRounded.woff2) format('woff2') tech('variations');
+  font-weight: 100 1000;
+  font-stretch: 25% 151%;
+}
+
+@font-face {
+  font-family: 'SF Pro';
+  src: url(/fonts/SfPro.woff2) format('woff2-variations');
+  src: url(/fonts/SfPro.woff2) format('woff2') tech('variations');
+  font-weight: 100 1000;
+  font-stretch: 25% 151%;
+  /* Latin only */
+  unicode-range: U+000-5FF;
+}
+
+:root {
+  --accent: #4374ec;
+  --accent-hover: #6d9efc;
+  --selection: #6d9efc4d;
+
+  --primary: #0e121b;
+  --secondary: #171d26;
+  --controls-tertiary: #2e3442;
+  --success: #23cfb2;
+  --error: #f3617d;
+
+  --safe-area-bottom: 1.2rem;
+
+  --toastify-color-success: var(--success);
+  --toastify-color-error: var(--error);
+}
+
+html {
+  scroll-behavior: smooth;
+  scrollbar-color: var(--accent) transparent;
+  scrollbar-width: thin;
+}
+::-webkit-scrollbar {
+  display: none;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
 body {
   margin: 0;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+::selection {
+  background-color: var(--selection);
+}
+::moz-selection {
+  background-color: var(--selection);
+}
+.bg-special-gradient {
+  background: linear-gradient(to right, #3af3ff, #4986fb, #8160e1);
+}
+
+.bg-border-gradient {
+  background:
+    linear-gradient(var(--primary), var(--primary)) padding-box,
+    linear-gradient(to right, #3af3ff, #4986fb, #8160e1) border-box;
+  border: 1.5px solid transparent;
+}
+
+.dots-loader::before {
+  animation: dots 1s linear infinite;
+  content: '.';
+}
+
+@keyframes dots {
+  0%,
+  30% {
+    content: '.';
+  }
+  60% {
+    content: '..';
+  }
+  90% {
+    content: '...';
+  }
 }
