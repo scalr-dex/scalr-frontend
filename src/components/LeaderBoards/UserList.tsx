@@ -40,11 +40,9 @@ export default function ({ users }: { users: LeaderBoardUser[] | undefined }) {
 
   return (
     <div>
-      {users ? (
-        users.map((item, index) => renderItem({ item, index }))
-      ) : (
-        <TaskSkeleton />
-      )}
+      {users
+        ? users.map((item, index) => renderItem({ item, index }))
+        : [...Array(5)].map(() => <TaskSkeleton />)}
     </div>
   )
 }
