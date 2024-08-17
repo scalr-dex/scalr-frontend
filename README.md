@@ -1,6 +1,6 @@
 # Frontend code for scalr telegram mini app
 
-TODO: create a theme.ts file that integrates with tailwind.config.js and can be used inside the app
+TODO: create a `theme.ts` file that integrates with tailwind.config.js and can be used inside the app
 
 ## Local launch
 

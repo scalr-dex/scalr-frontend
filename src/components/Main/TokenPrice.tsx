@@ -10,7 +10,7 @@ export default function ({
   roundStartPrice,
 }: {
   price?: number
-  roundStartPrice?: number
+  roundStartPrice?: number | undefined
 }) {
   const delta = price && roundStartPrice ? price - roundStartPrice : 0
   const isPositive = delta >= 0
