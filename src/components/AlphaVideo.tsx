@@ -45,7 +45,15 @@ export default function ({
 
   return (
     <StackedAlphaVideo style={{ width, height, display: 'inline-block' }}>
-      <video muted playsInline autoplay loop poster={poster} className="hidden">
+      <video
+        muted
+        playsInline
+        autoplay
+        loop
+        preload="metadata"
+        poster={poster}
+        className="hidden"
+      >
         <source
           src={srcAv1}
           type="video/mp4; codecs=av01.0.08M.08.0.110.01.01.01.1"
