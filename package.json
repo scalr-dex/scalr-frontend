@@ -26,6 +26,7 @@
     "preact": "^10.22.0",
     "react-countup": "^6.5.3",
     "react-device-detect": "^2.2.3",
+    "react-range": "^1.10.0",
     "react-toastify": "^10.0.5",
     "stacked-alpha-video": "^1.0.8",
     "wouter-preact": "^3.3.1"

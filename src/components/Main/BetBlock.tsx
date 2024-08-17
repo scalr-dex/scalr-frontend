@@ -9,25 +9,46 @@ import placeBet from 'helpers/api/placeBet'
 import PointsWithTimer from 'components/Main/PointsWithTimer'
 import BetDirection from 'type/BetDirection'
 import { useAutoAnimate } from '@formkit/auto-animate/react'
-import Timer from 'components/Main/Timer'
 import { BodyText } from 'components/icons/Text'
+import BetTimer from 'components/Main/BetTimer'
+import { roundDurationMs } from 'helpers/atoms/priceHistoryAtom'
 
-export default function ({ loading }: { loading?: boolean }) {
+export default function ({
+  loading,
+  lastPrice,
+  roundStartTime,
+}: {
+  loading?: boolean
+  lastPrice?: number
+  roundStartTime: number | undefined
+}) {
   const [parent] = useAutoAnimate()
-  const [betValue, setBetValue] = useState(0)
   const user = useAtomValue(UserAtom)
   const [userBet, setUserBet] = useAtom(userBetAtom)
+  const [betValue, setBetValue] = useState((user?.balance || 0) / 2)
 
   const disabled = betValue <= 0 || loading
 
   const onClick = useCallback(
     async (direction: BetDirection) => {
+      if (!lastPrice || !roundStartTime) return
+
       const bet = { amount: betValue, direction }
       setBetValue(0)
-      setUserBet({ ...bet, date: new Date() })
+
+      const roundEndTime = roundStartTime + roundDurationMs
+      const untilEnd = roundEndTime - Date.now()
+      const endTime = untilEnd + Date.now() + roundDurationMs
+
+      setUserBet({
+        ...bet,
+        date: new Date(),
+        priceAt: lastPrice,
+        endTime: new Date(endTime),
+      })
       await placeBet(bet)
     },
-    [betValue, setUserBet]
+    [betValue, lastPrice, roundStartTime, setUserBet]
   )
 
   return (
@@ -35,9 +56,19 @@ export default function ({ loading }: { loading?: boolean }) {
       <PointsWithTimer user={user} />
 
       {userBet ? (
-        <div className="flex flex-row items-center justify-between">
-          <BodyText>You'll get result in</BodyText>
-          <Timer extra={30000} />
+        <div className="flex flex-col gap-y-2">
+          <div className="flex flex-row items-center justify-between">
+            <BodyText>You'll get result in</BodyText>
+            <BetTimer />
+          </div>
+          <BodyText>
+            You bet <b>{userBet.amount} pts</b>
+          </BodyText>
+          <BodyText>
+            That price will go{' '}
+            <b>{userBet.direction ? 'lower 📉' : 'higher 📈'}</b> than{' '}
+            <b>${userBet.priceAt}</b>
+          </BodyText>
         </div>
       ) : (
         <>
