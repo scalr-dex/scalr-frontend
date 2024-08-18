@@ -1,6 +1,7 @@
 import handleError from 'helpers/handleError'
 import backendKy from 'helpers/api/backendKy'
 import UserTask from 'type/UserTask'
+import { successConfetti } from 'helpers/shootConfetti'
 
 export async function getTasks() {
   try {
@@ -20,7 +21,8 @@ export async function markTaskDone(id: number) {
 
 export async function claimTask(id: number) {
   try {
-    return await backendKy().post(`tasks/claim/${id}`)
+    await backendKy().post(`tasks/claim/${id}`)
+    void successConfetti()
   } catch (e) {
     handleError({ e })
   }

@@ -16,6 +16,7 @@ export default function ({
   const isPositive = delta >= 0
 
   const textColor = isPositive ? 'text-success' : 'text-error'
+  const deltaString = Math.abs(delta).toFixed(3)
 
   return (
     <div className="flex flex-col gap-y-1 justify-start w-full px-4 pt-2">
@@ -44,7 +45,7 @@ export default function ({
             className={`flex flex-row gap-x-2 items-center font-semibold ${textColor}`}
           >
             <StonksArrow size={9} rotate={isPositive ? 0 : 90} />{' '}
-            {Math.abs(delta).toFixed(3)}
+            {deltaString === '0.000' ? '0.001' : deltaString}
           </div>
         </div>
 

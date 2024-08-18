@@ -27,7 +27,7 @@ export default function ({
   const [userBet, setUserBet] = useAtom(userBetAtom)
   const [betValue, setBetValue] = useState((user?.balance || 0) / 2)
 
-  const disabled = betValue <= 0 || loading
+  const disabled = betValue <= 0 || loading || !user?.balance
 
   const onClick = useCallback(
     async (direction: BetDirection) => {
@@ -76,7 +76,7 @@ export default function ({
             userBalance={user?.balance}
             value={betValue}
             setValue={setBetValue}
-            disabled={loading || !!userBet}
+            disabled={loading || !!userBet || !user?.balance}
           />
           <div className="flex flex-row gap-x-1">
             <Button

@@ -8,7 +8,6 @@ import UserTask, {
 } from 'type/UserTask'
 import { useCallback, useState } from 'preact/hooks'
 import { useUtils } from '@telegram-apps/sdk-react'
-import { successConfetti } from 'helpers/shootConfetti'
 
 export default function ({
   IconNumber,
@@ -32,7 +31,6 @@ export default function ({
     void taskStatusToCallback[Status](TaskID).finally(() => {
       setLoading(false)
       refetch()
-      void successConfetti()
     })
   }, [Status, TaskID, URL, refetch, utils])
 

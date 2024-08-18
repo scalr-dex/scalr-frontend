@@ -62,13 +62,13 @@ export default function () {
 }
 
 async function setupUser() {
-  const launchParams = retrieveLaunchParams()
-
-  const { initData, initDataRaw } = launchParams
-
-  if (!initData || !initDataRaw) return
-
   try {
+    const launchParams = retrieveLaunchParams()
+
+    const { initData, initDataRaw } = launchParams
+
+    if (!initData || !initDataRaw) return
+
     const response = await backendKy(initDataRaw).post('user', {
       searchParams: { code: initData.startParam || '' },
     })
@@ -84,6 +84,6 @@ async function setupUser() {
     writeAtom(UserAtom, clientUser)
     return clientUser
   } catch (e) {
-    handleError({ e, toastMessage: 'Unauthorized' })
+    handleError({ e })
   }
 }

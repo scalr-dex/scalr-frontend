@@ -14,6 +14,8 @@ export default function () {
   const user = useAtomValue(UserAtom)
   const { data } = useLeaderBoard()
 
+  const tgUser = user?.launchParams?.initData?.user
+
   return (
     <div className="flex flex-col px-4 gap-y-10">
       <YourEpochVolume points={data?.user?.points} />
@@ -21,7 +23,7 @@ export default function () {
         Leaderboard <GetHelp onClick={() => setModalOpen(true)} size={20} />
       </Header3>
       <YourPosition
-        userName={user?.launchParams?.initData?.user?.username}
+        userName={tgUser?.username || tgUser?.firstName}
         userRank={data?.user?.user_rank}
       />
       <UserList users={data?.lb} />
