@@ -25,7 +25,8 @@ export default function ({
   const [parent] = useAutoAnimate()
   const user = useAtomValue(UserAtom)
   const [userBet, setUserBet] = useAtom(userBetAtom)
-  const [betValue, setBetValue] = useState((user?.balance || 0) / 2)
+  const [betValue, setBetValue] = useState(Math.floor((user?.balance || 0) / 2))
+
 
   const disabled = betValue <= 0 || loading || !user?.balance
 

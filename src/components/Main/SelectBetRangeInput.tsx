@@ -16,8 +16,9 @@ export default function ({
 } & JSX.HTMLAttributes<HTMLInputElement>) {
   const haptic = useHapticFeedback()
 
-  const betPercent =
-    userBalance && value ? ((value / userBalance) * 100).toFixed(0) : 0
+  const betPercent = 
+    userBalance && value ? Math.floor((value / userBalance) * 100).toFixed(0) : 0
+
 
   const inputProps = { min: 0, max: userBalance || 1000, values: [value] }
   const background = getTrackBackground({
