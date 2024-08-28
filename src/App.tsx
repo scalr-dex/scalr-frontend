@@ -55,7 +55,7 @@ function AppInner({ socket }: { socket: WebSocket }) {
             closeOnClick
             stacked
             closeButton={false}
-            autoClose={false}
+            autoClose={3000}
             theme="dark"
             toastClassName="!bg-tertiary !rounded-xl !bottom-24 !w-[96dvw] !ml-[2dvw] !shadow-super"
             hideProgressBar
