@@ -12,7 +12,9 @@ import { useState } from 'preact/hooks'
 export default function () {
   const [modalOpen, setModalOpen] = useState(false)
   const user = useAtomValue(UserAtom)
-  const { data } = useLeaderBoard()
+  const { data, status } = useLeaderBoard()
+
+  const loading = status === 'pending'
 
   const tgUser = user?.launchParams?.initData?.user
 

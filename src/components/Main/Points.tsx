@@ -1,4 +1,3 @@
-import DotsLoader from 'components/DotsLoader'
 import ScalrCoin from 'components/icons/coins/ScalrCoin'
 import { Header2 } from 'components/icons/Text'
 import CountUp from 'react-countup'
@@ -11,7 +10,7 @@ export default function ({ amount }: { amount?: number | undefined }) {
         {typeof amount === 'number' ? (
           <CountUp end={amount} preserveValue duration={1} />
         ) : (
-          <DotsLoader />
+          0
         )}
       </Header2>
     </div>
