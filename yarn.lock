@@ -6095,6 +6095,7 @@ __metadata:
     react-toastify: ^10.0.5
     rollup-plugin-visualizer: ^5.12.0
     stacked-alpha-video: ^1.0.8
+    sturdy-websocket: ^0.2.1
     tailwindcss: ^3.4.3
     ts-node: ^10.9.2
     typescript: ^5.4.5
@@ -6461,6 +6462,13 @@ __metadata:
   version: 3.1.1
   resolution: "strip-json-comments@npm:3.1.1"
   checksum: 492f73e27268f9b1c122733f28ecb0e7e8d8a531a6662efbd08e22cccb3f9475e90a1b82cab06a392f6afae6d2de636f977e231296400d0ec5304ba70f166443
+  languageName: node
+  linkType: hard
+
+"sturdy-websocket@npm:^0.2.1":
+  version: 0.2.1
+  resolution: "sturdy-websocket@npm:0.2.1"
+  checksum: 6d948da780397e8c27f7e324556d98b0cc4476c419a90863b498e284346864f9e168299a439e2eceba819477315096f9eccbd89640ab056c8c3212565020bce4
   languageName: node
   linkType: hard
 

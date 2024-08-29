@@ -6,10 +6,11 @@ import priceHistoryAtom, {
   previousRoundAtom,
 } from 'helpers/atoms/priceHistoryAtom'
 import balanceChangeToast from 'helpers/sendToast'
+import SturdyWebSocket from 'sturdy-websocket'
 
 const dataMaxLength = 40
 
-export default function (socket: WebSocket) {
+export default function (socket: SturdyWebSocket) {
   const [user, setUser] = useAtom(UserAtom)
   const setPreviousRound = useSetAtom(previousRoundAtom)
   const setPrice = useSetAtom(priceHistoryAtom)
@@ -50,7 +51,6 @@ export default function (socket: WebSocket) {
     }
 
     socket.addEventListener('message', update)
-
     return () => {
       socket.removeEventListener('message', update)
     }

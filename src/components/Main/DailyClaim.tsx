@@ -16,7 +16,6 @@ export default function ({
   const [loading, setLoading] = useState(false)
 
   const seconds = dayjs(timeToReward).diff(dayjs(), 'seconds')
-  const diff = dayjs({ seconds })
   const canClaim = seconds < 0
 
   const onClick = useCallback(() => {
@@ -33,7 +32,7 @@ export default function ({
       isLoading={loading}
       className="px-4 py-1.5"
     >
-      {canClaim ? 'Daily Claim' : diff.format('HH[h] mm[m]')}
+      {canClaim ? 'Daily Claim' : dayjs({ seconds }).format('HH[h] mm[m]')}
     </ButtonSmall>
   )
 }

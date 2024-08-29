@@ -15,10 +15,11 @@ import {
 import { LogLevel } from '@amplitude/analytics-types'
 import env from 'helpers/env'
 import setupMiniApp from 'helpers/setupMiniApp'
+import SturdyWebSocket from 'sturdy-websocket'
 
 export default function () {
   const [appStatus, setAppStatus] = useState(AppStatus.loading)
-  const [socket, setSocket] = useState<WebSocket>()
+  const [socket, setSocket] = useState<SturdyWebSocket>()
 
   useEffect(() => {
     const start = async () => {

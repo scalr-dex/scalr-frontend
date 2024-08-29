@@ -1,5 +1,6 @@
 import env from 'helpers/env'
 import { EventData } from 'type/WebsocketEvents'
+import SturdyWebSocket from 'sturdy-websocket'
 
 function getBetLostFromWsEventData(data: EventData) {
   if (!Array.isArray(data) && data._ === 'l') return data
@@ -17,9 +18,8 @@ function getPriceChangeFromWsEventData(data: EventData) {
 }
 
 export function setupWebSocket(ticket: string) {
-  const io = (url: URL) => new WebSocket(url)
-  const url = new URL(`${env.VITE_BACKEND_URL.replace('https', 'wss')}/ws`)
-  url.searchParams.set('ticket', ticket)
+  const io = (url: string) => new SturdyWebSocket(url)
+  const url = `${env.VITE_BACKEND_URL.replace('https', 'wss')}/ws?ticket=${ticket}`
 
   return io(url)
 }

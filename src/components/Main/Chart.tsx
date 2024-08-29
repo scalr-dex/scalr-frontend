@@ -24,8 +24,8 @@ export default function ({
 
   const betPoint = {
     name: 'User Bet',
-    yAxis: userBet?.priceAt || 0,
-    xAxis: Number(userBet?.date) || 0,
+    yAxis: userBet?.value[1] || 0,
+    xAxis: userBet?.value[0] || 0,
   }
 
   const roundLines = data
@@ -38,7 +38,7 @@ export default function ({
 
   return (
     <div
-      className={`relative w-full h-96 my-4 ${loadingAnimation}`}
+      className={`relative w-full min-h-64 flex flex-1 my-4 ${loadingAnimation}`}
       style={{
         background: 'radial-gradient(#ffffff08 1.5px, transparent 0)',
         backgroundSize: '8px 8px',
@@ -51,10 +51,9 @@ export default function ({
           left: 1,
           top: 10,
           right: 9,
-          bottom: 30,
+          bottom: 20,
         }}
-        width={400}
-        height={400}
+        className="w-full min-h-64"
         use={[
           GridComponent,
           MarkLineComponent,
