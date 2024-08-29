@@ -1,8 +1,8 @@
 import { AccentText } from 'components/icons/Text'
 import ImageWithFallback from 'components/ImageWithFallback'
-import TaskSkeleton from 'components/Tasks/TaskSkeleton'
 import formatUSA from 'helpers/formatUSA'
 import { LeaderBoardUser } from 'type/LeaderBoardResponse'
+import UserListSkeleton from 'components/LeaderBoards/UserListSkeleton'
 
 export default function ({ users }: { users: LeaderBoardUser[] | undefined }) {
   const renderItem = ({
@@ -40,9 +40,11 @@ export default function ({ users }: { users: LeaderBoardUser[] | undefined }) {
 
   return (
     <div>
-      {users
-        ? users.map((item, index) => renderItem({ item, index }))
-        : [...Array(5)].map(() => <TaskSkeleton />)}
+      {users ? (
+        users.map((item, index) => renderItem({ item, index }))
+      ) : (
+        <UserListSkeleton />
+      )}
     </div>
   )
 }

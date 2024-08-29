@@ -10,22 +10,22 @@ export default function () {
   const userBet = useAtomValue(userBetAtom)
 
   const lastIndex = data.length - 1
-  const lastPrice = data[lastIndex]?.value[1]
+  const lastValue = data[lastIndex]?.value
 
   const currentRoundStart = data.findLast((entry) => entry.roundSeparator)
   const roundStartPrice = userBet
-    ? userBet.priceAt
+    ? userBet.value[1]
     : currentRoundStart?.value[1]
 
   const loading = !data.length
 
   return (
-    <div>
-      <TokenPrice price={lastPrice} roundStartPrice={roundStartPrice} />
+    <div className="flex flex-col h-[85dvh]">
+      <TokenPrice price={lastValue?.[1]} roundStartPrice={roundStartPrice} />
       <Chart data={data} userBet={userBet} loading={loading} />
       <BetBlock
         loading={loading}
-        lastPrice={lastPrice}
+        lastValue={lastValue}
         roundStartTime={currentRoundStart?.value[0]}
       />
     </div>

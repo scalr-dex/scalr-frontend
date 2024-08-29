@@ -19,7 +19,11 @@ export default function ({
   const betPercent =
     userBalance && value ? ((value / userBalance) * 100).toFixed(0) : 0
 
-  const inputProps = { min: 0, max: userBalance || 1000, values: [value] }
+  const inputProps = {
+    min: 0,
+    max: userBalance || 1000,
+    values: [value],
+  }
   const background = getTrackBackground({
     ...inputProps,
     colors: ['var(--accent)', 'var(--controls-tertiary)'],

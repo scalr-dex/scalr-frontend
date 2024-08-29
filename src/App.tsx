@@ -18,8 +18,9 @@ import Onboarding from 'components/Onboarding'
 import { useAtomValue } from 'jotai'
 import didOnboardAtom from 'helpers/atoms/UserStates'
 import useWebSocketData from 'helpers/hooks/useWebSocketData'
+import SturdyWebSocket from 'sturdy-websocket'
 
-function AppInner({ socket }: { socket: WebSocket }) {
+function AppInner({ socket }: { socket: SturdyWebSocket }) {
   useWebSocketData(socket)
   const [parent] = useAutoAnimate()
   const didOnboard = useAtomValue(didOnboardAtom)
@@ -55,7 +56,7 @@ function AppInner({ socket }: { socket: WebSocket }) {
             closeOnClick
             stacked
             closeButton={false}
-            autoClose={3000}
+            autoClose={5000}
             theme="dark"
             toastClassName="!bg-tertiary !rounded-xl !bottom-24 !w-[96dvw] !ml-[2dvw] !shadow-super"
             hideProgressBar

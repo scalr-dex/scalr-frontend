@@ -12,14 +12,15 @@ import { useAutoAnimate } from '@formkit/auto-animate/react'
 import { BodyText } from 'components/icons/Text'
 import BetTimer from 'components/Main/BetTimer'
 import { roundDurationMs } from 'helpers/atoms/priceHistoryAtom'
+import { GraphTokenValue } from 'type/TokenState'
 
 export default function ({
   loading,
-  lastPrice,
+  lastValue,
   roundStartTime,
 }: {
   loading?: boolean
-  lastPrice?: number
+  lastValue?: GraphTokenValue
   roundStartTime: number | undefined
 }) {
   const [parent] = useAutoAnimate()
@@ -31,7 +32,7 @@ export default function ({
 
   const onClick = useCallback(
     async (direction: BetDirection) => {
-      if (!lastPrice || !roundStartTime) return
+      if (!lastValue || !roundStartTime) return
 
       const bet = { amount: betValue, direction }
       setBetValue(0)
@@ -42,13 +43,12 @@ export default function ({
 
       setUserBet({
         ...bet,
-        date: new Date(),
-        priceAt: lastPrice,
+        value: lastValue,
         endTime: new Date(endTime),
       })
       await placeBet(bet)
     },
-    [betValue, lastPrice, roundStartTime, setUserBet]
+    [betValue, lastValue, roundStartTime, setUserBet]
   )
 
   return (
@@ -67,7 +67,7 @@ export default function ({
           <BodyText>
             That price will go{' '}
             <b>{userBet.direction ? 'lower 📉' : 'higher 📈'}</b> than{' '}
-            <b>${userBet.priceAt}</b>
+            <b>${userBet.value[1]}</b>
           </BodyText>
         </div>
       ) : (
