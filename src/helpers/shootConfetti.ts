@@ -6,4 +6,4 @@ export const successConfetti = () =>
   jsConfetti.addConfetti({ confettiColors: ['#4374EC'] })
 
 export const sadConfetti = () =>
-  jsConfetti.addConfetti({ emojis: ['😓', '😿'] })
+  jsConfetti.addConfetti({ emojis: ['😓', '📉', '🥀'] })

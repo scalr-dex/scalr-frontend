@@ -23,12 +23,13 @@ export default function ({
     min: 0,
     max: userBalance || 1000,
     values: [value],
+    step: 1,
   }
   const background = getTrackBackground({
     ...inputProps,
     colors: ['var(--accent)', 'var(--controls-tertiary)'],
   })
-  const thumbOpacity = props.disabled ? 'bg-opacity-50' : 'bg-opacity-100'
+  const opacity = props.disabled ? 'opacity-50 bg-opacity-50' : ''
 
   return (
     <div>
@@ -51,7 +52,7 @@ export default function ({
           <div
             {...props}
             style={{ background }}
-            className="h-1.5 w-full rounded-full"
+            className={`h-1.5 w-full rounded-full ${opacity}`}
           >
             {children}
           </div>
@@ -60,7 +61,7 @@ export default function ({
           <div
             {...props}
             role="button"
-            className={`bg-white focus-within:outline-none w-8 h-9 border-[12px] border-transparent bg-clip-padding rounded-full ${thumbOpacity}`}
+            className={`bg-white focus-within:outline-none w-8 h-9 border-[12px] border-transparent bg-clip-padding rounded-full ${opacity}`}
           />
         )}
       />

@@ -1,4 +1,5 @@
 import { FunctionComponent } from 'preact'
+import { useState } from 'preact/hooks'
 import { JSX } from 'preact/jsx-runtime'
 import {
   isAndroid,
@@ -22,13 +23,17 @@ export default function ({
   width,
   height,
 }: {
-  srcAv1: string
+  srcAv1?: string
   srcHevc: string
   src?: string
   poster?: string
   width?: number
   height?: number
 }) {
+  const [videoReady, setVideoReady] = useState(false)
+
+  console.log(srcHevc)
+
   if ((isBrowser && !isSafari && !isMobileSafari && !isMacOs) || isAndroid)
     return (
       <video
@@ -44,23 +49,39 @@ export default function ({
     )
 
   return (
-    <StackedAlphaVideo style={{ width, height, display: 'inline-block' }}>
-      <video
-        muted
-        playsInline
-        autoplay
-        loop
-        preload="metadata"
-        poster={poster}
-        className="hidden"
+    <div
+      style={{
+        width,
+        height,
+        backgroundImage: videoReady ? '' : `url(${poster})`,
+        backgroundSize: 'cover',
+      }}
+    >
+      <StackedAlphaVideo
+        style={{
+          width,
+          height,
+          display: videoReady ? 'inline-block' : 'none',
+          aspectRatio: '1 / 1',
+        }}
       >
-        <source
-          src={srcAv1}
-          type="video/mp4; codecs=av01.0.08M.08.0.110.01.01.01.1"
-        />
-        <source src={srcHevc} type="video/mp4; codecs=hvc1.1.6.H120.b0" />
-        <source src={src} type="video/webm" />
-      </video>
-    </StackedAlphaVideo>
+        <video
+          muted
+          playsInline
+          autoplay
+          loop
+          onLoadedData={() => {
+            setTimeout(() => setVideoReady(true), 1600)
+          }}
+          src={srcHevc}
+          type="video/mp4; codecs=hvc1.1.6.H120.b0"
+        >
+          <source
+            src={srcAv1}
+            type="video/mp4; codecs=av01.0.08M.08.0.110.01.01.01.1"
+          />
+        </video>
+      </StackedAlphaVideo>
+    </div>
   )
 }

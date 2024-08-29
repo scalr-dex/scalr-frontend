@@ -6,13 +6,14 @@ import didOnboardAtom from 'helpers/atoms/UserStates'
 import { JSX } from 'preact/jsx-runtime'
 import Step2 from 'components/Onboarding/Step2'
 import { useAutoAnimate } from '@formkit/auto-animate/react'
-import Step1Background from 'components/Onboarding/Step1Background'
 import Step3 from 'components/Onboarding/Step3'
+import StepToVideo from 'components/Onboarding/StepToVideo'
+import Step1Background from 'components/Onboarding/Step1Background'
 import Step2Background from 'components/Onboarding/Step2Background'
 import Step3Background from 'components/Onboarding/Step3Background'
-import AlphaVideo from 'components/AlphaVideo.js'
 
 type StepToElement = { [step: number]: JSX.Element | string }
+type StepToString = { [step: number]: string }
 
 const stepToComponent: StepToElement = {
   0: <Step1 />,
@@ -20,16 +21,16 @@ const stepToComponent: StepToElement = {
   2: <Step3 />,
 }
 
+const stepToText: StepToString = {
+  0: 'Ok. All clear  🫡',
+  1: 'Cool 😎',
+  2: 'Wooow 🔥 I’m in  🚀',
+}
+
 const stepToBg: StepToElement = {
   0: <Step1Background />,
   1: <Step2Background />,
   2: <Step3Background />,
-}
-
-const stepToText: StepToElement = {
-  0: 'Ok. All clear  🫡',
-  1: 'Cool 😎',
-  2: 'Wooow 🔥 I’m in  🚀',
 }
 
 export default function () {
@@ -59,14 +60,7 @@ export default function () {
         ref={parent}
       >
         {stepToBg[step]}
-        <AlphaVideo
-          srcAv1="/img/utya-av1.mp4"
-          srcHevc="/img/utya-hevc.mp4"
-          poster="/img/utya.png"
-          src="/img/utya.webm"
-          width={155}
-          height={155}
-        />
+        <StepToVideo step={step} />
         {stepToComponent[step]}
       </div>
       <Button className="!w-56 !rounded-full mb-2" onClick={onClick}>

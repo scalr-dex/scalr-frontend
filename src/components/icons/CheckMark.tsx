@@ -1,4 +1,4 @@
-export default function ({ size }: { size: number }) {
+export default function ({ size }: { size?: number }) {
   return (
     <svg
       width={size}
