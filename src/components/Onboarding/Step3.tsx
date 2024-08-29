@@ -1,19 +1,18 @@
 import Gift from 'components/icons/Gift'
-import { Header1, SpecialText } from 'components/icons/Text'
+import { Header1 } from 'components/icons/Text'
 
 export default function () {
   return (
-    <div className="max-w-96">
+    <div className="max-w-96 mt-8">
       <Header1 className="text-center">
         Join perp DEX waitlist with
-        <SpecialText
-          withShadow
-          className="bg-special-gradient !py-0 -rotate-1"
-          leftIcon={<Gift className="inline-block mr-1" />}
-        >
-          presents
-        </SpecialText>
-        for
+        <p>
+          <span className="inline-block mr-2 text-accent">
+            <Gift className="inline mr-2" />
+            presents
+          </span>
+          for
+        </p>
         <p className="appearance-none text-center">first comers</p>
       </Header1>
     </div>

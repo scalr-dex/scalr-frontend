@@ -20,7 +20,7 @@ function ModalBody() {
       <p>
         Earn{' '}
         <SpecialText
-          leftIcon={<Logo size={18} className="inline-block mr-1" />}
+          leftIcon={<Logo size={18} />}
           className="bg-tertiary !py-1 !px-1.5 !mx-1 -rotate-3"
         >
           1,500
@@ -31,7 +31,7 @@ function ModalBody() {
       <p>
         or{' '}
         <SpecialText
-          leftIcon={<Logo size={18} className="inline-block mr-1" />}
+          leftIcon={<Logo size={18} />}
           className="bg-special-gradient !py-0.5 !px-1.5 !mx-1 rotate-2"
         >
           10,500
@@ -64,7 +64,7 @@ function ModalFooter() {
 
     utils.shareURL(
       `${env.VITE_APP_BASE_LINK}?startapp=${userId}`,
-      'Check out Scalr DEX app!'
+      '\nPlay with me, predict price movement, and get a token Airdrop!\n😋 +1k Points as a Daily claim gift\n🔥 +1k Points for a friend\n⭐️ +25k Points if a friend has Telegram Premium'
     )
   }, [userId, utils])
 

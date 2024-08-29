@@ -47,7 +47,7 @@ function AppInner({ socket }: { socket: SturdyWebSocket }) {
               <Route component={NotFound} />
             </Switch>
           </div>
-          <BottomTabNavigator />
+          <BottomTabNavigator didOnboard={didOnboard} />
           <ToastContainer
             draggable
             position="bottom-center"
@@ -56,11 +56,11 @@ function AppInner({ socket }: { socket: SturdyWebSocket }) {
             closeOnClick
             stacked
             closeButton={false}
-            autoClose={5000}
+            autoClose={3000}
             theme="dark"
             toastClassName="!bg-tertiary !rounded-xl !bottom-24 !w-[96dvw] !ml-[2dvw] !shadow-super"
+            draggableDirection="x"
             hideProgressBar
-            draggableDirection="y"
             limit={1}
           />
         </Router>

@@ -12,16 +12,19 @@ import { useState } from 'preact/hooks'
 export default function () {
   const [modalOpen, setModalOpen] = useState(false)
   const user = useAtomValue(UserAtom)
-  const { data } = useLeaderBoard()
+  const { data, status } = useLeaderBoard()
+
+  const loading = status === 'pending'
 
   const tgUser = user?.launchParams?.initData?.user
 
   return (
     <div className="flex flex-col px-4 gap-y-10">
       <YourEpochVolume points={data?.user?.points} />
-      <Header3>
-        Leaderboard <GetHelp onClick={() => setModalOpen(true)} size={20} />
-      </Header3>
+      <div className="flex flex-row items-center gap-x-1">
+        <Header3>Leaderboard</Header3>
+        <GetHelp onClick={() => setModalOpen(true)} size={20} />
+      </div>
       <YourPosition
         userName={tgUser?.username || tgUser?.firstName}
         userRank={data?.user?.user_rank}

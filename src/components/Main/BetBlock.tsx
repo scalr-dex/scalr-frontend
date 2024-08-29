@@ -26,29 +26,35 @@ export default function ({
   const [parent] = useAutoAnimate()
   const user = useAtomValue(UserAtom)
   const [userBet, setUserBet] = useAtom(userBetAtom)
-  const [betValue, setBetValue] = useState((user?.balance || 0) / 2)
+  const [processingBet, setProcessingBet] = useState(false)
+  const [betValue, setBetValue] = useState(Math.round((user?.balance || 0) / 2))
 
-  const disabled = betValue <= 0 || loading || !user?.balance
+  const disabled = betValue <= 0 || loading || processingBet || !user?.balance
 
   const onClick = useCallback(
     async (direction: BetDirection) => {
-      if (!lastValue || !roundStartTime) return
+      if (!lastValue || !roundStartTime || !user?.balance) return
 
+      setProcessingBet(true)
       const bet = { amount: betValue, direction }
-      setBetValue(0)
 
       const roundEndTime = roundStartTime + roundDurationMs
       const untilEnd = roundEndTime - Date.now()
       const endTime = untilEnd + Date.now() + roundDurationMs
 
-      setUserBet({
-        ...bet,
-        value: lastValue,
-        endTime: new Date(endTime),
-      })
       await placeBet(bet)
+        .then(() => {
+          setUserBet({
+            ...bet,
+            value: lastValue,
+            endTime: new Date(endTime),
+          })
+        })
+        .finally(() => {
+          setProcessingBet(false)
+        })
     },
-    [betValue, lastValue, roundStartTime, setUserBet]
+    [betValue, lastValue, roundStartTime, setUserBet, user?.balance]
   )
 
   return (

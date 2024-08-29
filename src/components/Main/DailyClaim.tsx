@@ -5,6 +5,9 @@ import claimDailyReward from 'helpers/api/dailyReward'
 import { useCallback, useState } from 'preact/hooks'
 import objectSupport from 'dayjs/plugin/objectSupport'
 import ButtonTypes from 'type/Button'
+import { track } from '@amplitude/analytics-browser'
+import { useSetAtom } from 'jotai'
+import UserAtom from 'helpers/atoms/UserAtom'
 
 dayjs.extend(objectSupport)
 
@@ -13,15 +16,26 @@ export default function ({
 }: {
   timeToReward: string | undefined
 }) {
+  const setUserAtom = useSetAtom(UserAtom)
   const [loading, setLoading] = useState(false)
 
   const seconds = dayjs(timeToReward).diff(dayjs(), 'seconds')
   const canClaim = seconds < 0
 
-  const onClick = useCallback(() => {
+  const onClick = useCallback(async () => {
     setLoading(true)
-    void claimDailyReward().finally(() => setLoading(false))
-  }, [])
+    const timeToReward = await claimDailyReward()
+
+    if (timeToReward)
+      setUserAtom((prev) => {
+        if (prev) return { ...prev, timeToReward }
+        return null
+      })
+
+    track('claimDailyReward')
+
+    setLoading(false)
+  }, [setUserAtom])
 
   return (
     <ButtonSmall
