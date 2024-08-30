@@ -2,7 +2,7 @@ import SelectBetRangeInput from 'components/Main/SelectBetRangeInput'
 import Button from 'components/Button'
 import StonksArrow from 'components/icons/StonksArrow'
 import ButtonTypes from 'type/Button'
-import { useCallback, useState } from 'preact/hooks'
+import { useCallback, useEffect, useState } from 'preact/hooks'
 import { useAtom, useAtomValue } from 'jotai'
 import UserAtom, { userBetAtom } from 'helpers/atoms/UserAtom'
 import placeBet from 'helpers/api/placeBet'
@@ -27,9 +27,13 @@ export default function ({
   const user = useAtomValue(UserAtom)
   const [userBet, setUserBet] = useAtom(userBetAtom)
   const [processingBet, setProcessingBet] = useState(false)
-  const [betValue, setBetValue] = useState(Math.round((user?.balance || 0) / 2))
+  const [betValue, setBetValue] = useState(0)
 
   const disabled = betValue <= 0 || loading || processingBet || !user?.balance
+
+  useEffect(() => {
+    setBetValue(Math.round((user?.balance || 0) / 2))
+  }, [user?.balance])
 
   const onClick = useCallback(
     async (direction: BetDirection) => {
