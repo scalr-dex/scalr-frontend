@@ -2289,6 +2289,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"cloudflared@npm:^0.5.3":
+  version: 0.5.3
+  resolution: "cloudflared@npm:0.5.3"
+  bin:
+    cloudflared: lib/cloudflared.js
+  checksum: afc09946cfcfd82e33df525bdb8ac906b67dde4822c3f52c2cd42b9adab7bb478b3307fc5f0602136ab86c5282015de18ee42573513828daf62afeb5562a364c
+  languageName: node
+  linkType: hard
+
 "clsx@npm:^2.1.0":
   version: 2.1.1
   resolution: "clsx@npm:2.1.1"
@@ -6069,6 +6078,7 @@ __metadata:
     "@vitejs/plugin-basic-ssl": ^1.1.0
     "@vitejs/plugin-react": ^4.3.0
     autoprefixer: ^10.4.19
+    cloudflared: ^0.5.3
     cross-env: ^7.0.3
     daisyui: ^4.12.10
     dayjs: ^1.11.12

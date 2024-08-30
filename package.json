@@ -8,7 +8,8 @@
     "build": "cross-env NODE_ENV=production tsc && vite build",
     "pretty": "prettier --check src",
     "lint": "yarn pretty && eslint --max-warnings 0 src",
-    "preview": "yarn build && yarn vite preview"
+    "preview": "yarn build && yarn vite preview",
+    "expose-dev": "cloudflared tunnel --url http://localhost:5173"
   },
   "dependencies": {
     "@amplitude/analytics-browser": "^2.11.0",
@@ -45,6 +46,7 @@
     "@vitejs/plugin-basic-ssl": "^1.1.0",
     "@vitejs/plugin-react": "^4.3.0",
     "autoprefixer": "^10.4.19",
+    "cloudflared": "^0.5.3",
     "cross-env": "^7.0.3",
     "eslint": "^9.3.0",
     "eslint-config-prettier": "^9.1.0",

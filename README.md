@@ -11,13 +11,12 @@ TODO: create a `theme.ts` file that integrates with tailwind.config.js and can b
 
 ## Testing inside Telegram with Hot Module Reload
 
-1. Install [cloudflared](https://developers.cloudflare.com/cloudflare-one/connections/connect-networks/downloads/)
-   - Note that you don't need to select a domain, simply login in your browser
-2. Run `cloudflared tunnel --url http://localhost:5173/`, it will create a temporary link
-3. Setup a bot in a [@BotFather](https://t.me/BotFather), don't use `Scalr` when naming so it won't popup in a telegram search.
+1. After running the server locally via `yarn start`, run `yarn expose-dev`, you'll see a temporary link in your terminal
+   - It uses `cloudflared`, which may require installation, run `yarn cloudflared bin install`
+2. Setup a bot in a [@BotFather](https://t.me/BotFather), don't use `Scalr` when naming so it won't popup in a telegram search.
    Use the link from `cloudflared`
    - No, you don't need test telegram account, your primary account is better because you can use it on any device (test accounts are not supported by Android)
-4. Open the app in you mobile device and check if it works
+3. Open the app in you mobile device and check if it works
 
 - **Can I use `ngrok`?** - yes you can, but it will shut down in 3 hours, while you can keep `cloudflared` alive for days
 - **Can I host using vite?** - I tried, it didn't work
