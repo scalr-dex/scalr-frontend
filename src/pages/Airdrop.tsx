@@ -1,11 +1,5 @@
 import Logo from 'components/icons/Logo'
-import {
-  BodyText,
-  Header1,
-  Header2,
-  Header3,
-  Header4,
-} from 'components/icons/Text'
+import { Header1, Header3 } from 'components/icons/Text'
 import env from 'helpers/env'
 import {
   TonConnectButton,
