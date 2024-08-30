@@ -2,7 +2,7 @@ export default function () {
   return (
     <img
       src="img/onboardingStep3Background.png"
-      className="absolute top-10 animate-hovering w-[90dvw]"
+      className="absolute top-2 animate-hovering w-[90dvw]"
     />
   )
 }
