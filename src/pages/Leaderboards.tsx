@@ -28,6 +28,7 @@ export default function () {
       <YourPosition
         userName={tgUser?.username || tgUser?.firstName}
         userRank={data?.user?.user_rank}
+        loading={loading}
       />
       <UserList users={data?.lb} />
       <LeaderBoardsFaqModal showModal={modalOpen} setShowModal={setModalOpen} />
