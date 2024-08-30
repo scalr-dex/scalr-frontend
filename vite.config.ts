@@ -10,7 +10,7 @@ export default defineConfig({
     port: 5173,
   },
   build: {
-    sourcemap: true, // Source map generation must be turned on
+    sourcemap: true,
     rollupOptions: {
       plugins: [
         visualizer({
