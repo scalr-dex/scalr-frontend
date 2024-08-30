@@ -4,7 +4,6 @@ import TokenPrice from 'components/Main/TokenPrice'
 import { useAtomValue } from 'jotai'
 import priceHistoryAtom from 'helpers/atoms/priceHistoryAtom'
 import { userBetAtom } from 'helpers/atoms/UserAtom'
-import { preload } from 'react-dom'
 
 export default function () {
   const data = useAtomValue(priceHistoryAtom)

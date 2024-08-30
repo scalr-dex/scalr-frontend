@@ -5,6 +5,7 @@ node_modules
 .env
 .env.local
 .env.*.local
+.env.sentry-build-plugin
 
 # Log files
 npm-debug.log*
