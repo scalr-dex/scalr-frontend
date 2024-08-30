@@ -92,3 +92,20 @@ body {
     content: '...';
   }
 }
+
+/* TON connect button restyling, classes will change with update */
+.go1522830083 {
+  width: 92dvw !important;
+}
+.go3974562317,
+.go3572451881 {
+  width: 92dvw !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+.go3974562317,
+.go526437840,
+.go2628359365,
+.go157313249 {
+  background-color: var(--accent) !important;
+}
