@@ -24,6 +24,11 @@ TODO: create a `theme.ts` file that integrates with tailwind.config.js and can b
 - [Article](https://docs.ton.org/develop/dapps/telegram-apps/testing-apps) about testing the app on mobile in case something goes off
 - [How to debug (use devtools) in telegram mini apps](https://docs.ton.org/develop/dapps/telegram-apps/testing-apps)
 
+## Sentry integration
+
+1. In order for sentry to work you'll need a `.env.sentry-build-plugin` in project root with `SENTRY_AUTH_TOKEN` in it, you can get it [here](https://docs.sentry.io/platforms/javascript/sourcemaps/uploading/vite/) after you login to sentry
+2. Sourcemaps and versions are managed by [sentry/vite-plugin](vite.config.ts#L20)
+
 ## Backend
 
 1. [Endpoints description](https://twisty-hour-7d6.notion.site/Mini-app-backend-e6a232073f114ed3913c66f4a76512fd)
