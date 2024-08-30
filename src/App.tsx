@@ -14,11 +14,14 @@ import { QueryClientProvider } from '@tanstack/react-query'
 import queryClient from 'helpers/queryClient'
 import AppStatus from 'type/AppStatus'
 import SplashScreen from 'components/SplashScreen'
-import Onboarding from 'components/Onboarding'
 import { useAtomValue } from 'jotai'
 import didOnboardAtom from 'helpers/atoms/UserStates'
 import useWebSocketData from 'helpers/hooks/useWebSocketData'
 import SturdyWebSocket from 'sturdy-websocket'
+import { lazy, Suspense } from 'preact/compat'
+import Airdrop from 'pages/Airdrop'
+
+const Onboarding = lazy(() => import('components/Onboarding'))
 
 function AppInner({ socket }: { socket: SturdyWebSocket }) {
   useWebSocketData(socket)
@@ -39,9 +42,12 @@ function AppInner({ socket }: { socket: SturdyWebSocket }) {
                   <Route path="/" component={Main} />
                   <Route path="/tasks" component={Tasks} />
                   <Route path="/leaderboards" component={LeaderBoards} />
+                  <Route path="/airdrop" component={Airdrop} />
                 </>
               ) : (
-                <Onboarding />
+                <Suspense fallback={SplashScreen}>
+                  <Onboarding />
+                </Suspense>
               )}
 
               <Route component={NotFound} />

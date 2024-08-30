@@ -2,11 +2,13 @@ import MainSquare from 'components/icons/MainSquare'
 import { useLocation } from 'wouter-preact'
 import Cup from 'components/icons/Cup'
 import Gift from 'components/icons/Gift'
+import Rocket from 'components/icons/Rocket'
 
 const buttons = [
   { path: '/', component: <MainSquare /> },
   { path: 'leaderboards', component: <Cup /> },
   { path: 'tasks', component: <Gift /> },
+  { path: 'airdrop', component: <Rocket /> },
 ]
 
 export default function ({ didOnboard }: { didOnboard: boolean }) {
