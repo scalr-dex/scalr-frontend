@@ -2,7 +2,7 @@ import { toast } from 'react-toastify'
 import Sentry from 'helpers/api/sentry'
 
 function checkErrorAndCapture(e: unknown, message?: string) {
-  const extra = { topText: message }
+  const extra = { message }
   if (e instanceof Error) {
     Sentry.captureException(e, { extra })
   } else {
