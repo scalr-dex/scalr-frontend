@@ -32,8 +32,6 @@ export default function ({
 }) {
   const [videoReady, setVideoReady] = useState(false)
 
-  console.log(srcHevc)
-
   if ((isBrowser && !isSafari && !isMobileSafari && !isMacOs) || isAndroid)
     return (
       <video
