@@ -17,14 +17,9 @@ module.exports = {
           '0%, 100%': { transform: 'translateY(0rem)' },
           '50%': { transform: 'translateY(0.5rem)' },
         },
-        hanging: {
-          '0%, 100%': { transform: 'rotate(0)' },
-          '50%': { transform: 'rotate(15deg)' },
-        },
       },
       animation: {
         hovering: 'hovering 4s ease-in-out infinite',
-        hanging: 'hanging 8s ease-in-out infinite',
       },
       fontSize: {
         '4.5xl': ['2.5rem', { lineHeight: '3rem' }],
