@@ -1,6 +1,5 @@
 import { useAutoAnimate } from '@formkit/auto-animate/react'
 import BottomTabNavigator from 'components/BottomTabNavigator'
-import Main from 'pages/Main'
 import NotFound from 'pages/NotFound'
 import Tasks from 'pages/Tasks'
 import { ToastContainer } from 'react-toastify'
@@ -14,11 +13,15 @@ import { QueryClientProvider } from '@tanstack/react-query'
 import queryClient from 'helpers/queryClient'
 import AppStatus from 'type/AppStatus'
 import SplashScreen from 'components/SplashScreen'
-import Onboarding from 'components/Onboarding'
 import { useAtomValue } from 'jotai'
 import didOnboardAtom from 'helpers/atoms/UserStates'
 import useWebSocketData from 'helpers/hooks/useWebSocketData'
 import SturdyWebSocket from 'sturdy-websocket'
+import { lazy, Suspense } from 'preact/compat'
+import Loader from 'components/Loader'
+import Main from 'pages/Main'
+
+const Onboarding = lazy(() => import('pages/Onboarding'))
 
 function AppInner({ socket }: { socket: SturdyWebSocket }) {
   useWebSocketData(socket)
@@ -33,21 +36,21 @@ function AppInner({ socket }: { socket: SturdyWebSocket }) {
             className="flex flex-col relative min-h-[90dvh] overflow-x-hidden my-4 container mx-auto max-w-prose text-white"
             ref={parent}
           >
-            <Switch>
-              {didOnboard ? (
-                <>
-                  <Route path="/" component={Main} />
-                  <Route path="/tasks" component={Tasks} />
-                  <Route path="/leaderboards" component={LeaderBoards} />
-                </>
-              ) : (
-                <Onboarding />
-              )}
+            {didOnboard ? (
+              <Switch>
+                <Route path="/" component={Main} />
+                <Route path="/tasks" component={Tasks} />
+                <Route path="/leaderboards" component={LeaderBoards} />
 
-              <Route component={NotFound} />
-            </Switch>
+                <Route component={NotFound} />
+              </Switch>
+            ) : (
+              <Suspense fallback={<Loader full />}>
+                <Onboarding />
+              </Suspense>
+            )}
           </div>
-          <BottomTabNavigator didOnboard={didOnboard} />
+          {didOnboard ? <BottomTabNavigator /> : null}
           <ToastContainer
             draggable
             position="bottom-center"
