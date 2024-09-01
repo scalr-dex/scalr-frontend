@@ -46,16 +46,14 @@ export default function ({
       const untilEnd = roundEndTime - Date.now()
       const endTime = untilEnd + Date.now() + roundDurationMs
 
-      await placeBet(bet)
-        .then(() => {
-          setUserBet({
-            ...bet,
-            value: lastValue,
-            endTime: new Date(endTime),
-          })
-        })
-        .finally(() => {
-          setProcessingBet(false)
+      const success = await placeBet(bet)
+      setProcessingBet(false)
+
+      if (success)
+        setUserBet({
+          ...bet,
+          value: lastValue,
+          endTime: new Date(endTime),
         })
     },
     [betValue, lastValue, roundStartTime, setUserBet, user?.balance]

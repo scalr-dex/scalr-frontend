@@ -18,7 +18,9 @@ export default async function ({
 
     await backendKy().post('bet', { json })
     track('placeBet', { amount, direction })
+    return true
   } catch (e) {
     handleError({ e, toastMessage: 'Failed to place a bet 😥' })
+    return false
   }
 }
