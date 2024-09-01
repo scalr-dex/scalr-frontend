@@ -20,4 +20,8 @@ export function initSentry() {
   Sentry.init(sentryConfig)
 }
 
+export function setSentryUser(tgId: string) {
+  Sentry.setUser({ username: tgId })
+}
+
 export default Sentry

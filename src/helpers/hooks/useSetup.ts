@@ -16,6 +16,7 @@ import { LogLevel } from '@amplitude/analytics-types'
 import env from 'helpers/env'
 import setupMiniApp from 'helpers/setupMiniApp'
 import SturdyWebSocket from 'sturdy-websocket'
+import { setSentryUser } from 'helpers/api/sentry'
 
 export default function () {
   const [appStatus, setAppStatus] = useState(AppStatus.loading)
@@ -43,11 +44,13 @@ export default function () {
       if (isMini) {
         const user = await setupUser()
         if (user) {
+          const userId = String(user.launchParams.initData?.user?.id)
           setSocket(setupWebSocket(user.ticket))
 
           identify(new Identify(), {
-            user_id: String(user.launchParams.initData?.user?.id),
+            user_id: String(userId),
           })
+          setSentryUser(userId)
         }
         setupMiniApp()
         setAppStatus(AppStatus.isTma)
