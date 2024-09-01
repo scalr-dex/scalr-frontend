@@ -1,4 +1,4 @@
-import { AccentText } from 'components/icons/Text'
+import { AccentText } from 'components/Text'
 import ImageWithFallback from 'components/ImageWithFallback'
 import formatUSA from 'helpers/formatUSA'
 import { LeaderBoardUser } from 'type/LeaderBoardResponse'

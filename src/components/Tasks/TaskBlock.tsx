@@ -1,5 +1,5 @@
 import ButtonSmall from 'components/ButtonSmall'
-import { AccentText } from 'components/icons/Text'
+import { AccentText } from 'components/Text'
 import UserTask, {
   iconNumberToIcon,
   taskStatusToButtonText,

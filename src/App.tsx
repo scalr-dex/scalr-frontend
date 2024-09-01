@@ -20,6 +20,8 @@ import SturdyWebSocket from 'sturdy-websocket'
 import { lazy, Suspense } from 'preact/compat'
 import Loader from 'components/Loader'
 import Main from 'pages/Main'
+import { ErrorBoundary } from '@sentry/react'
+import ErrorBoundaryFallback from 'components/ErrorBoundaryFallback'
 
 const Onboarding = lazy(() => import('pages/Onboarding'))
 
@@ -78,6 +80,11 @@ export default function () {
   if (appStatus === AppStatus.loading) return <SplashScreen />
   if (appStatus === AppStatus.isElse) return <BrowserInvite />
 
-  if (socket) return <AppInner socket={socket} />
+  if (socket)
+    return (
+      <ErrorBoundary fallback={ErrorBoundaryFallback}>
+        <AppInner socket={socket} />
+      </ErrorBoundary>
+    )
   else return <SplashScreen />
 }

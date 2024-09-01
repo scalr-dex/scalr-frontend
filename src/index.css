@@ -92,3 +92,8 @@ body {
     content: '...';
   }
 }
+
+.outlined-text-accent {
+  -webkit-text-stroke: 2px var(--accent-hover);
+  -webkit-text-fill-color: transparent;
+}

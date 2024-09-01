@@ -1,4 +1,4 @@
-import { AccentText, Header1 } from 'components/icons/Text'
+import { AccentText, Header1 } from 'components/Text'
 
 export default function () {
   return (

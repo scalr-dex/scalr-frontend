@@ -1,5 +1,5 @@
 import GetHelp from 'components/icons/GetHelp'
-import { Header3 } from 'components/icons/Text'
+import { Header3 } from 'components/Text'
 import UserList from 'components/LeaderBoards/UserList'
 import YourEpochVolume from 'components/LeaderBoards/YourEpochVolume'
 import YourPosition from 'components/LeaderBoards/YourPosition'

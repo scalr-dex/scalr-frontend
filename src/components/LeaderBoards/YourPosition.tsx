@@ -1,5 +1,5 @@
 import DotsLoader from 'components/DotsLoader'
-import { Header3 } from 'components/icons/Text'
+import { Header3 } from 'components/Text'
 import formatUSA from 'helpers/formatUSA'
 
 export default function ({

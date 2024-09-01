@@ -1,5 +1,5 @@
 import Button from 'components/Button'
-import { Header3, AccentText } from 'components/icons/Text'
+import { Header3, AccentText } from 'components/Text'
 import DefaultModal from 'components/Modals/DefaultModal'
 import ButtonTypes from 'type/Button'
 import { DefaultModalProps } from 'type/Props'

@@ -1,5 +1,5 @@
 import LogoIcon from 'components/icons/LogoIcon'
-import { AccentText, Header1, SpecialText } from 'components/icons/Text'
+import { AccentText, Header1, SpecialText } from 'components/Text'
 import { SparklesLeft, SparklesRight } from 'components/Onboarding/Sparkles'
 
 export default function () {
