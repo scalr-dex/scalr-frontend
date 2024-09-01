@@ -11,7 +11,7 @@ export default function () {
       </Header1>
       <Header2>
         <button onClick={() => setLocation('/')} className="underline">
-          Go back
+          Go to main
         </button>
       </Header2>
     </div>

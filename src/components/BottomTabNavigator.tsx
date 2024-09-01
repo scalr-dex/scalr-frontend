@@ -5,7 +5,7 @@ import Gift from 'components/icons/Gift'
 
 const buttons = [
   { path: '/', component: <MainSquare /> },
-  { path: 'leaderboard', component: <Cup /> },
+  { path: 'leaderboards', component: <Cup /> },
   { path: 'tasks', component: <Gift /> },
 ]
 
