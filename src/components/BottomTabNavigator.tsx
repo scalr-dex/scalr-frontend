@@ -11,10 +11,8 @@ const buttons = [
   { path: 'airdrop', component: <Rocket /> },
 ]
 
-export default function ({ didOnboard }: { didOnboard: boolean }) {
+export default function () {
   const [location, setLocation] = useLocation()
-
-  if (!didOnboard) return null
 
   const latest = location.split('/')[1] || '/'
 

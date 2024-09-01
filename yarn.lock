@@ -6410,7 +6410,6 @@ __metadata:
     react-range: ^1.10.0
     react-toastify: ^10.0.5
     rollup-plugin-visualizer: ^5.12.0
-    stacked-alpha-video: ^1.0.8
     sturdy-websocket: ^0.2.1
     tailwindcss: ^3.4.3
     ts-node: ^10.9.2
@@ -6621,13 +6620,6 @@ __metadata:
   version: 1.0.0-pre2
   resolution: "stack-trace@npm:1.0.0-pre2"
   checksum: 036a7a7edafae602b15e4c26a79ad9752d97d87be648b9c921a5d98c1426219c21784ee6aee3cff06ba555d238c30cd87b78b2d9ad537ac94df8b689ffc6b4b6
-  languageName: node
-  linkType: hard
-
-"stacked-alpha-video@npm:^1.0.8":
-  version: 1.0.8
-  resolution: "stacked-alpha-video@npm:1.0.8"
-  checksum: 4b3a01ebfcae3debcde51ed8d966581562ded1556184813f3a3204810885c672d41d66efe4da1ce28fc16bf856c05bdd711fae1aa65329770ed8085b4b9127b0
   languageName: node
   linkType: hard
 

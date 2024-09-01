@@ -12,7 +12,7 @@ TODO: create a `theme.ts` file that integrates with tailwind.config.js and can b
 ## Testing inside Telegram with Hot Module Reload
 
 1. After running the server locally via `yarn start`, run `yarn expose-dev`, you'll see a temporary link in your terminal
-   - It uses `cloudflared`, which may require installation, run `yarn cloudflared bin install`
+   - It uses `cloudflared`, which may require installation, run `yarn cloudflared bin install` to get the latest version
 2. Setup a bot in a [@BotFather](https://t.me/BotFather), don't use `Scalr` when naming so it won't popup in a telegram search.
    Use the link from `cloudflared`
    - No, you don't need test telegram account, your primary account is better because you can use it on any device (test accounts are not supported by Android)

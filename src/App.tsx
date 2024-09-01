@@ -1,6 +1,5 @@
 import { useAutoAnimate } from '@formkit/auto-animate/react'
 import BottomTabNavigator from 'components/BottomTabNavigator'
-import Main from 'pages/Main'
 import NotFound from 'pages/NotFound'
 import Tasks from 'pages/Tasks'
 import { ToastContainer } from 'react-toastify'
@@ -20,8 +19,10 @@ import useWebSocketData from 'helpers/hooks/useWebSocketData'
 import SturdyWebSocket from 'sturdy-websocket'
 import { lazy, Suspense } from 'preact/compat'
 import Airdrop from 'pages/Airdrop'
+import Loader from 'components/Loader'
+import Main from 'pages/Main'
 
-const Onboarding = lazy(() => import('components/Onboarding'))
+const Onboarding = lazy(() => import('pages/Onboarding'))
 
 function AppInner({ socket }: { socket: SturdyWebSocket }) {
   useWebSocketData(socket)
@@ -45,7 +46,7 @@ function AppInner({ socket }: { socket: SturdyWebSocket }) {
                   <Route path="/airdrop" component={Airdrop} />
                 </>
               ) : (
-                <Suspense fallback={SplashScreen}>
+                <Suspense fallback={<Loader full />}>
                   <Onboarding />
                 </Suspense>
               )}
@@ -53,7 +54,7 @@ function AppInner({ socket }: { socket: SturdyWebSocket }) {
               <Route component={NotFound} />
             </Switch>
           </div>
-          <BottomTabNavigator didOnboard={didOnboard} />
+          {didOnboard ? <BottomTabNavigator /> : null}
           <ToastContainer
             draggable
             position="bottom-center"

@@ -2,10 +2,10 @@ import AlphaVideo from 'components/AlphaVideo'
 
 type StepToString = { [step: number]: string }
 
-const stepToHevc: StepToString = {
-  0: 'vid/utya-hevc.mp4',
-  1: 'vid/utya-pair-hevc.mp4',
-  2: 'vid/utya-money-hevc.mp4',
+const stepToSafari: StepToString = {
+  0: 'vid/utya.gif',
+  1: 'vid/utya-pair.gif',
+  2: 'vid/utya-money.gif',
 }
 const stepToWebm: StepToString = {
   0: 'vid/utya.webm',
@@ -21,11 +21,12 @@ const stepToPoster: StepToString = {
 export default function ({ step }: { step: number }) {
   return (
     <AlphaVideo
-      srcHevc={stepToHevc[step]}
+      srcSafari={stepToSafari[step]}
       src={stepToWebm[step]}
       poster={stepToPoster[step]}
       width={155}
       height={155}
+      key={'onboarding-vid-' + step}
     />
   )
 }
