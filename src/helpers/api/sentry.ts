@@ -11,6 +11,7 @@ const sentryConfig: Sentry.BrowserOptions = {
     Sentry.browserProfilingIntegration(),
     Sentry.replayIntegration(),
   ],
+  sampleRate: 1,
   replaysSessionSampleRate: env.DEV ? 1 : 0.1,
   replaysOnErrorSampleRate: 1,
   debug: env.DEV,

@@ -30,9 +30,9 @@ export default function ({
 
   const roundLines = data
     .filter(({ roundSeparator }) => Boolean(roundSeparator))
-    .map(({ value }, index) => ({
+    .map(({ value }) => ({
       xAxis: value[0],
-      name: 'Round Separator' + index,
+      name: 'Round Separator' + value[0],
       label: { show: false },
     }))
 
@@ -45,7 +45,6 @@ export default function ({
       }}
     >
       <EChart
-        notMerge
         animation
         grid={{
           left: 1,
@@ -68,7 +67,6 @@ export default function ({
           splitLine: { show: false },
           axisTick: { show: false },
           axisLine: { show: false },
-          animation: true,
           axisLabel: {
             fontSize: 10,
             fontWeight: 500,
@@ -79,6 +77,7 @@ export default function ({
               return date.second() % 5 === 0 ? date.format('HH:mm:ss') : ''
             },
           },
+          animationDurationUpdate: 1000,
         }}
         yAxis={{
           type: 'value',
@@ -93,6 +92,7 @@ export default function ({
           },
           min: (val) => val.min - 0.0005,
           max: (val) => val.max + 0.0005,
+          animationDurationUpdate: 1000,
         }}
         series={{
           name: 'Token price',
@@ -110,6 +110,7 @@ export default function ({
               color: '#ffffff',
               width: 2,
             },
+            animationDurationUpdate: 1000,
           },
 
           markPoint: {
@@ -124,14 +125,15 @@ export default function ({
             },
             symbolSize: 10,
             symbol: 'circle',
+            animationDurationUpdate: 1000,
           },
 
           showSymbol: false,
           universalTransition: true,
           animation: true,
           animationEasing: 'cubicInOut',
-          animationDuration: 500,
-          stateAnimation: { duration: 100, easing: 'linear' },
+          animationDuration: 1000,
+          animationDurationUpdate: 1000,
           lineStyle: {
             color: '#B1C9F7',
             width: 4,
