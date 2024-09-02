@@ -7,7 +7,6 @@ import {
 import { LineChart } from 'echarts/charts'
 import { EChart } from '@kbox-labs/react-echarts'
 import dayjs from 'dayjs'
-import { UniversalTransition } from 'echarts/features'
 import { GraphTokenData } from 'type/TokenState'
 import { UserBet } from 'type/User'
 
@@ -33,7 +32,6 @@ export default function ({
     .map(({ value }) => ({
       xAxis: value[0],
       name: 'Round Separator' + value[0],
-      label: { show: false },
     }))
 
   return (
@@ -59,7 +57,6 @@ export default function ({
           MarkPointComponent,
           LineChart,
           SVGRenderer,
-          UniversalTransition,
         ]}
         renderer="svg"
         xAxis={{
@@ -103,6 +100,9 @@ export default function ({
           markLine: {
             data: roundLines,
 
+            label: { show: false },
+            tooltip: { show: false },
+
             symbol: ['diamond', 'diamond'],
             symbolSize: 7,
             lineStyle: {
@@ -129,7 +129,6 @@ export default function ({
           },
 
           showSymbol: false,
-          universalTransition: true,
           animation: true,
           animationEasing: 'cubicInOut',
           animationDuration: 1000,
