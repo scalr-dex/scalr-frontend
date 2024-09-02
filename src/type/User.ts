@@ -22,5 +22,5 @@ export interface UserBet {
 
   amount: number
   direction: BetDirection
-  endTime: Date
+  endTime: number
 }
