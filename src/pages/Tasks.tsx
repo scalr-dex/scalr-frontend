@@ -1,17 +1,26 @@
 import { useQuery } from '@tanstack/react-query'
 import Logo from 'components/icons/Logo'
-import { AccentText, Header2 } from 'components/icons/Text'
+import { AccentText, Header2 } from 'components/Text'
 import InviteFriends from 'components/Tasks/InviteFriends'
 import TaskBlock from 'components/Tasks/TaskBlock'
 import TaskSkeleton from 'components/Tasks/TaskSkeleton'
 import { getTasks } from 'helpers/api/userTasks'
 import { QueryKeys } from 'helpers/queryClient'
+import { useCallback } from 'preact/hooks'
+import UserTask from 'type/UserTask'
 
 export default function () {
   const { data, refetch } = useQuery({
     queryKey: [QueryKeys.userTasks],
     queryFn: getTasks,
   })
+
+  const renderTask = useCallback(
+    (taskData: UserTask) => (
+      <TaskBlock {...taskData} refetch={refetch} key={taskData.TaskID} />
+    ),
+    [refetch]
+  )
 
   return (
     <div className="flex flex-col flex-1 gap-y-8 px-4">
@@ -24,9 +33,7 @@ export default function () {
       </div>
       <div className="flex flex-col gap-y-6">
         {data
-          ? data.map((taskData) => (
-              <TaskBlock {...taskData} refetch={refetch} />
-            ))
+          ? data.map(renderTask)
           : [...Array(5)].map(() => <TaskSkeleton />)}
       </div>
       <InviteFriends />

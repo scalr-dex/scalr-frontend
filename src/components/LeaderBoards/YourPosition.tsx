@@ -1,5 +1,5 @@
 import DotsLoader from 'components/DotsLoader'
-import { Header3 } from 'components/icons/Text'
+import { Header3 } from 'components/Text'
 import formatUSA from 'helpers/formatUSA'
 
 export default function ({
@@ -14,7 +14,7 @@ export default function ({
   return (
     <div className="flex flex-row justify-between rounded-2xl px-5 py-3 bg-border-gradient">
       <Header3 className="truncate">{userName}</Header3>
-      <Header3>#{loading ? <DotsLoader /> : formatUSA(userRank)}</Header3>
+      <Header3>#{loading ? <DotsLoader /> : formatUSA(userRank || 0)}</Header3>
     </div>
   )
 }

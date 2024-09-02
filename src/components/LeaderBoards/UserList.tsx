@@ -1,10 +1,16 @@
-import { AccentText } from 'components/icons/Text'
+import { AccentText, Header3 } from 'components/Text'
 import ImageWithFallback from 'components/ImageWithFallback'
 import formatUSA from 'helpers/formatUSA'
 import { LeaderBoardUser } from 'type/LeaderBoardResponse'
 import UserListSkeleton from 'components/LeaderBoards/UserListSkeleton'
 
-export default function ({ users }: { users: LeaderBoardUser[] | undefined }) {
+export default function ({
+  users,
+  loading,
+}: {
+  users: LeaderBoardUser[] | undefined
+  loading: boolean
+}) {
   const renderItem = ({
     item,
     index,
@@ -27,7 +33,7 @@ export default function ({ users }: { users: LeaderBoardUser[] | undefined }) {
           <AccentText className="font-semibold">{item.telegram_id}</AccentText>
         </div>
 
-        <div className="flex flex-row gap-x-4 text-sm">
+        <div className="flex flex-row items-center gap-x-4 text-sm">
           <AccentText>{formatUSA(item.points)}</AccentText>
           <AccentText className={`font-semibold ${bg}`}>
             {isTopThree ? '' : '#'}
@@ -40,10 +46,15 @@ export default function ({ users }: { users: LeaderBoardUser[] | undefined }) {
 
   return (
     <div>
-      {users ? (
+      {loading ? (
+        <UserListSkeleton />
+      ) : users?.length ? (
         users.map((item, index) => renderItem({ item, index }))
       ) : (
-        <UserListSkeleton />
+        <Header3 className="text-center">
+          <p>Leaderboard is being formed</p>
+          <p>stay tuned 😎</p>
+        </Header3>
       )}
     </div>
   )

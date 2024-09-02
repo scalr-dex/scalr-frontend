@@ -1,5 +1,5 @@
 import ScalrCoin from 'components/icons/coins/ScalrCoin'
-import { Header2 } from 'components/icons/Text'
+import { Header2 } from 'components/Text'
 import CountUp from 'react-countup'
 
 export default function ({ amount }: { amount?: number | undefined }) {

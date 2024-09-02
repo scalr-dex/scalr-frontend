@@ -24,6 +24,9 @@ export async function claimTask(id: number) {
     await backendKy().post(`tasks/claim/${id}`)
     void successConfetti()
   } catch (e) {
-    handleError({ e })
+    handleError({
+      e,
+      toastMessage: 'Failed to claim rewards 😿 Please try again later 🥺',
+    })
   }
 }

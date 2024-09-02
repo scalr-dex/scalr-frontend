@@ -34,6 +34,9 @@ module.exports = {
           '0px 15px 40px 0px #00000066, 0px 5px 10px 0px #00000033, 0px 0px 0px 1px #0000001a',
         onboarding: '0px 16px 32px -8px #0C0C0D66',
       },
+      dropShadow: {
+        'glow-accent': '0 0 0.25rem var(--accent)',
+      },
       screens: {
         se: '375px',
       },

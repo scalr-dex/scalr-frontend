@@ -9,7 +9,7 @@ import placeBet from 'helpers/api/placeBet'
 import PointsWithTimer from 'components/Main/PointsWithTimer'
 import BetDirection from 'type/BetDirection'
 import { useAutoAnimate } from '@formkit/auto-animate/react'
-import { BodyText } from 'components/icons/Text'
+import { BodyText } from 'components/Text'
 import BetTimer from 'components/Main/BetTimer'
 import { roundDurationMs } from 'helpers/atoms/priceHistoryAtom'
 import { GraphTokenValue } from 'type/TokenState'
@@ -32,6 +32,11 @@ export default function ({
   const disabled = betValue <= 0 || loading || processingBet || !user?.balance
 
   useEffect(() => {
+    if (!userBet) return
+    if (userBet.endTime < Date.now()) setUserBet(null)
+  }, [setUserBet, userBet])
+
+  useEffect(() => {
     setBetValue(Math.round((user?.balance || 0) / 2))
   }, [user?.balance])
 
@@ -46,16 +51,14 @@ export default function ({
       const untilEnd = roundEndTime - Date.now()
       const endTime = untilEnd + Date.now() + roundDurationMs
 
-      await placeBet(bet)
-        .then(() => {
-          setUserBet({
-            ...bet,
-            value: lastValue,
-            endTime: new Date(endTime),
-          })
-        })
-        .finally(() => {
-          setProcessingBet(false)
+      const success = await placeBet(bet)
+      setProcessingBet(false)
+
+      if (success)
+        setUserBet({
+          ...bet,
+          value: lastValue,
+          endTime: new Date(endTime).getTime(),
         })
     },
     [betValue, lastValue, roundStartTime, setUserBet, user?.balance]

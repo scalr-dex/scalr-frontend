@@ -1,5 +1,5 @@
 import GetHelp from 'components/icons/GetHelp'
-import { Header3 } from 'components/icons/Text'
+import { Header3 } from 'components/Text'
 import UserList from 'components/LeaderBoards/UserList'
 import YourEpochVolume from 'components/LeaderBoards/YourEpochVolume'
 import YourPosition from 'components/LeaderBoards/YourPosition'
@@ -30,7 +30,7 @@ export default function () {
         userRank={data?.user?.user_rank}
         loading={loading}
       />
-      <UserList users={data?.lb} />
+      <UserList users={data?.lb} loading={loading} />
       <LeaderBoardsFaqModal showModal={modalOpen} setShowModal={setModalOpen} />
     </div>
   )

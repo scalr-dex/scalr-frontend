@@ -1,4 +1,4 @@
-import { BodyText } from 'components/icons/Text'
+import { BodyText } from 'components/Text'
 import Points from 'components/Main/Points'
 
 export default function ({ points }: { points: number | undefined }) {

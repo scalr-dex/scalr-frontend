@@ -1,7 +1,7 @@
 import DotsLoader from 'components/DotsLoader'
 import TonCoin from 'components/icons/coins/TonCoin'
 import StonksArrow from 'components/icons/StonksArrow'
-import { Header2, Header4 } from 'components/icons/Text'
+import { Header2, Header4 } from 'components/Text'
 import Timer from 'components/Main/Timer'
 import CountUp from 'react-countup'
 

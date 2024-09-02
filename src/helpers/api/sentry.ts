@@ -11,6 +11,7 @@ const sentryConfig: Sentry.BrowserOptions = {
     Sentry.browserProfilingIntegration(),
     Sentry.replayIntegration(),
   ],
+  sampleRate: 1,
   replaysSessionSampleRate: env.DEV ? 1 : 0.1,
   replaysOnErrorSampleRate: 1,
   debug: env.DEV,
@@ -18,6 +19,10 @@ const sentryConfig: Sentry.BrowserOptions = {
 
 export function initSentry() {
   Sentry.init(sentryConfig)
+}
+
+export function setSentryUser(tgId: string) {
+  Sentry.setUser({ username: tgId })
 }
 
 export default Sentry

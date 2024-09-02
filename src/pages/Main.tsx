@@ -12,7 +12,10 @@ export default function () {
   const lastIndex = data.length - 1
   const lastValue = data[lastIndex]?.value
 
-  const currentRoundStart = data.findLast((entry) => entry.roundSeparator)
+  const currentRoundStart = data
+    .slice()
+    .reverse()
+    .find((entry) => entry.roundSeparator) // findLast isn't supported by old browsers
   const roundStartPrice = userBet
     ? userBet.value[1]
     : currentRoundStart?.value[1]
