@@ -31,6 +31,8 @@ export default function ({
   const buttonType = taskStatusToButtonType[Status]
   const [time, setTime] = useState(0)
 
+  const onTimer = time > 0
+
   useEffect(() => {
     if (!canClaimAt) return
 
@@ -48,7 +50,7 @@ export default function ({
   }, [])
 
   const onClick = useCallback(async () => {
-    if (canClaimAt && time > 0) return
+    if (canClaimAt && onTimer) return
     setLoading(true)
 
     if (canClaimAt) {
@@ -64,7 +66,7 @@ export default function ({
 
     // Should be at the end of callback to execute previous functions
     if (Status === 'NotStarted' && !canClaimAt) utils.openLink(URL)
-  }, [canClaimAt, time, refetch, Status, TaskID, utils, URL])
+  }, [canClaimAt, onTimer, Status, utils, URL, TaskID, refetch])
 
   const opacity = Status === 'Claimed' ? 'opacity-50' : 'opacity-100'
 
@@ -82,9 +84,9 @@ export default function ({
         className="text-sm font-accent px-2.5 py-1.5"
         onClick={onClick}
         isLoading={loading}
-        disabled={Status === 'Claimed' || time > 0}
+        disabled={Status === 'Claimed' || onTimer}
       >
-        {time > 0
+        {onTimer
           ? dayjs({ seconds: time }).format('ss[s]')
           : canClaimAt
             ? 'Check'
