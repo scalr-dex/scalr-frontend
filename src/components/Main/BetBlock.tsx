@@ -32,6 +32,11 @@ export default function ({
   const disabled = betValue <= 0 || loading || processingBet || !user?.balance
 
   useEffect(() => {
+    if (!userBet) return
+    if (userBet.endTime < Date.now()) setUserBet(null)
+  }, [setUserBet, userBet])
+
+  useEffect(() => {
     setBetValue(Math.round((user?.balance || 0) / 2))
   }, [user?.balance])
 
@@ -53,7 +58,7 @@ export default function ({
         setUserBet({
           ...bet,
           value: lastValue,
-          endTime: new Date(endTime),
+          endTime: new Date(endTime).getTime(),
         })
     },
     [betValue, lastValue, roundStartTime, setUserBet, user?.balance]
