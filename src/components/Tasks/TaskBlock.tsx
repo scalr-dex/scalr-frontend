@@ -29,9 +29,13 @@ export default function ({
   const utils = useUtils()
   const [loading, setLoading] = useState(false)
   const buttonType = taskStatusToButtonType[Status]
-  const [time, setTime] = useState(dayjs(canClaimAt).diff(dayjs(), 'seconds'))
+  const [time, setTime] = useState(0)
 
-  const onTimer = canClaimAt && time > 0
+  useEffect(() => {
+    if (!canClaimAt) return
+
+    setTime(dayjs(canClaimAt).diff(dayjs(), 'seconds'))
+  }, [TaskID, canClaimAt, refetch, time])
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -44,23 +48,20 @@ export default function ({
   }, [])
 
   const onClick = useCallback(async () => {
-    if (onTimer) return
+    if (canClaimAt && time > 0) return
     setLoading(true)
-
-    console.log(canClaimAt)
 
     if (canClaimAt) {
       await markTaskDone(TaskID)
       clearPendingTask(TaskID)
     } else await taskStatusToCallback[Status](TaskID)
 
-    setLoading(false)
     refetch()
+    setLoading(false)
 
-    if (Status === 'NotStarted') {
-      utils.openLink(URL)
-    }
-  }, [onTimer, canClaimAt, TaskID, Status, refetch, utils, URL])
+    // Should be at the end of callback to execute previous functions
+    if (Status === 'NotStarted' && !canClaimAt) utils.openLink(URL)
+  }, [canClaimAt, time, refetch, Status, TaskID, utils, URL])
 
   const opacity = Status === 'Claimed' ? 'opacity-50' : 'opacity-100'
 
@@ -82,7 +83,9 @@ export default function ({
       >
         {time > 0
           ? dayjs({ seconds: time }).format('ss[s]')
-          : taskStatusToButtonText[Status]}
+          : canClaimAt
+            ? 'Check'
+            : taskStatusToButtonText[Status]}
       </ButtonSmall>
     </div>
   )
