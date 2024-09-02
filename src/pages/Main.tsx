@@ -4,7 +4,6 @@ import TokenPrice from 'components/Main/TokenPrice'
 import { useAtomValue } from 'jotai'
 import priceHistoryAtom from 'helpers/atoms/priceHistoryAtom'
 import { userBetAtom } from 'helpers/atoms/UserAtom'
-import { preload } from 'react-dom'
 
 export default function () {
   const data = useAtomValue(priceHistoryAtom)
@@ -13,7 +12,10 @@ export default function () {
   const lastIndex = data.length - 1
   const lastValue = data[lastIndex]?.value
 
-  const currentRoundStart = data.findLast((entry) => entry.roundSeparator)
+  const currentRoundStart = data
+    .slice()
+    .reverse()
+    .find((entry) => entry.roundSeparator) // findLast isn't supported by old browsers
   const roundStartPrice = userBet
     ? userBet.value[1]
     : currentRoundStart?.value[1]

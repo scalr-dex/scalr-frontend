@@ -9,10 +9,8 @@ const buttons = [
   { path: 'tasks', component: <Gift /> },
 ]
 
-export default function ({ didOnboard }: { didOnboard: boolean }) {
+export default function () {
   const [location, setLocation] = useLocation()
-
-  if (!didOnboard) return null
 
   const latest = location.split('/')[1] || '/'
 

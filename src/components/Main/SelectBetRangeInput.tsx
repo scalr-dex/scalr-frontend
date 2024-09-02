@@ -1,5 +1,5 @@
 import { useHapticFeedback } from '@telegram-apps/sdk-react'
-import { AccentText } from 'components/icons/Text'
+import { AccentText } from 'components/Text'
 import formatUSA from 'helpers/formatUSA'
 import { JSX } from 'preact/jsx-runtime'
 import { getTrackBackground, Range } from 'react-range'

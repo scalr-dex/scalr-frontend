@@ -2,14 +2,14 @@ import SelectBetRangeInput from 'components/Main/SelectBetRangeInput'
 import Button from 'components/Button'
 import StonksArrow from 'components/icons/StonksArrow'
 import ButtonTypes from 'type/Button'
-import { useCallback, useState } from 'preact/hooks'
+import { useCallback, useEffect, useState } from 'preact/hooks'
 import { useAtom, useAtomValue } from 'jotai'
 import UserAtom, { userBetAtom } from 'helpers/atoms/UserAtom'
 import placeBet from 'helpers/api/placeBet'
 import PointsWithTimer from 'components/Main/PointsWithTimer'
 import BetDirection from 'type/BetDirection'
 import { useAutoAnimate } from '@formkit/auto-animate/react'
-import { BodyText } from 'components/icons/Text'
+import { BodyText } from 'components/Text'
 import BetTimer from 'components/Main/BetTimer'
 import { roundDurationMs } from 'helpers/atoms/priceHistoryAtom'
 import { GraphTokenValue } from 'type/TokenState'
@@ -27,9 +27,13 @@ export default function ({
   const user = useAtomValue(UserAtom)
   const [userBet, setUserBet] = useAtom(userBetAtom)
   const [processingBet, setProcessingBet] = useState(false)
-  const [betValue, setBetValue] = useState(Math.round((user?.balance || 0) / 2))
+  const [betValue, setBetValue] = useState(0)
 
   const disabled = betValue <= 0 || loading || processingBet || !user?.balance
+
+  useEffect(() => {
+    setBetValue(Math.round((user?.balance || 0) / 2))
+  }, [user?.balance])
 
   const onClick = useCallback(
     async (direction: BetDirection) => {
@@ -42,16 +46,14 @@ export default function ({
       const untilEnd = roundEndTime - Date.now()
       const endTime = untilEnd + Date.now() + roundDurationMs
 
-      await placeBet(bet)
-        .then(() => {
-          setUserBet({
-            ...bet,
-            value: lastValue,
-            endTime: new Date(endTime),
-          })
-        })
-        .finally(() => {
-          setProcessingBet(false)
+      const success = await placeBet(bet)
+      setProcessingBet(false)
+
+      if (success)
+        setUserBet({
+          ...bet,
+          value: lastValue,
+          endTime: new Date(endTime),
         })
     },
     [betValue, lastValue, roundStartTime, setUserBet, user?.balance]

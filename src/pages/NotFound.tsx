@@ -1,3 +1,19 @@
+import { Header1, Header2 } from 'components/Text'
+import { useLocation } from 'wouter-preact'
+
 export default function () {
-  return <div>404</div>
+  const [, setLocation] = useLocation()
+
+  return (
+    <div className="flex flex-1 flex-col items-center justify-center">
+      <Header1 className="text-transparent outlined-text-accent drop-shadow-glow-accent">
+        404
+      </Header1>
+      <Header2>
+        <button onClick={() => setLocation('/')} className="underline">
+          Go to main
+        </button>
+      </Header2>
+    </div>
+  )
 }

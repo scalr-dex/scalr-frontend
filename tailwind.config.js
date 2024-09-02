@@ -17,14 +17,9 @@ module.exports = {
           '0%, 100%': { transform: 'translateY(0rem)' },
           '50%': { transform: 'translateY(0.5rem)' },
         },
-        hanging: {
-          '0%, 100%': { transform: 'rotate(0)' },
-          '50%': { transform: 'rotate(15deg)' },
-        },
       },
       animation: {
         hovering: 'hovering 4s ease-in-out infinite',
-        hanging: 'hanging 8s ease-in-out infinite',
       },
       fontSize: {
         '4.5xl': ['2.5rem', { lineHeight: '3rem' }],
@@ -38,6 +33,9 @@ module.exports = {
         super:
           '0px 15px 40px 0px #00000066, 0px 5px 10px 0px #00000033, 0px 0px 0px 1px #0000001a',
         onboarding: '0px 16px 32px -8px #0C0C0D66',
+      },
+      dropShadow: {
+        'glow-accent': '0 0 0.25rem var(--accent)',
       },
       screens: {
         se: '375px',

@@ -1,6 +1,6 @@
 import Button from 'components/Button'
 import CardWrapper from 'components/CardWrapper'
-import { AccentText, Header4 } from 'components/icons/Text'
+import { AccentText, Header4 } from 'components/Text'
 import { useState } from 'preact/hooks'
 import ButtonTypes from 'type/Button'
 import InviteFriendsModal from 'components/Modals/InviteFriendsModal'

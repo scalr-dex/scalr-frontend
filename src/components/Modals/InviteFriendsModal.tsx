@@ -4,13 +4,12 @@ import Close from 'components/icons/Close'
 import Copy from 'components/icons/Copy'
 import Logo from 'components/icons/Logo'
 import Share from 'components/icons/Share'
-import { AccentText, Header3, SpecialText } from 'components/icons/Text'
+import { AccentText, Header3, SpecialText } from 'components/Text'
 import DefaultModal from 'components/Modals/DefaultModal'
 import UserAtom from 'helpers/atoms/UserAtom'
 import env from 'helpers/env'
 import { useAtomValue } from 'jotai'
-import { useCallback } from 'preact/hooks'
-import { toast } from 'react-toastify'
+import { useCallback, useState } from 'preact/hooks'
 import ButtonTypes from 'type/Button'
 import { DefaultModalProps } from 'type/Props'
 
@@ -56,6 +55,7 @@ function ModalHeader({ onClose }: { onClose: () => void }) {
 function ModalFooter() {
   const user = useAtomValue(UserAtom)
   const utils = useUtils()
+  const [copied, setCopied] = useState(false)
 
   const userId = user?.launchParams.initData?.user?.id
 
@@ -75,7 +75,8 @@ function ModalFooter() {
       `${env.VITE_APP_BASE_LINK}?startapp=${userId}`
     )
 
-    toast.success('Copied 📝')
+    setCopied(true)
+    setTimeout(() => setCopied(false), 1500)
   }, [userId])
 
   return (
@@ -93,9 +94,9 @@ function ModalFooter() {
         onClick={onCopy}
         buttonType={ButtonTypes.secondary}
         className="!rounded-full"
-        iconRight={<Copy />}
+        iconRight={copied ? <span>🎉</span> : <Copy />}
       >
-        Copy link
+        {copied ? 'Copied' : 'Copy link'}
       </Button>
     </div>
   )

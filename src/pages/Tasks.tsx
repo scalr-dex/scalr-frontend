@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query'
 import Logo from 'components/icons/Logo'
-import { AccentText, Header2 } from 'components/icons/Text'
+import { AccentText, Header2 } from 'components/Text'
 import InviteFriends from 'components/Tasks/InviteFriends'
 import TaskBlock from 'components/Tasks/TaskBlock'
 import TaskSkeleton from 'components/Tasks/TaskSkeleton'

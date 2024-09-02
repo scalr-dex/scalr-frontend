@@ -1,5 +1,5 @@
 import Gift from 'components/icons/Gift'
-import { Header1 } from 'components/icons/Text'
+import { Header1 } from 'components/Text'
 
 export default function () {
   return (
