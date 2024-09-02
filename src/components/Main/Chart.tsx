@@ -9,6 +9,7 @@ import { EChart } from '@kbox-labs/react-echarts'
 import dayjs from 'dayjs'
 import { GraphTokenData } from 'type/TokenState'
 import { UserBet } from 'type/User'
+import { tick } from 'helpers/atoms/priceHistoryAtom'
 
 export default function ({
   data,
@@ -74,7 +75,7 @@ export default function ({
               return date.second() % 5 === 0 ? date.format('HH:mm:ss') : ''
             },
           },
-          animationDurationUpdate: 1000,
+          animationDurationUpdate: tick,
         }}
         yAxis={{
           type: 'value',
@@ -89,7 +90,7 @@ export default function ({
           },
           min: (val) => val.min - 0.0005,
           max: (val) => val.max + 0.0005,
-          animationDurationUpdate: 1000,
+          animationDurationUpdate: tick,
         }}
         series={{
           name: 'Token price',
@@ -110,7 +111,7 @@ export default function ({
               color: '#ffffff',
               width: 2,
             },
-            animationDurationUpdate: 1000,
+            animationDurationUpdate: tick,
           },
 
           markPoint: {
@@ -125,14 +126,14 @@ export default function ({
             },
             symbolSize: 10,
             symbol: 'circle',
-            animationDurationUpdate: 1000,
+            animationDurationUpdate: tick,
           },
 
           showSymbol: false,
           animation: true,
           animationEasing: 'cubicInOut',
           animationDuration: 1000,
-          animationDurationUpdate: 1000,
+          animationDurationUpdate: tick,
           lineStyle: {
             color: '#B1C9F7',
             width: 4,

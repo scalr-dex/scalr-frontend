@@ -1,7 +1,8 @@
 import CheckMark from 'components/icons/CheckMark'
 import Telegram from 'components/icons/socials/Telegram'
 import X from 'components/icons/socials/X'
-import { claimTask, markTaskDone } from 'helpers/api/userTasks'
+import { claimTask } from 'helpers/api/userTasks'
+import { setTaskPending } from 'helpers/atoms/pendingTasksAtom'
 import { JSX } from 'preact/jsx-runtime'
 import ButtonTypes from 'type/Button'
 
@@ -14,6 +15,8 @@ export default interface UserTask {
   Status: TaskStatus
   TaskID: number
   URL: string
+
+  canClaimAt?: number | undefined
 }
 
 export const iconNumberToIcon = {
@@ -34,7 +37,7 @@ export const taskStatusToButtonText = {
 }
 
 export const taskStatusToCallback = {
-  NotStarted: markTaskDone,
+  NotStarted: setTaskPending,
   ReadyToClaim: claimTask,
-  Claimed: () => Promise.resolve(),
+  Claimed: Promise.resolve,
 }
