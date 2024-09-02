@@ -48,10 +48,13 @@ export default function ({
     <div>
       {loading ? (
         <UserListSkeleton />
-      ) : users ? (
+      ) : users?.length ? (
         users.map((item, index) => renderItem({ item, index }))
       ) : (
-        <Header3>Leaderboard is being formed, stay tuned 😎</Header3>
+        <Header3 className="text-center">
+          <p>Leaderboard is being formed</p>
+          <p>stay tuned 😎</p>
+        </Header3>
       )}
     </div>
   )
