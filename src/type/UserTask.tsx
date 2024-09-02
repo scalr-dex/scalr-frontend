@@ -26,7 +26,6 @@ export const iconNumberToIcon = {
 
 export const taskStatusToButtonType = {
   NotStarted: ButtonTypes.secondary,
-  Pending: ButtonTypes.secondary,
   ReadyToClaim: ButtonTypes.success,
   Claimed: ButtonTypes.success,
 }

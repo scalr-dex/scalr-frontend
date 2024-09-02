@@ -89,7 +89,7 @@ export default function ({
         {onTimer
           ? dayjs({ seconds: time }).format('ss[s]')
           : canClaimAt
-            ? 'Check'
+            ? 'Check 👀'
             : taskStatusToButtonText[Status]}
       </ButtonSmall>
     </div>
