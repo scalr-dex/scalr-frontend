@@ -23,7 +23,7 @@ export default function ({
   TaskID,
   URL,
   refetch,
-}: UserTask & { refetch: () => Promise<void> }) {
+}: UserTask & { refetch: () => Promise<unknown> }) {
   const canClaimAt = useAtomValue(pendingTasksAtom)[TaskID]
 
   const utils = useUtils()
