@@ -14,6 +14,7 @@ import pendingTasksAtom, {
   clearPendingTask,
 } from 'helpers/atoms/pendingTasksAtom'
 import { useAtomValue } from 'jotai'
+import useCountDown from 'helpers/hooks/useCountDown'
 
 export default function ({
   IconNumber,
@@ -30,6 +31,7 @@ export default function ({
   const [loading, setLoading] = useState(false)
   const buttonType = taskStatusToButtonType[Status]
   const [time, setTime] = useState(0)
+  useCountDown(setTime)
 
   const onTimer = time > 0
 
@@ -38,16 +40,6 @@ export default function ({
 
     setTime(dayjs(canClaimAt).diff(dayjs(), 'seconds'))
   }, [TaskID, canClaimAt, refetch, time])
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setTime((prev) => (prev ? prev - 1 : 0))
-    }, 1000)
-
-    return () => {
-      clearInterval(interval)
-    }
-  }, [])
 
   const onClick = useCallback(async () => {
     if (canClaimAt && onTimer) return
