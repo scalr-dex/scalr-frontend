@@ -23,7 +23,7 @@ export default function ({
   TaskID,
   URL,
   refetch,
-}: UserTask & { refetch: () => void }) {
+}: UserTask & { refetch: () => Promise<void> }) {
   const canClaimAt = useAtomValue(pendingTasksAtom)[TaskID]
 
   const utils = useUtils()
@@ -53,10 +53,13 @@ export default function ({
 
     if (canClaimAt) {
       await markTaskDone(TaskID)
+      await refetch()
       clearPendingTask(TaskID)
-    } else await taskStatusToCallback[Status](TaskID)
+    } else {
+      await taskStatusToCallback[Status](TaskID)
+      await refetch()
+    }
 
-    refetch()
     setLoading(false)
 
     // Should be at the end of callback to execute previous functions
