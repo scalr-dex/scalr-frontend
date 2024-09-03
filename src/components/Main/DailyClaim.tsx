@@ -6,17 +6,13 @@ import { useCallback, useState } from 'preact/hooks'
 import objectSupport from 'dayjs/plugin/objectSupport'
 import ButtonTypes from 'type/Button'
 import { track } from '@amplitude/analytics-browser'
-import { useSetAtom } from 'jotai'
-import UserAtom from 'helpers/atoms/UserAtom'
+import { useAtom } from 'jotai'
+import { timeToRewardAtom } from 'helpers/atoms/UserAtom'
 
 dayjs.extend(objectSupport)
 
-export default function ({
-  timeToReward,
-}: {
-  timeToReward: string | undefined
-}) {
-  const setUserAtom = useSetAtom(UserAtom)
+export default function () {
+  const [timeToReward, setTimeToReward] = useAtom(timeToRewardAtom)
   const [loading, setLoading] = useState(false)
 
   const seconds = dayjs(timeToReward).diff(dayjs(), 'seconds')
@@ -24,18 +20,13 @@ export default function ({
 
   const onClick = useCallback(async () => {
     setLoading(true)
-    const timeToReward = await claimDailyReward()
-
-    if (timeToReward)
-      setUserAtom((prev) => {
-        if (prev) return { ...prev, timeToReward }
-        return null
-      })
+    const newTime = await claimDailyReward()
+    if (newTime) setTimeToReward(newTime)
 
     track('claimDailyReward')
 
     setLoading(false)
-  }, [setUserAtom])
+  }, [setTimeToReward])
 
   return (
     <ButtonSmall

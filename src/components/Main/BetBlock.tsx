@@ -6,13 +6,14 @@ import { useCallback, useEffect, useState } from 'preact/hooks'
 import { useAtom, useAtomValue } from 'jotai'
 import UserAtom, { userBetAtom } from 'helpers/atoms/UserAtom'
 import placeBet from 'helpers/api/placeBet'
-import PointsWithTimer from 'components/Main/PointsWithTimer'
 import BetDirection from 'type/BetDirection'
 import { useAutoAnimate } from '@formkit/auto-animate/react'
 import { BodyText } from 'components/Text'
 import BetTimer from 'components/Main/BetTimer'
 import { roundDurationMs } from 'helpers/atoms/priceHistoryAtom'
 import { GraphTokenValue } from 'type/TokenState'
+import DailyClaim from 'components/Main/DailyClaim'
+import Points from 'components/Main/Points'
 
 export default function ({
   loading,
@@ -66,7 +67,9 @@ export default function ({
 
   return (
     <div className="flex flex-col px-4 gap-y-5" ref={parent}>
-      <PointsWithTimer user={user} />
+      <div className="flex flex-row justify-between items-center">
+        <Points amount={user?.balance} /> <DailyClaim />
+      </div>
 
       {userBet ? (
         <div className="flex flex-col gap-y-2">

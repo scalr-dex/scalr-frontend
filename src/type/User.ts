@@ -13,7 +13,6 @@ export interface ServerUser {
 export interface ClientUser {
   ticket: string
   balance: number
-  timeToReward: string
   launchParams: LaunchParams
 }
 

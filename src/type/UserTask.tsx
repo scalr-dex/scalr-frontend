@@ -22,6 +22,7 @@ export default interface UserTask {
 export const iconNumberToIcon = {
   1: <Telegram />,
   2: <X />,
+  3: <img src="img/collabs/cyberFi.png" className="rounded-sm" />,
 } as { [num: number]: JSX.Element }
 
 export const taskStatusToButtonType = {
