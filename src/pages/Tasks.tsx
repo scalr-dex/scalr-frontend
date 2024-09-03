@@ -33,7 +33,7 @@ export default function () {
       </div>
       <div className="flex flex-col gap-y-6">
         {data
-          ? data.map(renderTask)
+          ? data.map(renderTask).reverse()
           : [...Array(5)].map(() => <TaskSkeleton />)}
       </div>
       <InviteFriends />

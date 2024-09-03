@@ -3,7 +3,7 @@ import backendKy from 'helpers/api/backendKy'
 import { ServerUser } from 'type/User'
 import { useEffect, useState } from 'preact/hooks'
 import { writeAtom } from 'helpers/atoms/atomStore'
-import UserAtom from 'helpers/atoms/UserAtom'
+import UserAtom, { timeToRewardAtom } from 'helpers/atoms/UserAtom'
 import handleError from 'helpers/handleError'
 import { setupWebSocket } from 'helpers/api/webSocket'
 import AppStatus from 'type/AppStatus'
@@ -81,10 +81,10 @@ async function setupUser() {
     const clientUser = {
       ticket: user.ticket,
       balance: user.points,
-      timeToReward: user.can_claim_daily_reward,
       launchParams,
     }
 
+    writeAtom(timeToRewardAtom, user.can_claim_daily_reward)
     writeAtom(UserAtom, clientUser)
     return clientUser
   } catch (e) {

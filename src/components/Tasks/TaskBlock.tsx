@@ -57,7 +57,9 @@ export default function ({
     setLoading(false)
 
     // Should be at the end of callback to execute previous functions
-    if (Status === 'NotStarted' && !canClaimAt) utils.openLink(URL)
+    if (Status === 'NotStarted' && !canClaimAt) {
+      URL.includes('t.me') ? utils.openTelegramLink(URL) : utils.openLink(URL)
+    }
   }, [canClaimAt, onTimer, Status, utils, URL, TaskID, refetch])
 
   const opacity = Status === 'Claimed' ? 'opacity-50' : 'opacity-100'
