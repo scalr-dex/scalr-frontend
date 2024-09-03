@@ -14,7 +14,6 @@ const sentryConfig: Sentry.BrowserOptions = {
   sampleRate: 1,
   replaysSessionSampleRate: env.DEV ? 1 : 0.1,
   replaysOnErrorSampleRate: 1,
-  debug: env.DEV,
 }
 
 export function initSentry() {

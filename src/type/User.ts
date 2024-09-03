@@ -4,6 +4,7 @@ import { GraphTokenValue } from 'type/TokenState'
 
 export interface ServerUser {
   can_claim_daily_reward: string
+  new: boolean
   points: number
   telegram_id: number
   ticket: string
@@ -14,6 +15,7 @@ export interface ClientUser {
   ticket: string
   balance: number
   launchParams: LaunchParams
+  tonAddress?: string
 }
 
 export interface UserBet {
