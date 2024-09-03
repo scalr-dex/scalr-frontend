@@ -29,7 +29,7 @@ export default function () {
 
       initAnalytics(env.VITE_AMPLITUDE_API_KEY, {
         appVersion: env.DEV ? 'DEV' : 'PROD',
-        logLevel: env.DEV ? LogLevel.Debug : LogLevel.None,
+        logLevel: LogLevel.None,
         serverZone: 'EU',
         autocapture: {
           attribution: false,
@@ -83,6 +83,7 @@ async function setupUser() {
       balance: user.points,
       timeToReward: user.can_claim_daily_reward,
       launchParams,
+      tonAddress: user.ton_address,
     }
 
     writeAtom(UserAtom, clientUser)

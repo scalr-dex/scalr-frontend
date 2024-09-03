@@ -99,6 +99,9 @@ body {
 }
 
 /* TON connect button restyling, classes will change with update */
+.go3349661836 > path {
+  fill: #ffffff90 !important;
+}
 .go1522830083 {
   width: 92dvw !important;
 }
