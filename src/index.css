@@ -41,15 +41,19 @@
   --toastify-color-error: var(--error);
 }
 
-html {
-  scroll-behavior: smooth;
-  scrollbar-color: var(--accent) transparent;
-  scrollbar-width: thin;
+* {
+  scroll-behavior: smooth !important;
+  scrollbar-color: transparent !important;
+  scrollbar-width: none !important;
+  -ms-overflow-style: none !important;
+  overflow: -moz-scrollbars-none !important;
 }
 ::-webkit-scrollbar {
-  display: none;
-  -ms-overflow-style: none;
-  scrollbar-width: none;
+  display: none !important;
+  -ms-overflow-style: none !important;
+  scrollbar-width: none !important;
+  width: 0 !important;
+  background: none !important;
 }
 
 body {
