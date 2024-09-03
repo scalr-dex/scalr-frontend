@@ -10,9 +10,9 @@ export default async function getUser() {
   }
 }
 
-export async function setTonAddress(address: string) {
+export async function setTonAddress(wallet: string) {
   try {
-    await backendKy().post('wallet', { json: { address } })
+    await backendKy().post('wallet', { json: { wallet } })
   } catch (e) {
     handleError({ e })
   }
