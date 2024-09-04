@@ -8,14 +8,12 @@ import {
 
 export default function ({
   srcSafari,
-  poster,
   src,
   width,
   height,
 }: {
   srcSafari?: string
   src?: string
-  poster?: string
   width?: number
   height?: number
 }) {
@@ -27,7 +25,6 @@ export default function ({
         playsInline
         autoplay
         loop
-        poster={poster}
         src={src}
         style={{ width, height }}
       />
