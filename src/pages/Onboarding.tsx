@@ -11,8 +11,6 @@ import StepToVideo from 'components/Onboarding/StepToVideo'
 import Step1Background from 'components/Onboarding/Step1Background'
 import Step2Background from 'components/Onboarding/Step2Background'
 import Step3Background from 'components/Onboarding/Step3Background'
-import { Suspense } from 'preact/compat'
-import Loader from 'components/Loader'
 
 type StepToElement = { [step: number]: JSX.Element | string }
 type StepToString = { [step: number]: string }
@@ -50,28 +48,26 @@ export default function () {
   }, [setDidOnboard, step])
 
   return (
-    <Suspense fallback={<Loader full />}>
-      <div
-        className="flex flex-col items-center justify-between h-[94dvh] shadow-onboarding"
-        style={{
-          background:
-            'radial-gradient(ellipse at left, #133D8D60, transparent 50%), radial-gradient(circle at right, #133D8D70, transparent 60%)',
-        }}
-      >
-        <>
-          <div
-            className="relative flex flex-col gap-y-2 items-center justify-center flex-1 w-full"
-            ref={parent}
-          >
-            {stepToBg[step]}
-            <StepToVideo step={step} />
-            {stepToComponent[step]}
-          </div>
-          <Button className="!w-56 !rounded-full mb-2" onClick={onClick}>
-            {stepToText[step]}
-          </Button>
-        </>
-      </div>
-    </Suspense>
+    <div
+      className="flex flex-col items-center justify-between h-[94dvh] shadow-onboarding"
+      style={{
+        background:
+          'radial-gradient(ellipse at left, #133D8D60, transparent 50%), radial-gradient(circle at right, #133D8D70, transparent 60%)',
+      }}
+    >
+      <>
+        <div
+          className="relative flex flex-col gap-y-2 items-center justify-center flex-1 w-full"
+          ref={parent}
+        >
+          {stepToBg[step]}
+          <StepToVideo step={step} />
+          {stepToComponent[step]}
+        </div>
+        <Button className="!w-56 !rounded-full mb-2" onClick={onClick}>
+          {stepToText[step]}
+        </Button>
+      </>
+    </div>
   )
 }
