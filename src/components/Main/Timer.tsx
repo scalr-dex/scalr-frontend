@@ -20,7 +20,7 @@ export default function () {
         'seconds'
       )
 
-      const formatted = dayjs({ seconds }).format('mm:ss')
+      const formatted = seconds ? dayjs({ seconds }).format('mm:ss') : '00:00'
       setTime(formatted)
     }, 1000)
 
