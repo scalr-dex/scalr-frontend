@@ -20,6 +20,7 @@ export interface ButtonProps extends JSX.HTMLAttributes<HTMLButtonElement> {
   iconRight?: JSX.Element | null
   isLoading?: boolean
   disabled?: boolean | undefined
+  allowDisabledClick?: boolean | undefined
   haptic?: ImpactHapticFeedbackStyle
 }
 

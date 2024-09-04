@@ -27,6 +27,7 @@ export default [
       '**/postcss.config.cts',
       '**/vite.config.ts',
       '**/tailwind.config.js',
+      '**/lib/*',
     ],
   },
   ...compat.extends(

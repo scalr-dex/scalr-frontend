@@ -8,8 +8,10 @@ import UserAtom from 'helpers/atoms/UserAtom'
 import useLeaderBoard from 'helpers/hooks/useLeaderBoard'
 import { useAtomValue } from 'jotai'
 import { useState } from 'preact/hooks'
+import { useAutoAnimate } from '@formkit/auto-animate/react'
 
 export default function () {
+  const [parent] = useAutoAnimate()
   const [modalOpen, setModalOpen] = useState(false)
   const user = useAtomValue(UserAtom)
   const { data, status } = useLeaderBoard()
@@ -19,7 +21,7 @@ export default function () {
   const tgUser = user?.launchParams?.initData?.user
 
   return (
-    <div className="flex flex-col px-4 gap-y-10">
+    <div className="flex flex-col px-4 gap-y-10" ref={parent}>
       <YourEpochVolume points={data?.user?.points} />
       <div className="flex flex-row items-center gap-x-1">
         <Header3>Leaderboard</Header3>

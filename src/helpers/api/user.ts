@@ -9,3 +9,11 @@ export default async function getUser() {
     handleError({ e })
   }
 }
+
+export async function setTonAddress(wallet: string) {
+  try {
+    await backendKy().post('wallet', { json: { wallet } })
+  } catch (e) {
+    handleError({ e })
+  }
+}

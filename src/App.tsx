@@ -24,6 +24,7 @@ import { ErrorBoundary } from '@sentry/react'
 import ErrorBoundaryFallback from 'components/ErrorBoundaryFallback'
 
 const Onboarding = lazy(() => import('pages/Onboarding'))
+const Airdrop = lazy(() => import('pages/Airdrop'))
 
 function AppInner({ socket }: { socket: SturdyWebSocket }) {
   useWebSocketData(socket)
@@ -38,19 +39,29 @@ function AppInner({ socket }: { socket: SturdyWebSocket }) {
             className="flex flex-col relative min-h-[90dvh] overflow-x-hidden my-4 container mx-auto max-w-prose text-white"
             ref={parent}
           >
-            {didOnboard ? (
-              <Switch>
-                <Route path="/" component={Main} />
-                <Route path="/tasks" component={Tasks} />
-                <Route path="/leaderboards" component={LeaderBoards} />
+            <Switch>
+              {didOnboard ? (
+                <>
+                  <Route path="/" component={Main} />
+                  <Route path="/tasks" component={Tasks} />
+                  <Route path="/leaderboards" component={LeaderBoards} />
+                  <Route
+                    path="/airdrop"
+                    component={() => (
+                      <Suspense fallback={<Loader full />}>
+                        <Airdrop />
+                      </Suspense>
+                    )}
+                  />
+                </>
+              ) : (
+                <Suspense fallback={<Loader full />}>
+                  <Onboarding />
+                </Suspense>
+              )}
 
-                <Route component={NotFound} />
-              </Switch>
-            ) : (
-              <Suspense fallback={<Loader full />}>
-                <Onboarding />
-              </Suspense>
-            )}
+              <Route component={NotFound} />
+            </Switch>
           </div>
           {didOnboard ? <BottomTabNavigator /> : null}
           <ToastContainer

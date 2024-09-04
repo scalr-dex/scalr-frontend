@@ -2,11 +2,13 @@ import MainSquare from 'components/icons/MainSquare'
 import { useLocation } from 'wouter-preact'
 import Cup from 'components/icons/Cup'
 import Gift from 'components/icons/Gift'
+import DollarCoin from 'components/icons/DollarCoin'
 
 const buttons = [
   { path: '/', component: <MainSquare /> },
   { path: 'leaderboards', component: <Cup /> },
   { path: 'tasks', component: <Gift /> },
+  { path: 'airdrop', component: <DollarCoin /> },
 ]
 
 export default function () {

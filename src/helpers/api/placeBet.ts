@@ -2,6 +2,7 @@ import { track } from '@amplitude/analytics-browser'
 import backendKy from 'helpers/api/backendKy'
 import handleError from 'helpers/handleError'
 import BetDirection from 'type/BetDirection'
+import TrackerEvents from 'type/TrackerEvernts'
 
 export default async function ({
   amount,
@@ -17,7 +18,7 @@ export default async function ({
     }
 
     await backendKy().post('bet', { json })
-    track('placeBet', { amount, direction })
+    track(TrackerEvents.placeBet, { amount, direction })
     return true
   } catch (e) {
     handleError({ e, toastMessage: 'Failed to place a bet 😥' })

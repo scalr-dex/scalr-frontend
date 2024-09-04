@@ -8,6 +8,7 @@
   src: url(/fonts/SfProRounded.woff2) format('woff2') tech('variations');
   font-weight: 100 1000;
   font-stretch: 25% 151%;
+  font-display: swap;
   /* Latin only */
   unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC,
     U+2000-206F, U+2074, U+20AC, U+2212, U+2215, U+E0FF, U+EFFD, U+F000;
@@ -19,6 +20,7 @@
   src: url(/fonts/SfProSub.woff2) format('woff2') tech('variations');
   font-weight: 100 1000;
   font-stretch: 25% 151%;
+  font-display: swap;
   /* Latin only */
   unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC,
     U+2000-206F, U+2074, U+20AC, U+2212, U+2215, U+E0FF, U+EFFD, U+F000;
@@ -100,4 +102,24 @@ body {
 .outlined-text-accent {
   -webkit-text-stroke: 2px var(--accent-hover);
   -webkit-text-fill-color: transparent;
+}
+
+/* TON connect button restyling, classes will change with update */
+.go3349661836 > path {
+  fill: #ffffff90 !important;
+}
+.go1522830083 {
+  width: 92dvw !important;
+}
+.go3974562317,
+.go3572451881 {
+  width: 92dvw !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+.go3974562317,
+.go526437840,
+.go2628359365,
+.go157313249 {
+  background-color: var(--accent) !important;
 }

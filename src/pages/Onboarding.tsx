@@ -55,17 +55,19 @@ export default function () {
           'radial-gradient(ellipse at left, #133D8D60, transparent 50%), radial-gradient(circle at right, #133D8D70, transparent 60%)',
       }}
     >
-      <div
-        className="relative flex flex-col gap-y-2 items-center justify-center flex-1 w-full"
-        ref={parent}
-      >
-        {stepToBg[step]}
-        <StepToVideo step={step} />
-        {stepToComponent[step]}
-      </div>
-      <Button className="!w-56 !rounded-full mb-2" onClick={onClick}>
-        {stepToText[step]}
-      </Button>
+      <>
+        <div
+          className="relative flex flex-col gap-y-2 items-center justify-center flex-1 w-full"
+          ref={parent}
+        >
+          {stepToBg[step]}
+          <StepToVideo step={step} />
+          {stepToComponent[step]}
+        </div>
+        <Button className="!w-56 !rounded-full mb-2" onClick={onClick}>
+          {stepToText[step]}
+        </Button>
+      </>
     </div>
   )
 }
