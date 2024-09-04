@@ -2,6 +2,12 @@
 
 TODO: create a `theme.ts` file that integrates with tailwind.config.js and can be used inside the app
 
+## Updating .env variables
+
+1. Update [.env.sample](.env.sample)
+2. Update [deployflow.yml](.github/workflows/deployflow.yml)
+3. Add env variables to environment **variables** [here](https://github.com/scalr-dex/scalr-frontend/settings/environments/3626706489/edit)
+
 ## Local launch
 
 1. Install dependencies with `yarn`

@@ -26,6 +26,11 @@ jobs:
         shell: bash
       - name: Build code
         run: yarn build
+        env:
+          VITE_BACKEND_URL: ${{ secrets.VITE_BACKEND_URL }}
+          VITE_AMPLITUDE_API_KEY: ${{ secrets.VITE_AMPLITUDE_API_KEY }}
+          VITE_APP_BASE_LINK: ${{ secrets.VITE_APP_BASE_LINK }}
+          VITE_SENTRY_DSN: ${{ secrets.VITE_SENTRY_DSN }}
         shell: bash
       - name: Setup Pages
         uses: actions/configure-pages@v2
