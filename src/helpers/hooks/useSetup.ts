@@ -5,7 +5,7 @@ import { useEffect, useState } from 'preact/hooks'
 import { writeAtom } from 'helpers/atoms/atomStore'
 import UserAtom, { timeToRewardAtom } from 'helpers/atoms/UserAtom'
 import handleError from 'helpers/handleError'
-import { setupWebSocket } from 'helpers/api/webSocket'
+import { getWebsocketTicket, setupWebSocket } from 'helpers/api/webSocket'
 import AppStatus from 'type/AppStatus'
 import {
   init as initAnalytics,
@@ -15,12 +15,31 @@ import {
 import { LogLevel } from '@amplitude/analytics-types'
 import env from 'helpers/env'
 import setupMiniApp from 'helpers/setupMiniApp'
-import SturdyWebSocket from 'sturdy-websocket'
 import { setSentryUser } from 'helpers/api/sentry'
 
 export default function () {
   const [appStatus, setAppStatus] = useState(AppStatus.loading)
-  const [socket, setSocket] = useState<SturdyWebSocket>()
+  const [socket, setSocket] = useState<WebSocket>()
+
+  useEffect(() => {
+    if (!socket) return
+
+    const reconnect = async () => {
+      try {
+        const { ticket } = await getWebsocketTicket()
+        setSocket(setupWebSocket(ticket))
+      } catch (e) {
+        handleError({ e, toastMessage: 'Failed to reconnect :(' })
+      }
+    }
+
+    socket.onclose = () => setTimeout(reconnect, 1000)
+
+    socket.onerror = (e) => {
+      handleError({ e })
+      socket.close()
+    }
+  }, [socket])
 
   useEffect(() => {
     const start = async () => {

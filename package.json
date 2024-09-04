@@ -31,7 +31,6 @@
     "react-device-detect": "^2.2.3",
     "react-range": "^1.10.0",
     "react-toastify": "^10.0.5",
-    "sturdy-websocket": "^0.2.1",
     "wouter-preact": "^3.3.1"
   },
   "devDependencies": {

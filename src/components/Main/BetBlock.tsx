@@ -7,7 +7,6 @@ import { useAtom, useAtomValue } from 'jotai'
 import UserAtom, { userBetAtom } from 'helpers/atoms/UserAtom'
 import placeBet from 'helpers/api/placeBet'
 import BetDirection from 'type/BetDirection'
-import { useAutoAnimate } from '@formkit/auto-animate/react'
 import { BodyText } from 'components/Text'
 import BetTimer from 'components/Main/BetTimer'
 import { roundDurationMs } from 'helpers/atoms/priceHistoryAtom'
@@ -24,7 +23,6 @@ export default function ({
   lastValue?: GraphTokenValue
   roundStartTime: number | undefined
 }) {
-  const [parent] = useAutoAnimate()
   const user = useAtomValue(UserAtom)
   const [userBet, setUserBet] = useAtom(userBetAtom)
   const [processingBet, setProcessingBet] = useState(false)
@@ -66,7 +64,7 @@ export default function ({
   )
 
   return (
-    <div className="flex flex-col px-4 gap-y-5" ref={parent}>
+    <div className="flex flex-col px-4 gap-y-5">
       <div className="flex flex-row justify-between items-center">
         <Points amount={user?.balance} /> <DailyClaim />
       </div>

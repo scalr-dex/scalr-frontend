@@ -16,7 +16,6 @@ import SplashScreen from 'components/SplashScreen'
 import { useAtomValue } from 'jotai'
 import didOnboardAtom from 'helpers/atoms/UserStates'
 import useWebSocketData from 'helpers/hooks/useWebSocketData'
-import SturdyWebSocket from 'sturdy-websocket'
 import { lazy, Suspense } from 'preact/compat'
 import Loader from 'components/Loader'
 import Main from 'pages/Main'
@@ -26,7 +25,7 @@ import ErrorBoundaryFallback from 'components/ErrorBoundaryFallback'
 const Onboarding = lazy(() => import('pages/Onboarding'))
 const Airdrop = lazy(() => import('pages/Airdrop'))
 
-function AppInner({ socket }: { socket: SturdyWebSocket }) {
+function AppInner({ socket }: { socket: WebSocket }) {
   useWebSocketData(socket)
   const [parent] = useAutoAnimate()
   const didOnboard = useAtomValue(didOnboardAtom)
