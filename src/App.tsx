@@ -18,13 +18,13 @@ import didOnboardAtom from 'helpers/atoms/UserStates'
 import useWebSocketData from 'helpers/hooks/useWebSocketData'
 import SturdyWebSocket from 'sturdy-websocket'
 import { lazy, Suspense } from 'preact/compat'
-import Airdrop from 'pages/Airdrop'
 import Loader from 'components/Loader'
 import Main from 'pages/Main'
 import { ErrorBoundary } from '@sentry/react'
 import ErrorBoundaryFallback from 'components/ErrorBoundaryFallback'
 
 const Onboarding = lazy(() => import('pages/Onboarding'))
+const Airdrop = lazy(() => import('pages/Airdrop'))
 
 function AppInner({ socket }: { socket: SturdyWebSocket }) {
   useWebSocketData(socket)
@@ -45,7 +45,14 @@ function AppInner({ socket }: { socket: SturdyWebSocket }) {
                   <Route path="/" component={Main} />
                   <Route path="/tasks" component={Tasks} />
                   <Route path="/leaderboards" component={LeaderBoards} />
-                  <Route path="/airdrop" component={Airdrop} />
+                  <Route
+                    path="/airdrop"
+                    component={() => (
+                      <Suspense fallback={<Loader full />}>
+                        <Airdrop />
+                      </Suspense>
+                    )}
+                  />
                 </>
               ) : (
                 <Suspense fallback={<Loader full />}>
