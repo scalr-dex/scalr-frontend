@@ -41,5 +41,5 @@ export const taskStatusToButtonText = {
 export const taskStatusToCallback = {
   NotStarted: setTaskPending,
   ReadyToClaim: claimTask,
-  Claimed: Promise.resolve,
+  Claimed: () => Promise.resolve(),
 }

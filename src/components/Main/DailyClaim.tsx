@@ -8,6 +8,7 @@ import ButtonTypes from 'type/Button'
 import { track } from '@amplitude/analytics-browser'
 import { useAtom } from 'jotai'
 import { timeToRewardAtom } from 'helpers/atoms/UserAtom'
+import TrackerEvents from 'type/TrackerEvernts'
 
 dayjs.extend(objectSupport)
 
@@ -23,7 +24,7 @@ export default function () {
     const newTime = await claimDailyReward()
     if (newTime) setTimeToReward(newTime)
 
-    track('claimDailyReward')
+    track(TrackerEvents.claimDailyReward)
 
     setLoading(false)
   }, [setTimeToReward])

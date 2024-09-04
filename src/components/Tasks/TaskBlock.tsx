@@ -15,6 +15,8 @@ import pendingTasksAtom, {
 } from 'helpers/atoms/pendingTasksAtom'
 import { useAtomValue } from 'jotai'
 import useCountDown from 'helpers/hooks/useCountDown'
+import { track } from '@amplitude/analytics-browser'
+import TrackerEvents from 'type/TrackerEvernts'
 
 export default function ({
   IconNumber,
@@ -48,6 +50,7 @@ export default function ({
     if (canClaimAt) {
       await markTaskDone(TaskID)
       await refetch()
+      track(TrackerEvents.taskDone, { taskId: TaskID })
       clearPendingTask(TaskID)
     } else {
       await taskStatusToCallback[Status](TaskID)
@@ -57,7 +60,7 @@ export default function ({
     setLoading(false)
 
     // Should be at the end of callback to execute previous functions
-    if (Status === 'NotStarted' && !canClaimAt) {
+    if (Status === 'Claimed' || (Status === 'NotStarted' && !canClaimAt)) {
       URL.includes('t.me') ? utils.openTelegramLink(URL) : utils.openLink(URL)
     }
   }, [canClaimAt, onTimer, Status, utils, URL, TaskID, refetch])
@@ -79,6 +82,7 @@ export default function ({
         onClick={onClick}
         isLoading={loading}
         disabled={Status === 'Claimed' || onTimer}
+        allowDisabledClick
       >
         {onTimer
           ? dayjs({ seconds: time }).format('ss[s]')
