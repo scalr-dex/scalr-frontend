@@ -17,22 +17,28 @@ export default function ({
   userBet,
 }: {
   data: GraphTokenData[]
-  userBet: UserBet | null
   loading: boolean
+  userBet: UserBet | null
 }) {
   const loadingAnimation = loading ? 'animate-pulse' : ''
-
-  const betPoint = {
-    name: 'User Bet',
-    yAxis: userBet?.value[1] || 0,
-    xAxis: userBet?.value[0] || 0,
-  }
 
   const roundLines = data
     .filter(({ roundSeparator }) => Boolean(roundSeparator))
     .map(({ value }) => ({
       xAxis: value[0],
       name: 'Round Separator' + value[0],
+    }))
+
+  const betLine = data
+    .filter(({ roundSeparator }) => Boolean(roundSeparator))
+    .map(({ value }) => ({
+      name: 'User bet' + value[1],
+      type: 'time',
+      coord: [0, 0.3],
+      label: {
+        formatter: 'start',
+        position: 'start',
+      },
     }))
 
   return (
@@ -99,7 +105,7 @@ export default function ({
           data,
 
           markLine: {
-            data: roundLines,
+            data: [...roundLines, ...betLine],
 
             label: { show: false },
             tooltip: { show: false },
@@ -111,21 +117,6 @@ export default function ({
               color: '#ffffff',
               width: 2,
             },
-            animationDurationUpdate: tick,
-          },
-
-          markPoint: {
-            data: [betPoint],
-            itemStyle: {
-              color: '#fff',
-              borderColor: '#fff',
-              shadowBlur: 10,
-              shadowColor: '#fff',
-              shadowOffsetX: 1,
-              shadowOffsetY: 0,
-            },
-            symbolSize: 10,
-            symbol: 'circle',
             animationDurationUpdate: tick,
           },
 
