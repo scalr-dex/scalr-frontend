@@ -21,6 +21,7 @@ import Loader from 'components/Loader'
 import Main from 'pages/Main'
 import { ErrorBoundary } from '@sentry/react'
 import ErrorBoundaryFallback from 'components/ErrorBoundaryFallback'
+import { useHashLocation } from 'wouter-preact/use-hash-location'
 
 const Onboarding = lazy(() => import('pages/Onboarding'))
 const Airdrop = lazy(() => import('pages/Airdrop'))
@@ -33,7 +34,7 @@ function AppInner({ socket }: { socket: WebSocket }) {
   return (
     <SDKProvider debug={env.DEV} acceptCustomStyles>
       <QueryClientProvider client={queryClient}>
-        <Router>
+        <Router hook={useHashLocation}>
           <div
             className="flex flex-col relative min-h-[90dvh] overflow-x-hidden my-4 container mx-auto max-w-prose text-white"
             ref={parent}
@@ -41,7 +42,6 @@ function AppInner({ socket }: { socket: WebSocket }) {
             <Switch>
               {didOnboard ? (
                 <>
-                  <Route path="/" component={Main} />
                   <Route path="/tasks" component={Tasks} />
                   <Route path="/leaderboards" component={LeaderBoards} />
                   <Route
@@ -52,14 +52,19 @@ function AppInner({ socket }: { socket: WebSocket }) {
                       </Suspense>
                     )}
                   />
+                  <Route component={Main} />
                 </>
               ) : (
-                <Suspense fallback={<Loader full />}>
-                  <Onboarding />
-                </Suspense>
+                <Route
+                  component={() => (
+                    <Suspense fallback={<Loader full />}>
+                      <Onboarding />
+                    </Suspense>
+                  )}
+                />
               )}
 
-              <Route component={NotFound} />
+              <Route path="/404" component={NotFound} />
             </Switch>
           </div>
           {didOnboard ? <BottomTabNavigator /> : null}
