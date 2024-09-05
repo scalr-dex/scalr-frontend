@@ -3,7 +3,7 @@ import BottomTabNavigator from 'components/BottomTabNavigator'
 import NotFound from 'pages/NotFound'
 import Tasks from 'pages/Tasks'
 import { ToastContainer } from 'react-toastify'
-import { Router, Switch, Route } from 'wouter-preact'
+import { Router, Switch, Route, Redirect } from 'wouter-preact'
 import { SDKProvider } from '@telegram-apps/sdk-react'
 import useSetup from 'helpers/hooks/useSetup'
 import BrowserInvite from 'pages/BrowserInvite'
@@ -52,10 +52,11 @@ function AppInner({ socket }: { socket: WebSocket }) {
                       </Suspense>
                     )}
                   />
-                  <Route component={Main} />
+                  <Route path="/" component={Main} />
                 </>
               ) : (
                 <Route
+                  path="/"
                   component={() => (
                     <Suspense fallback={<Loader full />}>
                       <Onboarding />
@@ -64,6 +65,7 @@ function AppInner({ socket }: { socket: WebSocket }) {
                 />
               )}
 
+              <Redirect to="/" />
               <Route path="/404" component={NotFound} />
             </Switch>
           </div>
