@@ -32,13 +32,9 @@ export default function ({
   const betLine = data
     .filter(({ roundSeparator }) => Boolean(roundSeparator))
     .map(({ value }) => ({
-      name: 'User bet' + value[1],
-      type: 'time',
-      coord: [0, 0.3],
-      label: {
-        formatter: 'start',
-        position: 'start',
-      },
+      name: 'User bet',
+      xAxis: value[0],
+      yAxis: value[1],
     }))
 
   return (
