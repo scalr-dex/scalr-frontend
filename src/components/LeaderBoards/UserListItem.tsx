@@ -19,10 +19,12 @@ export default function ({
     <div className="flex flex-row justify-between items-center px-4 py-3 bg-tertiary border-b border-white border-opacity-5 h-14 first:rounded-t-xl last:rounded-b-xl">
       <div className="flex flex-row gap-x-3 items-center">
         <ImageWithFallback
-          src={item.telegram_id.toString()}
+          src={item.user_pfp_url}
           className="rounded-full w-8 h-8"
         />
-        <AccentText className="font-semibold">{item.telegram_id}</AccentText>
+        <AccentText className="font-semibold">
+          {item.username || item.telegram_id}
+        </AccentText>
       </div>
 
       <div className="flex flex-row items-center gap-x-4 text-sm">
