@@ -10,6 +10,9 @@ import dayjs from 'dayjs'
 import { GraphTokenData } from 'type/TokenState'
 import { UserBet } from 'type/User'
 import { tick } from 'helpers/atoms/priceHistoryAtom'
+import ChartArrowUp from 'components/icons/ChartArrowUp'
+import BetDirection from 'type/BetDirection'
+import ChartArrowDown from 'components/icons/ChartArrowDown'
 
 export default function ({
   data,
@@ -29,13 +32,22 @@ export default function ({
       name: 'Round Separator' + value[0],
     }))
 
-  const betLine = data
-    .filter(({ roundSeparator }) => Boolean(roundSeparator))
-    .map(({ value }) => ({
-      name: 'User bet',
-      xAxis: value[0],
-      yAxis: value[1],
-    }))
+  const betPoint = userBet
+    ? data
+        .filter(
+          ({ value, roundSeparator }) =>
+            value[0] >= userBet?.startTime - 1000 && roundSeparator // 1sec is approximation for differences in timing between chart and JS
+        )
+        .map(({ value }) => ({
+          name: 'User Bet',
+          xAxis: value[0],
+          yAxis: value[1],
+          symbol:
+            userBet.direction === BetDirection.long
+              ? ChartArrowUp
+              : ChartArrowDown,
+        }))
+    : []
 
   return (
     <div
@@ -48,9 +60,9 @@ export default function ({
       <EChart
         animation
         grid={{
-          left: 1,
+          left: -16, // chart is jumpy on the edges, we hide this
+          right: 10,
           top: 10,
-          right: 9,
           bottom: 20,
         }}
         className="w-full min-h-64"
@@ -86,7 +98,7 @@ export default function ({
           splitNumber: 1,
           axisLabel: {
             inside: true,
-            margin: 5,
+            margin: 0,
             height: 20,
             formatter: (num) => num.toFixed(4),
           },
@@ -101,7 +113,7 @@ export default function ({
           data,
 
           markLine: {
-            data: [...roundLines, ...betLine],
+            data: roundLines,
 
             label: { show: false },
             tooltip: { show: false },
@@ -113,6 +125,20 @@ export default function ({
               color: '#ffffff',
               width: 2,
             },
+            animationDurationUpdate: tick,
+          },
+
+          markPoint: {
+            data: betPoint,
+            itemStyle: {
+              color: '#fff',
+              borderColor: '#fff',
+              shadowBlur: 10,
+              shadowColor: '#fff',
+              shadowOffsetX: 1,
+              shadowOffsetY: 0,
+            },
+            symbolSize: 16,
             animationDurationUpdate: tick,
           },
 
