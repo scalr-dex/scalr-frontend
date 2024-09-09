@@ -1,6 +1,5 @@
 import { LaunchParams } from '@telegram-apps/sdk-react'
 import BetDirection from 'type/BetDirection'
-import { GraphTokenValue } from 'type/TokenState'
 
 export interface ServerUser {
   can_claim_daily_reward: string
@@ -19,9 +18,9 @@ export interface ClientUser {
 }
 
 export interface UserBet {
-  value: GraphTokenValue
-
   amount: number
   direction: BetDirection
+
+  startTime: number
   endTime: number
 }

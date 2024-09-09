@@ -10,17 +10,14 @@ import BetDirection from 'type/BetDirection'
 import { BodyText } from 'components/Text'
 import BetTimer from 'components/Main/BetTimer'
 import { roundDurationMs } from 'helpers/atoms/priceHistoryAtom'
-import { GraphTokenValue } from 'type/TokenState'
 import DailyClaim from 'components/Main/DailyClaim'
 import Points from 'components/Main/Points'
 
 export default function ({
   loading,
-  lastValue,
   roundStartTime,
 }: {
   loading?: boolean
-  lastValue?: GraphTokenValue
   roundStartTime: number | undefined
 }) {
   const user = useAtomValue(UserAtom)
@@ -41,7 +38,7 @@ export default function ({
 
   const onClick = useCallback(
     async (direction: BetDirection) => {
-      if (!lastValue || !roundStartTime || !user?.balance) return
+      if (!roundStartTime || !user?.balance) return
 
       setProcessingBet(true)
       const bet = { amount: betValue, direction }
@@ -56,11 +53,11 @@ export default function ({
       if (success)
         setUserBet({
           ...bet,
-          value: lastValue,
+          startTime: roundEndTime,
           endTime: new Date(endTime).getTime(),
         })
     },
-    [betValue, lastValue, roundStartTime, setUserBet, user?.balance]
+    [betValue, roundStartTime, setUserBet, user?.balance]
   )
 
   return (
@@ -80,8 +77,7 @@ export default function ({
           </BodyText>
           <BodyText>
             That price will go{' '}
-            <b>{userBet.direction ? 'lower 📉' : 'higher 📈'}</b> than{' '}
-            <b>${userBet.value[1]}</b>
+            <b>{userBet.direction ? 'lower 📉' : 'higher 📈'}</b>
           </BodyText>
         </div>
       ) : (
