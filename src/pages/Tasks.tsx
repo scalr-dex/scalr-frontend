@@ -8,8 +8,10 @@ import { getTasks } from 'helpers/api/userTasks'
 import { QueryKeys } from 'helpers/queryClient'
 import { useCallback } from 'preact/hooks'
 import UserTask from 'type/UserTask'
+import { useAutoAnimate } from '@formkit/auto-animate/react'
 
 export default function () {
+  const [parent] = useAutoAnimate()
   const { data, refetch } = useQuery({
     queryKey: [QueryKeys.userTasks],
     queryFn: getTasks,
@@ -31,12 +33,12 @@ export default function () {
           We’ll reward you immediately with points after each task completion
         </AccentText>
       </div>
-      <div className="flex flex-col gap-y-6">
+      <InviteFriends />
+      <div className="flex flex-col gap-y-6" ref={parent}>
         {data
           ? data.map(renderTask).reverse()
           : [...Array(5)].map(() => <TaskSkeleton />)}
       </div>
-      <InviteFriends />
     </div>
   )
 }

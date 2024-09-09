@@ -3,7 +3,7 @@ import backendKy from 'helpers/api/backendKy'
 import UserTask from 'type/UserTask'
 import { successConfetti } from 'helpers/shootConfetti'
 import { track } from '@amplitude/analytics-browser'
-import TrackerEvents from 'type/TrackerEvernts'
+import TrackerEvents from 'type/TrackerEvents'
 
 export async function getTasks() {
   try {
