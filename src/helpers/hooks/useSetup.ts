@@ -89,7 +89,6 @@ async function setupUser() {
     const launchParams = retrieveLaunchParams()
 
     const { initData, initDataRaw } = launchParams
-    console.log(launchParams)
 
     if (!initData || !initDataRaw) return
 
