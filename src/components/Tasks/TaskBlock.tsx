@@ -65,10 +65,17 @@ export default function ({
     }
   }, [canClaimAt, onTimer, Status, utils, URL, TaskID, refetch])
 
+  const isSpecial = TaskID === 7
+
   const opacity = Status === 'Claimed' ? 'opacity-50' : 'opacity-100'
+  const specialStyle = isSpecial
+    ? 'bg-accent -mx-2 py-3 pl-3 pr-2 rounded-3xl'
+    : ''
 
   return (
-    <div className={`flex flex-row items-center justify-between ${opacity}`}>
+    <div
+      className={`flex flex-row items-center justify-between ${opacity} ${specialStyle}`}
+    >
       <div className="flex flex-row items-center gap-x-3">
         <div className="w-6 h-6">{iconNumberToIcon[IconNumber]}</div>
         <div className="flex flex-col gap-y-1">
