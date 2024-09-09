@@ -8,7 +8,7 @@ import ButtonTypes from 'type/Button'
 import { track } from '@amplitude/analytics-browser'
 import { useAtom } from 'jotai'
 import { timeToRewardAtom } from 'helpers/atoms/UserAtom'
-import TrackerEvents from 'type/TrackerEvernts'
+import TrackerEvents from 'type/TrackerEvents'
 
 dayjs.extend(objectSupport)
 

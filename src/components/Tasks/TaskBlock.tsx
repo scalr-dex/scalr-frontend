@@ -16,7 +16,7 @@ import pendingTasksAtom, {
 import { useAtomValue } from 'jotai'
 import useCountDown from 'helpers/hooks/useCountDown'
 import { track } from '@amplitude/analytics-browser'
-import TrackerEvents from 'type/TrackerEvernts'
+import TrackerEvents from 'type/TrackerEvents'
 
 export default function ({
   IconNumber,
@@ -68,9 +68,10 @@ export default function ({
   const isSpecial = TaskID === 7
 
   const opacity = Status === 'Claimed' ? 'opacity-50' : 'opacity-100'
-  const specialStyle = isSpecial
-    ? 'bg-accent -mx-2 py-3 pl-3 pr-2 rounded-3xl'
-    : ''
+  const specialStyle =
+    Status !== 'Claimed' && isSpecial
+      ? 'bg-accent -mx-2 py-3 pl-3 pr-2 rounded-3xl'
+      : ''
 
   return (
     <div

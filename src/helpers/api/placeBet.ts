@@ -2,7 +2,7 @@ import { track } from '@amplitude/analytics-browser'
 import backendKy from 'helpers/api/backendKy'
 import handleError from 'helpers/handleError'
 import BetDirection from 'type/BetDirection'
-import TrackerEvents from 'type/TrackerEvernts'
+import TrackerEvents from 'type/TrackerEvents'
 
 export default async function ({
   amount,
