@@ -101,7 +101,10 @@ async function setupUser() {
       ticket: user.ticket,
       balance: user.points,
       launchParams,
+      telegramId: user.telegram_id,
       tonAddress: user.ton_address,
+      inviteLimit: user.invite_limit,
+      invitedUsers: user.invited_users,
     }
 
     writeAtom(timeToRewardAtom, user.can_claim_daily_reward)
