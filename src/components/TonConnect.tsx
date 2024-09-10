@@ -14,6 +14,11 @@ export default function () {
   const [tonConnectUI] = useTonConnectUI()
   const userAddress = useTonAddress()
   const [copied, setCopied] = useState(false)
+  const [loading, setLoading] = useState(true)
+
+  useEffect(() => {
+    void tonConnectUI.connectionRestored.finally(() => setLoading(false))
+  }, [tonConnectUI.connectionRestored])
 
   useEffect(() => {
     const setAddress = async () => {
@@ -54,6 +59,7 @@ export default function () {
         onClick={userAddress ? onCopy : onConnect}
         className={`!w-full !rounded-full !font-bold !font-accent ${padding}`}
         buttonType={copied ? ButtonTypes.success : ButtonTypes.accent}
+        isLoading={loading}
         iconLeft={
           userAddress ? (
             copied ? (
