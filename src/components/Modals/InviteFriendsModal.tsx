@@ -57,7 +57,7 @@ function ModalHeader({
         <div className="rounded-full bg-tertiary h-14 w-14 text-center leading-tight flex justify-center items-center">
           <Header3>🥳</Header3>
         </div>
-        <BodyText className="font-semibold">
+        <BodyText className="text-controls-tertiary-focus font-semibold">
           {invitedUsers}/{inviteLimit} invited
         </BodyText>
       </div>
