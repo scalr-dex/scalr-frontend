@@ -7,7 +7,7 @@ import priceHistoryAtom, {
 } from 'helpers/atoms/priceHistoryAtom'
 import balanceChangeToast from 'helpers/sendToast'
 
-const dataMaxLength = 65
+const dataMaxLength = 40
 
 export default function (socket: WebSocket) {
   const [user, setUser] = useAtom(UserAtom)
