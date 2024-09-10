@@ -1,4 +1,4 @@
-import { SVGRenderer } from 'echarts/renderers'
+import { CanvasRenderer } from 'echarts/renderers'
 import {
   GridComponent,
   MarkLineComponent,
@@ -71,9 +71,9 @@ export default function ({
           MarkLineComponent,
           MarkPointComponent,
           LineChart,
-          SVGRenderer,
+          CanvasRenderer,
         ]}
-        renderer="svg"
+        renderer="canvas"
         xAxis={{
           type: 'time',
           splitLine: { show: false },
