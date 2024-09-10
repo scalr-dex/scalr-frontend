@@ -7,7 +7,7 @@ export default function ({
 }: JSX.HTMLAttributes<HTMLImageElement> & { fallbackSrc?: string }) {
   return (
     <img
-      src={src}
+      src={src || fallbackSrc}
       onError={({ currentTarget }) => {
         currentTarget.onerror = null
         currentTarget.src = fallbackSrc

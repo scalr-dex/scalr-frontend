@@ -3,7 +3,7 @@ export type LeaderBoardUser = {
   points: number
   user_rank: number
   user_pfp_url: string
-  username: string
+  name: string
 }
 
 export default interface LeaderBoardResponse {

@@ -61,7 +61,7 @@ export default function ({
         animation
         grid={{
           left: -16, // chart is jumpy on the edges, we hide this
-          right: 10,
+          right: 5,
           top: 10,
           bottom: 20,
         }}

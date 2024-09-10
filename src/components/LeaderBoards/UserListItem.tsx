@@ -23,7 +23,7 @@ export default function ({
           className="rounded-full w-8 h-8"
         />
         <AccentText className="font-semibold">
-          {item.username || item.telegram_id}
+          {item.name || item.telegram_id}
         </AccentText>
       </div>
 

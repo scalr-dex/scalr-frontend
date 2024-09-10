@@ -16,6 +16,7 @@ export interface ClientUser {
   balance: number
   launchParams: LaunchParams
   tonAddress?: string
+  username: string
   telegramId: number
   inviteLimit: number
   invitedUsers: number

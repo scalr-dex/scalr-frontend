@@ -90,7 +90,7 @@ async function setupUser() {
 
     const { initData, initDataRaw } = launchParams
 
-    if (!initData || !initDataRaw) return
+    if (!initData || !initDataRaw || !initData.user) return
 
     const response = await backendKy(initDataRaw).post('user', {
       searchParams: { code: initData.startParam || '' },
@@ -101,6 +101,7 @@ async function setupUser() {
       ticket: user.ticket,
       balance: user.points,
       launchParams,
+      username: initData.user.username || initData.user.firstName,
       telegramId: user.telegram_id,
       tonAddress: user.ton_address,
       inviteLimit: user.invite_limit,
