@@ -12,6 +12,7 @@ import { useAtomValue } from 'jotai'
 import { useCallback, useState } from 'preact/hooks'
 import ButtonTypes from 'type/Button'
 import { DefaultModalProps } from 'type/Props'
+import CheckMark from 'components/icons/CheckMark'
 
 function ModalBody() {
   return (
@@ -92,9 +93,9 @@ function ModalFooter() {
       </Button>
       <Button
         onClick={onCopy}
-        buttonType={ButtonTypes.secondary}
+        buttonType={copied ? ButtonTypes.success : ButtonTypes.secondary}
         className="!rounded-full"
-        iconRight={copied ? <span>🎉</span> : <Copy />}
+        iconRight={copied ? <CheckMark /> : <Copy />}
       >
         {copied ? 'Copied' : 'Copy link'}
       </Button>

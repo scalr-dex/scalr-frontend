@@ -1,4 +1,4 @@
-import Logo from 'components/icons/Logo'
+import Coin3D from 'components/Coin3D'
 import { BodyText, Header1, Header3, Header4 } from 'components/Text'
 import TonConnect from 'components/TonConnect'
 import env from 'helpers/env'
@@ -6,13 +6,13 @@ import { TonConnectUIProvider } from 'lib/@tonconnect/ui-react'
 
 function AirDropInner() {
   return (
-    <div className="flex flex-1 flex-col items-center justify-center gap-y-4 text-center px-4">
+    <div className="flex flex-col min-h-[90dvh] w-full items-center justify-center gap-y-4 text-center px-4">
       <Header1>Scalr Airdrop</Header1>
       <Header3>
         Connect wallet to take part in <span className="underline">$SCR</span>{' '}
         tokens distribution
       </Header3>
-      <Logo size={100} withBackground />
+      <Coin3D />
       <TonConnect />
       <span>
         <Header4>Tokens will be distributed for:</Header4>
