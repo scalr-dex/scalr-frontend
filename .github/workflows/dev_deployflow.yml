@@ -3,7 +3,8 @@ name: Build and deploy app
 on:
   push:
     branches:
-      - **
+      - '**'
+
 jobs:
   build-and-deploy-app:
     if: contains(github.event.head_commit.message, '[DEV_DEPLOY]')
@@ -26,7 +27,7 @@ jobs:
       - name: Install modules
         run: yarn
         shell: bash
-      - name: Build dev code
+      - name: Build code
         run: yarn build
         env:
           VITE_BACKEND_URL: ${{ secrets.VITE_DEV_BACKEND_URL }}
