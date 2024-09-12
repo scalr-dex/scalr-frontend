@@ -3,17 +3,20 @@ import env from 'helpers/env'
 
 const sentryConfig: Sentry.BrowserOptions = {
   dsn: env.VITE_SENTRY_DSN,
-  tracesSampleRate: 1,
-  maxValueLength: 1000,
   environment: env.DEV ? 'development' : 'production',
+  debug: true,
   integrations: [
     Sentry.browserTracingIntegration(),
     Sentry.browserProfilingIntegration(),
     Sentry.replayIntegration(),
   ],
+  tracesSampleRate: 1,
+  maxValueLength: 1000,
   sampleRate: 1,
-  replaysSessionSampleRate: env.DEV ? 1 : 0.1,
-  replaysOnErrorSampleRate: 1,
+  profilesSampleRate: 1,
+  // Only works with sentry.io, GlitchClip doesn't support it
+  replaysSessionSampleRate: 0,
+  replaysOnErrorSampleRate: 0,
 }
 
 export function initSentry() {

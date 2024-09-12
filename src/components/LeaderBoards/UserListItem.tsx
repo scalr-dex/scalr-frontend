@@ -19,7 +19,7 @@ export default function ({
     <div className="flex flex-row justify-between items-center px-4 py-3 bg-tertiary border-b border-white border-opacity-5 h-14 first:rounded-t-xl last:rounded-b-xl">
       <div className="flex flex-row gap-x-3 items-center">
         <ImageWithFallback
-          src={item.user_pfp_url}
+          src={item.userPfp}
           className="rounded-full w-8 h-8"
         />
         <AccentText className="font-semibold">
