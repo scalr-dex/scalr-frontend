@@ -109,3 +109,11 @@ body {
   left: 0% !important;
   transform: none !important;
 }
+
+/* Those are removed by postCSS preprocessor, so we add them manually */
+.w-8 {
+  width: 2rem;
+}
+.h-8 {
+  height: 2rem;
+}
