@@ -1,8 +1,11 @@
+import safeExtractCharAt from 'helpers/formatters/safeExtractCharAt'
 import { useState } from 'preact/hooks'
 import { JSX } from 'preact/jsx-runtime'
 import { ClassNameProp } from 'type/Props'
 
-const defaultFallback = (name: string) => <span>{name[0]}</span>
+const defaultFallback = (name: string) => (
+  <span>{safeExtractCharAt(name, 0)}</span>
+)
 
 export default function ({
   name,

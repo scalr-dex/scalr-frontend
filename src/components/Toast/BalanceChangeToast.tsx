@@ -1,4 +1,4 @@
-import formatUSA from 'helpers/formatUSA'
+import formatUSA from 'helpers/formatters/formatUSA'
 import ScalrCoin from 'components/icons/coins/ScalrCoin'
 
 export default function ({ delta, lost }: { delta: number; lost: boolean }) {

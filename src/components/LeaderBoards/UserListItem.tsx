@@ -1,6 +1,6 @@
 import ImgWithComponentFallback from 'components/ImgWithComponentFallback'
 import { AccentText } from 'components/Text'
-import formatUSA from 'helpers/formatUSA'
+import formatUSA from 'helpers/formatters/formatUSA'
 import { LeaderBoardUser } from 'type/LeaderBoardResponse'
 
 export default function ({
