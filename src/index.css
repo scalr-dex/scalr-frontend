@@ -103,3 +103,9 @@ body {
   -webkit-text-stroke: 2px var(--accent-hover);
   -webkit-text-fill-color: transparent;
 }
+
+/* fixes toast centering on windows */
+.Toastify__toast-container--bottom-center {
+  left: 0% !important;
+  transform: none !important;
+}
