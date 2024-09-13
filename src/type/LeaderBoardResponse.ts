@@ -3,7 +3,7 @@ export type LeaderBoardUser = {
   points: number
   user_rank: number
   userPfp: string // fetched by frontend from a separate endpoint
-  name: string
+  name?: string
 }
 
 export default interface LeaderBoardResponse {
