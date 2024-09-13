@@ -9,7 +9,7 @@ export default function ({
   imgUrl,
   fallback = defaultFallback,
   className = 'rounded-full bg-controls-tertiary-focus flex items-center justify-center',
-  size = 10,
+  size = 8,
 }: {
   name: string
   imgUrl?: string | undefined
