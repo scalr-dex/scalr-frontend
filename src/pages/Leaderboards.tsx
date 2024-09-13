@@ -16,8 +16,6 @@ export default function () {
 
   const loading = status === 'pending'
 
-  const tgUser = user?.launchParams?.initData?.user
-
   return (
     <div className="flex flex-col px-4 gap-y-10">
       <YourEpochVolume points={data?.user?.points} />
@@ -26,7 +24,7 @@ export default function () {
         <GetHelp onClick={() => setModalOpen(true)} size={20} />
       </div>
       <YourPosition
-        userName={tgUser?.username || tgUser?.firstName}
+        userName={user?.username}
         userRank={data?.user?.user_rank}
         loading={loading}
       />
