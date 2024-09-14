@@ -105,6 +105,12 @@ export default function () {
     threshold: animationDuration,
   })
 
+  const buttonText = canClaim
+    ? animation === AnimationState.playing
+      ? 'Hold'
+      : 'Daily Claim'
+    : dayjs({ seconds }).format('HH[h] mm[m]')
+
   return (
     <ButtonSmall
       {...bind()}
@@ -112,9 +118,9 @@ export default function () {
       iconRight={canClaim ? <ChevronRight /> : null}
       disabled={!canClaim}
       isLoading={loading}
-      className="px-4 py-1.5 select-none"
+      className="px-4 py-1.5 select-none w-36 h-9"
     >
-      {canClaim ? 'Daily Claim' : dayjs({ seconds }).format('HH[h] mm[m]')}
+      <span className="pb-0.5">{buttonText}</span>
     </ButtonSmall>
   )
 }

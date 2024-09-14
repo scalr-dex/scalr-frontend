@@ -11,6 +11,9 @@ import StepToVideo from 'components/Onboarding/StepToVideo'
 import Step1Background from 'components/Onboarding/Step1Background'
 import Step2Background from 'components/Onboarding/Step2Background'
 import Step3Background from 'components/Onboarding/Step3Background'
+import useImagePreloader from 'helpers/hooks/useImagePreload'
+import { preloadList } from 'type/Onboarding'
+import LoaderFullPage from 'components/LoaderFullPage'
 
 type StepToElement = { [step: number]: JSX.Element | string }
 type StepToString = { [step: number]: string }
@@ -34,6 +37,7 @@ const stepToBg: StepToElement = {
 }
 
 export default function () {
+  const { imagesPreloaded } = useImagePreloader(preloadList)
   const setDidOnboard = useSetAtom(didOnboardAtom)
   const [parent] = useAutoAnimate()
   const [step, setStep] = useState(0)
@@ -46,6 +50,8 @@ export default function () {
 
     setStep((prev) => prev + 1)
   }, [setDidOnboard, step])
+
+  if (!imagesPreloaded) return <LoaderFullPage />
 
   return (
     <div

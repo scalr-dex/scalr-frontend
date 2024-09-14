@@ -1,10 +1,4 @@
-import {
-  isAndroid,
-  isBrowser,
-  isMacOs,
-  isMobileSafari,
-  isSafari,
-} from 'react-device-detect'
+import { renderWebm } from 'type/Onboarding'
 
 export default function ({
   srcSafari,
@@ -17,7 +11,7 @@ export default function ({
   width?: number
   height?: number
 }) {
-  if ((isBrowser && !isSafari && !isMobileSafari && !isMacOs) || isAndroid)
+  if (renderWebm)
     return (
       <video
         muted

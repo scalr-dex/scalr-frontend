@@ -22,6 +22,7 @@ import Main from 'pages/Main'
 import { ErrorBoundary } from '@sentry/react'
 import ErrorBoundaryFallback from 'components/ErrorBoundaryFallback'
 import { useHashLocation } from 'wouter-preact/use-hash-location'
+import LoaderFullPage from 'components/LoaderFullPage'
 
 const Onboarding = lazy(() => import('pages/Onboarding'))
 const Airdrop = lazy(() => import('pages/Airdrop'))
@@ -58,13 +59,7 @@ function AppInner({ socket }: { socket: WebSocket }) {
                 <Route
                   path="/"
                   component={() => (
-                    <Suspense
-                      fallback={
-                        <div className="flex min-h-[90dvh] w-full items-center justify-center">
-                          <Loader />
-                        </div>
-                      }
-                    >
+                    <Suspense fallback={<LoaderFullPage />}>
                       <Onboarding />
                     </Suspense>
                   )}
