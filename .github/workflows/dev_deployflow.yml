@@ -1,0 +1,19 @@
+name: Deploy Dev
+
+on:
+  push:
+    branches:
+      - dev
+
+jobs:
+  test_commentary:
+    runs-on: ubuntu-latest
+    environment:
+      name: dev-pages
+
+    steps:
+      - name: Trigger Dev Deploy
+        uses: distributhor/workflow-webhook
+        with:
+          url: ${{ secrets.FRONTEND_DEV_HOST }}
+          json: '{ "repository": "${{github.event.repository.full_name}}", "number": "${{github.event.number}}", "created_at": "${{github.event.pull_request.created_at}}", "updated_at": "${{github.event.pull_request.updated_at}}" }'
