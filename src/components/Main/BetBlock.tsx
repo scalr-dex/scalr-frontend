@@ -54,7 +54,7 @@ export default function ({
         setUserBet({
           ...bet,
           startTime: roundEndTime,
-          endTime: new Date(endTime).getTime(),
+          endTime,
         })
     },
     [betValue, roundStartTime, setUserBet, user?.balance]
