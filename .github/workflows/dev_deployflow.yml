@@ -6,7 +6,7 @@ on:
       - dev
 
 jobs:
-  test_commentary:
+  trigger_webhook:
     runs-on: ubuntu-latest
     environment:
       name: dev-pages
