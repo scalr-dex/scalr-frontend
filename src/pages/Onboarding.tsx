@@ -12,7 +12,7 @@ import Step1Background from 'components/Onboarding/Step1Background'
 import Step2Background from 'components/Onboarding/Step2Background'
 import Step3Background from 'components/Onboarding/Step3Background'
 import useImagePreloader from 'helpers/hooks/useImagePreload'
-import { preloadList } from 'type/Onboarding'
+import { preloadList, stepToGif } from 'type/Onboarding'
 import LoaderFullPage from 'components/LoaderFullPage'
 
 type StepToElement = { [step: number]: JSX.Element | string }
@@ -67,7 +67,7 @@ export default function () {
           ref={parent}
         >
           {stepToBg[step]}
-          <StepToVideo step={step} />
+          <img style={{ width: 155, height: 155 }} src={stepToGif[step]} />
           {stepToComponent[step]}
         </div>
         <Button className="!w-56 !rounded-full mb-2" onClick={onClick}>
