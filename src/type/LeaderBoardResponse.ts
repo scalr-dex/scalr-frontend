@@ -9,4 +9,5 @@ export type LeaderBoardUser = {
 export default interface LeaderBoardResponse {
   user: LeaderBoardUser // aka current user
   lb: LeaderBoardUser[]
+  round_end_time: number // unix
 }

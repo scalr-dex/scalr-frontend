@@ -18,7 +18,8 @@ export default function () {
 
   return (
     <div className="flex flex-col px-4 gap-y-10">
-      <YourEpochVolume points={data?.user?.points} />
+      <YourEpochVolume points={data?.user?.points} endTime={data?.endTime} />
+
       <div className="flex flex-row items-center gap-x-1">
         <Header3>Leaderboard</Header3>
         <GetHelp onClick={() => setModalOpen(true)} size={20} />

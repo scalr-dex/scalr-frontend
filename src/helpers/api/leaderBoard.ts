@@ -4,7 +4,7 @@ import LeaderBoardResponse from 'type/LeaderBoardResponse'
 
 export default async function () {
   try {
-    const { lb, user } = await backendKy()
+    const { lb, user, round_end_time } = await backendKy()
       .get('leaderboard')
       .json<LeaderBoardResponse>()
     const images = await backendKy()
@@ -16,7 +16,7 @@ export default async function () {
       userPfp: 'data:image/jpg;base64,' + images[index].Base64,
     }))
 
-    return { lb: usersWithImages, user }
+    return { lb: usersWithImages, user, endTime: round_end_time * 1000 }
   } catch (e) {
     handleError({ e })
     return { user: undefined, lb: [] }
