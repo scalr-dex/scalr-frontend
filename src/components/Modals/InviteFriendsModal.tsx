@@ -34,7 +34,7 @@ function ModalBody() {
           leftIcon={<Logo size={18} />}
           className="bg-special-gradient !py-0.5 !px-1.5 !mx-1 rotate-2"
         >
-          10,500
+          25,000
         </SpecialText>{' '}
         for each friend with Premium.
       </p>
