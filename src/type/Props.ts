@@ -1,7 +1,9 @@
 import { ComponentChildren, JSX } from 'preact'
 
+export type ClassName = JSX.HTMLAttributes<HTMLDivElement>['className']
+
 export interface ClassNameProp {
-  className?: JSX.HTMLAttributes<HTMLDivElement>['className']
+  className?: ClassName
 }
 
 export interface OnClickProp {

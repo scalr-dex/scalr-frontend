@@ -16,17 +16,16 @@ export default function () {
 
   const loading = status === 'pending'
 
-  const tgUser = user?.launchParams?.initData?.user
-
   return (
     <div className="flex flex-col px-4 gap-y-10">
-      <YourEpochVolume points={data?.user?.points} />
+      <YourEpochVolume points={data?.user?.points} endTime={data?.endTime} />
+
       <div className="flex flex-row items-center gap-x-1">
         <Header3>Leaderboard</Header3>
         <GetHelp onClick={() => setModalOpen(true)} size={20} />
       </div>
       <YourPosition
-        userName={tgUser?.username || tgUser?.firstName}
+        userName={user?.username}
         userRank={data?.user?.user_rank}
         loading={loading}
       />

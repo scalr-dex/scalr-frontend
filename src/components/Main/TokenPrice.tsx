@@ -2,7 +2,7 @@ import DotsLoader from 'components/DotsLoader'
 import TonCoin from 'components/icons/coins/TonCoin'
 import StonksArrow from 'components/icons/StonksArrow'
 import { Header2, Header4 } from 'components/Text'
-import Timer from 'components/Main/Timer'
+import RoundTimer from 'components/Main/RoundTimer'
 import CountUp from 'react-countup'
 
 export default function ({
@@ -49,7 +49,7 @@ export default function ({
           </div>
         </div>
 
-        <Timer />
+        <RoundTimer />
       </div>
     </div>
   )

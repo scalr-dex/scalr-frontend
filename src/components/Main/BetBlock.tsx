@@ -8,10 +8,10 @@ import UserAtom, { userBetAtom } from 'helpers/atoms/UserAtom'
 import placeBet from 'helpers/api/placeBet'
 import BetDirection from 'type/BetDirection'
 import { BodyText } from 'components/Text'
-import BetTimer from 'components/Main/BetTimer'
 import { roundDurationMs } from 'helpers/atoms/priceHistoryAtom'
 import DailyClaim from 'components/Main/DailyClaim'
 import Points from 'components/Main/Points'
+import Timer from 'components/Main/Timer'
 
 export default function ({
   loading,
@@ -54,7 +54,7 @@ export default function ({
         setUserBet({
           ...bet,
           startTime: roundEndTime,
-          endTime: new Date(endTime).getTime(),
+          endTime,
         })
     },
     [betValue, roundStartTime, setUserBet, user?.balance]
@@ -70,7 +70,7 @@ export default function ({
         <div className="flex flex-col gap-y-2">
           <div className="flex flex-row items-center justify-between">
             <BodyText>You'll get result in</BodyText>
-            <BetTimer />
+            <Timer endTime={userBet?.endTime} />
           </div>
           <BodyText>
             You bet <b>{userBet.amount} pts</b>

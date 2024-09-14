@@ -4,7 +4,7 @@ import Close from 'components/icons/Close'
 import Copy from 'components/icons/Copy'
 import Logo from 'components/icons/Logo'
 import Share from 'components/icons/Share'
-import { AccentText, Header3, SpecialText } from 'components/Text'
+import { AccentText, BodyText, Header3, SpecialText } from 'components/Text'
 import DefaultModal from 'components/Modals/DefaultModal'
 import UserAtom from 'helpers/atoms/UserAtom'
 import env from 'helpers/env'
@@ -34,7 +34,7 @@ function ModalBody() {
           leftIcon={<Logo size={18} />}
           className="bg-special-gradient !py-0.5 !px-1.5 !mx-1 rotate-2"
         >
-          10,500
+          25,000
         </SpecialText>{' '}
         for each friend with Premium.
       </p>
@@ -42,43 +42,49 @@ function ModalBody() {
   )
 }
 
-function ModalHeader({ onClose }: { onClose: () => void }) {
+function ModalHeader({
+  onClose,
+  inviteLimit,
+  invitedUsers,
+}: {
+  onClose: () => void
+  inviteLimit: number
+  invitedUsers: number
+}) {
   return (
     <div className="flex flex-row items-center justify-between">
-      <div className="rounded-full bg-tertiary h-14 w-14 text-center leading-tight flex justify-center items-center">
-        <Header3>🥳</Header3>
+      <div className="flex flex-row gap-x-2 items-center">
+        <div className="rounded-full bg-tertiary h-14 w-14 text-center leading-tight flex justify-center items-center">
+          <Header3>🥳</Header3>
+        </div>
+        <BodyText className="text-controls-tertiary-focus font-semibold">
+          {invitedUsers}/{inviteLimit} invited
+        </BodyText>
       </div>
       <Close onClick={onClose} />
     </div>
   )
 }
 
-function ModalFooter() {
-  const user = useAtomValue(UserAtom)
+function ModalFooter({ telegramId }: { telegramId: number }) {
   const utils = useUtils()
   const [copied, setCopied] = useState(false)
 
-  const userId = user?.launchParams.initData?.user?.id
-
   const onShare = useCallback(() => {
-    if (!userId) return
-
     utils.shareURL(
-      `${env.VITE_APP_BASE_LINK}?startapp=${userId}`,
+      `${env.VITE_APP_BASE_LINK}?startapp=${telegramId}`,
       '\nPlay with me, predict price movement, and get a token Airdrop!\n😋 +1k Points as a Daily claim gift\n🔥 +1k Points for a friend\n⭐️ +25k Points if a friend has Telegram Premium'
     )
-  }, [userId, utils])
+  }, [telegramId, utils])
 
   const onCopy = useCallback(async () => {
-    if (!userId) return
-
     await navigator.clipboard.writeText(
-      `${env.VITE_APP_BASE_LINK}?startapp=${userId}`
+      `${env.VITE_APP_BASE_LINK}?startapp=${telegramId}`
     )
 
     setCopied(true)
     setTimeout(() => setCopied(false), 1500)
-  }, [userId])
+  }, [telegramId])
 
   return (
     <div className="flex flex-col gap-y-4">
@@ -87,7 +93,7 @@ function ModalFooter() {
         buttonType={ButtonTypes.secondary}
         className="!rounded-full"
         iconRight={<Share />}
-        isLoading={!userId}
+        isLoading={!telegramId}
       >
         Send link
       </Button>
@@ -104,12 +110,24 @@ function ModalFooter() {
 }
 
 export default function (props: DefaultModalProps) {
+  const user = useAtomValue(UserAtom)
+
+  if (!user) return null
+
+  const { inviteLimit, invitedUsers, telegramId } = user
+
   return (
     <DefaultModal
       {...props}
-      header={(onClose) => <ModalHeader onClose={onClose} />}
+      header={(onClose) => (
+        <ModalHeader
+          onClose={onClose}
+          inviteLimit={inviteLimit}
+          invitedUsers={invitedUsers}
+        />
+      )}
       body={ModalBody}
-      footer={ModalFooter}
+      footer={() => <ModalFooter telegramId={telegramId} />}
     />
   )
 }

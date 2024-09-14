@@ -58,7 +58,13 @@ function AppInner({ socket }: { socket: WebSocket }) {
                 <Route
                   path="/"
                   component={() => (
-                    <Suspense fallback={<Loader full />}>
+                    <Suspense
+                      fallback={
+                        <div className="flex min-h-[90dvh] w-full items-center justify-center">
+                          <Loader />
+                        </div>
+                      }
+                    >
                       <Onboarding />
                     </Suspense>
                   )}

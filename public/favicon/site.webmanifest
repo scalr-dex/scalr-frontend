@@ -13,7 +13,39 @@
       "type": "image/png"
     }
   ],
-  "theme_color": "#ffffff",
-  "background_color": "#ffffff",
-  "display": "standalone"
+  "theme_color": "#fff",
+  "background_color": "#0e121b",
+  "display": "standalone",
+  "start_url": "https://blue.scalr.trade",
+  "screenshots": [
+    {
+      "src": "./screenshot-1.png",
+      "form_factor": "narrow",
+      "sizes": "640x1280",
+      "type": "image/png",
+      "label": "bet on price"
+    },
+    {
+      "src": "./screenshot-2.png",
+      "form_factor": "narrow",
+      "sizes": "640x1280",
+      "type": "image/png",
+      "label": "compete with others"
+    },
+    {
+      "src": "./screenshot-3.png",
+      "form_factor": "narrow",
+      "sizes": "640x1280",
+      "type": "image/png",
+      "label": "get an airdrop"
+    },
+    {
+      "src": "./screenshot-4.png",
+      "form_factor": "wide",
+      "sizes": "1280x640",
+      "type": "image/png",
+      "label": "Join perp dex"
+    }
+  ],
+  "description": "User-friendly perpetual futures DEX built for Telegram and powered by TON"
 }

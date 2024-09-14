@@ -1,6 +1,6 @@
 import DotsLoader from 'components/DotsLoader'
 import { Header3 } from 'components/Text'
-import formatUSA from 'helpers/formatUSA'
+import formatUSA from 'helpers/formatters/formatUSA'
 
 export default function ({
   userName,

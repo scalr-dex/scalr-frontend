@@ -29,6 +29,7 @@ export default function ({
       {...buttonProps}
       disabled={disabled}
       onClick={(e) => {
+        if (isLoading || disabled) return
         buttonProps.onClick?.(e)
         hapticFeedback.impactOccurred(haptic)
       }}

@@ -1,6 +1,6 @@
-import ImageWithFallback from 'components/ImageWithFallback'
+import ImgWithComponentFallback from 'components/ImgWithComponentFallback'
 import { AccentText } from 'components/Text'
-import formatUSA from 'helpers/formatUSA'
+import formatUSA from 'helpers/formatters/formatUSA'
 import { LeaderBoardUser } from 'type/LeaderBoardResponse'
 
 export default function ({
@@ -15,14 +15,15 @@ export default function ({
     ? 'bg-success-alt px-2 py-0.5 rounded-full text-primary'
     : ''
 
+  const name = item.name || item.telegram_id
+
   return (
     <div className="flex flex-row justify-between items-center px-4 py-3 bg-tertiary border-b border-white border-opacity-5 h-14 first:rounded-t-xl last:rounded-b-xl">
       <div className="flex flex-row gap-x-3 items-center">
-        <ImageWithFallback
-          src={item.telegram_id.toString()}
-          className="rounded-full w-8 h-8"
-        />
-        <AccentText className="font-semibold">{item.telegram_id}</AccentText>
+        <ImgWithComponentFallback imgUrl={item.userPfp} name={String(name)} />
+        <AccentText className="font-semibold truncate max-w-40">
+          {name}
+        </AccentText>
       </div>
 
       <div className="flex flex-row items-center gap-x-4 text-sm">

@@ -103,3 +103,17 @@ body {
   -webkit-text-stroke: 2px var(--accent-hover);
   -webkit-text-fill-color: transparent;
 }
+
+/* fixes toast centering on windows */
+.Toastify__toast-container--bottom-center {
+  left: 0% !important;
+  transform: none !important;
+}
+
+/* Those are removed by postCSS preprocessor, so we add them manually */
+.w-8 {
+  width: 2rem;
+}
+.h-8 {
+  height: 2rem;
+}
