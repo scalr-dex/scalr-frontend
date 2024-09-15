@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 @font-face {
-  font-family: 'SF Pro Rounded', sans-serif;
+  font-family: 'SF Pro Rounded';
   src: url(/fonts/SfProRounded.woff2) format('woff2-variations');
   src: url(/fonts/SfProRounded.woff2) format('woff2') tech('variations');
   font-weight: 100 1000;
@@ -15,7 +15,7 @@
 }
 
 @font-face {
-  font-family: 'SF Pro', Arial, Helvetica, sans-serif;
+  font-family: 'SF Pro';
   src: url(/fonts/SfProSub.woff2) format('woff2-variations');
   src: url(/fonts/SfProSub.woff2) format('woff2') tech('variations');
   font-weight: 100 1000;
