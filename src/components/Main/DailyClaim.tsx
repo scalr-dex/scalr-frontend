@@ -55,15 +55,10 @@ export default function () {
 
   const isRunning = animation === AnimationState.running
   const buttonText = canClaim
-    ? isRunning
-      ? 'Hold'
-      : 'Daily Claim'
+    ? 'Hold to Claim'
     : dayjs({ seconds }).format('HH[h] mm[m]')
 
   const scale = isRunning ? 'scale-110' : 'scale-100'
-
-  const staticBg = `linear-gradient(var(--primary), var(--primary)) padding-box, linear-gradient(to right, #3af3ff, #4986fb, #8160e1) border-box`
-  const animationBg = `linear-gradient(to right, #3af3ff, #4986fb, #8160e1 50%, transparent 0%)`
 
   return (
     <ButtonSmall
@@ -72,14 +67,10 @@ export default function () {
       iconRight={canClaim ? <ChevronRight /> : null}
       disabled={disabled}
       isLoading={loading}
-      className={`px-4 py-1.5 select-none !w-36 h-9 ${scale}`}
+      className={`px-4 py-1.5 select-none !w-40 h-9 ${scale}`}
       style={{
         transitionDuration: animationDuration + 'ms',
-        transition: `all ${animationDuration}ms ease-in-out`,
-        background: isRunning ? animationBg : staticBg,
-        backgroundSize: isRunning ? '200% 200%' : '100% 100%',
-        backgroundPosition: isRunning ? '0% 200%' : '200% 200%',
-        border: isRunning ? 'none' : '2px solid transparent',
+        transition: `transform ${animationDuration}ms ease-in-out`,
       }}
     >
       <span className="pb-0.5">{buttonText}</span>
