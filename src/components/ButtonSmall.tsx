@@ -16,11 +16,11 @@ export default function ({
 }: ButtonProps) {
   const haptic = useHapticFeedback()
   const content = (
-    <>
+    <div className="flex flex-row w-full items-center justify-center gap-x-1">
       {iconLeft}
       {children}
       {iconRight}
-    </>
+    </div>
   )
 
   const buttonStyles = buttonClassNames(disabled)[buttonType]
@@ -29,7 +29,8 @@ export default function ({
     <button
       {...buttonProps}
       onClick={(e) => {
-        if (isLoading || disabled) return
+        if (!allowDisabledClick && (isLoading || disabled)) return
+
         onClick?.(e)
         haptic.impactOccurred('soft')
       }}

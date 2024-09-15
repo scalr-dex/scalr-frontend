@@ -6,8 +6,8 @@ module.exports = {
 
   theme: {
     fontFamily: {
-      sans: ['SF Pro Rounded', 'sans'],
-      accent: ['SF Pro', 'sans'],
+      sans: ['SF Pro Rounded', 'sans-serif'],
+      accent: ['Inter', 'sans-serif'],
     },
     extend: {
       borderRadius: {
