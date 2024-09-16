@@ -65,6 +65,9 @@ export default function ({
       <div className="flex flex-row justify-between items-center">
         <Points amount={user?.balance} /> <DailyClaim />
       </div>
+      {user?.canClaimAmount ? (
+        <span>Available to claim: {user?.canClaimAmount}</span>
+      ) : null}
 
       {userBet ? (
         <div className="flex flex-col gap-y-2">

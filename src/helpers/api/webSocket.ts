@@ -21,6 +21,10 @@ function getPriceChangeFromWsEventData(data: EventData) {
   } else if (data._ === 'p') return [data]
 }
 
+function getClaimFromWsEventData(data: EventData) {
+  if (!Array.isArray(data) && data._ === 'c') return { amount: data.a }
+}
+
 export function setupWebSocket(ticket: string) {
   const io = (url: string) => new WebSocket(url)
   const url = `${env.VITE_BACKEND_URL.replace('https', 'wss')}/ws?ticket=${ticket}`
@@ -35,5 +39,6 @@ export default function ({ data }: { data: string }) {
     balance: getBalanceChangeFromWsEventData(parsed),
     price: getPriceChangeFromWsEventData(parsed),
     lost: getBetLostFromWsEventData(parsed),
+    claim: getClaimFromWsEventData(parsed),
   }
 }
