@@ -66,7 +66,9 @@ export default function ({
         <Points amount={user?.balance} /> <DailyClaim />
       </div>
       {user?.canClaimAmount ? (
-        <span>Available to claim: {user?.canClaimAmount}</span>
+        <span className="text-right">
+          Available to claim: {user.canClaimAmount}
+        </span>
       ) : null}
 
       {userBet ? (
