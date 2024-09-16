@@ -1,7 +1,6 @@
 import { useAutoAnimate } from '@formkit/auto-animate/react'
 import BottomTabNavigator from 'components/BottomTabNavigator'
 import NotFound from 'pages/NotFound'
-import Tasks from 'pages/Tasks'
 import { ToastContainer } from 'react-toastify'
 import { Router, Switch, Route, Redirect } from 'wouter-preact'
 import { SDKProvider } from '@telegram-apps/sdk-react'
@@ -26,6 +25,7 @@ import LoaderFullPage from 'components/LoaderFullPage'
 
 const Onboarding = lazy(() => import('pages/Onboarding'))
 const Airdrop = lazy(() => import('pages/Airdrop'))
+const Tasks = lazy(() => import('pages/Tasks'))
 
 function AppInner({ socket }: { socket: WebSocket }) {
   useWebSocketData(socket)
@@ -43,7 +43,14 @@ function AppInner({ socket }: { socket: WebSocket }) {
             <Switch>
               {didOnboard ? (
                 <>
-                  <Route path="/tasks" component={Tasks} />
+                  <Route
+                    path="/tasks"
+                    component={() => (
+                      <Suspense fallback={<Loader full />}>
+                        <Tasks />
+                      </Suspense>
+                    )}
+                  />
                   <Route path="/leaderboards" component={LeaderBoards} />
                   <Route
                     path="/airdrop"

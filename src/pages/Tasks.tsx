@@ -1,3 +1,4 @@
+import 'helpers/scripts/adsGramMinimized'
 import { useQuery } from '@tanstack/react-query'
 import Logo from 'components/icons/Logo'
 import { AccentText, Header2 } from 'components/Text'
@@ -9,6 +10,7 @@ import { QueryKeys } from 'helpers/queryClient'
 import { useCallback } from 'preact/hooks'
 import UserTask from 'type/UserTask'
 import { useAutoAnimate } from '@formkit/auto-animate/react'
+import WatchAd from 'components/WatchAd'
 
 export default function () {
   const [parent] = useAutoAnimate()
@@ -34,6 +36,7 @@ export default function () {
         </AccentText>
       </div>
       <InviteFriends />
+      <WatchAd />
       <div className="flex flex-col gap-y-6" ref={parent}>
         {data
           ? data.map(renderTask).reverse()

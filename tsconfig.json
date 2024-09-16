@@ -28,6 +28,11 @@
     "noPropertyAccessFromIndexSignature": true,
     "useDefineForClassFields": true
   },
-  "include": ["src", "eslint.config.mjs", "vite.config.ts"],
-  "exclude": ["node_modules", "src/lib"]
+  "include": [
+    "src",
+    "eslint.config.mjs",
+    "vite.config.ts",
+    "public/adsGramMinimized.js"
+  ],
+  "exclude": ["node_modules", "src/lib", "src/helpers/scripts"]
 }
