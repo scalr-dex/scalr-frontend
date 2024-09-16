@@ -2,7 +2,13 @@ import dayjs from 'dayjs'
 import useCountDown from 'helpers/hooks/useCountDown'
 import { useState, useEffect } from 'preact/hooks'
 
-export default function ({ endTime }: { endTime: number | undefined }) {
+export default function ({
+  endTime,
+  withHours,
+}: {
+  endTime: number | undefined
+  withHours?: boolean
+}) {
   const [time, setTime] = useState(0)
   useCountDown(setTime)
 
@@ -12,9 +18,11 @@ export default function ({ endTime }: { endTime: number | undefined }) {
     setTime(dayjs(endTime).diff(dayjs(), 'seconds'))
   }, [time, endTime])
 
+  const format = withHours ? 'hh:mm:ss' : 'mm:ss'
+
   return (
-    <div className="w-16 py-2 px-3 bg-secondary opacity-50 rounded-3xl font-semibold font-accent text-sm">
-      <span>{dayjs({ seconds: time }).format('mm:ss')}</span>
+    <div className="py-2 px-3 bg-secondary opacity-50 rounded-3xl font-semibold font-accent text-sm">
+      <span>{dayjs({ seconds: time }).format(format)}</span>
     </div>
   )
 }

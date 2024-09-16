@@ -14,7 +14,7 @@ export default function ({
       <BodyText className="font-semibold">Your current epoch volume</BodyText>
       <div className="flex flex-row justify-between items-center gap-x-2">
         <Points amount={points} />
-        <Timer endTime={endTime} />
+        <Timer endTime={endTime} withHours />
       </div>
     </div>
   )
