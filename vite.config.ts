@@ -10,6 +10,7 @@ export default defineConfig({
     port: 5173,
   },
   build: {
+    minify: false,
     sourcemap: true,
     rollupOptions: {
       plugins: [
