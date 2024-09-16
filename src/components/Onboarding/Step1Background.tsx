@@ -5,6 +5,7 @@ export default function () {
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
       className="absolute top-5 left-0 w-full -z-10 animate-hovering"
+      key="step-1-bg"
     >
       <g filter="url(#filter0_f_2189_37198)">
         <g clip-path="url(#clip0_2189_37198)">

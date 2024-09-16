@@ -567,7 +567,7 @@ const SvgBackground = () => (
 
 export default function () {
   return (
-    <div className="absolute top-3 -left-1/2 -z-10">
+    <div className="absolute top-3 -left-1/2 -z-10" key="step-2-bg">
       <SvgBackground />
     </div>
   )

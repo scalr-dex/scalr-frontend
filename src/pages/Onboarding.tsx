@@ -66,7 +66,11 @@ export default function () {
           ref={parent}
         >
           {stepToBg[step]}
-          <img style={{ width: 155, height: 155 }} src={stepToGif[step]} />
+          <img
+            style={{ width: 155, height: 155 }}
+            src={stepToGif[step]}
+            key={'step-img-' + step}
+          />
           {stepToComponent[step]}
         </div>
         <Button className="!w-56 !rounded-full mb-2" onClick={onClick}>
