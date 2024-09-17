@@ -31,9 +31,14 @@ export function setupWebSocket(ticket: string) {
 export default function ({ data }: { data: string }) {
   const parsed = JSON.parse(data)
 
-  return {
-    balance: getBalanceChangeFromWsEventData(parsed),
-    price: getPriceChangeFromWsEventData(parsed),
-    lost: getBetLostFromWsEventData(parsed),
-  }
+  const balance = getBalanceChangeFromWsEventData(parsed)
+  if (balance) return { balance }
+
+  const price = getPriceChangeFromWsEventData(parsed)
+  if (price) return { price }
+
+  const lost = getBetLostFromWsEventData(parsed)
+  if (lost) return { lost }
+
+  return {}
 }

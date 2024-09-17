@@ -1,28 +1,27 @@
 import UserAtom, { userBetAtom } from 'helpers/atoms/UserAtom'
-import { useAtom, useSetAtom } from 'jotai'
+import { useSetAtom } from 'jotai'
 import { useEffect } from 'preact/hooks'
 import analyzeMessage from 'helpers/api/webSocket'
 import priceHistoryAtom, {
   previousRoundAtom,
 } from 'helpers/atoms/priceHistoryAtom'
 import balanceChangeToast from 'helpers/sendToast'
-
 const dataMaxLength = 40
 
 export default function (socket: WebSocket) {
-  const [user, setUser] = useAtom(UserAtom)
+  const setUser = useSetAtom(UserAtom)
   const setPreviousRound = useSetAtom(previousRoundAtom)
   const setPrice = useSetAtom(priceHistoryAtom)
   const setUserBet = useSetAtom(userBetAtom)
 
   useEffect(() => {
-    if (!socket || !user) return
+    if (!socket) return
 
     const update = (msg: { data: string }) => {
       const { balance, lost, price } = analyzeMessage(msg)
 
-      if (balance?.balance && user)
-        setUser({ ...user, balance: balance.balance })
+      if (balance?.balance)
+        setUser((prev) => (prev ? { ...prev, balance: balance.balance } : null))
       if (balance?.event === 'BetWon') {
         balanceChangeToast(balance.delta, false)
         setUserBet(null)
@@ -39,7 +38,6 @@ export default function (socket: WebSocket) {
           roundSeparator: data.r,
         }))
         setPrice((prev) => [...prev, ...processedPrice].slice(-dataMaxLength))
-
         const prevRound = price.findLast(({ r }) => Boolean(r))
         if (prevRound)
           setPreviousRound({
@@ -48,10 +46,9 @@ export default function (socket: WebSocket) {
           })
       }
     }
-
     socket.addEventListener('message', update)
     return () => {
       socket.removeEventListener('message', update)
     }
-  }, [setPreviousRound, setPrice, setUser, setUserBet, socket, user])
+  }, [setPreviousRound, setPrice, setUser, setUserBet, socket])
 }

@@ -10,7 +10,7 @@ const pendingTasksAtom = atomWithStorage<{ [taskId: number]: number }>(
 export function setTaskPending(taskId: number) {
   writeAtom(pendingTasksAtom, (prev) => ({
     ...prev,
-    [taskId]: dayjs().add(60, 'seconds').valueOf(),
+    [taskId]: dayjs().add(5, 'seconds').valueOf(),
   }))
 }
 
