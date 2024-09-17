@@ -9,4 +9,6 @@ export default function () {
     onReward: () => toast.success("You've been rewarded!"),
     onError: () => toast.error('Shoot! An error while watching the ad?!'),
   })
+
+  return <Button onClick={ad}>Watch Ad to get pts</Button>
 }
