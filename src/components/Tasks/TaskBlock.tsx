@@ -1,5 +1,3 @@
-import ButtonSmall from 'components/ButtonSmall'
-import { AccentText } from 'components/Text'
 import UserTask, {
   iconNumberToIcon,
   taskStatusToButtonText,
@@ -17,16 +15,19 @@ import { useAtomValue } from 'jotai'
 import useCountDown from 'helpers/hooks/useCountDown'
 import { track } from '@amplitude/analytics-browser'
 import TrackerEvents from 'type/TrackerEvents'
+import SingleTask from 'components/Tasks/SingleTask'
+
+type TaskProps = UserTask & { refetch: () => Promise<unknown> }
 
 export default function ({
-  IconNumber,
-  Name,
-  RewardAmount,
-  Status,
   TaskID,
-  URL,
+  Status,
   refetch,
-}: UserTask & { refetch: () => Promise<unknown> }) {
+  URL,
+  IconNumber,
+  RewardAmount,
+  Name,
+}: TaskProps) {
   const canClaimAt = useAtomValue(pendingTasksAtom)[TaskID]
 
   const utils = useUtils()
@@ -41,7 +42,7 @@ export default function ({
     if (!canClaimAt) return
 
     setTime(dayjs(canClaimAt).diff(dayjs(), 'seconds'))
-  }, [TaskID, canClaimAt, refetch, time])
+  }, [TaskID, canClaimAt, time])
 
   const onClick = useCallback(async () => {
     if (canClaimAt && onTimer) return
@@ -74,26 +75,17 @@ export default function ({
       : ''
 
   return (
-    <div
-      className={`flex flex-row items-center justify-between ${opacity} ${specialStyle}`}
+    <SingleTask
+      className={opacity + ' ' + specialStyle}
+      icon={iconNumberToIcon[IconNumber]}
+      loading={loading || onTimer}
+      disabled={Status === 'Claimed'}
+      buttonType={buttonType}
+      onClick={onClick}
+      rewardAmount={RewardAmount}
+      taskText={Name}
     >
-      <div className="flex flex-row items-center gap-x-3">
-        <div className="w-6 h-6">{iconNumberToIcon[IconNumber]}</div>
-        <div className="flex flex-col gap-y-1">
-          <AccentText className="font-bold">{Name} </AccentText>
-          <AccentText>+{RewardAmount} pts</AccentText>
-        </div>
-      </div>
-      <ButtonSmall
-        buttonType={buttonType}
-        className="text-sm font-accent px-2.5 py-1.5"
-        onClick={onClick}
-        isLoading={loading || onTimer}
-        disabled={Status === 'Claimed'}
-        allowDisabledClick
-      >
-        {canClaimAt ? 'Check 👀' : taskStatusToButtonText[Status]}
-      </ButtonSmall>
-    </div>
+      {canClaimAt ? 'Check 👀' : taskStatusToButtonText[Status]}
+    </SingleTask>
   )
 }

@@ -14,11 +14,11 @@ enum ButtonTypes {
 }
 
 export interface ButtonProps extends JSX.HTMLAttributes<HTMLButtonElement> {
-  buttonType?: ButtonTypes
+  buttonType?: ButtonTypes | undefined
   children: ComponentChildren
   iconLeft?: JSX.Element
   iconRight?: JSX.Element | null
-  isLoading?: boolean
+  isLoading?: boolean | undefined
   disabled?: boolean | undefined
   allowDisabledClick?: boolean | undefined
   haptic?: ImpactHapticFeedbackStyle

@@ -1,7 +1,7 @@
 import { useAdsgram } from 'helpers/hooks/useAdsGram'
-import Button from 'components/Button'
 import { toast } from 'react-toastify'
 import env from 'helpers/env'
+import SingleTask from 'components/Tasks/SingleTask'
 
 export default function () {
   const ad = useAdsgram({
@@ -10,5 +10,14 @@ export default function () {
     onError: () => toast.error('Shoot! An error while watching the ad?!'),
   })
 
-  return <Button onClick={ad}>Watch Ad to get pts</Button>
+  return (
+    <SingleTask
+      icon={<span>AD</span>}
+      rewardAmount={750}
+      taskText="Watch Ad to get points"
+      onClick={ad}
+    >
+      Watch
+    </SingleTask>
+  )
 }
