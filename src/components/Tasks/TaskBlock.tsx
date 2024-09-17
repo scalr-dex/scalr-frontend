@@ -88,15 +88,11 @@ export default function ({
         buttonType={buttonType}
         className="text-sm font-accent px-2.5 py-1.5"
         onClick={onClick}
-        isLoading={loading}
-        disabled={Status === 'Claimed' || onTimer}
+        isLoading={loading || onTimer}
+        disabled={Status === 'Claimed'}
         allowDisabledClick
       >
-        {onTimer
-          ? dayjs({ seconds: time }).format('ss[s]')
-          : canClaimAt
-            ? 'Check 👀'
-            : taskStatusToButtonText[Status]}
+        {canClaimAt ? 'Check 👀' : taskStatusToButtonText[Status]}
       </ButtonSmall>
     </div>
   )
