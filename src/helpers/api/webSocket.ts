@@ -16,7 +16,7 @@ function getBalanceChangeFromWsEventData(data: EventData) {
 }
 
 function getBetFromWsEventData(data: EventData) {
-  if (!Array.isArray(data) && data._ === 'w')
+  if (!Array.isArray(data) && data._ === 'g')
     return { amount: data.a, time: data.c, direction: data.d }
 }
 
