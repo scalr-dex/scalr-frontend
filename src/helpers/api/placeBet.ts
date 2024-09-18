@@ -17,7 +17,7 @@ export default async function ({
       direction: BetDirection[direction],
     }
 
-    await backendKy().post('bet', { json })
+    await backendKy().post('bet/v2', { json })
     track(TrackerEvents.placeBet, { amount, direction })
     return true
   } catch (e) {

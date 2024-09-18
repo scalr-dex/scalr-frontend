@@ -12,13 +12,14 @@ import { roundDurationMs } from 'helpers/atoms/priceHistoryAtom'
 import DailyClaim from 'components/Main/DailyClaim'
 import Points from 'components/Main/Points'
 import Timer from 'components/Main/Timer'
+import { GraphTokenValue } from 'type/TokenState'
 
 export default function ({
   loading,
-  roundStartTime,
+  roundStart,
 }: {
   loading?: boolean
-  roundStartTime: number | undefined
+  roundStart: GraphTokenValue | undefined
 }) {
   const user = useAtomValue(UserAtom)
   const [userBet, setUserBet] = useAtom(userBetAtom)
@@ -28,8 +29,8 @@ export default function ({
   const disabled = betValue <= 0 || loading || processingBet || !user?.balance
 
   useEffect(() => {
-    if (!userBet) return
-    if (userBet.endTime < Date.now()) setUserBet(null)
+    // in case app reloads and timeout vanishes
+    if (userBet && userBet.endTime < Date.now()) setUserBet(null)
   }, [setUserBet, userBet])
 
   useEffect(() => {
@@ -38,14 +39,10 @@ export default function ({
 
   const onClick = useCallback(
     async (direction: BetDirection) => {
-      if (!roundStartTime || !user?.balance) return
+      if (!roundStart || !user?.balance) return
 
       setProcessingBet(true)
       const bet = { amount: betValue, direction }
-
-      const roundEndTime = roundStartTime + roundDurationMs
-      const untilEnd = roundEndTime - Date.now()
-      const endTime = untilEnd + Date.now() + roundDurationMs
 
       const success = await placeBet(bet)
       setProcessingBet(false)
@@ -53,11 +50,13 @@ export default function ({
       if (success)
         setUserBet({
           ...bet,
-          startTime: roundEndTime,
-          endTime,
+          value: roundStart,
+          endTime: roundStart[0] + roundDurationMs,
         })
+
+      setTimeout(() => setUserBet(null), roundDurationMs)
     },
-    [betValue, roundStartTime, setUserBet, user?.balance]
+    [betValue, roundStart, setUserBet, user?.balance]
   )
 
   return (
@@ -70,7 +69,7 @@ export default function ({
         <div className="flex flex-col gap-y-2">
           <div className="flex flex-row items-center justify-between">
             <BodyText>You'll get result in</BodyText>
-            <Timer endTime={userBet?.endTime} />
+            <Timer endTime={userBet.endTime} />
           </div>
           <BodyText>
             You bet <b>{userBet.amount} pts</b>

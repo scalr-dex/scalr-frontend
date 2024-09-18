@@ -8,46 +8,27 @@ import { LineChart } from 'echarts/charts'
 import { EChart } from '@kbox-labs/react-echarts'
 import dayjs from 'dayjs'
 import { GraphTokenData } from 'type/TokenState'
-import { UserBet } from 'type/User'
 import { tick } from 'helpers/atoms/priceHistoryAtom'
 import ChartArrowUp from 'components/icons/ChartArrowUp'
-import BetDirection from 'type/BetDirection'
 import ChartArrowDown from 'components/icons/ChartArrowDown'
 
 export default function ({
   data,
   loading,
-  userBet,
 }: {
   data: GraphTokenData[]
   loading: boolean
-  userBet: UserBet | null
 }) {
   const loadingAnimation = loading ? 'animate-pulse' : ''
 
-  const roundLines = data
-    .filter(({ roundSeparator }) => Boolean(roundSeparator))
-    .map(({ value }) => ({
+  const betPoint = data
+    .filter(({ userBet }) => userBet !== undefined)
+    .map(({ value, name, userBet }) => ({
+      name,
       xAxis: value[0],
-      name: 'Round Separator' + value[0],
+      yAxis: value[1],
+      symbol: userBet ? ChartArrowDown : ChartArrowUp,
     }))
-
-  const betPoint = userBet
-    ? data
-        .filter(
-          ({ value, roundSeparator }) =>
-            value[0] >= userBet?.startTime - 1000 && roundSeparator // 1sec is approximation for differences in timing between chart and JS
-        )
-        .map(({ value }) => ({
-          name: 'User Bet',
-          xAxis: value[0],
-          yAxis: value[1],
-          symbol:
-            userBet.direction === BetDirection.long
-              ? ChartArrowUp
-              : ChartArrowDown,
-        }))
-    : []
 
   return (
     <div
@@ -111,22 +92,6 @@ export default function ({
           id: 'token',
           type: 'line',
           data,
-
-          markLine: {
-            data: roundLines,
-
-            label: { show: false },
-            tooltip: { show: false },
-
-            symbol: ['diamond', 'diamond'],
-            symbolSize: 7,
-            lineStyle: {
-              type: 'dotted',
-              color: '#ffffff',
-              width: 2,
-            },
-            animationDurationUpdate: tick,
-          },
 
           markPoint: {
             data: betPoint,
