@@ -10,10 +10,7 @@ export default defineConfig({
     port: 5173,
   },
   build: {
-    minify:
-      process.env['MINIFY'] !== undefined
-        ? process.env['MINIFY'] === 'true'
-        : true,
+    minify: false,
     sourcemap: true,
     rollupOptions: {
       plugins: [
