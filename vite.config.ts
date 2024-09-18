@@ -11,8 +11,8 @@ export default defineConfig({
   },
   build: {
     minify:
-      import.meta.env['MINIFY'] !== undefined
-        ? import.meta.env['MINIFY']
+      process.env['MINIFY'] !== undefined
+        ? Boolean(process.env['MINIFY'])
         : true,
     sourcemap: true,
     rollupOptions: {
@@ -24,7 +24,7 @@ export default defineConfig({
         sentryVitePlugin({
           org: 'scalr-15',
           project: 'scalr-mini-app',
-          authToken: import.meta.env['SENTRY_AUTH_TOKEN'],
+          authToken: process.env['SENTRY_AUTH_TOKEN'] as string,
         }),
       ],
     },
