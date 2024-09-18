@@ -27,7 +27,7 @@ export default function ({
       name,
       xAxis: value[0],
       yAxis: value[1],
-      symbol: userBet ? ChartArrowDown : ChartArrowUp,
+      symbol: userBet ? ChartArrowUp : ChartArrowDown,
     }))
 
   return (

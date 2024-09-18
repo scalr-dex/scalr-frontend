@@ -15,6 +15,7 @@ export default function (socket: WebSocket) {
     if (!socket) return
 
     const update = (msg: { data: string }) => {
+      console.log
       const { balance, lost, price, bet } = analyzeMessage(msg)
 
       if (balance?.balance) {
@@ -28,10 +29,10 @@ export default function (socket: WebSocket) {
       }
       if (bet) {
         setPrice((prev) => {
-          const len = prev.length
-          const last = prev[len]
+          const lastIndex = prev.length - 1
+          const last = prev[lastIndex]
 
-          prev.splice(len - 1, 1, {
+          prev.splice(lastIndex, 1, {
             name: last.name,
             value: last.value,
             userBet: Number(bet.direction),
