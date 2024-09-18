@@ -1,4 +1,4 @@
-import UserAtom from 'helpers/atoms/UserAtom'
+import UserAtom, { userBetAtom } from 'helpers/atoms/UserAtom'
 import { useSetAtom } from 'jotai'
 import { useEffect } from 'preact/hooks'
 import analyzeMessage from 'helpers/api/webSocket'
@@ -8,6 +8,7 @@ import balanceChangeToast from 'helpers/sendToast'
 const dataMaxLength = 40
 
 export default function (socket: WebSocket) {
+  const setUserBet = useSetAtom(userBetAtom)
   const setUser = useSetAtom(UserAtom)
   const setPrice = useSetAtom(priceHistoryAtom)
 
@@ -15,7 +16,6 @@ export default function (socket: WebSocket) {
     if (!socket) return
 
     const update = (msg: { data: string }) => {
-      console.log
       const { balance, lost, price, bet } = analyzeMessage(msg)
 
       if (balance?.balance) {
@@ -23,9 +23,11 @@ export default function (socket: WebSocket) {
       }
       if (balance?.event === 'BetWon') {
         balanceChangeToast(balance.delta, false)
+        setUserBet(null)
       }
       if (lost) {
         balanceChangeToast(lost.l, true)
+        setUserBet(null)
       }
       if (bet) {
         setPrice((prev) => {
@@ -53,5 +55,5 @@ export default function (socket: WebSocket) {
     return () => {
       socket.removeEventListener('message', update)
     }
-  }, [setPrice, setUser, socket])
+  }, [setPrice, setUser, setUserBet, socket])
 }

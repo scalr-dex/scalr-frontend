@@ -40,6 +40,9 @@ export default function ({
     >
       <EChart
         animation
+        animationDurationUpdate={tick}
+        animationEasing="cubicInOut"
+        animationDuration={1000}
         grid={{
           left: -16, // chart is jumpy on the edges, we hide this
           right: 5,
@@ -70,7 +73,6 @@ export default function ({
               return date.second() % 5 === 0 ? date.format('HH:mm:ss') : ''
             },
           },
-          animationDurationUpdate: tick,
         }}
         yAxis={{
           type: 'value',
@@ -85,7 +87,6 @@ export default function ({
           },
           min: (val) => val.min - 0.0005,
           max: (val) => val.max + 0.0005,
-          animationDurationUpdate: tick,
         }}
         series={{
           name: 'Token price',
@@ -104,14 +105,9 @@ export default function ({
               shadowOffsetY: 0,
             },
             symbolSize: 16,
-            animationDurationUpdate: tick,
           },
 
           showSymbol: false,
-          animation: true,
-          animationEasing: 'cubicInOut',
-          animationDuration: 1000,
-          animationDurationUpdate: tick,
           lineStyle: {
             color: '#B1C9F7',
             width: 4,

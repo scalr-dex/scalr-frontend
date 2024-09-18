@@ -44,16 +44,15 @@ export default function ({
       setProcessingBet(true)
       const bet = { amount: betValue, direction }
 
+      setUserBet({
+        ...bet,
+        value: roundStart,
+        endTime: roundStart[0] + roundDurationMs,
+      })
+
       const success = await placeBet(bet)
       setProcessingBet(false)
-
-      if (success)
-        setUserBet({
-          ...bet,
-          value: roundStart,
-          endTime: roundStart[0] + roundDurationMs,
-        })
-
+      if (!success) setUserBet(null)
       setTimeout(() => setUserBet(null), roundDurationMs)
     },
     [betValue, roundStart, setUserBet, user?.balance]
@@ -65,48 +64,50 @@ export default function ({
         <Points amount={user?.balance} /> <DailyClaim />
       </div>
 
-      {userBet ? (
-        <div className="flex flex-col gap-y-2">
-          <div className="flex flex-row items-center justify-between">
-            <BodyText>You'll get result in</BodyText>
-            <Timer endTime={userBet.endTime} />
+      <div className="h-28">
+        {userBet ? (
+          <div className="flex flex-col gap-y-2">
+            <div className="flex flex-row items-center justify-between">
+              <BodyText>You'll get result in</BodyText>
+              <Timer endTime={userBet.endTime} />
+            </div>
+            <BodyText>
+              You bet <b>{userBet.amount} pts</b>
+            </BodyText>
+            <BodyText>
+              That price will go{' '}
+              <b>{userBet.direction ? 'lower 📉' : 'higher 📈'}</b>
+            </BodyText>
           </div>
-          <BodyText>
-            You bet <b>{userBet.amount} pts</b>
-          </BodyText>
-          <BodyText>
-            That price will go{' '}
-            <b>{userBet.direction ? 'lower 📉' : 'higher 📈'}</b>
-          </BodyText>
-        </div>
-      ) : (
-        <>
-          <SelectBetRangeInput
-            userBalance={user?.balance}
-            value={betValue}
-            setValue={setBetValue}
-            disabled={loading || !!userBet || !user?.balance}
-          />
-          <div className="flex flex-row gap-x-1">
-            <Button
-              buttonType={ButtonTypes.success}
-              iconRight={<StonksArrow size={16} />}
-              disabled={disabled || !!userBet}
-              onClick={() => onClick(BetDirection.long)}
-            >
-              Higher
-            </Button>
-            <Button
-              buttonType={ButtonTypes.error}
-              iconRight={<StonksArrow rotate={90} size={16} />}
-              disabled={disabled || !!userBet}
-              onClick={() => onClick(BetDirection.short)}
-            >
-              Lower
-            </Button>
+        ) : (
+          <div className="flex flex-col gap-y-5">
+            <SelectBetRangeInput
+              userBalance={user?.balance}
+              value={betValue}
+              setValue={setBetValue}
+              disabled={loading || !!userBet || !user?.balance}
+            />
+            <div className="flex flex-row gap-x-1">
+              <Button
+                buttonType={ButtonTypes.success}
+                iconRight={<StonksArrow size={16} />}
+                disabled={disabled || !!userBet}
+                onClick={() => onClick(BetDirection.long)}
+              >
+                Higher
+              </Button>
+              <Button
+                buttonType={ButtonTypes.error}
+                iconRight={<StonksArrow rotate={90} size={16} />}
+                disabled={disabled || !!userBet}
+                onClick={() => onClick(BetDirection.short)}
+              >
+                Lower
+              </Button>
+            </div>
           </div>
-        </>
-      )}
+        )}
+      </div>
     </div>
   )
 }

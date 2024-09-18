@@ -16,7 +16,7 @@ export default function ({ price }: { price?: number }) {
   const deltaString = Math.abs(delta).toFixed(3)
 
   return (
-    <div className="flex flex-col gap-y-1 justify-start w-full px-4 pt-2">
+    <div className="flex flex-col gap-y-1 justify-start w-full px-4 pt-2 h-24">
       <div className="flex flex-row gap-x-1 items-center">
         <TonCoin size={20} />
         <span className="text-white text-opacity-50">TON-USD, 10s round</span>
