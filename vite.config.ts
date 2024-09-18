@@ -12,7 +12,7 @@ export default defineConfig({
   build: {
     minify:
       process.env['MINIFY'] !== undefined
-        ? Boolean(process.env['MINIFY'])
+        ? process.env['MINIFY'] === 'true'
         : true,
     sourcemap: true,
     rollupOptions: {
