@@ -29,10 +29,12 @@ export default function ({
       open={showModal}
       onClose={onClose}
     >
-      <div className="modal-box bg-secondary max-h-[90dvh] p-4 flex flex-col gap-y-5 rounded-4xl">
-        {header(onClose)}
-        <div className="flex flex-col gap-y-4">{body()}</div>
-        <div className="mb-4">{footer(onClose)}</div>
+      <div className="modal-box bg-transparent max-h-[90dvh] !px-2 !pb-4">
+        <div className="w-full p-4 flex flex-col gap-y-5 bg-secondary rounded-4xl">
+          {header(onClose)}
+          <div className="flex flex-col gap-y-4">{body()}</div>
+          <div className="mb-4">{footer(onClose)}</div>
+        </div>
       </div>
 
       <form method="dialog" className="modal-backdrop bg-black bg-opacity-75">
