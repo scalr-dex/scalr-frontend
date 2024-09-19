@@ -61,7 +61,8 @@ export default function ({
   return (
     <div className="flex flex-col px-4 gap-y-5">
       <div className="flex flex-row justify-between items-center">
-        <Points amount={user?.balance} /> <DailyClaim />
+        <Points amount={user?.balance} />{' '}
+        <DailyClaim claimAmount={user?.canClaimAmount} />
       </div>
 
       <div className="h-28">

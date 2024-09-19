@@ -100,6 +100,7 @@ async function setupUser() {
     const clientUser = {
       ticket: user.ticket,
       balance: user.points,
+      canClaimAmount: user.claim_amount,
       launchParams,
       username: initData.user.username || initData.user.firstName,
       telegramId: user.telegram_id,

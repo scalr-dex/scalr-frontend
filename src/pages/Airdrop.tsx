@@ -8,15 +8,14 @@ function AirDropInner() {
   return (
     <div className="flex flex-col min-h-[90dvh] w-full items-center justify-center gap-y-4 text-center px-4">
       <Header1>Scalr Airdrop</Header1>
-      <Header3>
-        Connect wallet to take part in <span className="underline">$SCR</span>{' '}
-        tokens distribution
+      <Header3 className="italic !font-semibold">
+        Connect wallet to take part in $SCR tokens distribution
       </Header3>
       <Coin3D />
       <TonConnect />
       <span>
         <Header4>Tokens will be distributed for:</Header4>
-        <BodyText className="font-normal">
+        <BodyText className="font-normal text-controls-tertiary-focus">
           <ul>
             <li>- Bet volumes</li>
             <li>- Invited friends</li>
