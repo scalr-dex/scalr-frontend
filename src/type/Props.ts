@@ -10,6 +10,8 @@ export interface OnClickProp {
   onClick?: JSX.MouseEventHandler<HTMLButtonElement>
 }
 
+export type OnClickEvent = JSX.TargetedMouseEvent<HTMLButtonElement>
+
 export interface ChildrenProp {
   children: ComponentChildren
 }

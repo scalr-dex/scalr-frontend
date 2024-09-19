@@ -2,6 +2,7 @@ export type EventData =
   | EventDataPriceChange
   | EventDataBalanceChange
   | EventDataBetLost
+  | EventClaim
   | EventBet
 
 export type EventDataPriceChangeSingle = {
@@ -30,5 +31,9 @@ export type EventBet = {
 }
 export type EventDataBetLost = {
   _: 'l'
-  l: number
+  l: number // lost amount
+}
+export type EventClaim = {
+  _: 'c'
+  a: number // amount available to claim after completing a task or daily claim
 }
