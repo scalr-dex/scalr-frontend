@@ -15,8 +15,8 @@ const sentryConfig: Sentry.BrowserOptions = {
   sampleRate: 1,
   profilesSampleRate: 1,
   // Only works with sentry.io, GlitchClip doesn't support it
-  replaysSessionSampleRate: 0,
-  replaysOnErrorSampleRate: 0,
+  replaysSessionSampleRate: 1,
+  replaysOnErrorSampleRate: 1,
 }
 
 export function initSentry() {
