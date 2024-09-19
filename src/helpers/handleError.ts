@@ -5,7 +5,13 @@ function checkErrorAndCapture(e: unknown, message?: string) {
   const extra = { message }
 
   Sentry.setExtra('full-error', e)
-  Sentry.captureException(e, { extra })
+  if (e instanceof Error) {
+    Sentry.captureException(e, { extra })
+  } else {
+    Sentry.captureException(new Error(JSON.stringify(e), { cause: e }), {
+      extra,
+    })
+  }
 }
 
 export default function ({
