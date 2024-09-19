@@ -10,9 +10,11 @@ function ModalBody() {
     <>
       <img src="img/utya-sad.png" className="w-36 mx-auto" />
       <Header3>Claim isn't ready yet, but...</Header3>
-      <BodyText className="italic">
-        Get points by completing tasks and inviting friends. Instantly add
-        rewards to your daily claim total.
+      <BodyText>
+        <span className="italic">
+          Get points by completing tasks and inviting friends.
+        </span>{' '}
+        Instantly add rewards to your daily claim total.
       </BodyText>
       <BodyText className="text-controls-tertiary-focus">
         Claimed amounts count toward the $SCR airdrop distribution 👀
