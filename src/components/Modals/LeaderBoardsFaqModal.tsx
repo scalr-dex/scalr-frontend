@@ -14,11 +14,11 @@ function ModalBody() {
         <p>Top traders win prizes:</p>
         <br />
         <ul>
-          <li>+2000 pts for 1st</li>
-          <li>+1000 pts for 2nd</li>
-          <li>+500 pts for 3rd</li>
-          <li>+200 pts for 4th-10th</li>
-          <li>+100 pts for 11th-25th</li>
+          <li>+5000 pts for 1st</li>
+          <li>+3000 pts for 2nd</li>
+          <li>+2000 pts for 3rd</li>
+          <li>+1000 pts for 4th-10th</li>
+          <li>+500 pts for 11th-25th</li>
         </ul>
         <br />
         <p>Keep pushing to climb the ranks!💪</p>

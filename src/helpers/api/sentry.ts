@@ -4,7 +4,7 @@ import env from 'helpers/env'
 const sentryConfig: Sentry.BrowserOptions = {
   dsn: env.VITE_SENTRY_DSN,
   environment: env.DEV ? 'development' : 'production',
-  debug: true,
+  debug: false,
   integrations: [
     Sentry.browserTracingIntegration(),
     Sentry.browserProfilingIntegration(),
