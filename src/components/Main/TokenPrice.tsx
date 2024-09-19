@@ -8,7 +8,7 @@ import CountUp from 'react-countup'
 
 export default function ({ price }: { price?: number }) {
   const roundStartPrice = useAtomValue(userBetAtom)
-  const shouldDisplayDelta = price && roundStartPrice
+  const shouldDisplayDelta = price && roundStartPrice?.value
   const delta = shouldDisplayDelta ? price - roundStartPrice.value[1] : 0
   const isPositive = delta >= 0
 
