@@ -39,6 +39,7 @@ function ModalFooter({
           onClose()
           setTimeout(() => setShowFriendsModal(true))
         }}
+        haptic={false}
       >
         Invite friends
       </Button>
@@ -49,6 +50,7 @@ function ModalFooter({
           onClose()
           navigate('/tasks')
         }}
+        haptic={false}
       >
         See tasks
       </Button>

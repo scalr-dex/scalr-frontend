@@ -55,6 +55,7 @@ export default function ({ claimAmount }: { claimAmount: number | undefined }) {
       </BodyText>
     </>
   )
+  const haptic = canClaim ? 'soft' : false
 
   return (
     <>
@@ -64,6 +65,7 @@ export default function ({ claimAmount }: { claimAmount: number | undefined }) {
         iconRight={iconRight}
         isLoading={loading}
         className="transition-all px-4 py-1.5 select-non h-9"
+        haptic={haptic}
       >
         {buttonText}
       </ButtonSmall>
