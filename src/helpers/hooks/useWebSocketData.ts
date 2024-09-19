@@ -6,7 +6,6 @@ import priceHistoryAtom, {
   previousRoundAtom,
 } from 'helpers/atoms/priceHistoryAtom'
 import balanceChangeToast from 'helpers/sendToast'
-
 const dataMaxLength = 40
 
 export default function (socket: WebSocket) {
@@ -44,7 +43,6 @@ export default function (socket: WebSocket) {
           roundSeparator: data.r,
         }))
         setPrice((prev) => [...prev, ...processedPrice].slice(-dataMaxLength))
-
         const prevRound = price.findLast(({ r }) => Boolean(r))
         if (prevRound)
           setPreviousRound({
@@ -53,7 +51,6 @@ export default function (socket: WebSocket) {
           })
       }
     }
-
     socket.addEventListener('message', update)
     return () => {
       socket.removeEventListener('message', update)

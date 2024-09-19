@@ -18,8 +18,8 @@ export default defineConfig({
           brotliSize: true,
         }),
         sentryVitePlugin({
-          org: 'scalr-15',
-          project: 'scalr-mini-app',
+          org: 'scalr-79',
+          project: 'mini-app',
           authToken: process.env['SENTRY_AUTH_TOKEN'] as string,
         }),
       ],
