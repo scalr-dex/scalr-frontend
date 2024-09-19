@@ -1,5 +1,4 @@
 import ButtonSmall from 'components/ButtonSmall'
-import ChevronRight from 'components/icons/ChevronRight'
 import dayjs from 'dayjs'
 import claimDailyReward from 'helpers/api/dailyReward'
 import { useCallback, useState } from 'preact/hooks'
@@ -9,29 +8,25 @@ import { track } from '@amplitude/analytics-browser'
 import { useAtom } from 'jotai'
 import { timeToRewardAtom } from 'helpers/atoms/UserAtom'
 import TrackerEvents from 'type/TrackerEvents'
-import { useLongPress } from 'use-long-press'
-import useProgressiveHaptic from 'helpers/hooks/useProgressiveHaptic'
-import AnimationState from 'type/AnimationState'
+import formatUSA from 'helpers/formatters/formatUSA'
+import ScalrCoin from 'components/icons/coins/ScalrCoin'
+import Logo from 'components/icons/Logo'
+import { BodyText } from 'components/Text'
+import ClaimTimeoutModal from 'components/Modals/ClaimTimeoutModal'
+import InviteFriendsModal from 'components/Modals/InviteFriendsModal'
 
 dayjs.extend(objectSupport)
 
-const animationDuration = 1500
-
-export default function () {
+export default function ({ claimAmount }: { claimAmount: number | undefined }) {
   const [timeToReward, setTimeToReward] = useAtom(timeToRewardAtom)
   const [loading, setLoading] = useState(false)
-  const [animation, setAnimation] = useState(AnimationState.init)
+  const [showModal, setShowModal] = useState(false)
+  const [friendsModal, setShowFriendsModal] = useState(false)
 
   const seconds = dayjs(timeToReward).diff(dayjs(), 'seconds')
   const canClaim = seconds < 0
-  const disabled = !canClaim
-  useProgressiveHaptic({
-    duration: animationDuration,
-    state: animation,
-    disabled,
-  })
 
-  const onClick = useCallback(async () => {
+  const onClaimClick = useCallback(async () => {
     setLoading(true)
     const newTime = await claimDailyReward()
     if (newTime) setTimeToReward(newTime)
@@ -41,39 +36,46 @@ export default function () {
     setLoading(false)
   }, [setTimeToReward])
 
-  const bind = useLongPress(onClick, {
-    onStart: () => {
-      if (disabled) return
-      setAnimation(AnimationState.running)
-    },
-    onFinish: () => {
-      setAnimation(AnimationState.finished)
-    },
-    onCancel: () => setAnimation(AnimationState.canceled),
-    threshold: animationDuration,
-  })
+  const onTimeoutClick = useCallback(() => {
+    setShowModal(true)
+  }, [])
 
-  const isRunning = animation === AnimationState.running
+  const onClick = canClaim ? onClaimClick : onTimeoutClick
   const buttonText = canClaim
-    ? 'Hold to Claim'
-    : dayjs({ seconds }).format('HH[h] mm[m]')
-
-  const scale = isRunning ? 'scale-110' : 'scale-100'
+    ? '+' + formatUSA(claimAmount || 0) + ' pts'
+    : 'Get'
+  const buttonType = canClaim ? ButtonTypes.special : ButtonTypes.secondary
+  const iconRight = canClaim ? (
+    <ScalrCoin size={17} />
+  ) : (
+    <>
+      <Logo size={24} />
+      <BodyText className="px-3 py-0.5 bg-tertiary rounded-full text-white">
+        {dayjs({ seconds }).format('H[h] mm[m]')}
+      </BodyText>
+    </>
+  )
 
   return (
-    <ButtonSmall
-      {...bind()}
-      buttonType={ButtonTypes.special}
-      iconRight={canClaim ? <ChevronRight /> : null}
-      disabled={disabled}
-      isLoading={loading}
-      className={`px-4 py-1.5 select-none !w-40 h-9 ${scale}`}
-      style={{
-        transitionDuration: animationDuration + 'ms',
-        transition: `transform ${animationDuration}ms ease-in-out`,
-      }}
-    >
-      <span className="pb-0.5">{buttonText}</span>
-    </ButtonSmall>
+    <>
+      <ButtonSmall
+        onClick={onClick}
+        buttonType={buttonType}
+        iconRight={iconRight}
+        isLoading={loading}
+        className="transition-all px-4 py-1.5 select-non h-9"
+      >
+        {buttonText}
+      </ButtonSmall>
+      <ClaimTimeoutModal
+        showModal={showModal}
+        setShowModal={setShowModal}
+        setShowFriendsModal={setShowFriendsModal}
+      />
+      <InviteFriendsModal
+        showModal={friendsModal}
+        setShowModal={setShowFriendsModal}
+      />
+    </>
   )
 }

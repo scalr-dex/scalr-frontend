@@ -35,7 +35,8 @@ export const buttonClassNames = (disabled?: boolean) => ({
     'text-primary bg-success hover:bg-opacity-90 focus:bg-opacity-70 disabled:bg-opacity-60',
   [ButtonTypes.ghost]:
     'text-white bg-transparent hover:text-opacity-90 focus:text-opacity-70 disabled:text-opacity-60',
-  [ButtonTypes.neutral]: 'bg-neutral active:bg-neutral-active',
+  [ButtonTypes.neutral]:
+    'bg-controls-tertiary hover:bg-controls-tertiary-hover active:bg-controls-tertiary-active disabled:bg-controls-tertiary-disabled',
   [ButtonTypes.outline]: 'bg-transparent border border-white-16',
   [ButtonTypes.special]: `text-white ${disabled ? 'bg-border-gradient' : 'bg-special-gradient'} hover:opacity-90 active:opacity-90 font-medium disabled:bg-primary disabled:text-opacity-50`,
 })

@@ -68,7 +68,7 @@ export function BodyText({
   ...props
 }: ChildrenProp & JSX.HTMLAttributes<HTMLSpanElement>) {
   return (
-    <span {...props} className={`font-sm leading-4 ${className}`}>
+    <span {...props} className={`leading-4 ${className}`}>
       {children}
     </span>
   )
