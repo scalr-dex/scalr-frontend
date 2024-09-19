@@ -33,11 +33,9 @@ export default function () {
       }
     }
 
-    socket.onclose = () => setTimeout(reconnect, 1000)
-
     socket.onerror = (e) => {
       handleError({ e })
-      socket.close()
+      setTimeout(reconnect, 1000)
     }
   }, [socket])
 

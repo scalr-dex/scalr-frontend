@@ -41,9 +41,7 @@ export default function ({ claimAmount }: { claimAmount: number | undefined }) {
   }, [])
 
   const onClick = canClaim ? onClaimClick : onTimeoutClick
-  const buttonText = canClaim
-    ? '+' + formatUSA(claimAmount || 0) + ' pts'
-    : 'Get'
+  const buttonText = canClaim ? '+' + formatUSA(claimAmount || 0) : 'Get'
   const buttonType = canClaim ? ButtonTypes.special : ButtonTypes.secondary
   const iconRight = canClaim ? (
     <ScalrCoin size={17} />
