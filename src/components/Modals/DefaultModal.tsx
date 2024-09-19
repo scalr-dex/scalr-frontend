@@ -29,7 +29,7 @@ export default function ({
       open={showModal}
       onClose={onClose}
     >
-      <div className="modal-box bg-secondary max-h-[90dvh] p-4 flex flex-col gap-y-5 rounded-4xl mx-4">
+      <div className="modal-box bg-secondary max-h-[90dvh] p-4 flex flex-col gap-y-5 rounded-4xl">
         {header(onClose)}
         <div className="flex flex-col gap-y-4">{body()}</div>
         <div className="mb-4">{footer(onClose)}</div>
