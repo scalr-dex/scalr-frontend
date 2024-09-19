@@ -37,6 +37,7 @@
   scrollbar-width: none !important;
   -ms-overflow-style: none !important;
   overflow: -moz-scrollbars-none !important;
+  user-select: none;
 }
 ::-webkit-scrollbar {
   display: none !important;

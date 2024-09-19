@@ -28,7 +28,7 @@ export const buttonClassNames = (disabled?: boolean) => ({
   [ButtonTypes.accent]:
     'bg-accent hover:bg-accent-hover focus:bg-accent-focus disabled:bg-accent-disabled',
   [ButtonTypes.secondary]:
-    'text-primary bg-white hover:bg-opacity-90 focus:bg-opacity-70 disabled:bg-opacity-60',
+    'text-primary bg-white hover:bg-opacity-90 active:bg-opacity-70 disabled:bg-opacity-60',
   [ButtonTypes.error]:
     'text-primary bg-error hover:bg-opacity-90 focus:bg-opacity-70 disabled:bg-opacity-60',
   [ButtonTypes.success]:

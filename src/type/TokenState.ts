@@ -1,3 +1,5 @@
+import BetDirection from 'type/BetDirection'
+
 export type TokenState = { date: number; price: number }
 export type TokenStates = TokenState[]
 
@@ -7,5 +9,5 @@ export type GraphTokenValue = number[]
 export type GraphTokenData = {
   name: string
   value: GraphTokenValue
-  roundSeparator: boolean
+  userBet?: BetDirection
 }
