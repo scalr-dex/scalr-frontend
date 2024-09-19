@@ -4,11 +4,12 @@ import Sentry from 'helpers/api/sentry'
 function checkErrorAndCapture(e: unknown, message?: string) {
   const extra = { message }
 
-  Sentry.setExtra('full-error', e)
+  const stringError = JSON.stringify(e)
+  Sentry.setExtra('full-error', stringError)
   if (e instanceof Error) {
     Sentry.captureException(e, { extra })
   } else {
-    Sentry.captureException(new Error(JSON.stringify(e), { cause: e }), {
+    Sentry.captureException(stringError, {
       extra,
     })
   }
