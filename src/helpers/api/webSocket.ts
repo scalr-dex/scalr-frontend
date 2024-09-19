@@ -15,6 +15,11 @@ function getBalanceChangeFromWsEventData(data: EventData) {
     return { balance: Number(data.b), event: data.e, delta: data.d }
 }
 
+function getBetFromWsEventData(data: EventData) {
+  if (!Array.isArray(data) && data._ === 'g')
+    return { amount: data.a, time: data.c, direction: data.d }
+}
+
 function getPriceChangeFromWsEventData(data: EventData) {
   if (Array.isArray(data)) {
     if (data[0]?._ === 'p') return data
@@ -33,6 +38,9 @@ export default function ({ data }: { data: string }) {
 
   const balance = getBalanceChangeFromWsEventData(parsed)
   if (balance) return { balance }
+
+  const bet = getBetFromWsEventData(parsed)
+  if (bet) return { bet }
 
   const price = getPriceChangeFromWsEventData(parsed)
   if (price) return { price }
