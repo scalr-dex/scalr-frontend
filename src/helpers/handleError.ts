@@ -3,6 +3,8 @@ import Sentry from 'helpers/api/sentry'
 
 function checkErrorAndCapture(e: unknown, message?: string) {
   const extra = { message }
+
+  Sentry.setExtra('full-error', e)
   if (e instanceof Error) {
     Sentry.captureException(e, { extra })
   } else {
