@@ -9,6 +9,7 @@ import { QueryKeys } from 'helpers/queryClient'
 import { useCallback } from 'preact/hooks'
 import UserTask from 'type/UserTask'
 import { useAutoAnimate } from '@formkit/auto-animate/react'
+import sortTasks from 'helpers/sortTasks'
 
 export default function () {
   const [parent] = useAutoAnimate()
@@ -36,7 +37,7 @@ export default function () {
       <InviteFriends />
       <div className="flex flex-col gap-y-6" ref={parent}>
         {data
-          ? data.map(renderTask).reverse()
+          ? data.sort(sortTasks).map(renderTask)
           : [...Array(5)].map(() => <TaskSkeleton />)}
       </div>
     </div>

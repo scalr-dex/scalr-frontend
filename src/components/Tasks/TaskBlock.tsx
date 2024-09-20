@@ -17,6 +17,7 @@ import { useAtomValue } from 'jotai'
 import useCountDown from 'helpers/hooks/useCountDown'
 import { track } from '@amplitude/analytics-browser'
 import TrackerEvents from 'type/TrackerEvents'
+import { specialTasks } from 'helpers/sortTasks'
 
 export default function ({
   IconNumber,
@@ -65,7 +66,7 @@ export default function ({
     }
   }, [canClaimAt, onTimer, Status, utils, URL, TaskID, refetch])
 
-  const isSpecial = TaskID === 7
+  const isSpecial = specialTasks.includes(TaskID)
 
   const opacity = Status === 'Claimed' ? 'opacity-50' : 'opacity-100'
   const specialStyle =
