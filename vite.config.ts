@@ -7,6 +7,8 @@ import { sentryVitePlugin } from '@sentry/vite-plugin'
 export default defineConfig(({ mode }) => {
   const env = Object.assign(process.env, loadEnv(mode, process.cwd(), ''))
 
+  const minify = env['MINIFY'] === undefined ? true : Boolean(env['MINIFY'])
+
   return {
     plugins: [preact(), tsconfigPaths()],
     preview: {
@@ -14,7 +16,7 @@ export default defineConfig(({ mode }) => {
     },
     build: {
       sourcemap: true,
-      minify: Boolean(env['MINIFY']),
+      minify,
       rollupOptions: {
         plugins: [
           visualizer({
