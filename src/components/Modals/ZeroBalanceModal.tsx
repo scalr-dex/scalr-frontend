@@ -14,10 +14,9 @@ function ModalBody() {
 
       <Header3>Oh no, your balance is zero 😢</Header3>
       <BodyText>
-        <span className="italic">
-          Get points by completing tasks and inviting friends.
-        </span>{' '}
-        Instantly add rewards to your daily claim total.
+        Get points by <span className="italic">completing tasks</span> and{' '}
+        <span className="italic">inviting friends</span>. Instantly add rewards
+        to your daily claim total.
       </BodyText>
       <BodyText className="text-controls-tertiary-focus">
         Claimed amounts count toward the $SCR airdrop distribution 👀
