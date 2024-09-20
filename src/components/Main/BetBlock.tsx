@@ -13,6 +13,7 @@ import DailyClaim from 'components/Main/DailyClaim'
 import Points from 'components/Main/Points'
 import Timer from 'components/Main/Timer'
 import { GraphTokenValue } from 'type/TokenState'
+import formatUSA from 'helpers/formatters/formatUSA'
 
 export default function ({
   loading,
@@ -73,7 +74,7 @@ export default function ({
               <Timer endTime={userBet.endTime} />
             </div>
             <BodyText>
-              You bet <b>{userBet.amount} pts</b>
+              You bet <b>{formatUSA(userBet.amount)} pts</b>
             </BodyText>
             <BodyText>
               That price will go{' '}

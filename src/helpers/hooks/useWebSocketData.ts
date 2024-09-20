@@ -18,7 +18,7 @@ export default function (socket: WebSocket) {
     const update = (msg: { data: string }) => {
       const { balance, lost, price, claim, bet } = analyzeMessage(msg)
 
-      if (balance?.balance) {
+      if (balance && balance.balance !== undefined) {
         setUser((prev) => (prev ? { ...prev, balance: balance.balance } : null))
       }
       if (balance?.event === 'BetWon') {
@@ -35,6 +35,7 @@ export default function (socket: WebSocket) {
         )
       }
       if (bet) {
+        // include bet in chart data to keep it smooth
         setPrice((prev) => {
           const lastIndex = prev.length - 1
           const last = prev[lastIndex]

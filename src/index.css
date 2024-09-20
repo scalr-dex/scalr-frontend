@@ -99,6 +99,20 @@ body {
   transform: none !important;
 }
 
+.half-tone-overlay::before {
+  content: '';
+  background-color: transparent;
+  background-image: radial-gradient(transparent 1px, var(--secondary) 1px);
+  background-size: 4px 4px;
+  backdrop-filter: brightness(100%) blur(3px);
+
+  position: absolute;
+
+  overflow: hidden;
+  width: 9rem;
+  height: 9rem;
+}
+
 /* Those are removed by postCSS preprocessor, so we add them manually */
 .w-8 {
   width: 2rem;

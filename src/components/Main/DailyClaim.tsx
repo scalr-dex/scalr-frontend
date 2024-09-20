@@ -14,6 +14,8 @@ import Logo from 'components/icons/Logo'
 import { BodyText } from 'components/Text'
 import ClaimTimeoutModal from 'components/Modals/ClaimTimeoutModal'
 import InviteFriendsModal from 'components/Modals/InviteFriendsModal'
+import { showZeroBalanceModal } from 'helpers/atoms/UserStates'
+import ZeroBalanceModal from 'components/Modals/ZeroBalanceModal'
 
 dayjs.extend(objectSupport)
 
@@ -22,6 +24,7 @@ export default function ({ claimAmount }: { claimAmount: number | undefined }) {
   const [loading, setLoading] = useState(false)
   const [showModal, setShowModal] = useState(false)
   const [friendsModal, setShowFriendsModal] = useState(false)
+  const [showZeroBalance, setShowZeroBalance] = useAtom(showZeroBalanceModal)
 
   const seconds = dayjs(timeToReward).diff(dayjs(), 'seconds')
   const canClaim = seconds < 0
@@ -67,6 +70,11 @@ export default function ({ claimAmount }: { claimAmount: number | undefined }) {
       >
         {buttonText}
       </ButtonSmall>
+      <ZeroBalanceModal
+        showModal={showZeroBalance}
+        setShowModal={setShowZeroBalance}
+        setShowFriendsModal={setShowFriendsModal}
+      />
       <ClaimTimeoutModal
         showModal={showModal}
         setShowModal={setShowModal}
