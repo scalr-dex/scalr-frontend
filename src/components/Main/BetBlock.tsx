@@ -40,7 +40,7 @@ export default function ({
 
   const onClick = useCallback(
     async (direction: BetDirection) => {
-      if (!roundStart || !user?.balance) return
+      if (!roundStart || !user || user.balance === undefined) return
 
       setProcessingBet(true)
       const bet = { amount: betValue, direction }
@@ -56,7 +56,7 @@ export default function ({
       if (!success) setUserBet(null)
       setTimeout(() => setUserBet(null), roundDurationMs)
     },
-    [betValue, roundStart, setUserBet, user?.balance]
+    [betValue, roundStart, setUserBet, user]
   )
 
   return (
