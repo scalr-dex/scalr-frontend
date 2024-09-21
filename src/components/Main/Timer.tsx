@@ -19,7 +19,7 @@ export default function ({
     setTime(dayjs(endTime).diff(dayjs(), 'seconds'))
   }, [time, endTime])
 
-  const format = withHours ? 'hh:mm:ss' : 'mm:ss'
+  const format = withHours ? 'HH:mm:ss' : 'mm:ss'
 
   return (
     <div className="py-2 px-3 bg-secondary opacity-50 rounded-3xl font-semibold font-accent text-sm">
