@@ -26,7 +26,7 @@
   --error: #f3617d;
 
   --safe-area-bottom: 1.25rem;
-  --footer-height: calc(var(--safe-area-bottom) * 2 + 3.5rem);
+  --footer-height: calc(var(--safe-area-bottom) * 4);
 
   --toastify-color-success: var(--success);
   --toastify-color-error: var(--error);
