@@ -1,4 +1,3 @@
-import CheckMark from 'components/icons/CheckMark'
 import Telegram from 'components/icons/socials/Telegram'
 import X from 'components/icons/socials/X'
 import { claimTask } from 'helpers/api/userTasks'
@@ -39,7 +38,7 @@ export const taskStatusToButtonType = {
 export const taskStatusToButtonText = {
   NotStarted: 'Start',
   ReadyToClaim: 'Claim',
-  Claimed: <CheckMark size={18} />,
+  Claimed: 'Done',
 }
 
 export const taskStatusToCallback = {

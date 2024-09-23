@@ -87,7 +87,7 @@ export default function ({
       </div>
       <ButtonSmall
         buttonType={buttonType}
-        className="text-sm font-accent px-2.5 py-1.5"
+        className="text-sm font-accent px-2.5 py-1.5 transition-all !min-w-24"
         onClick={onClick}
         isLoading={loading || onTimer}
         disabled={Status === 'Claimed'}
