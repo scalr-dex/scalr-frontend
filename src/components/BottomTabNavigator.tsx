@@ -17,7 +17,7 @@ export default function () {
   const latest = location.split('/')[1] || '/'
 
   return (
-    <div className="sticky flex justify-center items-center bottom-safe-bottom my-4 pointer-events-none">
+    <footer className="fixed inset-x-0 bottom-safe-bottom flex justify-center items-center pointer-events-none">
       <div className="w-fit shadow-super flex flex-row gap-x-8 items-center justify-center px-8 py-3 border border-white-16 bg-primary text-gray-500 rounded-3xl">
         {buttons.map(({ path, component }, index) => (
           <button
@@ -31,6 +31,6 @@ export default function () {
           </button>
         ))}
       </div>
-    </div>
+    </footer>
   )
 }

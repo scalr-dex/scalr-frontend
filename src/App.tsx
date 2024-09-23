@@ -32,12 +32,14 @@ function AppInner({ socket }: { socket: WebSocket }) {
   const [parent] = useAutoAnimate()
   const didOnboard = useAtomValue(didOnboardAtom)
 
+  const wrapper = didOnboard ? 'pb-footer-height' : ''
+
   return (
     <SDKProvider debug={env.DEV} acceptCustomStyles>
       <QueryClientProvider client={queryClient}>
         <Router hook={useHashLocation}>
           <div
-            className="flex flex-col relative min-h-[90dvh] overflow-x-hidden my-4 container mx-auto max-w-prose text-white"
+            className={`flex flex-col relative h-screen overflow-x-hidden max-w-prose text-white ${wrapper}`}
             ref={parent}
           >
             <Switch>

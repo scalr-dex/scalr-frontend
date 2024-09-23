@@ -17,7 +17,7 @@
 :root {
   --accent: #4374ec;
   --accent-hover: #6d9efc;
-  --selection: #6d9efc4d;
+  --selection: #6d9efc;
 
   --primary: #0e121b;
   --secondary: #171d26;
@@ -25,7 +25,8 @@
   --success: #23cfb2;
   --error: #f3617d;
 
-  --safe-area-bottom: 1.2rem;
+  --safe-area-bottom: 1.25rem;
+  --footer-height: calc(var(--safe-area-bottom) * 2 + 3.5rem);
 
   --toastify-color-success: var(--success);
   --toastify-color-error: var(--error);
@@ -35,20 +36,11 @@
   scroll-behavior: smooth !important;
   scrollbar-color: transparent !important;
   scrollbar-width: none !important;
-  -ms-overflow-style: none !important;
-  overflow: -moz-scrollbars-none !important;
-  user-select: none;
-}
-::-webkit-scrollbar {
-  display: none !important;
-  -ms-overflow-style: none !important;
-  scrollbar-width: none !important;
-  width: 0 !important;
-  background: none !important;
 }
 
-body {
-  margin: 0;
+html {
+  overflow: hidden;
+  user-select: none;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -59,6 +51,15 @@ body {
 ::moz-selection {
   background-color: var(--selection);
 }
+
+::-webkit-scrollbar {
+  display: none !important;
+  -ms-overflow-style: none !important;
+  scrollbar-width: none !important;
+  width: 0 !important;
+  background: none !important;
+}
+
 .bg-special-gradient {
   background: linear-gradient(to right, #3af3ff, #4986fb, #8160e1);
 }

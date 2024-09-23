@@ -29,6 +29,8 @@ module.exports = {
         '1/10': '10%',
         '1/7': '15%',
         '1/5': '20%',
+        'safe-bottom': 'var(--safe-area-bottom)',
+        'footer-height': 'var(--footer-height)',
       },
       boxShadow: {
         super:
@@ -43,6 +45,7 @@ module.exports = {
       },
       inset: {
         'safe-bottom': 'var(--safe-area-bottom)',
+        'footer-height': 'var(--footer-height)',
       },
       background: {
         'border-gradient':
