@@ -54,7 +54,7 @@ export default function () {
 
   return (
     <div
-      className="flex flex-col items-center justify-between h-[94dvh] shadow-onboarding"
+      className="flex flex-col items-center justify-between pb-safe-bottom h-full shadow-onboarding"
       style={{
         background:
           'radial-gradient(ellipse at left, #133D8D60, transparent 50%), radial-gradient(circle at right, #133D8D70, transparent 60%)',
