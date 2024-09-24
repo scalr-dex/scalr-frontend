@@ -48,14 +48,6 @@ export default function () {
         appVersion: env.DEV ? 'DEV' : 'PROD',
         logLevel: LogLevel.None,
         serverZone: 'EU',
-        autocapture: {
-          attribution: false,
-          pageViews: false,
-          sessions: true,
-          formInteractions: false,
-          fileDownloads: false,
-          elementInteractions: false,
-        },
       })
 
       if (isMini) {
