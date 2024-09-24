@@ -3,6 +3,7 @@ import { useLocation } from 'wouter-preact'
 import Cup from 'components/icons/Cup'
 import Gift from 'components/icons/Gift'
 import DollarCoin from 'components/icons/DollarCoin'
+import { trackNavigation } from 'helpers/api/analytics'
 
 const buttons = [
   { path: '/', component: <MainSquare /> },
@@ -23,6 +24,7 @@ export default function () {
           <button
             onClick={() => {
               setLocation(path)
+              trackNavigation(path)
             }}
             className={`pointer-events-auto w-6 h-6 ${latest.match(path) ? 'text-white' : 'text-opacity-50'} hover:text-gray-300 transition-colors hover:drop-shadow`}
             key={'nav-link-' + index}

@@ -4,7 +4,6 @@ import claimDailyReward from 'helpers/api/dailyReward'
 import { useCallback, useState } from 'preact/hooks'
 import objectSupport from 'dayjs/plugin/objectSupport'
 import ButtonTypes from 'type/Button'
-import { track } from '@amplitude/analytics-browser'
 import { useAtom } from 'jotai'
 import { timeToRewardAtom } from 'helpers/atoms/UserAtom'
 import TrackerEvents from 'type/TrackerEvents'
@@ -16,6 +15,7 @@ import ClaimTimeoutModal from 'components/Modals/ClaimTimeoutModal'
 import InviteFriendsModal from 'components/Modals/InviteFriendsModal'
 import { showZeroBalanceModal } from 'helpers/atoms/UserStates'
 import ZeroBalanceModal from 'components/Modals/ZeroBalanceModal'
+import { track } from 'helpers/api/analytics'
 
 dayjs.extend(objectSupport)
 
