@@ -15,9 +15,9 @@ import pendingTasksAtom, {
 } from 'helpers/atoms/pendingTasksAtom'
 import { useAtomValue } from 'jotai'
 import useCountDown from 'helpers/hooks/useCountDown'
-import { track } from '@amplitude/analytics-browser'
 import TrackerEvents from 'type/TrackerEvents'
 import { specialTasks } from 'helpers/sortTasks'
+import { track } from 'helpers/api/analytics'
 
 export default function ({
   IconNumber,
@@ -51,7 +51,7 @@ export default function ({
     if (canClaimAt) {
       await markTaskDone(TaskID)
       await refetch()
-      track(TrackerEvents.taskDone, { taskId: TaskID })
+      track(TrackerEvents.taskDone, TaskID)
       clearPendingTask(TaskID)
     } else {
       await taskStatusToCallback[Status](TaskID)

@@ -2,8 +2,8 @@ import handleError from 'helpers/handleError'
 import backendKy from 'helpers/api/backendKy'
 import UserTask from 'type/UserTask'
 import { successConfetti } from 'helpers/shootConfetti'
-import { track } from '@amplitude/analytics-browser'
 import TrackerEvents from 'type/TrackerEvents'
+import { track } from 'helpers/api/analytics'
 
 export async function getTasks() {
   try {
@@ -25,7 +25,7 @@ export async function claimTask(id: number) {
   try {
     await backendKy().post(`tasks/claim/${id}`)
     void successConfetti()
-    track(TrackerEvents.taskClaimed, { taskId: id })
+    track(TrackerEvents.taskClaimed, id)
   } catch (e) {
     handleError({
       e,
