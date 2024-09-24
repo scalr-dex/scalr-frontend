@@ -27,6 +27,8 @@ export default defineConfig(({ mode }) => {
             org: 'scalr-79',
             project: 'mini-app',
             authToken: String(env['SENTRY_AUTH_TOKEN']),
+            reactComponentAnnotation: { enabled: true },
+            sourcemaps: { filesToDeleteAfterUpload: '**/*.js.map' },
           }),
         ],
       },
