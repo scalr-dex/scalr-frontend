@@ -74,6 +74,7 @@ module.exports = {
 
         'white-16': '#ffffff16',
         skelton: '#DDDDDD60',
+        'metal-gray': '#555555',
       },
     },
   },

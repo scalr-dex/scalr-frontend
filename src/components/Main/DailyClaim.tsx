@@ -65,7 +65,7 @@ export default function ({ claimAmount }: { claimAmount: number | undefined }) {
         buttonType={buttonType}
         iconRight={iconRight}
         isLoading={loading}
-        className="transition-all px-2 py-1.5 select-non h-9"
+        className="transition-all px-2 py-1.5"
         haptic={haptic}
       >
         {buttonText}

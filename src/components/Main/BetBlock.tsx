@@ -14,6 +14,7 @@ import Points from 'components/Main/Points'
 import Timer from 'components/Main/Timer'
 import { GraphTokenValue } from 'type/TokenState'
 import formatUSA from 'helpers/formatters/formatUSA'
+import BoostPoints from 'components/Main/BoostPoints'
 
 export default function ({
   loading,
@@ -62,8 +63,11 @@ export default function ({
   return (
     <div className="flex flex-col px-4 gap-y-5">
       <div className="flex flex-row justify-between items-center">
-        <Points amount={user?.balance} />{' '}
-        <DailyClaim claimAmount={user?.canClaimAmount} />
+        <Points amount={user?.balance} />
+        <div className="flex flex-row gap-x-2 items-center">
+          <BoostPoints />
+          <DailyClaim claimAmount={user?.canClaimAmount} />
+        </div>
       </div>
 
       <div className="h-28">
