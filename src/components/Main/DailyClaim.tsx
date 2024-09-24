@@ -47,7 +47,7 @@ export default function ({ claimAmount }: { claimAmount: number | undefined }) {
   const buttonText = canClaim ? '+' + formatUSA(claimAmount || 0) : 'Get'
   const buttonType = canClaim ? ButtonTypes.special : ButtonTypes.secondary
   const iconRight = canClaim ? (
-    <ScalrCoin size={17} />
+    <ScalrCoin size={20} />
   ) : (
     <>
       <Logo size={24} />
@@ -65,7 +65,7 @@ export default function ({ claimAmount }: { claimAmount: number | undefined }) {
         buttonType={buttonType}
         iconRight={iconRight}
         isLoading={loading}
-        className="transition-all px-4 py-1.5 select-non h-9"
+        className="transition-all px-2 py-1.5 select-non h-9"
         haptic={haptic}
       >
         {buttonText}
