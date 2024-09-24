@@ -11,7 +11,7 @@ export function track(action: TrackerEvents, value?: number, label?: string) {
   trackAmplitude(action, { value, label })
   GoogleAnalytics.event({
     action: TrackerEvents[action],
-    category: 'user-interaction',
+    category: env.DEV ? 'DEV' : 'PROD',
     ...(value && { value }),
     ...(label && { label }),
   })
@@ -21,5 +21,6 @@ export function trackNavigation(route: string) {
   GoogleAnalytics.send({
     hitType: 'pageview',
     page: route,
+    category: env.DEV ? 'DEV' : 'PROD',
   })
 }
