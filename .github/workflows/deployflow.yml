@@ -30,6 +30,7 @@ jobs:
           SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
           VITE_BACKEND_URL: ${{ secrets.VITE_BACKEND_URL }}
           VITE_AMPLITUDE_API_KEY: ${{ secrets.VITE_AMPLITUDE_API_KEY }}
+          VITE_VITE_ANALYTICS_KEY: ${{ secrets.VITE_ANALYTICS_KEY }}
           VITE_APP_BASE_LINK: ${{ secrets.VITE_APP_BASE_LINK }}
           VITE_SENTRY_DSN: ${{ secrets.VITE_SENTRY_DSN }}
         shell: bash
