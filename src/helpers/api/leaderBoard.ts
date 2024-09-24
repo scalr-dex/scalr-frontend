@@ -13,7 +13,7 @@ export default async function () {
 
     const usersWithImages = lb.map((value, index) => ({
       ...value,
-      userPfp: 'data:image/jpg;base64,' + images[index].Base64,
+      userPfp: 'data:image/jpg;base64,' + images[index]?.Base64,
     }))
 
     return { lb: usersWithImages, user, endTime: round_end_time * 1000 }
