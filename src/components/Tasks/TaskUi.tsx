@@ -1,5 +1,6 @@
 import ButtonSmall from 'components/ButtonSmall'
 import { AccentText } from 'components/Text'
+import formatUSA from 'helpers/formatters/formatUSA'
 import { ButtonProps } from 'type/Button'
 
 interface TaskUiProps extends ButtonProps {
@@ -24,7 +25,7 @@ export default function ({
         <div className="w-6 h-6">{iconLeft}</div>
         <div className="flex flex-col gap-y-1">
           <AccentText className="font-bold">{taskText}</AccentText>
-          <AccentText>+{rewardAmount} pts</AccentText>
+          <AccentText>+{formatUSA(rewardAmount)} pts</AccentText>
         </div>
       </div>
       <ButtonSmall

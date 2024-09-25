@@ -19,7 +19,7 @@ export default interface UserTask {
 }
 
 export const iconNumberToIcon = {
-  0: <span>AD</span>, // reserved for ads
+  0: <span className="font-bold">AD</span>, // reserved for ads
   1: <Telegram />,
   2: <X />,
   3: <img src="img/collabs/cyberFi.png" className="rounded-sm" />,
