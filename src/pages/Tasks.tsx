@@ -36,6 +36,16 @@ export default function () {
       </div>
       <InviteFriends />
       <div className="flex flex-col gap-y-6" ref={parent}>
+        <TaskBlock
+          Name="AD"
+          RewardAmount={1000}
+          Status="NotStarted"
+          TaskID={0}
+          URL=""
+          refetch={refetch}
+          IconNumber={0}
+          key="adsgram-task"
+        />
         {data
           ? data.sort(sortTasks).map(renderTask)
           : [...Array(5)].map(() => <TaskSkeleton />)}
