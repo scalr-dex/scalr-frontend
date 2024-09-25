@@ -28,6 +28,7 @@ export const iconNumberToIcon = {
   7: <img src="img/collabs/makefrens_logo.jpg" className="rounded-sm" />,
   8: <img src="img/collabs/arenagames_logo.png" className="rounded-sm" />,
   9: <img src="img/collabs/kekokiller_logo.jpg" className="rounded-sm" />,
+  10: <img src="img/collabs/tappy_logo.jpg" className="rounded-sm" />,
 } as { [num: number]: JSX.Element }
 
 export const taskStatusToButtonType = {
