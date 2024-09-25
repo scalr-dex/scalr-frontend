@@ -121,3 +121,6 @@ html {
 .h-8 {
   height: 2rem;
 }
+.h-screen {
+  height: 100dvh !important;
+}
