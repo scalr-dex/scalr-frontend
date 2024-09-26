@@ -34,7 +34,9 @@ export default function ({ boosts = 0 }: { boosts: number | undefined }) {
     <>
       <div
         className={
-          activatedOrLocked ? 'silver-outline rounded-3xl shadow-accent' : ''
+          activatedOrLocked
+            ? 'silver-outline rounded-3xl shadow-accent -mr-px'
+            : '-mr-px'
         }
       >
         <ButtonSmall
