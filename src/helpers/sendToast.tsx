@@ -19,11 +19,12 @@ export default function balanceChangeToast(delta: number, lost: boolean) {
     } else {
       void sadConfetti()
     }
-    writeAtom(UserAtom, (prev) =>
-      prev ? { ...prev, boosts: prev.boosts - 1 } : null
-    )
   } else {
     void successConfetti()
   }
+
+  writeAtom(UserAtom, (prev) =>
+    prev ? { ...prev, boosts: prev.boosts - 1 } : null
+  )
   writeAtom(boostStateAtom, BoostStates.active)
 }
