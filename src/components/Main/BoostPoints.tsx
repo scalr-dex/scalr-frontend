@@ -30,27 +30,26 @@ export default function ({ boosts = 0 }: { boosts: number | undefined }) {
     if (boosts) setBoostState(BoostStates.active)
   }, [activatedOrLocked, boosts, setBoostState, state])
 
+  const wrapper = activatedOrLocked
+    ? 'silver-outline rounded-3xl shadow-accent -mr-px'
+    : '-mr-px'
+
   return (
     <>
-      <div
-        className={
-          activatedOrLocked
-            ? 'silver-outline rounded-3xl shadow-accent -mr-px'
-            : '-mr-px'
-        }
-      >
+      <div className={wrapper}>
         <ButtonSmall
           buttonType={ButtonTypes.neutral}
           className={`relative transition-all h-8 !min-w-12 ${stateToStyle[state]} m-1.5 z-10`}
           onClick={() => {
+            if (!boosts || state === BoostStates.disabled) {
+              setShowModal(true)
+              return
+            }
             if (state === BoostStates.active) {
               setBoostState(BoostStates.activated)
             }
             if (state === BoostStates.activated) {
               setBoostState(BoostStates.active)
-            }
-            if (state === BoostStates.disabled) {
-              setShowModal(true)
             }
           }}
         >
