@@ -75,15 +75,15 @@ function AppInner({ socket }: { socket: WebSocket }) {
           {didOnboard ? <BottomTabNavigator /> : null}
           <ToastContainer
             draggable
-            position="bottom-center"
+            position="top-center"
             pauseOnHover
             pauseOnFocusLoss
             closeOnClick
             stacked
             closeButton={false}
-            autoClose={3000}
+            autoClose={false}
             theme="dark"
-            toastClassName="!bg-tertiary !rounded-xl !bottom-24 !w-[96dvw] !ml-[2dvw] !shadow-super"
+            toastClassName="!bg-tertiary !rounded-xl !top-24 !w-[96dvw] !ml-[2dvw] !shadow-super"
             draggableDirection="x"
             hideProgressBar
             limit={1}

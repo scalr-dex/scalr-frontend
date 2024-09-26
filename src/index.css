@@ -122,8 +122,13 @@ html {
 }
 
 /* fixes toast centering on windows */
-.Toastify__toast-container--bottom-center {
-  left: 0% !important;
+.Toastify__toast-body {
+  margin: 0 !important;
+}
+
+.Toastify__toast-container--top-center {
+  top: 0 !important;
+  left: 0 !important;
   transform: none !important;
 }
 

@@ -23,8 +23,13 @@ export default function balanceChangeToast(delta: number, lost: boolean) {
     void successConfetti()
   }
 
-  writeAtom(UserAtom, (prev) =>
-    prev ? { ...prev, boosts: prev.boosts ? prev.boosts - 1 : 0 } : null
-  )
-  writeAtom(boostStateAtom, BoostStates.active)
+  const user = readAtom(UserAtom)
+  if (user) {
+    const boosts = user.boosts ? user.boosts - 1 : 0
+    writeAtom(UserAtom, { ...user, boosts })
+    writeAtom(
+      boostStateAtom,
+      boosts ? BoostStates.active : BoostStates.disabled
+    )
+  }
 }

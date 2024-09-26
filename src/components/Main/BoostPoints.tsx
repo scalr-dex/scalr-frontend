@@ -27,7 +27,7 @@ export default function ({ boosts = 0 }: { boosts: number | undefined }) {
 
   useEffect(() => {
     if (activatedOrLocked || state === BoostStates.betNoBoost) return
-    if (boosts) setBoostState(BoostStates.active)
+    if (boosts && boosts > 0) setBoostState(BoostStates.active)
   }, [activatedOrLocked, boosts, setBoostState, state])
 
   const wrapper = activatedOrLocked
