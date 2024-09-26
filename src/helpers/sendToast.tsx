@@ -24,7 +24,7 @@ export default function balanceChangeToast(delta: number, lost: boolean) {
   }
 
   writeAtom(UserAtom, (prev) =>
-    prev ? { ...prev, boosts: prev.boosts - 1 } : null
+    prev ? { ...prev, boosts: prev.boosts ? prev.boosts - 1 : 0 } : null
   )
   writeAtom(boostStateAtom, BoostStates.active)
 }
