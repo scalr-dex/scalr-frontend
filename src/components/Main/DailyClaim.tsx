@@ -4,8 +4,8 @@ import claimDailyReward from 'helpers/api/dailyReward'
 import { useCallback, useState } from 'preact/hooks'
 import objectSupport from 'dayjs/plugin/objectSupport'
 import ButtonTypes from 'type/Button'
-import { useAtom } from 'jotai'
-import { timeToRewardAtom } from 'helpers/atoms/UserAtom'
+import { useAtom, useSetAtom } from 'jotai'
+import UserAtom, { timeToRewardAtom } from 'helpers/atoms/UserAtom'
 import TrackerEvents from 'type/TrackerEvents'
 import formatUSA from 'helpers/formatters/formatUSA'
 import ScalrCoin from 'components/icons/coins/ScalrCoin'
@@ -20,6 +20,7 @@ import { track } from 'helpers/api/analytics'
 dayjs.extend(objectSupport)
 
 export default function ({ claimAmount }: { claimAmount: number | undefined }) {
+  const setUser = useSetAtom(UserAtom)
   const [timeToReward, setTimeToReward] = useAtom(timeToRewardAtom)
   const [loading, setLoading] = useState(false)
   const [showModal, setShowModal] = useState(false)
@@ -34,10 +35,12 @@ export default function ({ claimAmount }: { claimAmount: number | undefined }) {
     const newTime = await claimDailyReward()
     if (newTime) setTimeToReward(newTime)
 
+    setUser((prev) => (prev ? { ...prev, boosts: prev.boosts + 1 } : null))
+
     track(TrackerEvents.claimDailyReward)
 
     setLoading(false)
-  }, [setTimeToReward])
+  }, [setTimeToReward, setUser])
 
   const onTimeoutClick = useCallback(() => {
     setShowModal(true)
@@ -50,7 +53,7 @@ export default function ({ claimAmount }: { claimAmount: number | undefined }) {
     <ScalrCoin size={20} />
   ) : (
     <>
-      <Logo size={24} />
+      <Logo size={24} className="-ml-0.5" />
       <BodyText className="px-3 py-0.5 bg-tertiary rounded-full text-white">
         {dayjs({ seconds }).format('H[h] mm[m]')}
       </BodyText>
@@ -65,7 +68,7 @@ export default function ({ claimAmount }: { claimAmount: number | undefined }) {
         buttonType={buttonType}
         iconRight={iconRight}
         isLoading={loading}
-        className="transition-all px-2 py-1.5 select-non h-9"
+        className="transition-all px-2 py-1 h-8 text-sm !min-w-24"
         haptic={haptic}
       >
         {buttonText}

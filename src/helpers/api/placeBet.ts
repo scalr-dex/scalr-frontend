@@ -7,14 +7,17 @@ import { track } from 'helpers/api/analytics'
 export default async function ({
   amount,
   direction,
+  shouldBoost,
 }: {
   amount: number
   direction: BetDirection
+  shouldBoost: boolean
 }) {
   try {
     const json = {
       amount: String(amount),
       direction: BetDirection[direction],
+      multiplier_enabled: shouldBoost,
     }
 
     await backendKy().post('bet/v2', { json })

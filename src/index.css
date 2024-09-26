@@ -94,6 +94,33 @@ html {
   -webkit-text-fill-color: transparent;
 }
 
+.silver-outline {
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #ffffff70;
+}
+
+.silver-outline::before {
+  content: '';
+  display: block;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    #ffffff 50%,
+    transparent 100%
+  );
+  height: 300%;
+  width: 50%;
+  position: absolute;
+  z-index: 0;
+  top: 50%;
+  transform-origin: top center;
+  animation: spin 1.5s linear infinite;
+}
+
 /* fixes toast centering on windows */
 .Toastify__toast-container--bottom-center {
   left: 0% !important;

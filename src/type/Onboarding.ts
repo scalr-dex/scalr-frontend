@@ -7,4 +7,4 @@ export const stepToGif: StepToString = {
 }
 
 const vid = Object.values(stepToGif)
-export const preloadList = ['img/onboardingStep3Background.png', ...vid]
+export const preloadList = ['img/onboarding-step3-bg.png', ...vid]
