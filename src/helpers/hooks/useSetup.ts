@@ -97,6 +97,7 @@ async function setupUser() {
       tonAddress: user.ton_address,
       inviteLimit: user.invite_limit,
       invitedUsers: user.invited_users,
+      boosts: user.multiplier_count,
     }
 
     writeAtom(timeToRewardAtom, user.can_claim_daily_reward)
