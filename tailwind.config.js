@@ -83,6 +83,8 @@ module.exports = {
         'success-dark': '#128873',
         error: '#F3617D',
 
+        alt: '#FFE792',
+
         'white-16': '#ffffff16',
         skelton: '#DDDDDD60',
         'metal-gray': '#555555',
