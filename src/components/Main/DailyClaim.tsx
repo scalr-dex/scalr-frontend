@@ -73,7 +73,6 @@ export default function ({ claimAmount }: { claimAmount: number | undefined }) {
       <ZeroBalanceModal
         showModal={showZeroBalance}
         setShowModal={setShowZeroBalance}
-        setShowFriendsModal={setShowFriendsModal}
       />
       <ClaimTimeoutModal
         showModal={showModal}

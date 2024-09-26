@@ -1,18 +1,34 @@
+import env from 'helpers/env'
+import handleError from 'helpers/handleError'
 import { useCallback, useEffect, useRef } from 'react'
+import { toast } from 'react-toastify'
 import { ShowPromiseResult, AdController } from 'type/adsgram'
 
-export interface useAdsgramParams {
-  blockId: string
-  onReward: () => void
+export interface AdsgramHookParams {
+  blockId?: string
+  onReward?: () => void
   onError?: (result: ShowPromiseResult) => void
 }
 
 export default function useAdsgram({
-  blockId,
+  blockId = env.VITE_ADSGRAM_BLOCK_ID,
   onReward,
   onError,
-}: useAdsgramParams): () => Promise<void> {
+}: AdsgramHookParams) {
   const AdControllerRef = useRef<AdController | undefined>(undefined)
+
+  const reward = useCallback(() => {
+    onReward?.()
+    toast.success('Nice, you got +10,000 pts 😎')
+  }, [onReward])
+  const catchError = useCallback(
+    (result: ShowPromiseResult) => {
+      onError?.(result)
+      toast.error('Oh no, failed to load the Ad 😥')
+      handleError({ e: result.description })
+    },
+    [onError]
+  )
 
   useEffect(() => {
     AdControllerRef.current = window.Adsgram?.init({ blockId })
@@ -20,16 +36,7 @@ export default function useAdsgram({
 
   return useCallback(async () => {
     if (AdControllerRef.current) {
-      await AdControllerRef.current
-        .show()
-        .then(() => {
-          // user watch ad till the end
-          onReward()
-        })
-        .catch((result: ShowPromiseResult) => {
-          // user get error during playing ad or skip ad
-          onError?.(result)
-        })
+      await AdControllerRef.current.show().then(reward).catch(catchError)
     } else {
       onError?.({
         error: true,
@@ -38,5 +45,5 @@ export default function useAdsgram({
         description: 'Adsgram script not loaded',
       })
     }
-  }, [onError, onReward])
+  }, [catchError, onError, reward])
 }

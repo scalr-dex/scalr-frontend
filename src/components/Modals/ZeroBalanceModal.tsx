@@ -4,19 +4,17 @@ import DefaultModal from 'components/Modals/DefaultModal'
 import ButtonTypes from 'type/Button'
 import { DefaultModalProps } from 'type/Props'
 import { navigate } from 'wouter-preact/use-hash-location'
+import WatchFilled from 'components/icons/WatchFilled'
+import useAdsgram from 'helpers/hooks/useAdsgram'
 
 function ModalBody() {
   return (
     <>
-      <BodyText className="text-9xl font-bold text-center half-tone-overlay">
-        0
-      </BodyText>
-
-      <Header3>Oh no, your balance is zero 😢</Header3>
+      <img src="img/utya-sad.png" className="w-36 mx-auto" />
+      <Header3>Oh no, you lost everything...</Header3>
       <BodyText>
         Get points by <span className="italic">completing tasks</span> and{' '}
-        <span className="italic">inviting friends</span>. Instantly add rewards
-        to your daily claim total.
+        <span className="italic">inviting friends</span>
       </BodyText>
       <BodyText className="text-controls-tertiary-focus">
         Claimed amounts count toward the $SCR airdrop distribution 👀
@@ -25,25 +23,19 @@ function ModalBody() {
   )
 }
 
-function ModalFooter({
-  onClose,
-  setShowFriendsModal,
-}: {
-  onClose: () => void
-  setShowFriendsModal: (bool: boolean) => void
-}) {
+function ModalFooter({ onClose }: { onClose: () => void }) {
+  const showAd = useAdsgram({ onReward: onClose })
+
   return (
     <div className="flex flex-col gap-y-4">
       <Button
         buttonType={ButtonTypes.secondary}
         className="!rounded-full"
-        onClick={() => {
-          onClose()
-          setTimeout(() => setShowFriendsModal(true))
-        }}
+        onClick={showAd}
         haptic={false}
+        iconRight={<WatchFilled />}
       >
-        Invite friends
+        Watch Ad
       </Button>
       <Button
         buttonType={ButtonTypes.neutral}
@@ -60,21 +52,12 @@ function ModalFooter({
   )
 }
 
-export default function (
-  props: DefaultModalProps & {
-    setShowFriendsModal: (bool: boolean) => void
-  }
-) {
+export default function (props: DefaultModalProps) {
   return (
     <DefaultModal
       {...props}
       body={ModalBody}
-      footer={(onClose) => (
-        <ModalFooter
-          onClose={onClose}
-          setShowFriendsModal={props.setShowFriendsModal}
-        />
-      )}
+      footer={(onClose) => <ModalFooter onClose={onClose} />}
     />
   )
 }
