@@ -28,6 +28,7 @@ export default [
       '**/vite.config.ts',
       '**/tailwind.config.js',
       '**/lib/*',
+      '**/public/scripts/*',
     ],
   },
   ...compat.extends(

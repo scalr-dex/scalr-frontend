@@ -1,5 +1,3 @@
-import ButtonSmall from 'components/ButtonSmall'
-import { AccentText } from 'components/Text'
 import UserTask, {
   iconNumberToIcon,
   taskStatusToButtonText,
@@ -18,6 +16,7 @@ import useCountDown from 'helpers/hooks/useCountDown'
 import TrackerEvents from 'type/TrackerEvents'
 import { specialTasks } from 'helpers/sortTasks'
 import { track } from 'helpers/api/analytics'
+import TaskUi from 'components/Tasks/TaskUi'
 
 export default function ({
   IconNumber,
@@ -75,26 +74,17 @@ export default function ({
       : ''
 
   return (
-    <div
-      className={`flex flex-row items-center justify-between ${opacity} ${specialStyle}`}
+    <TaskUi
+      className={`${opacity} ${specialStyle}`}
+      iconLeft={iconNumberToIcon[IconNumber]}
+      taskText={Name}
+      rewardAmount={RewardAmount}
+      buttonType={buttonType}
+      onClick={onClick}
+      isLoading={loading || onTimer}
+      disabled={Status === 'Claimed'}
     >
-      <div className="flex flex-row items-center gap-x-3">
-        <div className="w-6 h-6">{iconNumberToIcon[IconNumber]}</div>
-        <div className="flex flex-col gap-y-1">
-          <AccentText className="font-bold">{Name} </AccentText>
-          <AccentText>+{RewardAmount} pts</AccentText>
-        </div>
-      </div>
-      <ButtonSmall
-        buttonType={buttonType}
-        className="text-sm font-accent px-2.5 py-1.5 transition-all !min-w-24"
-        onClick={onClick}
-        isLoading={loading || onTimer}
-        disabled={Status === 'Claimed'}
-        allowDisabledClick
-      >
-        {canClaimAt ? 'Check 👀' : taskStatusToButtonText[Status]}
-      </ButtonSmall>
-    </div>
+      {canClaimAt ? 'Check 👀' : taskStatusToButtonText[Status]}
+    </TaskUi>
   )
 }
