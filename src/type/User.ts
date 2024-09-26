@@ -11,6 +11,7 @@ export interface ServerUser {
   ton_address: string
   invite_limit: number
   invited_users: number
+  multiplier_count: number
 }
 
 export interface ClientUser {
@@ -23,6 +24,7 @@ export interface ClientUser {
   telegramId: number
   inviteLimit: number
   invitedUsers: number
+  boosts: number
 }
 
 export interface UserBet {

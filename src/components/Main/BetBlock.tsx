@@ -15,6 +15,8 @@ import Timer from 'components/Main/Timer'
 import { GraphTokenValue } from 'type/TokenState'
 import formatUSA from 'helpers/formatters/formatUSA'
 import BoostPoints from 'components/Main/BoostPoints'
+import { boostStateAtom } from 'helpers/atoms/UserStates'
+import BoostStates from 'type/BoostState'
 
 export default function ({
   loading,
@@ -27,6 +29,7 @@ export default function ({
   const [userBet, setUserBet] = useAtom(userBetAtom)
   const [processingBet, setProcessingBet] = useState(false)
   const [betValue, setBetValue] = useState(0)
+  const [boostState, setBoostState] = useAtom(boostStateAtom)
 
   const disabled = betValue <= 0 || loading || processingBet || !user?.balance
 
@@ -41,23 +44,32 @@ export default function ({
 
   const onClick = useCallback(
     async (direction: BetDirection) => {
-      if (!roundStart || !user || user.balance === undefined) return
+      if (!roundStart || !user || !user.balance) return
 
       setProcessingBet(true)
       const bet = { amount: betValue, direction }
+
+      const shouldBoost = boostState === BoostStates.activated
+      setBoostState(shouldBoost ? BoostStates.locked : BoostStates.betNoBoost)
+      const success = await placeBet({
+        ...bet,
+        shouldBoost,
+      })
+
+      setProcessingBet(false)
+      if (!success) {
+        setUserBet(null)
+        return
+      }
 
       setUserBet({
         ...bet,
         value: roundStart,
         endTime: roundStart[0] + roundDurationMs,
       })
-
-      const success = await placeBet(bet)
-      setProcessingBet(false)
-      if (!success) setUserBet(null)
       setTimeout(() => setUserBet(null), roundDurationMs)
     },
-    [betValue, roundStart, setUserBet, user]
+    [betValue, boostState, roundStart, setBoostState, setUserBet, user]
   )
 
   return (
@@ -65,7 +77,7 @@ export default function ({
       <div className="flex flex-row justify-between items-center">
         <Points amount={user?.balance} />
         <div className="flex flex-row gap-x-2 items-center">
-          <BoostPoints />
+          <BoostPoints boosts={user?.boosts} />
           <DailyClaim claimAmount={user?.canClaimAmount} />
         </div>
       </div>

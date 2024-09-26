@@ -1,5 +1,5 @@
 import Button from 'components/Button'
-import { Header3, BodyText } from 'components/Text'
+import { Header3 } from 'components/Text'
 import DefaultModal from 'components/Modals/DefaultModal'
 import ButtonTypes from 'type/Button'
 import { DefaultModalProps } from 'type/Props'
@@ -9,14 +9,12 @@ function ModalBody() {
     <>
       <img src="img/rocket-halftone.png" className="w-32 mx-auto" />
       <Header3>Scalr Win Multiplier 🚀</Header3>
-      <BodyText>
-        <p>Daily Claim refill a Scalr Win Multiplier</p>
-        <p>Click it to activate if available</p>
-        <p>
-          Win up to x15 on your next bet. If you lose, only the regular amount
-          is lost 🤑
-        </p>
-      </BodyText>
+      <p>Daily Claim refill a Scalr Win Multiplier</p>
+      <p>Click it to activate if available</p>
+      <p>
+        Win up to x15 on your next bet. If you lose, only the regular amount is
+        lost 🤑
+      </p>
     </>
   )
 }
