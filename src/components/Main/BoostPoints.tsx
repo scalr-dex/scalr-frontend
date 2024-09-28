@@ -27,7 +27,8 @@ export default function ({ boosts = 0 }: { boosts: number | undefined }) {
 
   useEffect(() => {
     if (activatedOrLocked || state === BoostStates.betNoBoost) return
-    if (boosts) setBoostState(BoostStates.active)
+
+    setBoostState(boosts ? BoostStates.active : BoostStates.disabled)
   }, [activatedOrLocked, boosts, setBoostState, state])
 
   const wrapper = activatedOrLocked
@@ -41,7 +42,12 @@ export default function ({ boosts = 0 }: { boosts: number | undefined }) {
           buttonType={ButtonTypes.neutral}
           className={`relative transition-all h-8 !min-w-12 ${stateToStyle[state]} m-1.5 z-10`}
           onClick={() => {
-            if (!boosts || state === BoostStates.disabled) {
+            if (
+              !boosts ||
+              state === BoostStates.disabled ||
+              state === BoostStates.locked ||
+              state === BoostStates.betNoBoost
+            ) {
               setShowModal(true)
               return
             }
