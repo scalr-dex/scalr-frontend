@@ -22,9 +22,6 @@ export default function ({ boosts = 0 }: { boosts: number | undefined }) {
   const [state, setBoostState] = useAtom(boostStateAtom)
   const [showModal, setShowModal] = useState(false)
 
-  console.log(boosts)
-  console.log(BoostStates[state])
-
   const activatedOrLocked =
     state === BoostStates.locked || state === BoostStates.activated
 
