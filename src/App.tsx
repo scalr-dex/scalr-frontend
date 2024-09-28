@@ -79,11 +79,10 @@ function AppInner({ socket }: { socket: WebSocket }) {
             pauseOnHover
             pauseOnFocusLoss
             closeOnClick
-            stacked
             closeButton={false}
-            autoClose={false}
+            autoClose={3000}
             theme="dark"
-            toastClassName="!bg-tertiary !rounded-xl !top-24 !w-[96dvw] !ml-[2dvw] !shadow-super"
+            toastClassName="!bg-tertiary !rounded-xl !top-24 !w-[96dvw] !ml-[2dvw] !shadow-super !top-4"
             draggableDirection="x"
             hideProgressBar
             limit={1}
