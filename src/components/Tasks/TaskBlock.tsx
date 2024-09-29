@@ -70,7 +70,7 @@ export default function ({
   const opacity = Status === 'Claimed' ? 'opacity-50' : 'opacity-100'
   const specialStyle =
     Status !== 'Claimed' && isSpecial
-      ? 'bg-accent -mx-2 py-3 pl-3 pr-2 rounded-3xl'
+      ? 'bg-accent -mx-2 py-3 pl-3 pr-2 rounded-2xl'
       : ''
 
   return (
