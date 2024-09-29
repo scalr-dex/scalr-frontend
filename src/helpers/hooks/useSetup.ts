@@ -14,7 +14,6 @@ import {
 } from '@amplitude/analytics-browser'
 import { LogLevel } from '@amplitude/analytics-types'
 import env from 'helpers/env'
-import setupMiniApp from 'helpers/setupMiniApp'
 import { setSentryUser } from 'helpers/api/sentry'
 
 export default function () {
@@ -61,7 +60,6 @@ export default function () {
           })
           setSentryUser(userId)
         }
-        setupMiniApp()
         setAppStatus(AppStatus.isTma)
       } else {
         setAppStatus(AppStatus.isElse)
