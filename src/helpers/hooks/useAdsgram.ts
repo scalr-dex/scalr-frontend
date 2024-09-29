@@ -24,7 +24,7 @@ export default function useAdsgram({
   const catchError = useCallback(
     (result: ShowPromiseResult) => {
       onError?.(result)
-      toast.error('Oh no, failed to load the Ad 😥')
+      toast.error('Oh no, failed to load the video 😥')
       handleError({ e: result.description })
     },
     [onError]

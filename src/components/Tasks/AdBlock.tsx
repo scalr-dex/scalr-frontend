@@ -14,7 +14,7 @@ export default function () {
       buttonType={ButtonTypes.accent}
       onClick={showAd}
     >
-      Play
+      Watch
     </TaskUi>
   )
 }
