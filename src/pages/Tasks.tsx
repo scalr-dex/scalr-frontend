@@ -11,6 +11,7 @@ import UserTask from 'type/UserTask'
 import { useAutoAnimate } from '@formkit/auto-animate/react'
 import sortTasks from 'helpers/sortTasks'
 import AdBlock from 'components/Tasks/AdBlock'
+import FooterSafeArea from 'components/FooterSafeArea'
 
 export default function () {
   const [parent] = useAutoAnimate()
@@ -42,6 +43,7 @@ export default function () {
           ? data.sort(sortTasks).map(renderTask)
           : [...Array(5)].map(() => <TaskSkeleton />)}
       </div>
+      <FooterSafeArea />
     </div>
   )
 }

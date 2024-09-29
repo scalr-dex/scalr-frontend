@@ -54,7 +54,7 @@ export default function ({ claimAmount }: { claimAmount: number | undefined }) {
   ) : (
     <>
       <Logo size={24} className="-ml-0.5" />
-      <BodyText className="px-3 py-0.5 bg-tertiary rounded-full text-white">
+      <BodyText className="w-16 py-0.5 bg-tertiary rounded-full text-white">
         {dayjs({ seconds }).format('H[h] mm[m]')}
       </BodyText>
     </>

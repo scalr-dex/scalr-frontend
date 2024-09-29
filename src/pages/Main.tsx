@@ -3,6 +3,7 @@ import Chart from 'components/Main/Chart'
 import TokenPrice from 'components/Main/TokenPrice'
 import { useAtomValue } from 'jotai'
 import priceHistoryAtom from 'helpers/atoms/priceHistoryAtom'
+import FooterSafeArea from 'components/FooterSafeArea'
 
 export default function () {
   const data = useAtomValue(priceHistoryAtom)
@@ -17,6 +18,7 @@ export default function () {
       <TokenPrice price={lastValue?.[1]} />
       <Chart data={data} loading={loading} />
       <BetBlock loading={loading} roundStart={lastValue} />
+      <FooterSafeArea />
     </div>
   )
 }

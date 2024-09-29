@@ -8,6 +8,7 @@ import UserAtom from 'helpers/atoms/UserAtom'
 import useLeaderBoard from 'helpers/hooks/useLeaderBoard'
 import { useAtomValue } from 'jotai'
 import { useState } from 'preact/hooks'
+import FooterSafeArea from 'components/FooterSafeArea'
 
 export default function () {
   const [modalOpen, setModalOpen] = useState(false)
@@ -31,6 +32,7 @@ export default function () {
       />
       <UserList users={data?.lb} loading={loading} />
       <LeaderBoardsFaqModal showModal={modalOpen} setShowModal={setModalOpen} />
+      <FooterSafeArea />
     </div>
   )
 }

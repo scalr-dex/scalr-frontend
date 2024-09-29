@@ -1,4 +1,5 @@
 import Coin3D from 'components/Coin3D'
+import FooterSafeArea from 'components/FooterSafeArea'
 import { BodyText, Header1, Header3, Header4 } from 'components/Text'
 import TonConnect from 'components/TonConnect'
 import env from 'helpers/env'
@@ -23,6 +24,7 @@ function AirDropInner() {
           </ul>
         </BodyText>
       </span>
+      <FooterSafeArea />
     </div>
   )
 }
