@@ -35,7 +35,7 @@ function ModalFooter({ onClose }: { onClose: () => void }) {
         haptic={false}
         iconRight={<WatchFilled />}
       >
-        Watch Ad
+        Watch short video
       </Button>
       <Button
         buttonType={ButtonTypes.neutral}

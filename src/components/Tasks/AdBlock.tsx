@@ -9,12 +9,12 @@ export default function () {
   return (
     <TaskUi
       iconLeft={iconNumberToIcon[0]}
-      taskText="Watch Ad"
+      taskText="Watch short video"
       rewardAmount={10000}
       buttonType={ButtonTypes.accent}
       onClick={showAd}
     >
-      Watch
+      Play
     </TaskUi>
   )
 }
