@@ -12,6 +12,7 @@ export interface ServerUser {
   invite_limit: number
   invited_users: number
   multiplier_count: number
+  remaining_ads: number
 }
 
 export interface ClientUser {
@@ -25,6 +26,7 @@ export interface ClientUser {
   inviteLimit: number
   invitedUsers: number
   boosts: number
+  remainingAds: number
 }
 
 export interface UserBet {

@@ -26,7 +26,7 @@ export interface ButtonProps extends JSX.HTMLAttributes<HTMLButtonElement> {
 
 export const buttonClassNames = (disabled?: boolean) => ({
   [ButtonTypes.accent]:
-    'bg-accent hover:bg-accent-hover focus:bg-accent-focus disabled:bg-accent-disabled',
+    'bg-accent hover:bg-accent-hover focus:bg-accent-focus disabled:bg-accent-disabled disabled:text-white/75',
   [ButtonTypes.secondary]:
     'text-primary bg-white hover:bg-opacity-90 active:bg-opacity-70 disabled:bg-opacity-60',
   [ButtonTypes.error]:
