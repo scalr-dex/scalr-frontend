@@ -13,17 +13,18 @@ export default function () {
       prev ? { ...prev, remainingAds: prev.remainingAds - 1 } : null
     )
   }, [setUser])
-
   const showAd = useAdsgram({ onReward })
+  const hasAds = !!user?.remainingAds
 
   return (
     <TaskUi
       iconLeft={iconNumberToIcon[0]}
       taskText={`Watch short video (${user?.remainingAds} left)`}
-      rewardAmount={10000}
+      rewardAmount={hasAds ? 10000 : <span>Come back tomorrow</span>}
       buttonType={ButtonTypes.accent}
       onClick={showAd}
-      disabled={!user?.remainingAds}
+      disabled={!hasAds}
+      allowDisabledClick={false}
     >
       Watch
     </TaskUi>
