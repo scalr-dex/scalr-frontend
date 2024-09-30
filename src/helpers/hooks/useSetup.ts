@@ -15,6 +15,7 @@ import {
 import { LogLevel } from '@amplitude/analytics-types'
 import env from 'helpers/env'
 import { setSentryUser } from 'helpers/api/sentry'
+import setupMiniApp from 'helpers/setupMiniApp'
 
 export default function () {
   const [appStatus, setAppStatus] = useState(AppStatus.loading)
@@ -57,6 +58,7 @@ export default function () {
           identify(new Identify(), {
             user_id: String(userId),
           })
+          setupMiniApp()
           setSentryUser(userId)
         }
         setAppStatus(AppStatus.isTma)
