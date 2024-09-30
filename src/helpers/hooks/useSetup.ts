@@ -41,7 +41,6 @@ export default function () {
   useEffect(() => {
     const start = async () => {
       const isMini = await isTMA()
-      setAppStatus(isMini ? AppStatus.isTma : AppStatus.isElse)
 
       initAnalytics(env.VITE_AMPLITUDE_API_KEY, {
         appVersion: env.DEV ? 'DEV' : 'PROD',
@@ -96,6 +95,7 @@ async function setupUser() {
       inviteLimit: user.invite_limit,
       invitedUsers: user.invited_users,
       boosts: user.multiplier_count,
+      remainingAds: user.remaining_ads,
     }
 
     writeAtom(timeToRewardAtom, user.can_claim_daily_reward)
