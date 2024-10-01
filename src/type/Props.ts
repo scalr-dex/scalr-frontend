@@ -20,3 +20,5 @@ export interface DefaultModalProps {
   showModal: boolean
   setShowModal: (show: boolean) => void
 }
+
+export type SizeProp = { size?: number }

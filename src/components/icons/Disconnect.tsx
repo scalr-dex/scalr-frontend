@@ -1,4 +1,6 @@
-export default function ({ size = 24 }: { size?: number }) {
+import { SizeProp } from 'type/Props'
+
+export default function ({ size = 16 }: SizeProp) {
   return (
     <svg
       width={size}

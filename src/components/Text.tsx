@@ -2,15 +2,30 @@ import { useHapticFeedback } from '@telegram-apps/sdk-react'
 import { JSX } from 'preact/jsx-runtime'
 import { ChildrenProp } from 'type/Props'
 
+export function AccentHeader({
+  children,
+  className,
+  ...props
+}: ChildrenProp & JSX.HTMLAttributes<HTMLHeadingElement>) {
+  return (
+    <h1
+      {...props}
+      className={`text-7xl font-bold leading-extra-tight ${className}`}
+    >
+      {children}
+    </h1>
+  )
+}
+
 export function Header1({
   children,
   className,
   ...props
 }: ChildrenProp & JSX.HTMLAttributes<HTMLHeadingElement>) {
   return (
-    <h2 {...props} className={`text-4.5xl font-bold ${className}`}>
+    <h1 {...props} className={`text-4.5xl font-bold ${className}`}>
       {children}
-    </h2>
+    </h1>
   )
 }
 
@@ -32,9 +47,9 @@ export function Header3({
   ...props
 }: ChildrenProp & JSX.HTMLAttributes<HTMLHeadingElement>) {
   return (
-    <h2 {...props} className={`text-2xl leading-7 font-bold ${className}`}>
+    <h3 {...props} className={`text-2xl leading-7 font-bold ${className}`}>
       {children}
-    </h2>
+    </h3>
   )
 }
 

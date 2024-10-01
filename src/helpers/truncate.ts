@@ -2,7 +2,7 @@ export default function ({
   fullString,
   strLen = 15,
   separator = '...',
-  frontChars = 9,
+  frontChars = 4,
   backChars = 3,
 }: {
   fullString?: string | undefined

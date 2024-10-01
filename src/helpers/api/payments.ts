@@ -2,6 +2,7 @@ import { readAtom } from 'helpers/atoms/atomStore'
 import UserAtom from 'helpers/atoms/UserAtom'
 import env from 'helpers/env'
 import ky from 'ky'
+import { AvailableAutoclaimOptions } from 'type/Market'
 
 const botBackend = ky.create({
   prefixUrl: env.VITE_BOT_API,
@@ -15,10 +16,10 @@ const botBackend = ky.create({
   },
 })
 
-export default function (amount: number) {
+export default function (option: AvailableAutoclaimOptions) {
   return botBackend
     .post('payments/invoice', {
-      json: { amount },
+      json: { option },
     })
     .json<{ invoiceLink: string }>()
 }
