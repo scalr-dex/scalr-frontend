@@ -1,4 +1,4 @@
-import { useHapticFeedback } from '@telegram-apps/sdk-react'
+import { hapticFeedbackSelectionChanged } from '@telegram-apps/sdk-react'
 import { AccentText } from 'components/Text'
 import formatUSA from 'helpers/formatters/formatUSA'
 import { JSX } from 'preact/jsx-runtime'
@@ -14,8 +14,6 @@ export default function ({
   setValue: (num: number) => void
   userBalance: number | undefined
 } & JSX.HTMLAttributes<HTMLInputElement>) {
-  const haptic = useHapticFeedback()
-
   const betPercent =
     userBalance && value ? ((value / userBalance) * 100).toFixed(0) : 0
 
@@ -46,7 +44,7 @@ export default function ({
         disabled={!!props.disabled}
         onChange={(values) => {
           setValue(values[0])
-          haptic.selectionChanged()
+          hapticFeedbackSelectionChanged()
         }}
         renderTrack={({ props, children }) => (
           <div

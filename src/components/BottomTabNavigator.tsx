@@ -7,6 +7,7 @@ import { trackNavigation } from 'helpers/api/analytics'
 
 const buttons = [
   { path: '/', component: <MainSquare /> },
+  { path: 'battles', component: <span>⚡</span> },
   { path: 'leaderboards', component: <Cup /> },
   { path: 'tasks', component: <Gift /> },
   { path: 'airdrop', component: <DollarCoin /> },

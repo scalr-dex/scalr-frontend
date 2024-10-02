@@ -1,4 +1,4 @@
-import { isTMA, retrieveLaunchParams } from '@telegram-apps/sdk-react'
+import { init, isTMA, retrieveLaunchParams } from '@telegram-apps/sdk-react'
 import backendKy from 'helpers/api/backendKy'
 import { ServerUser } from 'type/User'
 import { useEffect, useState } from 'preact/hooks'
@@ -50,6 +50,7 @@ export default function () {
       })
 
       if (isMini) {
+        init()
         const user = await setupUser()
         if (user) {
           const userId = String(user.launchParams.initData?.user?.id)

@@ -5,7 +5,6 @@ import UserTask, {
   taskStatusToCallback,
 } from 'type/UserTask'
 import { useCallback, useEffect, useState } from 'preact/hooks'
-import { useUtils } from '@telegram-apps/sdk-react'
 import dayjs from 'dayjs'
 import { markTaskDone } from 'helpers/api/userTasks'
 import pendingTasksAtom, {
@@ -17,6 +16,7 @@ import TrackerEvents from 'type/TrackerEvents'
 import { specialTasks } from 'helpers/sortTasks'
 import { track } from 'helpers/api/analytics'
 import TaskUi from 'components/Tasks/TaskUi'
+import { openLink, openTelegramLink } from '@telegram-apps/sdk-react'
 
 export default function ({
   IconNumber,
@@ -29,7 +29,6 @@ export default function ({
 }: UserTask & { refetch: () => Promise<unknown> }) {
   const canClaimAt = useAtomValue(pendingTasksAtom)[TaskID]
 
-  const utils = useUtils()
   const [loading, setLoading] = useState(false)
   const buttonType = taskStatusToButtonType[Status]
   const [time, setTime] = useState(0)
@@ -61,9 +60,9 @@ export default function ({
 
     // Should be at the end of callback to execute previous functions
     if (Status === 'Claimed' || (Status === 'NotStarted' && !canClaimAt)) {
-      URL.includes('t.me') ? utils.openTelegramLink(URL) : utils.openLink(URL)
+      URL.includes('t.me') ? openTelegramLink(URL) : openLink(URL)
     }
-  }, [canClaimAt, onTimer, Status, utils, URL, TaskID, refetch])
+  }, [canClaimAt, onTimer, Status, URL, TaskID, refetch])
 
   const isSpecial = specialTasks.includes(TaskID)
 
