@@ -39,7 +39,7 @@ export default function ({
         buttonType={ButtonTypes.secondary}
         className="text-xxs py-2 !px-0 w-full"
         innerClassName="!gap-x-0.5"
-        isLoading={loading}
+        disabled={loading}
       >
         <Star className="inline" />
         <span>

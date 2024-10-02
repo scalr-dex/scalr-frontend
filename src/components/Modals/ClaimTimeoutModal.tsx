@@ -36,6 +36,17 @@ function ModalFooter({
         className="!rounded-full"
         onClick={() => {
           onClose()
+          navigate('/airdrop')
+        }}
+        haptic={false}
+      >
+        Get autoclaim
+      </Button>
+      <Button
+        buttonType={ButtonTypes.secondary}
+        className="!rounded-full"
+        onClick={() => {
+          onClose()
           setTimeout(() => setShowFriendsModal(true))
         }}
         haptic={false}
