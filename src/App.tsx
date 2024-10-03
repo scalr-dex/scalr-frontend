@@ -35,7 +35,7 @@ function AppInner({ socket }: { socket: WebSocket }) {
     <QueryClientProvider client={queryClient}>
       <Router hook={useHashLocation}>
         <div
-          className="flex flex-col relative h-screen overflow-x-hidden max-w-prose text-white"
+          className="flex flex-col relative min-h-screen overflow-x-hidden max-w-prose pt-safe-top text-white"
           ref={parent}
         >
           <Switch>

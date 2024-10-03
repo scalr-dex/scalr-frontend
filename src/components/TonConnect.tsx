@@ -57,9 +57,10 @@ export default function () {
     <div className="flex flex-row items-center gap-x-4 w-full">
       <Button
         onClick={userAddress ? onCopy : onConnect}
-        className={`!w-full !rounded-full !font-bold !font-accent ${padding}`}
+        className={`!w-full font-bold !font-accent ${padding}`}
         buttonType={copied ? ButtonTypes.success : ButtonTypes.accent}
         isLoading={loading}
+        rounded="rounded-full"
         iconLeft={
           userAddress ? (
             copied ? (

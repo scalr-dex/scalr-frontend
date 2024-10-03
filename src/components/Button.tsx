@@ -13,6 +13,7 @@ export default function ({
   isLoading,
   disabled,
   haptic = 'medium',
+  rounded = 'rounded-lg',
   ...buttonProps
 }: ButtonProps) {
   const content = (
@@ -40,7 +41,7 @@ export default function ({
       {...buttonProps}
       disabled={disabled}
       onClick={onClick}
-      className={`flex flex-row gap-x-2 items-center justify-center w-full rounded-lg p-4 transition-colors font-semibold ${buttonStyles} ${className}`}
+      className={`flex flex-row gap-x-2 items-center justify-center w-full p-4 transition-colors font-accent font-semibold ${rounded} ${buttonStyles} ${className}`}
     >
       {isLoading ? <Loader /> : content}
     </button>

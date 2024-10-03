@@ -64,11 +64,10 @@ export function AccentText({
 
 export function BodyText({
   children,
-  className,
   ...props
 }: ChildrenProp & JSX.HTMLAttributes<HTMLSpanElement>) {
   return (
-    <span {...props} className={className}>
+    <span {...props} className={`font-accent ${props.className}`}>
       {children}
     </span>
   )
@@ -96,5 +95,19 @@ export function SpecialText({
       <span className="inline-block mr-1.5 align-middle">{leftIcon}</span>
       {children}
     </span>
+  )
+}
+
+export function GlowText({
+  children,
+  ...props
+}: ChildrenProp & JSX.HTMLAttributes<HTMLHeadingElement>) {
+  return (
+    <Header3
+      {...props}
+      className={`inline text-transparent drop-shadow-glow-accent !bg-clip-text bg-special-gradient ${props.className}`}
+    >
+      {children}
+    </Header3>
   )
 }

@@ -1,26 +1,44 @@
-export default function ({
-  size,
-  onClick,
-}: {
-  size: number
-  onClick: () => void
-}) {
+export default function () {
   return (
     <svg
-      width={size}
-      height={size}
-      viewBox="0 0 20 21"
+      width="20"
+      height="20"
+      viewBox="0 0 20 20"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
-      onClick={onClick}
-      className="cursor-pointer opacity-40 hover:opacity-80 active:opacity-100 inline-block transition-opacity"
+      className="inline"
     >
-      <path
-        fill-rule="evenodd"
-        clip-rule="evenodd"
-        d="M10 18.5C14.4183 18.5 18 14.9183 18 10.5C18 6.08172 14.4183 2.5 10 2.5C5.58172 2.5 2 6.08172 2 10.5C2 14.9183 5.58172 18.5 10 18.5ZM9.99822 6.98847C9.4783 6.98847 9.03894 7.34404 8.9147 7.82676C8.77881 8.35471 8.24067 8.67254 7.71272 8.53665C7.18478 8.40077 6.86695 7.86263 7.00283 7.33468C7.34612 6.00091 8.5557 5.01429 9.99822 5.01429C11.7064 5.01429 13.0911 6.39901 13.0911 8.10717C13.0911 9.47087 12.3456 10.1839 11.8233 10.6713C11.3113 11.1493 11.0521 11.3951 10.9754 11.9319C10.8983 12.4716 10.3983 12.8466 9.85864 12.7695C9.31896 12.6924 8.94397 12.1924 9.02107 11.6527C9.19822 10.4126 9.92299 9.74102 10.4023 9.29682L10.4763 9.22812C10.9411 8.7943 11.1169 8.58603 11.1169 8.10716C11.1169 7.48933 10.6161 6.98847 9.99822 6.98847ZM11.1429 14.8429C11.1429 15.474 10.6312 15.9857 10 15.9857C9.36882 15.9857 8.85714 15.474 8.85714 14.8429C8.85714 14.2117 9.36882 13.7 10 13.7C10.6312 13.7 11.1429 14.2117 11.1429 14.8429Z"
-        fill="white"
-      />
+      <g clip-path="url(#clip0_3063_88008)">
+        <path
+          d="M9.99935 18.3346C14.6017 18.3346 18.3327 14.6037 18.3327 10.0013C18.3327 5.39893 14.6017 1.66797 9.99935 1.66797C5.39698 1.66797 1.66602 5.39893 1.66602 10.0013C1.66602 14.6037 5.39698 18.3346 9.99935 18.3346Z"
+          stroke="currentColor"
+          stroke-opacity="0.64"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        />
+        <path
+          d="M7.57422 7.49852C7.77014 6.94158 8.15685 6.47194 8.66585 6.1728C9.17485 5.87365 9.7733 5.7643 10.3552 5.86411C10.9371 5.96393 11.4649 6.26646 11.8451 6.71813C12.2253 7.1698 12.4334 7.74146 12.4326 8.33185C12.4326 9.99852 9.93255 10.8319 9.93255 10.8319"
+          stroke="currentColor"
+          stroke-opacity="0.64"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        />
+        <path
+          d="M10 14.168H10.0083"
+          stroke="currentColor"
+          stroke-opacity="0.64"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        />
+      </g>
+      <defs>
+        <clipPath id="clip0_3063_88008">
+          <rect width="20" height="20" fill="white" />
+        </clipPath>
+      </defs>
     </svg>
   )
 }
