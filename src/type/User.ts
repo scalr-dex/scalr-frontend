@@ -2,6 +2,12 @@ import { LaunchParams } from '@telegram-apps/sdk-react'
 import BetDirection from 'type/BetDirection'
 import { GraphTokenValue } from 'type/TokenState'
 
+export interface PublicUser {
+  telegram_id: number
+  userPfp: string // fetched by frontend from a separate endpoint
+  name?: string
+}
+
 export interface ServerUser {
   can_claim_daily_reward: string
   claim_amount: number

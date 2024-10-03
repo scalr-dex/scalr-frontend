@@ -1,6 +1,6 @@
 import handleError from 'helpers/handleError'
 import backendKy from 'helpers/api/backendKy'
-import LeaderBoardResponse from 'type/LeaderBoardResponse'
+import { LeaderBoardResponse } from 'type/LeaderBoardResponse'
 
 export default async function () {
   try {

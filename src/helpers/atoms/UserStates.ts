@@ -2,7 +2,7 @@ import { atom } from 'jotai'
 import { atomWithStorage } from 'jotai/utils'
 import BoostStates from 'type/BoostState'
 
-export default atomWithStorage('didOnboard', false, undefined, {
+export const didOnboardAtom = atomWithStorage('didOnboard', false, undefined, {
   getOnInit: true,
 })
 

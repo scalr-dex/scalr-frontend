@@ -8,21 +8,40 @@ import ImgWithComponentFallback from 'components/ImgWithComponentFallback'
 import BattleSearchModal from 'components/Modals/BattleSearchModal'
 import PulseDot from 'components/PulseDot'
 import { BodyText, GlowText, Header3, Header4 } from 'components/Text'
+import { joinLobby } from 'helpers/api/battles'
 import UserAtom from 'helpers/atoms/UserAtom'
 import formatUSA from 'helpers/formatters/formatUSA'
+import handleError from 'helpers/handleError'
 import { useAtomValue } from 'jotai'
 import { useCallback, useState } from 'preact/hooks'
 import ButtonTypes from 'type/Button'
+import { navigate } from 'wouter-preact/use-hash-location'
 
 export default function () {
   const user = useAtomValue(UserAtom)
   const [modalOpen, setModalOpen] = useState(false)
+  const [lobbyId, setLobbyId] = useState('')
 
-  const openModal = () => setModalOpen(true)
+  const openModal = useCallback(() => setModalOpen(true), [])
 
   const onShuffleName = useCallback(() => {
     console.log('shuffle')
   }, [])
+
+  const onStartPublic = useCallback(async () => {
+    try {
+      const { LobbyID, Status } = await joinLobby().json()
+
+      setLobbyId(LobbyID)
+      if (Status === 'waiting') openModal()
+      if (Status === 'complete') navigate('/battle-chart')
+    } catch (e) {
+      handleError({
+        e,
+        toastMessage: 'Failed to start the game 😥 Please try again ',
+      })
+    }
+  }, [openModal])
 
   return (
     <div className="flex flex-col h-full px-4 pb-footer-height">
@@ -105,18 +124,22 @@ export default function () {
       </CardFilled>
 
       <div className="flex flex-row gap-x-3">
-        <Button rounded="rounded-full" onClick={openModal}>
+        <Button rounded="rounded-full" onClick={onStartPublic}>
           Start public battle
         </Button>
         <Button
           rounded="rounded-full"
-          onClick={openModal}
+          onClick={onStartPublic}
           buttonType={ButtonTypes.secondary}
         >
           Start private battle
         </Button>
       </div>
-      <BattleSearchModal showModal={modalOpen} setShowModal={setModalOpen} />
+      <BattleSearchModal
+        showModal={modalOpen}
+        setShowModal={setModalOpen}
+        lobbyId={lobbyId}
+      />
     </div>
   )
 }

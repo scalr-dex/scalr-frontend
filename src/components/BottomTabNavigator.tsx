@@ -4,17 +4,25 @@ import Cup from 'components/icons/Cup'
 import Gift from 'components/icons/Gift'
 import DollarCoin from 'components/icons/DollarCoin'
 import { trackNavigation } from 'helpers/api/analytics'
+import { useAtomValue } from 'jotai'
+import battleGameAtom from 'helpers/atoms/battleGameAtom'
+import { didOnboardAtom } from 'helpers/atoms/UserStates'
 
 const buttons = [
   { path: '/', component: <MainSquare /> },
-  { path: 'battles', component: <span>⚡</span> },
+  { path: 'battle-lobby', component: <span>⚡</span> },
   { path: 'leaderboards', component: <Cup /> },
   { path: 'tasks', component: <Gift /> },
   { path: 'airdrop', component: <DollarCoin /> },
 ]
 
 export default function () {
+  const didOnboard = useAtomValue(didOnboardAtom)
+  const battleGame = useAtomValue(battleGameAtom)
   const [location, setLocation] = useLocation()
+
+  const shouldHide = !didOnboard || !!battleGame
+  if (shouldHide) return null
 
   const latest = location.split('/')[1] || '/'
 

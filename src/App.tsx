@@ -12,7 +12,7 @@ import queryClient from 'helpers/queryClient'
 import AppStatus from 'type/AppStatus'
 import SplashScreen from 'components/SplashScreen'
 import { useAtomValue } from 'jotai'
-import didOnboardAtom from 'helpers/atoms/UserStates'
+import { didOnboardAtom } from 'helpers/atoms/UserStates'
 import useWebSocketData from 'helpers/hooks/useWebSocketData'
 import { lazy, Suspense } from 'preact/compat'
 import Loader from 'components/Loader'
@@ -21,7 +21,8 @@ import { ErrorBoundary } from '@sentry/react'
 import ErrorBoundaryFallback from 'components/ErrorBoundaryFallback'
 import { useHashLocation } from 'wouter-preact/use-hash-location'
 import LoaderFullPage from 'components/LoaderFullPage'
-import Battles from 'pages/Battles'
+import BattleLobby from 'pages/BattleLobby'
+import BattleChart from 'pages/BattleChart'
 
 const Onboarding = lazy(() => import('pages/Onboarding'))
 const Airdrop = lazy(() => import('pages/Airdrop'))
@@ -35,7 +36,7 @@ function AppInner({ socket }: { socket: WebSocket }) {
     <QueryClientProvider client={queryClient}>
       <Router hook={useHashLocation}>
         <div
-          className="flex flex-col relative min-h-screen overflow-x-hidden max-w-prose pt-safe-top text-white"
+          className="flex flex-col relative min-h-screen overflow-x-hidden max-w-prose pt-safe-top pb-safe-bottom text-white"
           ref={parent}
         >
           <Switch>
@@ -51,7 +52,8 @@ function AppInner({ socket }: { socket: WebSocket }) {
                     </Suspense>
                   )}
                 />
-                <Route path="/battles" component={Battles} />
+                <Route path="/battle-chart" component={BattleChart} />
+                <Route path="/battle-lobby" component={BattleLobby} />
                 <Route path="/" component={Main} />
               </>
             ) : (
@@ -69,7 +71,7 @@ function AppInner({ socket }: { socket: WebSocket }) {
             <Route path="/404" component={NotFound} />
           </Switch>
         </div>
-        {didOnboard ? <BottomTabNavigator /> : null}
+        <BottomTabNavigator />
         <ToastContainer
           draggable
           position="top-center"

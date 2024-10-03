@@ -44,7 +44,7 @@ export function Header4({
   ...props
 }: ChildrenProp & JSX.HTMLAttributes<HTMLHeadingElement>) {
   return (
-    <h4 {...props} className={`font-medium text-xl ${className}`}>
+    <h4 {...props} className={`font-medium text-xl leading-6 ${className}`}>
       {children}
     </h4>
   )
@@ -66,11 +66,7 @@ export function BodyText({
   children,
   ...props
 }: ChildrenProp & JSX.HTMLAttributes<HTMLSpanElement>) {
-  return (
-    <span {...props} className={`font-accent ${props.className}`}>
-      {children}
-    </span>
-  )
+  return <span {...props}>{children}</span>
 }
 
 export function SpecialText({

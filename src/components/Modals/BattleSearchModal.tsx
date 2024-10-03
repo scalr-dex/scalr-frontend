@@ -16,6 +16,7 @@ import Loader from 'components/Loader'
 import ScalrCoin from 'components/icons/coins/ScalrCoin'
 import DoublePeople from 'components/icons/DoublePeople'
 import handleError from 'helpers/handleError'
+import { quitLobby } from 'helpers/api/battles'
 
 function ModalBody() {
   return (
@@ -117,13 +118,28 @@ function ModalFooter({ onClose }: { onClose: () => void }) {
   )
 }
 
-export default function (props: DefaultModalProps) {
+export default function ({
+  setShowModal,
+  showModal,
+  lobbyId,
+}: DefaultModalProps & { lobbyId?: string }) {
+  const onClose = useCallback(async () => {
+    try {
+      if (!lobbyId) return
+      await quitLobby(lobbyId)
+      setShowModal(false)
+    } catch (e) {
+      handleError({ e, toastMessage: 'Failed to exit 😥 Please try agin' })
+    }
+  }, [lobbyId, setShowModal])
+
   return (
     <DefaultModal
-      {...props}
-      header={(onClose) => <ModalHeader onClose={onClose} />}
+      showModal={showModal}
+      setShowModal={setShowModal}
+      header={() => <ModalHeader onClose={onClose} />}
       body={ModalBody}
-      footer={() => <ModalFooter onClose={() => props.setShowModal(false)} />}
+      footer={() => <ModalFooter onClose={onClose} />}
     />
   )
 }

@@ -5,7 +5,7 @@ import { useEffect, useState } from 'preact/hooks'
 import { writeAtom } from 'helpers/atoms/atomStore'
 import UserAtom, { timeToRewardAtom } from 'helpers/atoms/UserAtom'
 import handleError from 'helpers/handleError'
-import { getWebsocketTicket, setupWebSocket } from 'helpers/api/webSocket'
+import { getWebsocketTicket, setupWebSocket } from 'helpers/api/ws'
 import AppStatus from 'type/AppStatus'
 import {
   init as initAnalytics,
@@ -82,7 +82,7 @@ async function setupUser() {
 
     if (!initData || !initDataRaw || !initData.user) return
 
-    const response = await backendKy(initDataRaw).post('user', {
+    const response = await backendKy({ initDataRaw }).post('user', {
       searchParams: { code: initData.startParam || '' },
     })
 
