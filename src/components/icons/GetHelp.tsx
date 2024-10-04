@@ -1,4 +1,4 @@
-export default function () {
+export default function ({ onClick }: { onClick: () => void }) {
   return (
     <svg
       width="20"
@@ -6,7 +6,8 @@ export default function () {
       viewBox="0 0 20 20"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
-      className="inline"
+      className="inline ml-1 cursor-pointer hover:text-white transition-colors"
+      onClick={onClick}
     >
       <g clip-path="url(#clip0_3063_88008)">
         <path

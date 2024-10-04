@@ -41,7 +41,9 @@ export default function () {
         <AdBlock />
         {data
           ? data.sort(sortTasks).map(renderTask)
-          : [...Array(5)].map(() => <TaskSkeleton />)}
+          : [...Array(5)].map((_, index) => (
+              <TaskSkeleton key={`task-skeleton-${index}`} />
+            ))}
       </div>
       <FooterSafeArea />
     </div>

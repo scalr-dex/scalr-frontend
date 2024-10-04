@@ -6,19 +6,16 @@ import { useAtom } from 'jotai'
 import BetDirection from 'type/BetDirection'
 import { BodyText } from 'components/Text'
 import { roundDurationMs } from 'helpers/atoms/priceHistoryAtom'
-import { GraphTokenValue } from 'type/TokenState'
 import RoundCounter from 'components/BattleGame/RoundCounter'
 import { battleBetAtom } from 'helpers/atoms/battleGameAtom'
 import { placeBattleBet } from 'helpers/api/battles'
 
 export default function ({
   loading,
-  roundStart,
   currentRound,
 }: {
   currentRound: number
   loading?: boolean
-  roundStart: GraphTokenValue | undefined
 }) {
   const [userBet, setUserBet] = useAtom(battleBetAtom)
   const [processingBet, setProcessingBet] = useState(false)
@@ -27,23 +24,18 @@ export default function ({
 
   const onClick = useCallback(
     async (direction: BetDirection) => {
-      if (!roundStart) return
-
       setProcessingBet(true)
       const bet = { direction }
 
       const success = await placeBattleBet(bet)
 
       setProcessingBet(false)
-      if (!success) {
-        setUserBet(null)
-        return
-      }
+      if (!success) return
 
       setUserBet(bet)
       setTimeout(() => setUserBet(null), roundDurationMs)
     },
-    [roundStart, setUserBet]
+    [setUserBet]
   )
 
   return (

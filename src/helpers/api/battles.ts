@@ -4,7 +4,9 @@ import BetDirection from 'type/BetDirection'
 
 const battlesApi = backendKy({ prefixUrlAppend: '/battles' })
 
-export function joinLobby() {
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+export function joinLobby(_amount: number) {
+  //   return battlesApi.get<LobbyData>('lobby', { json: { amount } })
   return battlesApi.get<LobbyData>('lobby')
 }
 

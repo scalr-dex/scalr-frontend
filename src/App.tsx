@@ -52,8 +52,8 @@ function AppInner({ socket }: { socket: WebSocket }) {
                     </Suspense>
                   )}
                 />
-                <Route path="/battle-chart" component={BattleChart} />
-                <Route path="/battle-lobby" component={BattleLobby} />
+                <Route path="/battle/chart" component={BattleChart} />
+                <Route path="/battle/lobby" component={BattleLobby} />
                 <Route path="/" component={Main} />
               </>
             ) : (

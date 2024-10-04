@@ -10,6 +10,7 @@ export default function () {
       style={{
         transform: `translate3d(-50%, -50%, 0) rotateY(90deg) rotateX(${(360 / edgeDetailLevel) * index}deg) translateZ(4.9em)`,
       }}
+      key={`coin-size-${index}`}
     />
   ))
 

@@ -10,10 +10,10 @@ import { didOnboardAtom } from 'helpers/atoms/UserStates'
 
 const buttons = [
   { path: '/', component: <MainSquare /> },
-  { path: 'battle-lobby', component: <span>⚡</span> },
   { path: 'leaderboards', component: <Cup /> },
   { path: 'tasks', component: <Gift /> },
   { path: 'airdrop', component: <DollarCoin /> },
+  { path: 'battle/lobby', component: <span>⚡</span> },
 ]
 
 export default function () {
@@ -21,7 +21,7 @@ export default function () {
   const battleGame = useAtomValue(battleGameAtom)
   const [location, setLocation] = useLocation()
 
-  const shouldHide = !didOnboard || !!battleGame
+  const shouldHide = !didOnboard || !!battleGame?.gameStartTime
   if (shouldHide) return null
 
   const latest = location.split('/')[1] || '/'

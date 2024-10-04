@@ -10,6 +10,7 @@ export default function ({ currentRound }: { currentRound: number }) {
         {[...Array(minRounds)].map((_, index) => (
           <div
             className={`flex items-center justify-center h-6 w-6 aspect-square rounded-full ${index === currentRound ? 'bg-white' : 'bg-white/50'}`}
+            key={`battle-round-${index}`}
           >
             <BodyText className="font-semibold text-center text-black align-baseline">
               {index + 1}

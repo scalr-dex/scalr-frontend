@@ -109,12 +109,12 @@ export default function ({
 
           showSymbol: false,
           lineStyle: {
-            color: '#B1C9F7',
+            color: '#FFE792',
             width: 4,
             cap: 'round',
             join: 'round',
             shadowBlur: 10,
-            shadowColor: '#4785F6',
+            shadowColor: '#E5FCB4',
             shadowOffsetX: 1,
             shadowOffsetY: 0,
           },
