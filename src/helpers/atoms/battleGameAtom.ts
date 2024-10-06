@@ -4,4 +4,12 @@ import BetDirection from 'type/BetDirection'
 
 export const battleBetAtom = atom<{ direction: BetDirection } | null>(null)
 
-export default atom<BattleGameState>({} as BattleGameState)
+export const emptyBattleGame: BattleGameState = {
+  lobbyId: '',
+  playerPoints: [],
+  gameStartTime: 0,
+  roundSeparators: [],
+  betSize: 0,
+}
+
+export default atom<BattleGameState>(emptyBattleGame)

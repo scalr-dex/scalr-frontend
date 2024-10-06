@@ -17,9 +17,13 @@ export default function () {
   return (
     <div className="flex flex-col h-screen">
       <TokenPrice price={lastValue?.[1]} />
-      <Chart data={data} loading={loading} />
+      <Chart
+        data={data}
+        roundSeparators={gameStatus.roundSeparators}
+        loading={loading}
+      />
 
-      <span>{JSON.stringify(gameStatus)}</span>
+      <span className="break-all">{JSON.stringify(gameStatus)}</span>
       <BattleBetBlock
         loading={loading}
         currentRound={gameStatus?.roundSeparators?.length || 0}
