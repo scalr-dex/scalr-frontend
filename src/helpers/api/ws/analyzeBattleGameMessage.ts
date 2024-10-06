@@ -1,7 +1,9 @@
 import { writeAtom } from 'helpers/atoms/atomStore'
 import battleGameAtom, { emptyBattleGame } from 'helpers/atoms/battleGameAtom'
+import priceHistoryAtom from 'helpers/atoms/priceHistoryAtom'
 import { BattlesWebsocketEvents } from 'type/Battles'
 import { navigate } from 'wouter-preact/use-hash-location'
+import getBetPoint from 'helpers/api/ws/getBetPoint'
 
 function processBetsConfirmed(data: BattlesWebsocketEvents) {
   if (!('RoundEndTimeUnix' in data)) return
@@ -10,6 +12,12 @@ function processBetsConfirmed(data: BattlesWebsocketEvents) {
     ...prev,
     roundSeparators: [...prev.roundSeparators, data.RoundEndTimeUnix * 1000],
   }))
+
+  for (const { Bets } of data.Bets) {
+    const latest = Bets[Bets.length]
+    // include bet in chart data to keep it smooth
+    writeAtom(priceHistoryAtom, (prev) => getBetPoint(prev, latest))
+  }
 
   return true
 }

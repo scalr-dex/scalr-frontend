@@ -1,10 +1,9 @@
 import { writeAtom } from 'helpers/atoms/atomStore'
-import priceHistoryAtom from 'helpers/atoms/priceHistoryAtom'
+import priceHistoryAtom, { dataMaxLength } from 'helpers/atoms/priceHistoryAtom'
 import UserAtom, { userBetAtom } from 'helpers/atoms/UserAtom'
 import balanceChangeToast from 'helpers/sendToast'
 import { EventData, EventDataPriceChangeSingle } from 'type/WebsocketEvents'
-
-const dataMaxLength = 40
+import getBetPoint from 'helpers/api/ws/getBetPoint'
 
 function getBetLostFromWsEventData(data: EventData) {
   if (Array.isArray(data) || data._ !== 'l') return
@@ -33,20 +32,14 @@ function getBalanceChangeFromWsEventData(data: EventData) {
 function getBetFromWsEventData(data: EventData) {
   if (Array.isArray(data) || data._ !== 'g') return
 
-  const bet = { amount: data.a, time: data.c, direction: data.d }
+  const bet = {
+    amount: data.a,
+    time: data.c,
+    direction: data.d,
+  }
 
   // include bet in chart data to keep it smooth
-  writeAtom(priceHistoryAtom, (prev) => {
-    const lastIndex = prev.length - 1
-    const last = prev[lastIndex]
-
-    prev.splice(lastIndex, 1, {
-      name: last.name,
-      value: last.value,
-      userBet: Number(bet.direction),
-    })
-    return prev.slice(-dataMaxLength)
-  })
+  writeAtom(priceHistoryAtom, (prev) => getBetPoint(prev, bet.direction))
   return true
 }
 

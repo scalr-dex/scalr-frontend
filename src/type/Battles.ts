@@ -4,7 +4,7 @@ import { PublicUser } from 'type/User'
 export type BattleStartWs = { GameStartTimeUnix: number; BetSize: number }
 
 export type BetsConfirmedWs = {
-  Bets: { TelegramID: number; Bets: BetDirection[] }[]
+  Bets: { TelegramID: number; Bets: boolean[] }[]
   RoundEndTimeUnix: number
 }
 

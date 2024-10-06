@@ -25,7 +25,7 @@ export default function () {
 
       <span className="break-all">{JSON.stringify(gameStatus)}</span>
       <BattleBetBlock
-        loading={loading}
+        loading={true}
         currentRound={gameStatus?.roundSeparators?.length || 0}
       />
     </div>
