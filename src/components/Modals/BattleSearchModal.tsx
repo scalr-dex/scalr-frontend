@@ -18,18 +18,22 @@ import DoublePeople from 'components/icons/DoublePeople'
 import handleError from 'helpers/handleError'
 import { quitLobby } from 'helpers/api/battles'
 import StoryShareButton from 'components/StoryShareButton'
+import LeftRightText from 'components/LeftRightText'
 
 function ModalBody() {
   return (
     <>
       <Loader size={64} className="self-center" />
       <Header3 className="text-center">Waiting for opponent</Header3>
-      <div className="flex flex-row justify-between items-center">
-        <BodyText className="text-white/50">Bet size</BodyText>
-        <BodyText className="font-bold">
-          100k <ScalrCoin className="inline-block" size={16} />
-        </BodyText>
-      </div>
+
+      <LeftRightText
+        leftText="Your bet"
+        rightText={
+          <>
+            <span>100k</span> <ScalrCoin className="inline-block" size={16} />{' '}
+          </>
+        }
+      />
       <div className="flex flex-row justify-between items-center">
         <BodyText className="text-white/50">Players online</BodyText>
         <BodyText className="font-bold">
@@ -101,20 +105,15 @@ function ModalFooter({ onClose }: { onClose: () => void }) {
   )
 }
 
-export default function ({
-  setShowModal,
-  showModal,
-  lobbyId,
-}: DefaultModalProps & { lobbyId?: string }) {
+export default function ({ setShowModal, showModal }: DefaultModalProps) {
   const onClose = useCallback(async () => {
     try {
-      if (!lobbyId) return
-      await quitLobby(lobbyId)
+      await quitLobby()
       setShowModal(false)
     } catch (e) {
       handleError({ e, toastMessage: 'Failed to exit 😥 Please try agin' })
     }
-  }, [lobbyId, setShowModal])
+  }, [setShowModal])
 
   return (
     <DefaultModal

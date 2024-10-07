@@ -32,6 +32,7 @@
     "react-countup": "^6.5.3",
     "react-device-detect": "^2.2.3",
     "react-ga4": "^2.1.0",
+    "react-pin-field": "^3.1.5",
     "react-range": "^1.10.0",
     "react-toastify": "^10.0.5",
     "wouter-preact": "^3.3.1"

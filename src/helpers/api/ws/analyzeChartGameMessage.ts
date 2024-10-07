@@ -3,7 +3,7 @@ import priceHistoryAtom, { dataMaxLength } from 'helpers/atoms/priceHistoryAtom'
 import UserAtom, { userBetAtom } from 'helpers/atoms/UserAtom'
 import balanceChangeToast from 'helpers/sendToast'
 import { EventData, EventDataPriceChangeSingle } from 'type/WebsocketEvents'
-import getBetPoint from 'helpers/api/ws/getBetPoint'
+import getBetPoint from 'helpers/chart/getBetPoint'
 
 function getBetLostFromWsEventData(data: EventData) {
   if (Array.isArray(data) || data._ !== 'l') return

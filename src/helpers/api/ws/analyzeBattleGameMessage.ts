@@ -3,7 +3,8 @@ import battleGameAtom, { emptyBattleGame } from 'helpers/atoms/battleGameAtom'
 import priceHistoryAtom from 'helpers/atoms/priceHistoryAtom'
 import { BattlesWebsocketEvents } from 'type/Battles'
 import { navigate } from 'wouter-preact/use-hash-location'
-import getBetPoint from 'helpers/api/ws/getBetPoint'
+import getBetPoint from 'helpers/chart/getBetPoint'
+import clearPreviousBets from 'helpers/chart/clearPreviousBets'
 
 function processBetsConfirmed(data: BattlesWebsocketEvents) {
   if (!('RoundEndTimeUnix' in data)) return
@@ -38,12 +39,7 @@ function processBattleEnd(data: BattlesWebsocketEvents) {
 
   writeAtom(battleGameAtom, emptyBattleGame)
 
-  writeAtom(priceHistoryAtom, (prev) =>
-    prev.map((val) => {
-      delete val.userBet
-      return val
-    })
-  )
+  clearPreviousBets()
 
   navigate('/battle/lobby', {
     state: { amount: data.Winnings, id: data.WinnerTelegramID },
@@ -55,6 +51,7 @@ function processBattleEnd(data: BattlesWebsocketEvents) {
 function processBattleStart(data: BattlesWebsocketEvents) {
   if (!('GameStartTimeUnix' in data)) return
 
+  clearPreviousBets()
   writeAtom(battleGameAtom, (prev) => ({
     ...prev,
     gameStartTime: data.GameStartTimeUnix,

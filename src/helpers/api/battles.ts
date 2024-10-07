@@ -4,17 +4,25 @@ import BetDirection from 'type/BetDirection'
 
 const battlesApi = backendKy({ prefixUrlAppend: '/battles' })
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-export function joinLobby(_amount: number) {
-  //   return battlesApi.get<LobbyData>('lobby', { json: { amount } })
-  return battlesApi.get<LobbyData>('lobby')
+export function joinLobby(match_bet: number) {
+  return battlesApi.post<LobbyData>('lobby', { json: { match_bet } })
 }
 
-export function quitLobby(lobbyId: string) {
-  // TODO: not implemented on the backend
-  return battlesApi.post('lobby', { json: { lobbyId } })
+export function quitLobby() {
+  return battlesApi.get('leave')
 }
 
-export function placeBattleBet(json: { direction: BetDirection }) {
+export function placeBattleBet(json: {
+  direction: BetDirection
+  lobbyId: string
+}) {
   return battlesApi.post('bet', { json })
+}
+
+export function createPrivateLobby(match_bet: number) {
+  return battlesApi.post('lobby/create', { json: { match_bet } })
+}
+
+export function joinPrivateLobby(code: string) {
+  return battlesApi.post('lobby/join', { json: { code } })
 }

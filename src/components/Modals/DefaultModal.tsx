@@ -19,7 +19,7 @@ export default function ({
 }: DefaultModalProps & {
   header?: (onClose: () => void) => JSX.Element
   body: () => JSX.Element
-  footer: (onClose: () => void) => JSX.Element
+  footer?: (onClose: () => void) => JSX.Element
 }) {
   const onClose = () => setShowModal(false)
 
@@ -33,7 +33,7 @@ export default function ({
         <div className="w-full p-4 flex flex-col gap-y-5 bg-secondary rounded-4xl">
           {header(onClose)}
           <div className="flex flex-col gap-y-4">{body()}</div>
-          <div className="mb-4">{footer(onClose)}</div>
+          {footer ? <div className="mb-4">{footer(onClose)}</div> : null}
         </div>
       </div>
 

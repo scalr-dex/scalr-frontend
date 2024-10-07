@@ -1,3 +1,4 @@
+import DotsLoader from 'components/DotsLoader'
 import Dices from 'components/icons/Dices'
 import ImgWithComponentFallback from 'components/ImgWithComponentFallback'
 import { BodyText, GlowText } from 'components/Text'
@@ -16,12 +17,14 @@ export default function () {
     <div className="flex flex-col gap-y-1 items-center">
       <ImgWithComponentFallback
         imgUrl={''}
-        name={user?.username || '...'}
+        name={user?.username || '?'}
         size={14}
       />
       <BodyText className="text-xs text-white/50">My battle name</BodyText>
       <div className="flex flex-row items-center gap-x-2">
-        <GlowText>{user?.username || '...'}</GlowText>
+        <GlowText className="max-w-64 truncate">
+          {user?.username || <DotsLoader />}
+        </GlowText>
         <Dices
           className="transition-all hover:cursor-pointer hover:scale-105 active:text-accent-dark h-6 w-6"
           onClick={onShuffleName}

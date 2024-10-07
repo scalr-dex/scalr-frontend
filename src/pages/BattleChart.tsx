@@ -31,6 +31,7 @@ export default function () {
         <RoundCounter currentRound={currentRoundIndex} />
         <BattleTimer endTime={gameStatus.roundSeparators[currentRoundIndex]} />
         <BattleBetBlock
+          lobbyId={gameStatus.lobbyId}
           loading={true}
           currentRound={gameStatus?.roundSeparators?.length || 0}
         />

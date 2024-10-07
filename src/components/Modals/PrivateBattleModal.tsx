@@ -3,6 +3,14 @@ import { Header3 } from 'components/Text'
 import DefaultModal from 'components/Modals/DefaultModal'
 import ButtonTypes from 'type/Button'
 import { DefaultModalProps } from 'type/Props'
+import { useCallback, useState } from 'preact/hooks'
+import handleError from 'helpers/handleError'
+import { BetAmountProp } from 'type/Battles'
+import { createPrivateLobby } from 'helpers/api/battles'
+
+type PrivateBattleModalProps = BetAmountProp & {
+  onJoinRoom: () => void
+}
 
 function ModalBody() {
   return (
@@ -17,35 +25,65 @@ function ModalBody() {
   )
 }
 
-function ModalFooter({ onClose }: { onClose: () => void }) {
+function ModalFooter({
+  onJoinRoom,
+  betAmount,
+}: {
+  onClose: () => void
+} & PrivateBattleModalProps) {
+  const [loading, setLoading] = useState(false)
+
+  const onCreateRoom = useCallback(async () => {
+    try {
+      setLoading(true)
+      const data = await createPrivateLobby(betAmount).json()
+      console.log(data)
+    } catch (e) {
+      handleError({
+        e,
+        toastMessage: 'Failed to create a lobby, please try again 😥',
+      })
+    } finally {
+      setLoading(false)
+    }
+  }, [betAmount])
+
   return (
     <div className="flex flex-col gap-y-4">
       <Button
         buttonType={ButtonTypes.secondary}
         className="!rounded-full"
-        onClick={onClose}
+        onClick={onCreateRoom}
         haptic={false}
+        isLoading={loading}
       >
         Create room
       </Button>
       <Button
         buttonType={ButtonTypes.neutral}
         className="!rounded-full"
-        onClick={onClose}
+        onClick={onJoinRoom}
         haptic={false}
+        disabled={loading}
       >
-        Create room
+        Join room
       </Button>
     </div>
   )
 }
 
-export default function (props: DefaultModalProps) {
+export default function (props: DefaultModalProps & PrivateBattleModalProps) {
   return (
     <DefaultModal
       {...props}
       body={ModalBody}
-      footer={(onClose) => <ModalFooter onClose={onClose} />}
+      footer={(onClose) => (
+        <ModalFooter
+          onClose={onClose}
+          onJoinRoom={props.onJoinRoom}
+          betAmount={props.betAmount}
+        />
+      )}
     />
   )
 }

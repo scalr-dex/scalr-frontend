@@ -13,7 +13,9 @@ import { placeBattleBet } from 'helpers/api/battles'
 export default function ({
   loading,
   currentRound,
+  lobbyId,
 }: {
+  lobbyId: string
   currentRound: number
   loading?: boolean
 }) {
@@ -25,17 +27,16 @@ export default function ({
   const onClick = useCallback(
     async (direction: BetDirection) => {
       setProcessingBet(true)
-      const bet = { direction }
 
-      const success = await placeBattleBet(bet)
+      const success = await placeBattleBet({ direction, lobbyId })
 
       setProcessingBet(false)
       if (!success) return
 
-      setUserBet(bet)
+      setUserBet({ direction })
       setTimeout(() => setUserBet(null), roundDurationMs)
     },
-    [setUserBet]
+    [lobbyId, setUserBet]
   )
 
   return (

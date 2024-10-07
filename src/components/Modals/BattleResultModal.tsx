@@ -6,11 +6,10 @@ import { DefaultModalProps } from 'type/Props'
 import Star from 'components/icons/Star'
 import UserAtom from 'helpers/atoms/UserAtom'
 import { useAtomValue } from 'jotai'
+import LeftRightText from 'components/LeftRightText'
+import StoryShareButton from 'components/StoryShareButton'
 
-function ModalBody({ amount, winnerId }: { amount: number; winnerId: number }) {
-  const user = useAtomValue(UserAtom)
-  const didWin = user?.telegramId && user.telegramId === winnerId
-
+function ModalBody({ amount, didWin }: { amount: number; didWin: boolean }) {
   return (
     <>
       <Star className="self-center" />
@@ -22,34 +21,59 @@ function ModalBody({ amount, winnerId }: { amount: number; winnerId: number }) {
           ? 'Congrats!'
           : 'Don’t worry, every loss is a step toward victory'}
       </BodyText>
-      <BodyText className={didWin ? 'text-success' : 'text-error'}>
-        {amount}
-      </BodyText>
+      <LeftRightText
+        leftText={didWin ? 'Your win' : 'Your losses'}
+        rightText={
+          <BodyText className={didWin ? 'text-success' : 'text-error'}>
+            {didWin ? '+' : '-'}
+            {amount}
+          </BodyText>
+        }
+      />
     </>
   )
 }
 
-function ModalFooter({ onClose }: { onClose: () => void }) {
+function ModalFooter({
+  onClose,
+  didWin,
+}: {
+  onClose: () => void
+  didWin: boolean
+}) {
   return (
-    <Button
-      buttonType={ButtonTypes.secondary}
-      className="!rounded-full"
-      onClick={onClose}
-      haptic={false}
-    >
-      OMG
-    </Button>
+    <div className="fle flex-col gap-y-4">
+      <Button
+        buttonType={ButtonTypes.secondary}
+        className="!rounded-full"
+        onClick={onClose}
+      >
+        Play again
+      </Button>
+      {didWin ? <StoryShareButton /> : null}
+      <Button
+        buttonType={ButtonTypes.ghost}
+        className="!rounded-full"
+        onClick={onClose}
+        haptic={false}
+      >
+        Close
+      </Button>
+    </div>
   )
 }
 
 export default function (
   props: DefaultModalProps & { amount: number; winnerId: number }
 ) {
+  const user = useAtomValue(UserAtom)
+  const didWin = !!(user?.telegramId && user.telegramId === props.winnerId)
+
   return (
     <DefaultModal
       {...props}
-      body={() => <ModalBody amount={props.amount} winnerId={props.winnerId} />}
-      footer={(onClose) => <ModalFooter onClose={onClose} />}
+      body={() => <ModalBody amount={props.amount} didWin={!!didWin} />}
+      footer={(onClose) => <ModalFooter onClose={onClose} didWin={didWin} />}
     />
   )
 }

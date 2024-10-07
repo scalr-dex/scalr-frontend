@@ -38,3 +38,5 @@ export interface BattleGameState {
   betSize: number
   winner?: { id: number; amount: number }
 }
+
+export type BetAmountProp = { betAmount: number }
