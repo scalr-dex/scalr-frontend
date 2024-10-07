@@ -6,7 +6,7 @@ export const battleBetAtom = atom<{ direction: BetDirection } | null>(null)
 
 export const emptyBattleGame: BattleGameState = {
   lobbyId: '',
-  playerPoints: [],
+  playerScore: [],
   gameStartTime: 0,
   roundSeparators: [],
   betSize: 0,

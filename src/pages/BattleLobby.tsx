@@ -7,10 +7,19 @@ import CardFilled from 'components/CardFilled'
 import BattlesLogo from 'components/icons/BattlesLogo'
 import GetHelp from 'components/icons/GetHelp'
 import BattleHelpModal from 'components/Modals/BattleHelpModal'
+import BattleResultModal from 'components/Modals/BattleResultModal'
 import { BodyText, Header4 } from 'components/Text'
 import { useState } from 'preact/hooks'
+import { useHistoryState } from 'wouter-preact/use-browser-location'
 
 export default function () {
+  const historyState =
+    useHistoryState<{
+      amount?: number
+      id?: number
+    }>() || {}
+  const [showBattleResult, setShowBattleResult] = useState(!!historyState.id)
+
   const [showHelp, setShowHelp] = useState(false)
   const [betAmount, setBetAmount] = useState(20)
 
@@ -36,6 +45,12 @@ export default function () {
 
       <BattleStartButtons betAmount={betAmount} />
 
+      <BattleResultModal
+        amount={historyState.amount || 0}
+        winnerId={historyState.id || 0}
+        showModal={showBattleResult}
+        setShowModal={setShowBattleResult}
+      />
       <BattleHelpModal showModal={showHelp} setShowModal={setShowHelp} />
     </div>
   )

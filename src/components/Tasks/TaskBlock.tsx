@@ -4,9 +4,7 @@ import UserTask, {
   taskStatusToButtonType,
   taskStatusToCallback,
 } from 'type/UserTask'
-import { useCallback, useEffect, useState } from 'preact/hooks'
-import dayjs from 'dayjs'
-import { markTaskDone } from 'helpers/api/userTasks'
+import { useCallback, useState } from 'preact/hooks'
 import pendingTasksAtom, {
   clearPendingTask,
 } from 'helpers/atoms/pendingTasksAtom'
@@ -17,6 +15,7 @@ import { specialTasks } from 'helpers/sortTasks'
 import { track } from 'helpers/api/analytics'
 import TaskUi from 'components/Tasks/TaskUi'
 import { openLink, openTelegramLink } from '@telegram-apps/sdk-react'
+import { markTaskDone } from 'helpers/api/userTasks'
 
 export default function ({
   IconNumber,
@@ -31,16 +30,9 @@ export default function ({
 
   const [loading, setLoading] = useState(false)
   const buttonType = taskStatusToButtonType[Status]
-  const [time, setTime] = useState(0)
-  useCountDown(setTime)
+  const { time } = useCountDown({ endTime: canClaimAt })
 
   const onTimer = time > 0
-
-  useEffect(() => {
-    if (!canClaimAt) return
-
-    setTime(dayjs(canClaimAt).diff(dayjs(), 'seconds'))
-  }, [TaskID, canClaimAt, refetch, time])
 
   const onClick = useCallback(async () => {
     if (canClaimAt && onTimer) return

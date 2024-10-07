@@ -32,7 +32,7 @@ export type BattleUser = PublicUser & {
 
 export interface BattleGameState {
   lobbyId: string
-  playerPoints: RoundEndedWs['PlayersPoints']
+  playerScore: RoundEndedWs['PlayersPoints']
   gameStartTime: number
   roundSeparators: number[]
   betSize: number

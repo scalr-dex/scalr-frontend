@@ -1,7 +1,5 @@
 import DotsLoader from 'components/DotsLoader'
-import dayjs from 'dayjs'
 import useCountDown from 'helpers/hooks/useCountDown'
-import { useState, useEffect } from 'preact/hooks'
 
 export default function ({
   endTime,
@@ -10,22 +8,12 @@ export default function ({
   endTime: number | undefined
   withHours?: boolean
 }) {
-  const [time, setTime] = useState(0)
-  useCountDown(setTime)
-
-  useEffect(() => {
-    if (time !== 0) return
-
-    setTime(dayjs(endTime).diff(dayjs(), 'seconds'))
-  }, [time, endTime])
-
   const format = withHours ? 'HH:mm:ss' : 'mm:ss'
+  const { formatted } = useCountDown({ endTime, format })
 
   return (
     <div className="py-2 px-3 bg-secondary opacity-50 rounded-3xl font-semibold font-accent text-sm">
-      <span>
-        {endTime ? dayjs({ seconds: time }).format(format) : <DotsLoader />}
-      </span>
+      <span>{endTime ? formatted : <DotsLoader />}</span>
     </div>
   )
 }

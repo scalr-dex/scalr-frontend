@@ -25,12 +25,10 @@ function processBetsConfirmed(data: BattlesWebsocketEvents) {
 function processRoundEnded(data: BattlesWebsocketEvents) {
   if (!('PlayersPoints' in data)) return
 
-  writeAtom(battleGameAtom, (prev) => {
-    return {
-      ...prev,
-      playerPoints: data.PlayersPoints,
-    }
-  })
+  writeAtom(battleGameAtom, (prev) => ({
+    ...prev,
+    playerScore: data.PlayersPoints,
+  }))
 
   return true
 }
@@ -38,15 +36,18 @@ function processRoundEnded(data: BattlesWebsocketEvents) {
 function processBattleEnd(data: BattlesWebsocketEvents) {
   if (!('WinnerTelegramID' in data)) return
 
-  writeAtom(battleGameAtom, (prev) => ({
-    ...prev,
-    winner: { amount: data.Winnings, id: data.WinnerTelegramID },
-  }))
+  writeAtom(battleGameAtom, emptyBattleGame)
 
-  setTimeout(() => {
-    navigate('/battle/lobby')
-    writeAtom(battleGameAtom, emptyBattleGame)
-  }, 2000)
+  writeAtom(priceHistoryAtom, (prev) =>
+    prev.map((val) => {
+      delete val.userBet
+      return val
+    })
+  )
+
+  navigate('/battle/lobby', {
+    state: { amount: data.Winnings, id: data.WinnerTelegramID },
+  })
 
   return true
 }

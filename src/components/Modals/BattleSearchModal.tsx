@@ -1,4 +1,4 @@
-import { shareStory, shareURL } from '@telegram-apps/sdk-react'
+import { shareURL } from '@telegram-apps/sdk-react'
 import Button from 'components/Button'
 import Close from 'components/icons/Close'
 import Copy from 'components/icons/Copy'
@@ -17,6 +17,7 @@ import ScalrCoin from 'components/icons/coins/ScalrCoin'
 import DoublePeople from 'components/icons/DoublePeople'
 import handleError from 'helpers/handleError'
 import { quitLobby } from 'helpers/api/battles'
+import StoryShareButton from 'components/StoryShareButton'
 
 function ModalBody() {
   return (
@@ -54,14 +55,6 @@ function ModalFooter({ onClose }: { onClose: () => void }) {
 
   const shareLink = `${env.VITE_APP_BASE_LINK}?startapp=${telegramId}`
 
-  const onStoryShare = useCallback(() => {
-    try {
-      shareStory('https://github.com/Telegram-Mini-Apps.png')
-    } catch (e) {
-      handleError({ e })
-    }
-  }, [])
-
   const onCopy = useCallback(async () => {
     await navigator.clipboard.writeText(shareLink)
 
@@ -86,17 +79,7 @@ function ModalFooter({ onClose }: { onClose: () => void }) {
       >
         Cancel
       </Button>
-      {shareStory.isSupported() ? (
-        <Button
-          onClick={onStoryShare}
-          buttonType={ButtonTypes.neutral}
-          className="!rounded-full"
-          iconRight={<Share />}
-          isLoading={!telegramId}
-        >
-          Send to stories
-        </Button>
-      ) : null}
+      <StoryShareButton isLoading={!telegramId} />
       <div className="flex flex-row gap-x-2">
         <Button
           onClick={onShare}

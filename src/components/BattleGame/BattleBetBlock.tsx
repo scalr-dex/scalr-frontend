@@ -39,7 +39,7 @@ export default function ({
   )
 
   return (
-    <div className="flex flex-col px-4 gap-y-5">
+    <div className="flex flex-col gap-y-5">
       <div className="h-28">
         {userBet ? (
           <div className="flex flex-col gap-y-2">

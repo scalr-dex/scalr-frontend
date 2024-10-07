@@ -4,6 +4,8 @@ import { useAtomValue } from 'jotai'
 import priceHistoryAtom from 'helpers/atoms/priceHistoryAtom'
 import battleGameAtom from 'helpers/atoms/battleGameAtom'
 import BattleBetBlock from 'components/BattleGame/BattleBetBlock'
+import RoundCounter from 'components/BattleGame/RoundCounter'
+import BattleTimer from 'components/BattleGame/BattleTimer'
 
 export default function () {
   const data = useAtomValue(priceHistoryAtom)
@@ -14,20 +16,25 @@ export default function () {
 
   const loading = !data.length
 
+  const currentRoundIndex = gameStatus.roundSeparators.length - 1
+  console.log(JSON.stringify(gameStatus))
+
   return (
     <div className="flex flex-col h-screen">
-      <TokenPrice price={lastValue?.[1]} />
+      <TokenPrice price={lastValue?.[1]} betSize={gameStatus.betSize} />
       <Chart
         data={data}
         roundSeparators={gameStatus.roundSeparators}
         loading={loading}
       />
-
-      <span className="break-all">{JSON.stringify(gameStatus)}</span>
-      <BattleBetBlock
-        loading={true}
-        currentRound={gameStatus?.roundSeparators?.length || 0}
-      />
+      <div className="flex flex-col gap-y-5 px-4">
+        <RoundCounter currentRound={currentRoundIndex} />
+        <BattleTimer endTime={gameStatus.roundSeparators[currentRoundIndex]} />
+        <BattleBetBlock
+          loading={true}
+          currentRound={gameStatus?.roundSeparators?.length || 0}
+        />
+      </div>
     </div>
   )
 }
