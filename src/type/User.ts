@@ -33,6 +33,7 @@ export interface ClientUser {
   invitedUsers: number
   boosts: number
   remainingAds: number
+  startParam: string | undefined
 }
 
 export interface UserBet {

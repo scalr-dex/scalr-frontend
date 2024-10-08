@@ -17,7 +17,6 @@ export default function () {
   const loading = !data.length
 
   const currentRoundIndex = gameStatus.roundSeparators.length - 1
-  console.log(JSON.stringify(gameStatus))
 
   return (
     <div className="flex flex-col h-screen">
@@ -32,7 +31,7 @@ export default function () {
         <BattleTimer endTime={gameStatus.roundSeparators[currentRoundIndex]} />
         <BattleBetBlock
           lobbyId={gameStatus.lobbyId}
-          loading={true}
+          loading={loading}
           currentRound={gameStatus?.roundSeparators?.length || 0}
         />
       </div>

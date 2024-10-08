@@ -3,7 +3,7 @@ import Button from 'components/Button'
 import handleError from 'helpers/handleError'
 import { useCallback } from 'preact/hooks'
 import ButtonTypes from 'type/Button'
-import Share from 'components/icons/Share'
+import ShareStory from 'components/icons/ShareStory'
 
 export default function ({
   imageUrl = 'https://github.com/Telegram-Mini-Apps.png',
@@ -27,7 +27,7 @@ export default function ({
       onClick={onStoryShare}
       buttonType={ButtonTypes.neutral}
       className="!rounded-full"
-      iconRight={<Share />}
+      iconRight={<ShareStory />}
       isLoading={isLoading}
     >
       Add to stories

@@ -25,8 +25,7 @@ function ModalBody({ onGoBack }: PrivateRoomJoinModalProps) {
   const onCodeSubmit = useCallback(async (code: string) => {
     try {
       setLoading(true)
-      const data = await joinPrivateLobby(code).json()
-      console.log(data)
+      await joinPrivateLobby(code)
     } catch (e) {
       handleError({ e })
       setError(true)

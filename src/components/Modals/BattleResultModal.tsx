@@ -8,6 +8,13 @@ import UserAtom from 'helpers/atoms/UserAtom'
 import { useAtomValue } from 'jotai'
 import LeftRightText from 'components/LeftRightText'
 import StoryShareButton from 'components/StoryShareButton'
+import { useCallback } from 'preact/hooks'
+
+type BattleResultModalProps = {
+  amount: number
+  winnerId: number
+  onPlayAgain: () => void
+}
 
 function ModalBody({ amount, didWin }: { amount: number; didWin: boolean }) {
   return (
@@ -37,23 +44,31 @@ function ModalBody({ amount, didWin }: { amount: number; didWin: boolean }) {
 function ModalFooter({
   onClose,
   didWin,
+  onPlayAgain,
 }: {
   onClose: () => void
   didWin: boolean
+  onPlayAgain: () => void
 }) {
+  const playAgain = useCallback(() => {
+    onClose()
+    onPlayAgain()
+  }, [onClose, onPlayAgain])
+
   return (
     <div className="fle flex-col gap-y-4">
       <Button
         buttonType={ButtonTypes.secondary}
-        className="!rounded-full"
-        onClick={onClose}
+        rounded="rounded-full"
+        onClick={playAgain}
       >
         Play again
       </Button>
       {didWin ? <StoryShareButton /> : null}
       <Button
         buttonType={ButtonTypes.ghost}
-        className="!rounded-full"
+        className="py-2"
+        rounded="rounded-full"
         onClick={onClose}
         haptic={false}
       >
@@ -63,9 +78,7 @@ function ModalFooter({
   )
 }
 
-export default function (
-  props: DefaultModalProps & { amount: number; winnerId: number }
-) {
+export default function (props: DefaultModalProps & BattleResultModalProps) {
   const user = useAtomValue(UserAtom)
   const didWin = !!(user?.telegramId && user.telegramId === props.winnerId)
 
@@ -73,7 +86,13 @@ export default function (
     <DefaultModal
       {...props}
       body={() => <ModalBody amount={props.amount} didWin={!!didWin} />}
-      footer={(onClose) => <ModalFooter onClose={onClose} didWin={didWin} />}
+      footer={(onClose) => (
+        <ModalFooter
+          onClose={onClose}
+          didWin={didWin}
+          onPlayAgain={props.onPlayAgain}
+        />
+      )}
     />
   )
 }

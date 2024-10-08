@@ -53,7 +53,10 @@ function AppInner({ socket }: { socket: WebSocket }) {
                   )}
                 />
                 <Route path="/battle/chart" component={BattleChart} />
-                <Route path="/battle/lobby" component={BattleLobby} />
+                <Route
+                  path="/battle/lobby/:code?"
+                  component={({ params }) => <BattleLobby {...params} />}
+                />
                 <Route path="/" component={Main} />
               </>
             ) : (

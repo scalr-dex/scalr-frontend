@@ -7,21 +7,33 @@ import CardFilled from 'components/CardFilled'
 import BattlesLogo from 'components/icons/BattlesLogo'
 import GetHelp from 'components/icons/GetHelp'
 import BattleHelpModal from 'components/Modals/BattleHelpModal'
-import BattleResultModal from 'components/Modals/BattleResultModal'
+import BattleLoadingJoinModal from 'components/Modals/BattleLoadingJoinModal'
 import { BodyText, Header4 } from 'components/Text'
-import { useState } from 'preact/hooks'
-import { useHistoryState } from 'wouter-preact/use-browser-location'
+import { joinPrivateLobby } from 'helpers/api/battles'
+import handleError from 'helpers/handleError'
+import { useCallback, useEffect, useState } from 'preact/hooks'
 
-export default function () {
-  const historyState =
-    useHistoryState<{
-      amount?: number
-      id?: number
-    }>() || {}
-  const [showBattleResult, setShowBattleResult] = useState(!!historyState.id)
-
+export default function ({ code }: { code?: string }) {
   const [showHelp, setShowHelp] = useState(false)
   const [betAmount, setBetAmount] = useState(20)
+  const [loading, setLoading] = useState(false)
+
+  const onCodeFromLink = useCallback(async (code: string) => {
+    try {
+      setLoading(true)
+      await joinPrivateLobby(code)
+    } catch (e) {
+      handleError({ e, toastMessage: 'Failed to join private room 😥' })
+    } finally {
+      setLoading(false)
+    }
+  }, [])
+
+  useEffect(() => {
+    if (!code) return
+
+    void onCodeFromLink(code)
+  }, [code, onCodeFromLink])
 
   return (
     <div className="flex flex-col h-full px-4 pb-footer-height">
@@ -45,12 +57,7 @@ export default function () {
 
       <BattleStartButtons betAmount={betAmount} />
 
-      <BattleResultModal
-        amount={historyState.amount || 0}
-        winnerId={historyState.id || 0}
-        showModal={showBattleResult}
-        setShowModal={setShowBattleResult}
-      />
+      <BattleLoadingJoinModal showModal={loading} setShowModal={setLoading} />
       <BattleHelpModal showModal={showHelp} setShowModal={setShowHelp} />
     </div>
   )

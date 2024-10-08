@@ -10,7 +10,7 @@ export default function ({ currentRound }: { currentRound: number }) {
       <div className="flex flex-row items-center gap-x-2">
         {[...Array(withExtra)].map((_, index) => (
           <div
-            className={`flex items-center justify-center h-6 px-1.5 transition-colors aspect-square rounded-full ${index === currentRound || index > withExtra ? 'bg-white' : 'bg-white/50'}`}
+            className={`flex items-center justify-center h-6 px-1.5 transition-colors aspect-square rounded-full ${index === currentRound || currentRound >= index ? 'bg-white' : 'bg-white/50'}`}
             key={`battle-round-${index}`}
           >
             <BodyText className="font-semibold text-center text-black align-baseline">

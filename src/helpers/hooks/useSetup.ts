@@ -16,6 +16,7 @@ import { LogLevel } from '@amplitude/analytics-types'
 import env from 'helpers/env'
 import { setSentryUser } from 'helpers/api/sentry'
 import setupMiniApp from 'helpers/setupMiniApp'
+import { navigate } from 'wouter-preact/use-hash-location'
 
 export default function () {
   const [appStatus, setAppStatus] = useState(AppStatus.loading)
@@ -61,6 +62,7 @@ export default function () {
           })
           setupMiniApp()
           setSentryUser(userId)
+          parseStartupParams(user.startParam)
         }
         setAppStatus(AppStatus.isTma)
       } else {
@@ -78,7 +80,7 @@ async function setupUser() {
   try {
     const launchParams = retrieveLaunchParams()
 
-    const { initData, initDataRaw } = launchParams
+    const { initData, initDataRaw, startParam } = launchParams
 
     if (!initData || !initDataRaw || !initData.user) return
 
@@ -99,6 +101,7 @@ async function setupUser() {
       invitedUsers: user.invited_users,
       boosts: user.multiplier_count,
       remainingAds: user.remaining_ads,
+      startParam,
     }
 
     writeAtom(timeToRewardAtom, user.can_claim_daily_reward)
@@ -106,5 +109,16 @@ async function setupUser() {
     return clientUser
   } catch (e) {
     handleError({ e })
+  }
+}
+
+function parseStartupParams(params?: string) {
+  if (!params) return
+
+  if (params.match('code-')) {
+    const code = params.split('-')[1]
+    if (code.length !== 4) return
+
+    navigate(`battle/lobby/${code}`)
   }
 }

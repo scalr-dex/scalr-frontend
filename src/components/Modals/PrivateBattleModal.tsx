@@ -7,9 +7,12 @@ import { useCallback, useState } from 'preact/hooks'
 import handleError from 'helpers/handleError'
 import { BetAmountProp } from 'type/Battles'
 import { createPrivateLobby } from 'helpers/api/battles'
+import { useSetAtom } from 'jotai/react'
+import { battlePrivateLobbyAtom } from 'helpers/atoms/battleGameAtom'
 
 type PrivateBattleModalProps = BetAmountProp & {
   onJoinRoom: () => void
+  onCreateLobby: () => void
 }
 
 function ModalBody() {
@@ -27,17 +30,21 @@ function ModalBody() {
 
 function ModalFooter({
   onJoinRoom,
+  onCreateLobby,
   betAmount,
 }: {
   onClose: () => void
 } & PrivateBattleModalProps) {
+  const setPrivateLobbyData = useSetAtom(battlePrivateLobbyAtom)
   const [loading, setLoading] = useState(false)
 
-  const onCreateRoom = useCallback(async () => {
+  const onCreate = useCallback(async () => {
     try {
       setLoading(true)
       const data = await createPrivateLobby(betAmount).json()
-      console.log(data)
+
+      setPrivateLobbyData({ ...data, betAmount })
+      onCreateLobby()
     } catch (e) {
       handleError({
         e,
@@ -46,14 +53,14 @@ function ModalFooter({
     } finally {
       setLoading(false)
     }
-  }, [betAmount])
+  }, [betAmount, onCreateLobby, setPrivateLobbyData])
 
   return (
     <div className="flex flex-col gap-y-4">
       <Button
         buttonType={ButtonTypes.secondary}
         className="!rounded-full"
-        onClick={onCreateRoom}
+        onClick={onCreate}
         haptic={false}
         isLoading={loading}
       >
@@ -80,6 +87,7 @@ export default function (props: DefaultModalProps & PrivateBattleModalProps) {
       footer={(onClose) => (
         <ModalFooter
           onClose={onClose}
+          onCreateLobby={props.onCreateLobby}
           onJoinRoom={props.onJoinRoom}
           betAmount={props.betAmount}
         />

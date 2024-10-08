@@ -15,9 +15,9 @@ function processBetsConfirmed(data: BattlesWebsocketEvents) {
   }))
 
   for (const { Bets } of data.Bets) {
-    const latest = Bets[Bets.length]
+    const latestDirection = Bets[Bets.length - 1]
     // include bet in chart data to keep it smooth
-    writeAtom(priceHistoryAtom, (prev) => getBetPoint(prev, latest))
+    writeAtom(priceHistoryAtom, (prev) => getBetPoint(prev, latestDirection))
   }
 
   return true

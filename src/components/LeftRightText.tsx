@@ -11,7 +11,9 @@ export default function ({
   return (
     <div className="flex flex-row justify-between items-center">
       <BodyText className="text-white/50">{leftText}</BodyText>
-      <BodyText className="font-bold items-center">{rightText}</BodyText>
+      <BodyText className="flex flex-row items-center gap-x-2 font-bold">
+        {rightText}
+      </BodyText>
     </div>
   )
 }
