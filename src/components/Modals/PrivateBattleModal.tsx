@@ -43,7 +43,11 @@ function ModalFooter({
       setLoading(true)
       const data = await createPrivateLobby(betAmount).json()
 
-      setPrivateLobbyData({ ...data, betAmount })
+      setPrivateLobbyData({
+        code: data.code,
+        lobbyEndTime: data.expire_time * 1000,
+        betAmount,
+      })
       onCreateLobby()
     } catch (e) {
       handleError({

@@ -20,11 +20,9 @@ export function placeBattleBet(json: {
 }
 
 export function createPrivateLobby(match_bet: number) {
-  return battlesApi.post<{ code: string; lobbyEndTime: number }>(
+  return battlesApi.post<{ code: string; expire_time: number }>(
     'lobby/create',
-    {
-      json: { match_bet },
-    }
+    { json: { match_bet } }
   )
 }
 

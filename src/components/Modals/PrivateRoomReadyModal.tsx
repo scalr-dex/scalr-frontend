@@ -3,9 +3,8 @@ import DefaultModal from 'components/Modals/DefaultModal'
 import ButtonTypes from 'type/Button'
 import { DefaultModalProps } from 'type/Props'
 import Star from 'components/icons/Star'
-import { useCallback, useEffect, useRef } from 'preact/hooks'
+import { useCallback } from 'preact/hooks'
 import Timer from 'components/Main/Timer'
-import PinCode from 'components/PinCode'
 import StoryShareButton from 'components/StoryShareButton'
 import Button from 'components/Button'
 import { quitLobby } from 'helpers/api/battles'
@@ -20,28 +19,20 @@ import env from 'helpers/env'
 
 function ModalBody() {
   const roomData = useAtomValue(battlePrivateLobbyAtom)
-  const ref = useRef<HTMLInputElement[]>([])
-
-  useEffect(() => {
-    if (!roomData?.code || !ref.current.length) return
-    console.log(roomData?.code)
-    console.log(ref.current)
-
-    ref.current.forEach(
-      (inputEl, index) => (inputEl.value = roomData.code[index])
-    )
-  }, [roomData?.code])
-
-  // TODO: make deep-links into tma
-  const shareLink = `${env.VITE_APP_BASE_LINK}?startapp=code-${roomData?.code}`
 
   const onShare = useCallback(() => {
     try {
-      shareURL(shareLink, "Hey, let's battle, I made a private game 😈")
+      if (!roomData?.code) return
+
+      const shareLink = `${env.VITE_APP_BASE_LINK}?startapp=code-${roomData.code}`
+      shareURL(
+        shareLink,
+        `\nHey, let's battle, I made a private game 😈\nUse this code to join 👉 ${roomData.code} 👈`
+      )
     } catch (e) {
       handleError({ e })
     }
-  }, [shareLink])
+  }, [roomData?.code])
 
   return (
     <>
@@ -62,7 +53,13 @@ function ModalBody() {
         <BodyText className="text-white/50 font-semibold text-center">
           To invite someone to play, share link or code
         </BodyText>
-        <PinCode disabled ref={ref} />
+        <div className="flex flex-row gap-x-1">
+          {roomData?.code.split('').map((val) => (
+            <div className="flex items-center justify-center uppercase bg-tertiary rounded-lg w-8 h-10">
+              <Header3>{val}</Header3>
+            </div>
+          ))}
+        </div>
       </div>
 
       <Button

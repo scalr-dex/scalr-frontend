@@ -11,12 +11,21 @@ import StoryShareButton from 'components/StoryShareButton'
 import { useCallback } from 'preact/hooks'
 
 type BattleResultModalProps = {
+  betSize: number
   amount: number
   winnerId: number
   onPlayAgain: () => void
 }
 
-function ModalBody({ amount, didWin }: { amount: number; didWin: boolean }) {
+function ModalBody({
+  amount,
+  didWin,
+  betSize,
+}: {
+  amount: number
+  didWin: boolean
+  betSize: number
+}) {
   return (
     <>
       <Star className="self-center" />
@@ -33,7 +42,7 @@ function ModalBody({ amount, didWin }: { amount: number; didWin: boolean }) {
         rightText={
           <BodyText className={didWin ? 'text-success' : 'text-error'}>
             {didWin ? '+' : '-'}
-            {amount}
+            {didWin ? amount : betSize}
           </BodyText>
         }
       />
@@ -65,15 +74,6 @@ function ModalFooter({
         Play again
       </Button>
       {didWin ? <StoryShareButton /> : null}
-      <Button
-        buttonType={ButtonTypes.ghost}
-        className="py-2"
-        rounded="rounded-full"
-        onClick={onClose}
-        haptic={false}
-      >
-        Close
-      </Button>
     </div>
   )
 }
@@ -85,7 +85,13 @@ export default function (props: DefaultModalProps & BattleResultModalProps) {
   return (
     <DefaultModal
       {...props}
-      body={() => <ModalBody amount={props.amount} didWin={!!didWin} />}
+      body={() => (
+        <ModalBody
+          amount={props.amount}
+          didWin={!!didWin}
+          betSize={props.betSize}
+        />
+      )}
       footer={(onClose) => (
         <ModalFooter
           onClose={onClose}

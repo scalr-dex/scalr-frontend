@@ -4,7 +4,7 @@ import BetAmount from 'components/BattleGame/BetAmount'
 import CrystalsBalanceCard from 'components/BattleGame/CrystalsBalanceCard'
 import CurrentOnline from 'components/BattleGame/CurrentOnline'
 import CardFilled from 'components/CardFilled'
-import BattlesLogo from 'components/icons/BattlesLogo'
+import ScalrBattleLogo from 'components/icons/ScalrBattleLogo'
 import GetHelp from 'components/icons/GetHelp'
 import BattleHelpModal from 'components/Modals/BattleHelpModal'
 import BattleLoadingJoinModal from 'components/Modals/BattleLoadingJoinModal'
@@ -37,7 +37,7 @@ export default function ({ code }: { code?: string }) {
 
   return (
     <div className="flex flex-col h-full px-4 pb-footer-height">
-      <BattlesLogo />
+      <ScalrBattleLogo />
 
       <CrystalsBalanceCard />
 

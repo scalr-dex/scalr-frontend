@@ -1,4 +1,4 @@
-import { writeAtom } from 'helpers/atoms/atomStore'
+import { readAtom, writeAtom } from 'helpers/atoms/atomStore'
 import battleGameAtom, { emptyBattleGame } from 'helpers/atoms/battleGameAtom'
 import priceHistoryAtom from 'helpers/atoms/priceHistoryAtom'
 import { BattlesWebsocketEvents } from 'type/Battles'
@@ -37,12 +37,13 @@ function processRoundEnded(data: BattlesWebsocketEvents) {
 function processBattleEnd(data: BattlesWebsocketEvents) {
   if (!('WinnerTelegramID' in data)) return
 
+  const betSize = readAtom(battleGameAtom).betSize
   writeAtom(battleGameAtom, emptyBattleGame)
 
   clearPreviousBets()
 
   navigate('/battle/lobby', {
-    state: { amount: data.Winnings, id: data.WinnerTelegramID },
+    state: { amount: data.Winnings, id: data.WinnerTelegramID, betSize },
   })
 
   return true
@@ -57,7 +58,7 @@ function processBattleStart(data: BattlesWebsocketEvents) {
     gameStartTime: data.GameStartTimeUnix,
     betSize: data.BetSize,
   }))
-  navigate('/battle/chart')
+  navigate('/battle/versus')
 
   return true
 }

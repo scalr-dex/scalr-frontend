@@ -13,17 +13,19 @@ import { BetAmountProp } from 'type/Battles'
 import ButtonTypes from 'type/Button'
 import { useHistoryState } from 'wouter-preact/use-browser-location'
 
+type AfterGameState = {
+  betSize?: number
+  amount?: number
+  id?: number
+}
+
 export default function ({ betAmount }: BetAmountProp) {
   const setBattleGameState = useSetAtom(battleGameAtom)
   const [publicOpen, setPublicOpen] = useState(false)
   const [privateOpen, setPrivateOpen] = useState(false)
   const [joinRoomOpen, setJoinRoomOpen] = useState(false)
   const [privateReadyOpen, setPrivateReadyOpen] = useState(false)
-  const historyState =
-    useHistoryState<{
-      amount?: number
-      id?: number
-    }>() || {}
+  const historyState = useHistoryState<AfterGameState>() || {}
   const [showBattleResult, setShowBattleResult] = useState(!!historyState.id)
 
   const openPublicModal = useCallback(() => setPublicOpen(true), [])
@@ -88,6 +90,7 @@ export default function ({ betAmount }: BetAmountProp) {
 
       <BattleResultModal
         onPlayAgain={onStartPublic}
+        betSize={historyState.betSize || 0}
         amount={historyState.amount || 0}
         winnerId={historyState.id || 0}
         showModal={showBattleResult}

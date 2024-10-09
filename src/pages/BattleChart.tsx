@@ -6,6 +6,7 @@ import battleGameAtom from 'helpers/atoms/battleGameAtom'
 import BattleBetBlock from 'components/BattleGame/BattleBetBlock'
 import RoundCounter from 'components/BattleGame/RoundCounter'
 import BattleTimer from 'components/BattleGame/BattleTimer'
+import { BodyText, Header4 } from 'components/Text'
 
 export default function () {
   const data = useAtomValue(priceHistoryAtom)
@@ -29,6 +30,14 @@ export default function () {
       <div className="flex flex-col gap-y-5 px-4">
         <RoundCounter currentRound={currentRoundIndex} />
         <BattleTimer endTime={gameStatus.roundSeparators[currentRoundIndex]} />
+
+        <div className="flex flew-row items-center gap-x-2 self-center">
+          <BodyText className="text-white/50">Score:</BodyText>
+          <Header4>
+            {gameStatus.playerScore.map(({ Points }) => Points || 0).join('-')}
+          </Header4>
+        </div>
+
         <BattleBetBlock
           lobbyId={gameStatus.lobbyId}
           loading={loading}

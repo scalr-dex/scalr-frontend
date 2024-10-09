@@ -23,6 +23,7 @@ import { useHashLocation } from 'wouter-preact/use-hash-location'
 import LoaderFullPage from 'components/LoaderFullPage'
 import BattleLobby from 'pages/BattleLobby'
 import BattleChart from 'pages/BattleChart'
+import BattleVersus from 'pages/BattleVersus'
 
 const Onboarding = lazy(() => import('pages/Onboarding'))
 const Airdrop = lazy(() => import('pages/Airdrop'))
@@ -53,6 +54,7 @@ function AppInner({ socket }: { socket: WebSocket }) {
                   )}
                 />
                 <Route path="/battle/chart" component={BattleChart} />
+                <Route path="/battle/versus" component={BattleVersus} />
                 <Route
                   path="/battle/lobby/:code?"
                   component={({ params }) => <BattleLobby {...params} />}
