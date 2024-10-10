@@ -14,9 +14,11 @@ import ChartArrowDown from 'components/icons/ChartArrowDown'
 
 export default function ({
   data,
+  roundSeparators = [],
   loading,
 }: {
   data: GraphTokenData[]
+  roundSeparators?: number[]
   loading: boolean
 }) {
   const loadingAnimation = loading ? 'animate-pulse' : ''
@@ -29,6 +31,11 @@ export default function ({
       yAxis: value[1],
       symbol: userBet ? ChartArrowUp : ChartArrowDown,
     }))
+
+  const roundLines = roundSeparators.map((value) => ({
+    xAxis: value,
+    name: 'Round Separator' + value,
+  }))
 
   return (
     <div
@@ -94,6 +101,21 @@ export default function ({
           type: 'line',
           data,
 
+          markLine: {
+            data: roundLines,
+
+            label: { show: false },
+            tooltip: { show: false },
+            symbol: ['diamond', 'diamond'],
+            symbolSize: 7,
+            lineStyle: {
+              type: 'dotted',
+              color: '#ffffff',
+              width: 2,
+            },
+            animationDurationUpdate: 1000,
+          },
+
           markPoint: {
             data: betPoint,
             itemStyle: {
@@ -109,12 +131,12 @@ export default function ({
 
           showSymbol: false,
           lineStyle: {
-            color: '#B1C9F7',
+            color: '#FFE792',
             width: 4,
             cap: 'round',
             join: 'round',
             shadowBlur: 10,
-            shadowColor: '#4785F6',
+            shadowColor: '#E5FCB4',
             shadowOffsetX: 1,
             shadowOffsetY: 0,
           },

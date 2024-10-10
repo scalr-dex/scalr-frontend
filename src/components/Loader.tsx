@@ -1,13 +1,16 @@
+import { ClassNameProp } from 'type/Props'
+
 export default function ({
   size = 16,
   full,
+  className,
 }: {
   size?: number
   full?: boolean
-}) {
+} & ClassNameProp) {
   const boxSize = full
-    ? 'flex flex-1 w-full h-full items-center justify-center'
-    : ''
+    ? `flex flex-1 w-full h-full items-center justify-center ${className}`
+    : className
 
   return (
     <div className={boxSize}>

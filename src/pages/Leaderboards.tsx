@@ -1,4 +1,3 @@
-import GetHelp from 'components/icons/GetHelp'
 import { Header3 } from 'components/Text'
 import UserList from 'components/LeaderBoards/UserList'
 import YourEpochVolume from 'components/LeaderBoards/YourEpochVolume'
@@ -9,6 +8,7 @@ import useLeaderBoard from 'helpers/hooks/useLeaderBoard'
 import { useAtomValue } from 'jotai'
 import { useState } from 'preact/hooks'
 import FooterSafeArea from 'components/FooterSafeArea'
+import GetHelpFilled from 'components/icons/GetHelpFilled'
 
 export default function () {
   const [modalOpen, setModalOpen] = useState(false)
@@ -23,7 +23,7 @@ export default function () {
 
       <div className="flex flex-row items-center gap-x-1">
         <Header3>Leaderboard</Header3>
-        <GetHelp onClick={() => setModalOpen(true)} size={20} />
+        <GetHelpFilled onClick={() => setModalOpen(true)} size={20} />
       </div>
       <YourPosition
         userName={user?.username}

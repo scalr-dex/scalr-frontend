@@ -1,4 +1,3 @@
-import { useUtils } from '@telegram-apps/sdk-react'
 import Button from 'components/Button'
 import Close from 'components/icons/Close'
 import Copy from 'components/icons/Copy'
@@ -13,6 +12,7 @@ import { useCallback, useState } from 'preact/hooks'
 import ButtonTypes from 'type/Button'
 import { DefaultModalProps } from 'type/Props'
 import CheckMark from 'components/icons/CheckMark'
+import { shareURL } from '@telegram-apps/sdk-react'
 
 function ModalBody() {
   return (
@@ -67,15 +67,14 @@ function ModalHeader({
 }
 
 function ModalFooter({ telegramId }: { telegramId: number }) {
-  const utils = useUtils()
   const [copied, setCopied] = useState(false)
 
   const onShare = useCallback(() => {
-    utils.shareURL(
+    shareURL(
       `${env.VITE_APP_BASE_LINK}?startapp=${telegramId}`,
       '\nPlay with me, predict price movement, and get a token Airdrop!\n😋 +1k Points as a Daily claim gift\n🔥 +1k Points for a friend\n⭐️ +25k Points if a friend has Telegram Premium'
     )
-  }, [telegramId, utils])
+  }, [telegramId])
 
   const onCopy = useCallback(async () => {
     await navigator.clipboard.writeText(

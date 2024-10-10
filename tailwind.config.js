@@ -36,6 +36,7 @@ module.exports = {
         '1/7': '15%',
         '1/5': '20%',
         'safe-bottom': 'var(--safe-area-bottom)',
+        'safe-top': 'var(--safe-area-top)',
         'footer-height': 'var(--footer-height)',
       },
       boxShadow: {
@@ -45,7 +46,7 @@ module.exports = {
         accent: '0 0 6px 2px #4374EC',
       },
       dropShadow: {
-        'glow-accent': '0 0 0.25rem var(--accent)',
+        'glow-accent': '0 0 0.125rem #4374EC',
       },
       screens: {
         se: '375px',
@@ -67,6 +68,8 @@ module.exports = {
         secondary: '#171D26',
         tertiary: '#1D232F',
 
+        'controls-secondary-disabled': '#ffffff64',
+
         'controls-tertiary': '#2E3442',
         'controls-tertiary-hover': '#3E4149',
         'controls-tertiary-focus': '#727B89',
@@ -77,10 +80,14 @@ module.exports = {
         'accent-focus': '#427AE4',
         'accent-disabled': '#345FB2',
         'accent-dimmed': '#B1C9F7',
+        'accent-dark': '#8160e1',
+        'accent-bright': '#00FFFF',
+
         success: '#23CFB2',
         'success-light': '#CBECDE',
         'success-alt': '#E5FCB4',
         'success-dark': '#128873',
+        'success-focus': '#1CA68E',
         error: '#F3617D',
 
         alt: '#FFE792',

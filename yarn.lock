@@ -1481,25 +1481,84 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@telegram-apps/sdk-react@npm:^1.1.3":
-  version: 1.1.3
-  resolution: "@telegram-apps/sdk-react@npm:1.1.3"
+"@telegram-apps/bridge@npm:^1.2.1":
+  version: 1.2.1
+  resolution: "@telegram-apps/bridge@npm:1.2.1"
   dependencies:
-    "@telegram-apps/sdk": ^1.1.3
+    "@telegram-apps/signals": ^1.0.1
+    "@telegram-apps/toolkit": ^1.0.0
+    "@telegram-apps/transformers": ^1.0.1
+    "@telegram-apps/types": ^1.0.1
+  checksum: 2da8d2090ef6f9d534577ab20f54f9365d4099881f6536de3319a9f405abeaf1ff9b9f9d2e8035913bdb3cc3ea12cec146f9e83de91f9ecfdaba0fb343aaa7bb
+  languageName: node
+  linkType: hard
+
+"@telegram-apps/navigation@npm:^1.0.3":
+  version: 1.0.3
+  resolution: "@telegram-apps/navigation@npm:1.0.3"
+  dependencies:
+    "@telegram-apps/bridge": ^1.2.1
+    "@telegram-apps/signals": ^1.0.1
+    "@telegram-apps/toolkit": ^1.0.0
+  checksum: 148454046ceaf799cbe7a0bbc932e9f4757f99c2fc7e92d9c1d6efc022a40569c5fabf97095d617be1bb92d3c2831f1c661406be5a1df30e11a8247dbee088d5
+  languageName: node
+  linkType: hard
+
+"@telegram-apps/sdk-react@npm:^2.0.5":
+  version: 2.0.5
+  resolution: "@telegram-apps/sdk-react@npm:2.0.5"
+  dependencies:
+    "@telegram-apps/sdk": ^2.4.0
   peerDependencies:
     "@types/react": ^17.0.0 || ^18.0.0
     react: ^17.0.0 || ^18.0.0
   peerDependenciesMeta:
     "@types/react":
       optional: true
-  checksum: f02871d90f3e8f97db348fea171429055251009efc2c6daf8abc25ecc57830b8f39ad90856b746ff8e1461159f9f6a1ada6f827e516fb9f1868450ec5dffc2a7
+  checksum: 1997be16ca942273a34398ccba22264e1972cec276338598ff43f5bd36a19ef9a6e5caff424a4cb6be568867a706af71f22871fa65947fc86ddacf2739946ab0
   languageName: node
   linkType: hard
 
-"@telegram-apps/sdk@npm:^1.1.3":
-  version: 1.1.3
-  resolution: "@telegram-apps/sdk@npm:1.1.3"
-  checksum: 5da6d8b6d208117fe4659a8f80d274a83298a7991bd300bfc6edfe65ad0c13330ab32642767d3f5c99073fae01a03a6467cd3acda1d251fb64edb7be0d2f33da
+"@telegram-apps/sdk@npm:^2.4.0":
+  version: 2.4.0
+  resolution: "@telegram-apps/sdk@npm:2.4.0"
+  dependencies:
+    "@telegram-apps/bridge": ^1.2.1
+    "@telegram-apps/navigation": ^1.0.3
+    "@telegram-apps/signals": ^1.0.1
+    "@telegram-apps/transformers": ^1.0.1
+  checksum: 471d86f0f79aa1b34ed98aac5ac43195770e25ca4176b283f7381ebd0401105dbb4a336e6b0952483d8f5abf72c5e8063d7f1e3503ba331a9d9299c1ba9bf653
+  languageName: node
+  linkType: hard
+
+"@telegram-apps/signals@npm:^1.0.1":
+  version: 1.0.1
+  resolution: "@telegram-apps/signals@npm:1.0.1"
+  checksum: 9e73b7ffa8781e452bcbba3c33de8b301fb5e39e02c88b24160026c8206a4dcdb465a309c0645a0f0b548be57789d0a5a054598242097d390021088a66cafe96
+  languageName: node
+  linkType: hard
+
+"@telegram-apps/toolkit@npm:^1.0.0":
+  version: 1.0.0
+  resolution: "@telegram-apps/toolkit@npm:1.0.0"
+  checksum: 46c340d78998c3750c32c4b887061214a308bc771f133b350bc39470a77663ada9f7be603bfecc01a5d31cf60f581224c822cfb73acdc7ca4529b9c8adb036a2
+  languageName: node
+  linkType: hard
+
+"@telegram-apps/transformers@npm:^1.0.1":
+  version: 1.0.1
+  resolution: "@telegram-apps/transformers@npm:1.0.1"
+  dependencies:
+    "@telegram-apps/toolkit": ^1.0.0
+    "@telegram-apps/types": ^1.0.1
+  checksum: 5a1f92dffe72aec4e4c81e537376da69af2ca295bb7cb6bc800f849780f864d5cd1056f1d7d91c54e27b26a1ff2d6df41c6c6e7db38453493b5fef43f39b1009
+  languageName: node
+  linkType: hard
+
+"@telegram-apps/types@npm:^1.0.1":
+  version: 1.0.1
+  resolution: "@telegram-apps/types@npm:1.0.1"
+  checksum: 61f1a8bd024dbcd862fb8b216d98518626268d7102c555af9651689c55497ed10e387091bf181ce5a0280ceb00da8fdcadda5b190c5889d7a683c62b261652fe
   languageName: node
   linkType: hard
 
@@ -5817,6 +5876,18 @@ __metadata:
   languageName: node
   linkType: hard
 
+"react-pin-field@npm:^3.1.5":
+  version: 3.1.5
+  resolution: "react-pin-field@npm:3.1.5"
+  dependencies:
+    react-use-bireducer: ^1.1.1
+  peerDependencies:
+    react: ^18.2.0
+    react-dom: ^18.2.0
+  checksum: 15a543024fd81b61cc9fcd0b1f576a3beb620e3e187b7a8d064d3ed9ee697f77c4d92523eefb0dbf52427347800c525d05ea89012a9346ddb4cf6c5dd0fec07b
+  languageName: node
+  linkType: hard
+
 "react-range@npm:^1.10.0":
   version: 1.10.0
   resolution: "react-range@npm:1.10.0"
@@ -5836,6 +5907,16 @@ __metadata:
     react: ">=18"
     react-dom: ">=18"
   checksum: 982d33918c63e99464623a1b3b023ab5fe18fe341143cb0cb04287e37fd0611c560d9ef451e151ac8ade15a1cda09df09d4c442b3db582965d71aaf42d49b230
+  languageName: node
+  linkType: hard
+
+"react-use-bireducer@npm:^1.1.1":
+  version: 1.1.1
+  resolution: "react-use-bireducer@npm:1.1.1"
+  peerDependencies:
+    react: ^16.8 || ^17 || ^18
+    react-dom: ^16.8 || ^17 || ^18
+  checksum: 06417880953d3e48f8bc4510d067a82acb04028f137d8091b087f5b051972e59e30bebb86abfe6c65ca05651ebefed428b078825a42599b44be716ecbddb23bb
   languageName: node
   linkType: hard
 
@@ -6217,7 +6298,7 @@ __metadata:
     "@sentry/vite-plugin": ^2.22.3
     "@tailwindcss/typography": ^0.5.13
     "@tanstack/react-query": ^5.51.23
-    "@telegram-apps/sdk-react": ^1.1.3
+    "@telegram-apps/sdk-react": ^2.0.5
     "@tonconnect/ui": ^2.0.9
     "@types/lodash": ^4.17.7
     "@types/node": ^20.12.12
@@ -6249,6 +6330,7 @@ __metadata:
     react-countup: ^6.5.3
     react-device-detect: ^2.2.3
     react-ga4: ^2.1.0
+    react-pin-field: ^3.1.5
     react-range: ^1.10.0
     react-toastify: ^10.0.5
     rollup-plugin-visualizer: ^5.12.0

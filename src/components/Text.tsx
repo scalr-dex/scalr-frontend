@@ -1,4 +1,4 @@
-import { useHapticFeedback } from '@telegram-apps/sdk-react'
+import { hapticFeedbackImpactOccurred } from '@telegram-apps/sdk-react'
 import { JSX } from 'preact/jsx-runtime'
 import { ChildrenProp } from 'type/Props'
 
@@ -44,7 +44,7 @@ export function Header4({
   ...props
 }: ChildrenProp & JSX.HTMLAttributes<HTMLHeadingElement>) {
   return (
-    <h4 {...props} className={`font-medium text-xl ${className}`}>
+    <h4 {...props} className={`font-medium text-xl leading-6 ${className}`}>
       {children}
     </h4>
   )
@@ -64,14 +64,9 @@ export function AccentText({
 
 export function BodyText({
   children,
-  className,
   ...props
 }: ChildrenProp & JSX.HTMLAttributes<HTMLSpanElement>) {
-  return (
-    <span {...props} className={className}>
-      {children}
-    </span>
-  )
+  return <span {...props}>{children}</span>
 }
 
 export function SpecialText({
@@ -85,17 +80,30 @@ export function SpecialText({
     leftIcon?: JSX.Element
     withShadow?: boolean
   }) {
-  const haptic = useHapticFeedback()
   const shadow = withShadow ? 'shadow-special' : ''
 
   return (
     <span
       {...props}
       className={`inline-block mx-2 py-2 px-4 rounded-full font-bold hover:scale-105 active:scale-105 transition-all ${className} ${shadow}`}
-      onClick={() => haptic.impactOccurred('heavy')}
+      onClick={() => hapticFeedbackImpactOccurred('heavy')}
     >
       <span className="inline-block mr-1.5 align-middle">{leftIcon}</span>
       {children}
     </span>
+  )
+}
+
+export function GlowText({
+  children,
+  ...props
+}: ChildrenProp & JSX.HTMLAttributes<HTMLHeadingElement>) {
+  return (
+    <Header3
+      {...props}
+      className={`inline text-transparent drop-shadow-glow-accent !bg-clip-text bg-special-gradient ${props.className}`}
+    >
+      {children}
+    </Header3>
   )
 }
