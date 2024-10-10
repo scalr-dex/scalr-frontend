@@ -27,5 +27,5 @@ export function createPrivateLobby(match_bet: number) {
 }
 
 export function joinPrivateLobby(code: string) {
-  return battlesApi.post('lobby/join', { json: { code } })
+  return battlesApi.post('lobby/join', { json: { code: code.toLowerCase() } })
 }
