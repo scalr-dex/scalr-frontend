@@ -41,3 +41,9 @@ export interface BattleGameState {
 }
 
 export type BetAmountProp = { betAmount: number }
+
+export enum BetStatus {
+  betBlocked,
+  canBet,
+  didBet,
+}

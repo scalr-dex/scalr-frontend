@@ -7,10 +7,13 @@ import BattleBetBlock from 'components/BattleGame/BattleBetBlock'
 import RoundCounter from 'components/BattleGame/RoundCounter'
 import BattleTimer from 'components/BattleGame/BattleTimer'
 import { BodyText, Header4 } from 'components/Text'
+import { useState } from 'preact/hooks'
+import { BetStatus } from 'type/Battles'
 
 export default function () {
   const data = useAtomValue(priceHistoryAtom)
   const gameStatus = useAtomValue(battleGameAtom)
+  const [betStatus, setBetStatus] = useState(BetStatus.betBlocked)
 
   const lastIndex = data.length - 1
   const lastValue = data[lastIndex]?.value
@@ -29,7 +32,11 @@ export default function () {
       />
       <div className="flex flex-col gap-y-5 px-4">
         <RoundCounter currentRound={currentRoundIndex} />
-        <BattleTimer endTime={gameStatus.roundSeparators[currentRoundIndex]} />
+        <BattleTimer
+          betStatus={betStatus}
+          setBetStatus={setBetStatus}
+          endTime={gameStatus.roundSeparators[currentRoundIndex]}
+        />
 
         <div className="flex flew-row items-center gap-x-2 self-center">
           <BodyText className="text-white/50">Score:</BodyText>
@@ -43,9 +50,9 @@ export default function () {
         </div>
 
         <BattleBetBlock
+          onBetSuccess={() => setBetStatus(BetStatus.didBet)}
           lobbyId={gameStatus.lobbyId}
-          loading={loading}
-          currentRound={gameStatus?.roundSeparators?.length || 0}
+          loading={loading || betStatus !== BetStatus.canBet}
         />
       </div>
     </div>
