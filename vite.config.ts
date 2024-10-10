@@ -24,7 +24,7 @@ export default defineConfig(({ mode }) => {
             brotliSize: true,
           }),
           sentryVitePlugin({
-            org: 'scalr-79',
+            org: 'scalr',
             project: 'mini-app',
             authToken: String(env['SENTRY_AUTH_TOKEN']),
             reactComponentAnnotation: { enabled: true },
