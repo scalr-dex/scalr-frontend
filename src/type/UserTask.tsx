@@ -35,6 +35,16 @@ export const iconNumberToIcon = {
   13: <img src="img/collabs/electionwars_logo.jpg" className="rounded-sm" />,
   14: <img src="img/collabs/hamsterrepublic_logo.jpg" className="rounded-sm" />,
   15: <img src="img/collabs/farmton_logo.jpg" className="rounded-sm" />,
+  16: <img src="img/collabs/soratopia_logo.png" className="rounded-sm" />,
+  17: <img src="img/collabs/monkeys_logo.jpg" className="rounded-sm" />,
+  18: <img src="img/collabs/shieldeum_logo.png" className="rounded-sm" />,
+  19: <img src="img/collabs/tonchi_logo.jpg" className="rounded-sm" />,
+  20: <img src="img/collabs/beambot_logo.jpg" className="rounded-sm" />,
+  21: <img src="img/collabs/gtap_logo.jpg" className="rounded-sm" />,
+  22: <img src="img/collabs/starduck_logo.jpg" className="rounded-sm" />,
+  23: <img src="img/collabs/greencoin_logo.jpeg" className="rounded-sm" />,
+  24: <img src="img/collabs/moondrop_logo.png" className="rounded-sm" />,
+  25: <img src="img/collabs/happyfarmer_logo.jpg" className="rounded-sm" />,
 } as { [num: number]: JSX.Element }
 
 export const taskStatusToButtonType = {

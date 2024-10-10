@@ -18,13 +18,15 @@ export default defineConfig(({ mode }) => {
       sourcemap: true,
       minify,
       rollupOptions: {
+        external: 'scripts/adsgram.min.js',
         plugins: [
           visualizer({
             gzipSize: true,
             brotliSize: true,
           }),
           sentryVitePlugin({
-            org: 'scalr-79',
+            org: 'scalr',
+            url: env['SENTRY_URL'],
             project: 'mini-app',
             authToken: String(env['SENTRY_AUTH_TOKEN']),
             reactComponentAnnotation: { enabled: true },
