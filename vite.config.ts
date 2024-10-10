@@ -8,6 +8,10 @@ export default defineConfig(({ mode }) => {
   const env = Object.assign(process.env, loadEnv(mode, process.cwd(), ''))
 
   const minify = env['MINIFY'] === undefined ? true : Boolean(env['MINIFY'])
+  const disabledSourceMaps =
+    env['DISABLE_SOURCEMAPS'] === undefined
+      ? false
+      : Boolean(env['DISABLE_SOURCEMAPS'])
 
   return {
     plugins: [preact(), tsconfigPaths()],
@@ -15,7 +19,7 @@ export default defineConfig(({ mode }) => {
       port: 5173,
     },
     build: {
-      sourcemap: true,
+      sourcemap: !disabledSourceMaps,
       minify,
       rollupOptions: {
         plugins: [
@@ -29,7 +33,10 @@ export default defineConfig(({ mode }) => {
             project: 'mini-app',
             authToken: String(env['SENTRY_AUTH_TOKEN']),
             reactComponentAnnotation: { enabled: true },
-            sourcemaps: { filesToDeleteAfterUpload: '**/*.js.map' },
+            sourcemaps: {
+              disable: disabledSourceMaps,
+              filesToDeleteAfterUpload: '**/*.js.map',
+            },
           }),
         ],
       },
