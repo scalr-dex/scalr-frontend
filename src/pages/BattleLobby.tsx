@@ -1,7 +1,6 @@
 import BattleName from 'components/BattleGame/BattleName'
 import BattleStartButtons from 'components/BattleGame/BattleStartButtons'
 import BetAmount from 'components/BattleGame/BetAmount'
-import CrystalsBalanceCard from 'components/BattleGame/CrystalsBalanceCard'
 import CurrentOnline from 'components/BattleGame/CurrentOnline'
 import CardFilled from 'components/CardFilled'
 import ScalrBattleLogo from 'components/icons/ScalrBattleLogo'
@@ -38,8 +37,6 @@ export default function ({ code }: { code?: string }) {
   return (
     <div className="flex flex-col h-full px-4 pb-footer-height">
       <ScalrBattleLogo />
-
-      <CrystalsBalanceCard />
 
       <div className="flex flex-row justify-between items-center mb-4">
         <Header4>Battle amount</Header4>

@@ -1,4 +1,3 @@
-import VersusPlayer from 'components/BattleGame/VersusPlayer'
 import ButtonSmall from 'components/ButtonSmall'
 import BattleLogo from 'components/icons/BattleLogo'
 import ScalrCoin from 'components/icons/coins/ScalrCoin'
@@ -30,7 +29,9 @@ export default function () {
       <div className="relative">
         <Lightning className="absolute -left-6 -top-4 animate-hovering" />
         <BattleLogo />
-        <Lightning className="-scale-x-100 absolute -right-6 -top-4 animate-hovering" />
+        <div className="-scale-x-100 absolute -right-7 -top-4">
+          <Lightning className="animate-hovering" />
+        </div>
       </div>
       <Header3>The battle will start in:</Header3>
       <Header3 className="text-accent-bright">{formatted}</Header3>
@@ -42,12 +43,6 @@ export default function () {
       >
         Points: {formatUSA(gameStatus.betSize)}
       </ButtonSmall>
-
-      <div className="flex flex-row gap-x-12">
-        {gameStatus?.playerScore.map(({ TelegramID }) => (
-          <VersusPlayer player={String(TelegramID)} />
-        ))}
-      </div>
     </div>
   )
 }

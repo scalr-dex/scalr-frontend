@@ -7,7 +7,6 @@ import ButtonTypes from 'type/Button'
 import { DefaultModalProps } from 'type/Props'
 import Loader from 'components/Loader'
 import ScalrCoin from 'components/icons/coins/ScalrCoin'
-import DoublePeople from 'components/icons/DoublePeople'
 import handleError from 'helpers/handleError'
 import { quitLobby } from 'helpers/api/battles'
 import LeftRightText from 'components/LeftRightText'
@@ -27,14 +26,6 @@ function ModalBody({ amount }: BattleSearchModalProps) {
           <>
             <span>{formatUSA(amount)}</span>
             <ScalrCoin className="inline-block" size={16} />
-          </>
-        }
-      />
-      <LeftRightText
-        leftText="Players online"
-        rightText={
-          <>
-            <span>130068</span> <DoublePeople className="inline-block" />
           </>
         }
       />

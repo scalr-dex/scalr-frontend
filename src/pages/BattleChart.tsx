@@ -34,7 +34,11 @@ export default function () {
         <div className="flex flew-row items-center gap-x-2 self-center">
           <BodyText className="text-white/50">Score:</BodyText>
           <Header4>
-            {gameStatus.playerScore.map(({ Points }) => Points || 0).join('-')}
+            {gameStatus.playerScore.length
+              ? gameStatus.playerScore
+                  .map(({ Points }) => Points || 0)
+                  .join('-')
+              : '0-0'}
           </Header4>
         </div>
 

@@ -1,5 +1,5 @@
 import ButtonSmall from 'components/ButtonSmall'
-import Diamond from 'components/icons/Diamond'
+import ScalrCoin from 'components/icons/coins/ScalrCoin'
 import { Dispatch } from 'preact/hooks'
 import ButtonTypes from 'type/Button'
 
@@ -25,7 +25,7 @@ export default function ({
               className="relative transition-all px-6 py-3 w-full m-1.5 z-10"
               buttonType={ButtonTypes.neutral}
               onClick={() => setBetAmount(val)}
-              iconRight={<Diamond />}
+              iconRight={<ScalrCoin size={20} />}
             >
               {val}
             </ButtonSmall>

@@ -1,7 +1,7 @@
 import ButtonSmall from 'components/ButtonSmall'
 import DotsLoader from 'components/DotsLoader'
+import ScalrCoin from 'components/icons/coins/ScalrCoin'
 import TonCoin from 'components/icons/coins/TonCoin'
-import Diamond from 'components/icons/Diamond'
 import StonksArrow from 'components/icons/StonksArrow'
 import { Header2, Header4 } from 'components/Text'
 import { userBetAtom } from 'helpers/atoms/UserAtom'
@@ -59,9 +59,9 @@ export default function ({
 
         {betSize ? (
           <ButtonSmall
-            className="px-6 py-3 w-fit"
+            className="px-3 py-1.5 w-fit"
             buttonType={ButtonTypes.neutral}
-            iconRight={<Diamond />}
+            iconRight={<ScalrCoin size={20} />}
           >
             {betSize}
           </ButtonSmall>

@@ -6,19 +6,11 @@ export default function ({
   step = 1,
   format = 'mm:ss',
 }: {
-  endTime: number | undefined
+  endTime: number
   step?: number
   format?: string
 }) {
-  const [time, setTime] = useState(0)
-
-  const shouldExit = !endTime || time !== 0
-
-  useEffect(() => {
-    if (shouldExit) return
-
-    setTime(dayjs(endTime).diff(dayjs(), 'seconds'))
-  }, [endTime, shouldExit])
+  const [time, setTime] = useState(dayjs(endTime).diff(dayjs(), 'seconds'))
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -33,7 +25,7 @@ export default function ({
     return () => {
       clearInterval(interval)
     }
-  }, [setTime, shouldExit, step, time])
+  }, [setTime, step, time])
 
   return { time, formatted: dayjs({ seconds: time }).format(format) }
 }

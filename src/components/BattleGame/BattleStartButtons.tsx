@@ -31,10 +31,10 @@ export default function ({ betAmount }: BetAmountProp) {
   const openPublicModal = useCallback(() => setPublicOpen(true), [])
   const onStartPublic = useCallback(async () => {
     try {
-      const { LobbyID, Status } = await joinLobby(betAmount).json()
+      const { lobby_id, status } = await joinLobby(betAmount).json()
 
-      setBattleGameState((prev) => ({ ...prev, lobbyId: LobbyID }))
-      if (Status === 'waiting') openPublicModal()
+      setBattleGameState((prev) => ({ ...prev, lobbyId: lobby_id }))
+      if (status === 'waiting') openPublicModal()
     } catch (e) {
       handleError({
         e,

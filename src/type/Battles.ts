@@ -20,9 +20,10 @@ export type BattlesWebsocketEvents =
   | BattleEndWs
 
 export interface LobbyData {
-  NumOfPlayers: number
-  LobbyID: string
-  Status: 'waiting' | 'complete'
+  num_of_players: number
+  lobby_id: string
+  status: 'waiting' | 'complete'
+  expire_time: number
 }
 
 export type BattleUser = PublicUser & {

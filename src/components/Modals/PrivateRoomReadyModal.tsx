@@ -12,10 +12,10 @@ import Share from 'components/icons/Share'
 import { shareURL } from '@telegram-apps/sdk-react'
 import handleError from 'helpers/handleError'
 import ButtonSmall from 'components/ButtonSmall'
-import Diamond from 'components/icons/Diamond'
 import { useAtomValue } from 'jotai'
 import { battlePrivateLobbyAtom } from 'helpers/atoms/battleGameAtom'
 import env from 'helpers/env'
+import ScalrCoin from 'components/icons/coins/ScalrCoin'
 
 function ModalBody() {
   const roomData = useAtomValue(battlePrivateLobbyAtom)
@@ -37,14 +37,14 @@ function ModalBody() {
   return (
     <>
       <div className="flex flex-col w-full items-center justify-center gap-y-4">
-        <Timer endTime={roomData?.lobbyEndTime} />
+        {roomData ? <Timer endTime={roomData.lobbyEndTime} /> : null}
 
         <Star />
 
         <ButtonSmall
           className="px-6 py-3 w-fit"
           buttonType={ButtonTypes.neutral}
-          iconRight={<Diamond />}
+          iconRight={<ScalrCoin size={20} />}
         >
           {roomData?.betAmount}
         </ButtonSmall>
