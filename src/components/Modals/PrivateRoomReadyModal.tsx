@@ -83,5 +83,7 @@ function ModalBody() {
 }
 
 export default function (props: DefaultModalProps) {
-  return <DefaultModal {...props} body={ModalBody} />
+  return (
+    <DefaultModal {...props} onCloseCallback={quitLobby} body={ModalBody} />
+  )
 }

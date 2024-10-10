@@ -25,7 +25,7 @@ export default function () {
   }, [])
 
   return (
-    <div className="flex flex-col gap-y-2 items-center justify-center h-screen">
+    <div className="flex flex-col gap-y-2 items-center justify-center h-full">
       <div className="relative">
         <Lightning className="absolute -left-6 -top-4 animate-hovering" />
         <BattleLogo />

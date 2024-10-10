@@ -13,6 +13,7 @@ function DefaultHeader({ onClose }: { onClose: () => void }) {
 export default function ({
   showModal,
   setShowModal,
+  onCloseCallback,
   header = (onClose: () => void) => <DefaultHeader onClose={onClose} />,
   body,
   footer,
@@ -21,7 +22,10 @@ export default function ({
   body: () => JSX.Element
   footer?: (onClose: () => void) => JSX.Element
 }) {
-  const onClose = () => setShowModal(false)
+  const onClose = () => {
+    onCloseCallback?.()
+    setShowModal(false)
+  }
 
   return (
     <dialog

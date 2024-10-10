@@ -71,6 +71,7 @@ export default function ({
     <DefaultModal
       showModal={showModal}
       setShowModal={setShowModal}
+      onCloseCallback={onClose}
       header={() => <ModalHeader onClose={onClose} />}
       body={() => <ModalBody amount={amount} />}
       footer={() => <ModalFooter onClose={onClose} />}

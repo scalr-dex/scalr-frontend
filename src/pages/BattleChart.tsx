@@ -20,7 +20,7 @@ export default function () {
   const currentRoundIndex = gameStatus.roundSeparators.length - 1
 
   return (
-    <div className="flex flex-col h-screen">
+    <div className="flex flex-col h-full">
       <TokenPrice price={lastValue?.[1]} betSize={gameStatus.betSize} />
       <Chart
         data={data}

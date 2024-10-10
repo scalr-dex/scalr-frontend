@@ -14,7 +14,7 @@ export default function () {
   const loading = !data.length
 
   return (
-    <div className="flex flex-col h-screen">
+    <div className="flex flex-col h-full">
       <TokenPrice price={lastValue?.[1]} />
       <Chart data={data} loading={loading} />
       <BetBlock loading={loading} roundStart={lastValue} />
