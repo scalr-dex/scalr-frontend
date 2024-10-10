@@ -3,66 +3,65 @@ import ButtonTypes from 'type/Button'
 import TonCoin from 'components/icons/coins/TonCoin'
 import { setTonAddress } from 'helpers/api/user'
 import handleError from 'helpers/handleError'
-import { useTonConnectUI, useTonAddress } from 'lib/@tonconnect/ui-react'
 import { useEffect, useCallback, useState } from 'preact/hooks'
 import Disconnect from 'components/icons/Disconnect'
 import Copy from 'components/icons/Copy'
 import truncate from 'helpers/truncate'
 import CheckMark from 'components/icons/CheckMark'
+import useTonConnect from 'helpers/hooks/useTonConnect'
 
 export default function () {
-  const [tonConnectUI] = useTonConnectUI()
-  const userAddress = useTonAddress()
+  const { address, tonConnect } = useTonConnect()
   const [copied, setCopied] = useState(false)
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    void tonConnectUI.connectionRestored.finally(() => setLoading(false))
-  }, [tonConnectUI.connectionRestored])
+    void tonConnect.connectionRestored.finally(() => setLoading(false))
+  }, [tonConnect.connectionRestored])
 
   useEffect(() => {
     const setAddress = async () => {
       try {
-        if (userAddress) await setTonAddress(userAddress)
+        if (address) await setTonAddress(address)
       } catch (e) {
         handleError({
           e,
           toastMessage:
             'Failed to update your ton address, please try again 😥',
         })
-        await tonConnectUI.disconnect()
+        await tonConnect.disconnect()
       }
     }
 
     void setAddress()
-  }, [tonConnectUI, userAddress])
+  }, [address, tonConnect])
 
   const onConnect = useCallback(async () => {
-    await tonConnectUI.openModal()
-  }, [tonConnectUI])
+    await tonConnect.openModal()
+  }, [tonConnect])
 
   const onCopy = useCallback(async () => {
-    await navigator.clipboard.writeText(userAddress)
+    await navigator.clipboard.writeText(address)
     setCopied(true)
     setTimeout(() => setCopied(false), 1000)
-  }, [userAddress])
+  }, [address])
 
   const onDisconnect = useCallback(async () => {
-    await tonConnectUI.disconnect()
-  }, [tonConnectUI])
+    await tonConnect.disconnect()
+  }, [tonConnect])
 
-  const padding = userAddress ? '!px-16' : ''
+  const padding = address ? '!px-16' : ''
 
   return (
     <div className="flex flex-row items-center gap-x-4 w-full">
       <Button
-        onClick={userAddress ? onCopy : onConnect}
+        onClick={address ? onCopy : onConnect}
         className={`!w-full font-bold !font-accent ${padding}`}
         buttonType={copied ? ButtonTypes.success : ButtonTypes.accent}
         isLoading={loading}
         rounded="rounded-full"
         iconLeft={
-          userAddress ? (
+          address ? (
             copied ? (
               <CheckMark />
             ) : (
@@ -73,9 +72,9 @@ export default function () {
           )
         }
       >
-        {userAddress ? truncate({ fullString: userAddress }) : 'Connect Wallet'}
+        {address ? truncate({ fullString: address }) : 'Connect Wallet'}
       </Button>
-      {userAddress ? (
+      {address ? (
         <Button className="!rounded-full !w-16" onClick={onDisconnect}>
           <Disconnect />
         </Button>

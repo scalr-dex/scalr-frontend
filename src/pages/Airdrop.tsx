@@ -2,10 +2,8 @@ import Coin3D from 'components/Coin3D'
 import FooterSafeArea from 'components/FooterSafeArea'
 import { BodyText, Header1, Header3, Header4 } from 'components/Text'
 import TonConnect from 'components/TonConnect'
-import env from 'helpers/env'
-import { TonConnectUIProvider } from 'lib/@tonconnect/ui-react'
 
-function AirDropInner() {
+export default function () {
   return (
     <div className="flex flex-col h-full w-full items-center justify-center gap-y-4 text-center px-4">
       <Header1>Scalr Airdrop</Header1>
@@ -26,19 +24,5 @@ function AirDropInner() {
       </span>
       <FooterSafeArea />
     </div>
-  )
-}
-
-export default function () {
-  return (
-    <TonConnectUIProvider
-      manifestUrl={`${location.origin}/tonconnect-manifest.json`}
-      actionsConfiguration={{
-        twaReturnUrl: env.VITE_APP_BASE_LINK,
-      }}
-      uiPreferences={{ theme: 'DARK' }}
-    >
-      <AirDropInner />
-    </TonConnectUIProvider>
   )
 }
