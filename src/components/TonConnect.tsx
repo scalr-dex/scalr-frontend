@@ -1,14 +1,13 @@
 import Button from 'components/Button'
 import ButtonTypes from 'type/Button'
-import TonCoin from 'components/icons/coins/TonCoin'
 import { setTonAddress } from 'helpers/api/user'
 import handleError from 'helpers/handleError'
 import { useTonConnectUI, useTonAddress } from 'lib/@tonconnect/ui-react'
 import { useEffect, useCallback, useState } from 'preact/hooks'
 import Disconnect from 'components/icons/Disconnect'
-import Copy from 'components/icons/Copy'
 import truncate from 'helpers/truncate'
 import CheckMark from 'components/icons/CheckMark'
+import ButtonSmall from 'components/ButtonSmall'
 
 export default function () {
   const [tonConnectUI] = useTonConnectUI()
@@ -51,31 +50,27 @@ export default function () {
     await tonConnectUI.disconnect()
   }, [tonConnectUI])
 
-  const padding = userAddress ? '!px-16' : ''
-
   return (
-    <div className="flex flex-row items-center gap-x-4 w-full">
-      <Button
+    <div className="flex flex-row items-center gap-x-1 w-full justify-end">
+      <ButtonSmall
         onClick={userAddress ? onCopy : onConnect}
-        className={`!w-full !rounded-full !font-bold !font-accent ${padding}`}
-        buttonType={copied ? ButtonTypes.success : ButtonTypes.accent}
+        className={`px-1.5 py-1.5 !rounded-full text-xs !font-accent`}
+        buttonType={copied ? ButtonTypes.success : ButtonTypes.secondary}
         isLoading={loading}
-        iconLeft={
-          userAddress ? (
-            copied ? (
-              <CheckMark />
-            ) : (
-              <Copy size={20} />
-            )
-          ) : (
-            <TonCoin size={36} />
-          )
-        }
+        iconLeft={copied ? <CheckMark size={16} /> : null}
       >
-        {userAddress ? truncate({ fullString: userAddress }) : 'Connect Wallet'}
-      </Button>
+        {copied
+          ? 'Copied!'
+          : userAddress
+            ? truncate({ fullString: userAddress })
+            : 'Connect Wallet'}
+      </ButtonSmall>
       {userAddress ? (
-        <Button className="!rounded-full !w-16" onClick={onDisconnect}>
+        <Button
+          buttonType={ButtonTypes.secondary}
+          className="!rounded-full !w-7 !h-7 !p-1"
+          onClick={onDisconnect}
+        >
           <Disconnect />
         </Button>
       ) : null}

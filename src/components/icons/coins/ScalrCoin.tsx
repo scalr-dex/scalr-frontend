@@ -1,8 +1,16 @@
-export default function ({ size = 28 }: { size?: number }) {
+export default function ({
+  size = 28,
+  width,
+  height,
+}: {
+  size?: number
+  width?: number
+  height?: number
+}) {
   return (
     <svg
-      width={size}
-      height={size}
+      width={width || size}
+      height={height || size}
       viewBox="0 0 28 28"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"

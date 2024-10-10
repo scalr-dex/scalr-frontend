@@ -8,7 +8,6 @@ import UserAtom from 'helpers/atoms/UserAtom'
 import useLeaderBoard from 'helpers/hooks/useLeaderBoard'
 import { useAtomValue } from 'jotai'
 import { useState } from 'preact/hooks'
-import FooterSafeArea from 'components/FooterSafeArea'
 
 export default function () {
   const [modalOpen, setModalOpen] = useState(false)
@@ -18,7 +17,7 @@ export default function () {
   const loading = status === 'pending'
 
   return (
-    <div className="flex flex-col px-4 gap-y-10">
+    <div className="flex flex-col px-4 gap-y-10 pb-footer-height">
       <YourEpochVolume points={data?.user?.points} endTime={data?.endTime} />
 
       <div className="flex flex-row items-center gap-x-1">
@@ -32,7 +31,6 @@ export default function () {
       />
       <UserList users={data?.lb} loading={loading} />
       <LeaderBoardsFaqModal showModal={modalOpen} setShowModal={setModalOpen} />
-      <FooterSafeArea />
     </div>
   )
 }

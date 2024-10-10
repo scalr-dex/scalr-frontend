@@ -11,7 +11,6 @@ import UserTask from 'type/UserTask'
 import { useAutoAnimate } from '@formkit/auto-animate/react'
 import sortTasks from 'helpers/sortTasks'
 import AdBlock from 'components/Tasks/AdBlock'
-import FooterSafeArea from 'components/FooterSafeArea'
 
 export default function () {
   const [parent] = useAutoAnimate()
@@ -28,7 +27,7 @@ export default function () {
   )
 
   return (
-    <div className="flex flex-col flex-1 gap-y-8 px-4">
+    <div className="flex flex-col flex-1 gap-y-8 px-4 pb-footer-height">
       <div className="flex flex-col gap-y-4 w-full items-center text-center">
         <Logo size={68} />
         <Header2>Tasks available</Header2>
@@ -43,7 +42,6 @@ export default function () {
           ? data.sort(sortTasks).map(renderTask)
           : [...Array(5)].map(() => <TaskSkeleton />)}
       </div>
-      <FooterSafeArea />
     </div>
   )
 }

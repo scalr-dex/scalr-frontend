@@ -31,11 +31,15 @@ module.exports = {
         xxs: '0.625rem',
         '4.5xl': ['2.5rem', { lineHeight: '3rem' }],
       },
+      lineHeight: {
+        'extra-tight': '0.75',
+      },
       spacing: {
         '1/10': '10%',
         '1/7': '15%',
         '1/5': '20%',
         'safe-bottom': 'var(--safe-area-bottom)',
+        'safe-top': 'var(--safe-area-top)',
         'footer-height': 'var(--footer-height)',
       },
       boxShadow: {
@@ -53,12 +57,13 @@ module.exports = {
       inset: {
         'safe-bottom': 'var(--safe-area-bottom)',
         'footer-height': 'var(--footer-height)',
+        'safe-top': 'var(--safe-area-top)',
       },
       background: {
         'border-gradient':
           'linear-gradient(white, white) padding-box, linear-gradient(to right, darkblue, darkorchid) border-box',
       },
-      margin: { 1.5: '1.5px', 'safe-bottom': 'var(--safe-area-bottom)' },
+      margin: { 1.5: '1.5px' },
       borderWidth: {
         1.5: '1.5px',
       },

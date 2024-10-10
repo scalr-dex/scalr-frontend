@@ -10,6 +10,7 @@ export default function ({
   iconRight,
   children,
   className,
+  innerClassName,
   isLoading,
   disabled,
   allowDisabledClick,
@@ -29,7 +30,9 @@ export default function ({
   )
 
   const content = (
-    <div className="flex flex-row w-full items-center justify-center gap-x-1">
+    <div
+      className={`flex flex-row w-full items-center justify-center gap-x-1 ${innerClassName}`}
+    >
       {iconLeft}
       {children}
       {iconRight}
