@@ -1,4 +1,4 @@
-import { THEME, TonConnectUI } from '@tonconnect/ui'
+import { THEME, TonConnectUI, toUserFriendlyAddress } from '@tonconnect/ui'
 import env from 'helpers/env'
 import { useEffect, useState } from 'preact/hooks'
 
@@ -15,8 +15,21 @@ export default function () {
 
   useEffect(() => {
     const unsubscribe = tonConnect.onStatusChange((walletInfo) => {
-      setAddress(walletInfo?.account.address || '')
+      console.log(walletInfo)
+      setAddress(
+        walletInfo?.account.address
+          ? toUserFriendlyAddress(walletInfo.account.address)
+          : ''
+      )
     })
+
+    void tonConnect.connectionRestored.then(() =>
+      setAddress(
+        tonConnect.account?.address
+          ? toUserFriendlyAddress(tonConnect.account.address)
+          : ''
+      )
+    )
 
     return () => {
       unsubscribe()
