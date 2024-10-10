@@ -15,7 +15,6 @@ export default function () {
 
   useEffect(() => {
     const unsubscribe = tonConnect.onStatusChange((walletInfo) => {
-      console.log(walletInfo)
       setAddress(
         walletInfo?.account.address
           ? toUserFriendlyAddress(walletInfo.account.address)
