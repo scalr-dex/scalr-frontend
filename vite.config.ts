@@ -18,7 +18,6 @@ export default defineConfig(({ mode }) => {
       sourcemap: true,
       minify,
       rollupOptions: {
-        external: 'scripts/adsgram.min.js',
         plugins: [
           visualizer({
             gzipSize: true,
