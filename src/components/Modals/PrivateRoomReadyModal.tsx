@@ -30,10 +30,7 @@ function ModalBody({ onClose }: { onClose: () => void }) {
       'milliseconds'
     )
 
-    const timeout = setTimeout(() => {
-      console.log('closing')
-      onClose()
-    }, timeToClose)
+    const timeout = setTimeout(onClose, timeToClose)
 
     return () => {
       clearTimeout(timeout)
@@ -69,7 +66,7 @@ function ModalBody({ onClose }: { onClose: () => void }) {
   )
 }
 
-function ModalFooter() {
+function ModalFooter({ onClose }: { onClose: () => void }) {
   const roomData = useAtomValue(battlePrivateLobbyAtom)
 
   const shareLink = `${env.VITE_APP_BASE_LINK}?startapp=code-${roomData?.code}`
@@ -103,7 +100,7 @@ function ModalFooter() {
       <StoryShareButton />
       <Button
         buttonType={ButtonTypes.neutral}
-        onClick={quitLobby}
+        onClick={onClose}
         rounded="rounded-full"
       >
         Cancel battle
@@ -118,7 +115,7 @@ export default function (props: DefaultModalProps) {
       {...props}
       onCloseCallback={quitLobby}
       body={(onClose) => <ModalBody onClose={onClose} />}
-      footer={ModalFooter}
+      footer={(onClose) => <ModalFooter onClose={onClose} />}
     />
   )
 }

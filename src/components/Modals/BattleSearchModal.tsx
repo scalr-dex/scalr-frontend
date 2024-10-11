@@ -46,7 +46,7 @@ function ModalFooter({ onClose }: { onClose: () => void }) {
     <Button
       onClick={onClose}
       buttonType={ButtonTypes.secondary}
-      className="!rounded-full"
+      rounded="rounded-full"
     >
       Cancel
     </Button>
