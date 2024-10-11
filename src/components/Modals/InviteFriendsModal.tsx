@@ -1,6 +1,5 @@
 import Button from 'components/Button'
 import Close from 'components/icons/Close'
-import Copy from 'components/icons/Copy'
 import Logo from 'components/icons/Logo'
 import Share from 'components/icons/Share'
 import { AccentText, BodyText, Header3, SpecialText } from 'components/Text'
@@ -8,11 +7,11 @@ import DefaultModal from 'components/Modals/DefaultModal'
 import UserAtom from 'helpers/atoms/UserAtom'
 import env from 'helpers/env'
 import { useAtomValue } from 'jotai'
-import { useCallback, useState } from 'preact/hooks'
+import { useCallback } from 'preact/hooks'
 import ButtonTypes from 'type/Button'
 import { DefaultModalProps } from 'type/Props'
-import CheckMark from 'components/icons/CheckMark'
 import { shareURL } from '@telegram-apps/sdk-react'
+import CopyButton from 'components/CopyButton'
 
 function ModalBody() {
   return (
@@ -67,22 +66,11 @@ function ModalHeader({
 }
 
 function ModalFooter({ telegramId }: { telegramId: number }) {
-  const [copied, setCopied] = useState(false)
-
   const onShare = useCallback(() => {
     shareURL(
       `${env.VITE_APP_BASE_LINK}?startapp=${telegramId}`,
       '\nPlay with me, predict price movement, and get a token Airdrop!\n😋 +1k Points as a Daily claim gift\n🔥 +1k Points for a friend\n⭐️ +25k Points if a friend has Telegram Premium'
     )
-  }, [telegramId])
-
-  const onCopy = useCallback(async () => {
-    await navigator.clipboard.writeText(
-      `${env.VITE_APP_BASE_LINK}?startapp=${telegramId}`
-    )
-
-    setCopied(true)
-    setTimeout(() => setCopied(false), 1500)
   }, [telegramId])
 
   return (
@@ -96,14 +84,10 @@ function ModalFooter({ telegramId }: { telegramId: number }) {
       >
         Send link
       </Button>
-      <Button
-        onClick={onCopy}
-        buttonType={copied ? ButtonTypes.success : ButtonTypes.secondary}
-        className="!rounded-full"
-        iconRight={copied ? <CheckMark /> : <Copy />}
-      >
-        {copied ? 'Copied' : 'Copy link'}
-      </Button>
+
+      <CopyButton
+        textToCopy={`${env.VITE_APP_BASE_LINK}?startapp=${telegramId}`}
+      />
     </div>
   )
 }

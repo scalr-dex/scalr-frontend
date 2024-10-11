@@ -1,7 +1,6 @@
 import BattleName from 'components/BattleGame/BattleName'
 import BattleStartButtons from 'components/BattleGame/BattleStartButtons'
 import BetAmount from 'components/BattleGame/BetAmount'
-import CurrentOnline from 'components/BattleGame/CurrentOnline'
 import CardFilled from 'components/CardFilled'
 import ScalrBattleLogo from 'components/icons/ScalrBattleLogo'
 import GetHelp from 'components/icons/GetHelp'
@@ -47,7 +46,6 @@ export default function ({ code }: { code?: string }) {
       </div>
 
       <CardFilled className="flex-col gap-y-6 items-center mb-6">
-        <CurrentOnline />
         <BetAmount betAmount={betAmount} setBetAmount={setBetAmount} />
         <BattleName />
       </CardFilled>
