@@ -4,6 +4,7 @@ import ButtonTypes from 'type/Button'
 import { useCallback, useState } from 'preact/hooks'
 import BetDirection from 'type/BetDirection'
 import { placeBattleBet } from 'helpers/api/battles'
+import handleError from 'helpers/handleError'
 
 export default function ({
   loading,
@@ -20,14 +21,17 @@ export default function ({
 
   const onClick = useCallback(
     async (direction: BetDirection) => {
-      setProcessingBet(true)
+      try {
+        setProcessingBet(true)
 
-      const success = await placeBattleBet({ direction, lobbyId })
+        await placeBattleBet({ direction, lobbyId })
 
-      setProcessingBet(false)
-      if (!success) return
-
-      onBetSuccess()
+        onBetSuccess()
+      } catch (e) {
+        handleError({ e, toastMessage: 'Failed to bet :(' })
+      } finally {
+        setProcessingBet(false)
+      }
     },
     [lobbyId, onBetSuccess]
   )

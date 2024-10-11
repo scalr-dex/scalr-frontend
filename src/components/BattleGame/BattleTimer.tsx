@@ -1,7 +1,16 @@
 import { BodyText, Header4 } from 'components/Text'
 import dayjs from 'dayjs'
+import useCountDown from 'helpers/hooks/useCountDown'
 import { Dispatch, useEffect } from 'preact/hooks'
 import { BetStatus } from 'type/Battles'
+
+const bettingDuration = 5000
+
+function BettingTimer() {
+  const { time } = useCountDown({ endTime: Date.now() + bettingDuration })
+
+  return <>{time}</>
+}
 
 export default function BattleTimer({
   setBetStatus,
@@ -27,7 +36,7 @@ export default function BattleTimer({
       <BodyText className="text-white/50">
         {bettingTime ? 'Betting time left:' : 'Result time left:'}
       </BodyText>
-      <Header4>{bettingTime ? 5 : time} sec</Header4>
+      <Header4>{bettingTime ? <BettingTimer /> : time} sec</Header4>
     </div>
   )
 }
