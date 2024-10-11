@@ -7,18 +7,23 @@ import { getTrackBackground, Range } from 'react-range'
 export default function ({
   value,
   setValue,
+  percent,
   userBalance,
   ...props
 }: {
   value: number
   setValue: (num: number) => void
+  percent: number
   userBalance: number | undefined
 } & JSX.HTMLAttributes<HTMLInputElement>) {
+<<<<<<< Updated upstream
   const haptic = useHapticFeedback()
 
   const betPercent =
     userBalance && value ? ((value / userBalance) * 100).toFixed(0) : 0
 
+=======
+>>>>>>> Stashed changes
   const inputProps = {
     min: 0,
     max: userBalance || 1000,
@@ -36,7 +41,7 @@ export default function ({
       <div className="flex flex-row items-center justify-between mb-1">
         <span className="text-xs">
           <AccentText className="opacity-50 font-bold">Your bet </AccentText>
-          <AccentText>{betPercent}%</AccentText>
+          <AccentText>{percent.toFixed(0)}%</AccentText>
         </span>
 
         <AccentText className="text-sm">{formatUSA(value)} pts</AccentText>
