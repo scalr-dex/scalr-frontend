@@ -151,8 +151,14 @@ html {
 .w-8 {
   width: 2rem;
 }
+.w-28 {
+  width: 7rem;
+}
 .h-8 {
   height: 2rem;
+}
+.h-28 {
+  height: 7rem;
 }
 .h-screen {
   height: 100dvh !important;

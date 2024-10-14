@@ -69,7 +69,7 @@ const avatars = [
 ] as const
 
 const notoMoji = new Notomoji({ data, type: 'individual' })
-const defaultVal = { ...avatars[0], svg: notoMoji.url(avatars[0].emoji) }
+const defaultOutput = { ...avatars[0], svg: notoMoji.url(avatars[0].emoji) }
 
 function hashCode(text: string) {
   let hash = 0
@@ -82,16 +82,18 @@ function hashCode(text: string) {
   return hash
 }
 
-export default function (str?: string): PfpStoreValue {
-  if (!str) return defaultVal
-  const storedValue = readAtom(pfpStore)[str]
-  if (storedValue) return storedValue || defaultVal
+export default function (value?: string | number): PfpStoreValue {
+  if (!value) return defaultOutput
+  const safeVal = String(value)
 
-  const avatarIndex = Math.abs(hashCode(str.toLowerCase()) % avatars.length)
+  const storedValue = readAtom(pfpStore)[safeVal]
+  if (storedValue) return storedValue || defaultOutput
+
+  const avatarIndex = Math.abs(hashCode(safeVal.toLowerCase()) % avatars.length)
   const avatar = avatars[avatarIndex ?? 0]
 
   const toWrite = { ...avatar, svg: notoMoji.url(avatar.emoji) }
 
-  writeAtom(pfpStore, { [str]: toWrite })
+  writeAtom(pfpStore, { [safeVal]: toWrite })
   return toWrite
 }

@@ -1,3 +1,4 @@
+import VersusAllPlayers from 'components/BattleGame/VersusAllPlayers'
 import ButtonSmall from 'components/ButtonSmall'
 import BattleLogo from 'components/icons/BattleLogo'
 import ScalrCoin from 'components/icons/coins/ScalrCoin'
@@ -43,6 +44,8 @@ export default function () {
       >
         Points: {formatUSA(gameStatus.betSize)}
       </ButtonSmall>
+
+      <VersusAllPlayers gameStatus={gameStatus} />
     </div>
   )
 }

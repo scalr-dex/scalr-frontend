@@ -36,32 +36,32 @@ export default function ({
 
   const betPoint = data
     .filter(({ userBet }) => userBet !== undefined)
-    .map(({ value, name, userBet, userIndex }) => {
-      const battleBet = userIndex !== undefined
-
+    .map(({ value, name, userBet, battleBet }) => {
       return {
         name,
         xAxis: value[0],
         yAxis: value[1],
         symbol: battleBet
-          ? 'image://' + emojiAvatarForString(String(userIndex)).svg
+          ? 'image://' + emojiAvatarForString(battleBet.userId).svg
           : userBet
             ? ChartArrowUp
             : ChartArrowDown,
         symbolSize: battleBet ? 40 : 16,
         symbolOffset: battleBet
-          ? [0, userIndex ? symbolOffset : -symbolOffset]
+          ? [0, battleBet.userIndex ? symbolOffset : -symbolOffset]
           : 0,
         shadowColor: battleBet ? 'none' : '#fff',
         shadowBlur: battleBet ? 0 : 10,
         shadowOffsetX: battleBet ? 0 : 1,
         shadowOffsetY: 0,
         label: {
-          show: battleBet,
-          position: userIndex ? ('top' as const) : ('bottom' as const),
-          color: userBet ? '#23CFB2' : '#F3617D',
+          show: battleBet !== undefined,
+          position: battleBet?.userIndex
+            ? ('top' as const)
+            : ('bottom' as const),
+          color: battleBet?.direction ? '#23CFB2' : '#F3617D',
           fontWeight: 700,
-          formatter: userBet ? 'UP' : 'DOWN',
+          formatter: battleBet?.direction ? 'UP' : 'DOWN',
         },
       }
     })

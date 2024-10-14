@@ -1,4 +1,6 @@
-export default function () {
+import { ClassNameProp } from 'type/Props'
+
+export default function ({ className }: ClassNameProp) {
   return (
     <svg
       width="172"
@@ -6,6 +8,7 @@ export default function () {
       viewBox="0 0 172 136"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
+      className={className}
     >
       <g filter="url(#filter0_d_3267_85927)">
         <mask

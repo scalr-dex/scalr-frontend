@@ -28,7 +28,7 @@ export default function ({
 
         onBetSuccess()
       } catch (e) {
-        handleError({ e, toastMessage: 'Failed to bet :(' })
+        handleError({ e })
       } finally {
         setProcessingBet(false)
       }

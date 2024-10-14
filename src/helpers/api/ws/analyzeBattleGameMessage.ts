@@ -6,6 +6,7 @@ import { navigate } from 'wouter-preact/use-hash-location'
 import getBetPoint from 'helpers/chart/getBetPoint'
 import clearPreviousBets from 'helpers/chart/clearPreviousBets'
 import { GraphTokenData } from 'type/TokenState'
+import UserAtom from 'helpers/atoms/UserAtom'
 
 function processBetsConfirmed(data: BattlesWebsocketEvents) {
   if (!('RoundEndsInSeconds' in data)) return
@@ -18,13 +19,17 @@ function processBetsConfirmed(data: BattlesWebsocketEvents) {
 
   const dataToWrite: GraphTokenData[] = []
   const prev = readAtom(priceHistoryAtom)
-  for (const [userIndex, { Bets }] of data.Bets.entries()) {
+  for (const [userIndex, { Bets, TelegramID }] of data.Bets.entries()) {
     const direction = Bets[Bets.length - 1]
+
     dataToWrite.push(
       getBetPoint({
         prev,
-        direction,
-        userIndex: userIndex,
+        battleBet: {
+          userId: TelegramID,
+          direction: Number(direction),
+          userIndex,
+        },
       }).last
     )
   }
@@ -51,7 +56,7 @@ function processBattleEnd(data: BattlesWebsocketEvents) {
   if (!('WinnerTelegramID' in data)) return
 
   const betSize = readAtom(battleGameAtom).betSize
-  writeAtom(battleGameAtom, emptyBattleGame)
+  setTimeout(() => writeAtom(battleGameAtom, emptyBattleGame)) // timeout because score may be processed before empty game
   clearPreviousBets()
 
   navigate('/battle/lobby', {
@@ -65,11 +70,12 @@ function processBattleStart(data: BattlesWebsocketEvents) {
   if (!('GameStartsInSeconds' in data)) return
 
   clearPreviousBets()
+  const user = readAtom(UserAtom)
   writeAtom(battleGameAtom, (prev) => ({
     ...prev,
     users: [
-      { avatar: '🤑', battleName: data.BattleName },
-      { avatar: '🍅', battleName: data.BattleName },
+      { battleName: String(user?.telegramId || 'none') },
+      { battleName: data.BattleName },
     ],
     gameStartTime: data.GameStartsInSeconds,
     betSize: data.BetSize,

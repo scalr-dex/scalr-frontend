@@ -6,9 +6,15 @@ export type TokenStates = TokenState[]
 // value is tuple of [unixDate, price], fot TS purposes we give this type
 export type GraphTokenValue = number[]
 
+export type BattleBet = {
+  userId: number
+  direction: BetDirection
+  userIndex: number
+}
+
 export type GraphTokenData = {
   name: string
   value: GraphTokenValue
   userBet?: BetDirection
-  userIndex?: number | undefined
+  battleBet?: BattleBet | undefined
 }

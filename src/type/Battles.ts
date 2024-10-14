@@ -41,7 +41,7 @@ export interface BattleGameState {
   gameStartTime: number
   roundSeparators: number[]
   betSize: number
-  users: { avatar: string; battleName: string }[] // avatar - base64 or svg, ref: https://echarts.apache.org/en/option.html#series-line.markPoint.symbol
+  users: { battleName: string }[]
   winner?: { id: number; amount: number }
 }
 

@@ -9,6 +9,7 @@ import BattleTimer from 'components/BattleGame/BattleTimer'
 import { BodyText, Header4 } from 'components/Text'
 import { useState } from 'preact/hooks'
 import { BetStatus } from 'type/Battles'
+import env from 'helpers/env'
 
 export default function () {
   const data = useAtomValue(priceHistoryAtom)
@@ -55,6 +56,7 @@ export default function () {
           lobbyId={gameStatus.lobbyId}
           loading={loading || betStatus !== BetStatus.canBet}
         />
+        {env.DEV ? <span>{gameStatus.lobbyId}</span> : null}
       </div>
     </div>
   )
