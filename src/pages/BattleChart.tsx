@@ -31,7 +31,7 @@ export default function () {
         loading={loading}
         lineColor="#FFE792"
       />
-      <div className="flex flex-col gap-y-5 px-4">
+      <div className="flex flex-col gap-y-4 px-4">
         <RoundCounter currentRound={currentRoundIndex} />
         <BattleTimer
           betStatus={betStatus}
