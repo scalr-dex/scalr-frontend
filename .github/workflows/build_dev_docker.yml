@@ -35,6 +35,8 @@ jobs:
           password: ${{ secrets.GHCR_PAT }}
 
       - name: Build and push Docker image
+        environment:
+          name: dev-pages
         env:
           BRANCH: ${{ steps.extract_branch.outputs.branch }}
           COMMIT_MESSAGE: ${{ github.event.head_commit.message }}
@@ -54,3 +56,8 @@ jobs:
           else
             echo "No action defined for this branch/tag."
           fi
+      - name: Trigger Dev Deploy
+        uses: distributhor/workflow-webhook@v3
+        with:
+          webhook_url: ${{ secrets.DEV_DEPLOY_WEBHOOK }}
+          data: '{ "repository": "${{github.event.repository.full_name}}", "number": "${{github.event.number}}", "created_at": "${{github.event.pull_request.created_at}}", "updated_at": "${{github.event.pull_request.updated_at}}" }'
