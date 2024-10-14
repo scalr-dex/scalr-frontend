@@ -10,38 +10,47 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v2
+      - name: Checkout repository
+        uses: actions/checkout@v2
 
-    - name: Set up Docker Buildx
-      uses: docker/setup-buildx-action@v1
-    
-    - name: Extract branch name
-      shell: bash
-      run: echo "branch=${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}}" >> $GITHUB_OUTPUT
-      id: extract_branch
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v1
 
-    - name: Get shortened SHA
-      id: shorten_sha
-      run: |
-        SHORT_SHA=$(echo "${GITHUB_SHA}" | cut -c1-6)
-        echo "::set-output name=short_sha::${SHORT_SHA}"
+      - name: Extract branch name
+        shell: bash
+        run: echo "branch=${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}}" >> $GITHUB_OUTPUT
+        id: extract_branch
 
-    - name: Login to GitHub Container Registry
-      uses: docker/login-action@v1
-      with:
-        registry: ghcr.io
-        username: ${{ secrets.GHCR_USR }}
-        password: ${{ secrets.GHCR_PAT }}
+      - name: Get shortened SHA
+        id: shorten_sha
+        run: |
+          SHORT_SHA=$(echo "${GITHUB_SHA}" | cut -c1-6)
+          echo "::set-output name=short_sha::${SHORT_SHA}"
 
-    - name: Build and push Docker image
-      env:
-        BRANCH: ${{ steps.extract_branch.outputs.branch }}
-        COMMIT_MESSAGE: ${{ github.event.head_commit.message }}
-        GIT_HASH: ${{ steps.shorten_sha.outputs.short_sha }}
-      run: |
-        if [[ $COMMIT_MESSAGE == *"DEPLOY_DEV"* ]]; then
-          docker buildx build --build-arg commit_sha=$GIT_HASH -t ghcr.io/scalr-dex/scalr-frontend:develop . --push
-        else
-          echo "No action defined for this branch/tag."
-        fi
+      - name: Login to GitHub Container Registry
+        uses: docker/login-action@v1
+        with:
+          registry: ghcr.io
+          username: ${{ secrets.GHCR_USR }}
+          password: ${{ secrets.GHCR_PAT }}
+
+      - name: Build and push Docker image
+        env:
+          BRANCH: ${{ steps.extract_branch.outputs.branch }}
+          COMMIT_MESSAGE: ${{ github.event.head_commit.message }}
+          GIT_HASH: ${{ steps.shorten_sha.outputs.short_sha }}
+
+          SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
+          SENTRY_URL: ${{ secrets.SENTRY_URL }}
+          VITE_BACKEND_URL: ${{ secrets.VITE_BACKEND_URL }}
+          VITE_AMPLITUDE_API_KEY: ${{ secrets.VITE_AMPLITUDE_API_KEY }}
+          VITE_VITE_ANALYTICS_KEY: ${{ secrets.VITE_ANALYTICS_KEY }}
+          VITE_APP_BASE_LINK: ${{ secrets.VITE_APP_BASE_LINK }}
+          VITE_SENTRY_DSN: ${{ secrets.VITE_SENTRY_DSN }}
+          VITE_ADSGRAM_BLOCK_ID: ${{secrets. VITE_ADSGRAM_BLOCK_ID }}
+        run: |
+          if [[ $COMMIT_MESSAGE == *"DEPLOY_DEV"* ]]; then
+            docker buildx build --build-arg commit_sha=$GIT_HASH -t ghcr.io/scalr-dex/scalr-frontend:develop . --push
+          else
+            echo "No action defined for this branch/tag."
+          fi
