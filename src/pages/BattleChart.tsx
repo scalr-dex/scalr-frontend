@@ -29,6 +29,7 @@ export default function () {
         data={data}
         roundSeparators={gameStatus.roundSeparators}
         loading={loading}
+        lineColor="#FFE792"
       />
       <div className="flex flex-col gap-y-5 px-4">
         <RoundCounter currentRound={currentRoundIndex} />

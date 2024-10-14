@@ -39,7 +39,10 @@ function getBetFromWsEventData(data: EventData) {
   }
 
   // include bet in chart data to keep it smooth
-  writeAtom(priceHistoryAtom, (prev) => getBetPoint(prev, bet.direction))
+  writeAtom(
+    priceHistoryAtom,
+    (prev) => getBetPoint({ prev, direction: bet.direction }).prev
+  )
   return true
 }
 

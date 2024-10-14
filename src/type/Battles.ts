@@ -1,11 +1,15 @@
 import BetDirection from 'type/BetDirection'
 import { PublicUser } from 'type/User'
 
-export type BattleStartWs = { GameStartTimeUnix: number; BetSize: number }
+export type BattleStartWs = {
+  GameStartsInSeconds: number
+  BetSize: number
+  BattleName: string
+}
 
 export type BetsConfirmedWs = {
   Bets: { TelegramID: number; Bets: boolean[] }[]
-  RoundEndTimeUnix: number
+  RoundEndsInSeconds: number
 }
 
 export type RoundEndedWs = {
@@ -37,6 +41,7 @@ export interface BattleGameState {
   gameStartTime: number
   roundSeparators: number[]
   betSize: number
+  users: { avatar: string; battleName: string }[] // avatar - base64 or svg, ref: https://echarts.apache.org/en/option.html#series-line.markPoint.symbol
   winner?: { id: number; amount: number }
 }
 

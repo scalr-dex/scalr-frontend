@@ -34,7 +34,7 @@ export default function ({ code }: { code?: string }) {
   }, [code, onCodeFromLink])
 
   return (
-    <div className="flex flex-col h-full px-4 pb-footer-height">
+    <div className="flex flex-col h-full justify-center px-4 pb-footer-height">
       <ScalrBattleLogo />
 
       <div className="flex flex-row justify-between items-center mb-4">

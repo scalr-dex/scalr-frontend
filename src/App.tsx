@@ -87,7 +87,7 @@ function AppInner({ socket }: { socket: WebSocket }) {
           autoClose={3000}
           theme="dark"
           toastClassName="!bg-tertiary !rounded-xl !w-[96dvw] !ml-[2dvw] !shadow-super !top-4"
-          draggableDirection="x"
+          draggableDirection="y"
           hideProgressBar
           limit={1}
         />

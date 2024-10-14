@@ -9,28 +9,60 @@ import { EChart } from '@kbox-labs/react-echarts'
 import dayjs from 'dayjs'
 import { GraphTokenData } from 'type/TokenState'
 import { tick } from 'helpers/atoms/priceHistoryAtom'
+import getSvgAvatar from 'helpers/chart/getSvgAvatar'
 import ChartArrowUp from 'components/icons/ChartArrowUp'
 import ChartArrowDown from 'components/icons/ChartArrowDown'
 
+const minMaxY = 0.0005
+const symbolOffset = 36
+
+const colorToShadow: { [color: string]: string } = {
+  '#FFE792': '#E5FCB4',
+  '#B1C9F7': '#4785F6',
+}
+
 export default function ({
   data,
+  lineColor = '#B1C9F7',
   roundSeparators = [],
   loading,
 }: {
   data: GraphTokenData[]
   roundSeparators?: number[]
   loading: boolean
+  lineColor?: string
 }) {
   const loadingAnimation = loading ? 'animate-pulse' : ''
 
   const betPoint = data
     .filter(({ userBet }) => userBet !== undefined)
-    .map(({ value, name, userBet }) => ({
-      name,
-      xAxis: value[0],
-      yAxis: value[1],
-      symbol: userBet ? ChartArrowUp : ChartArrowDown,
-    }))
+    .map(({ value, name, userBet, userIndex }) => {
+      const battleBet = userIndex !== undefined
+
+      return {
+        name,
+        xAxis: value[0],
+        yAxis: value[1],
+        symbol: battleBet
+          ? getSvgAvatar(!!userIndex)
+          : userBet
+            ? ChartArrowUp
+            : ChartArrowDown,
+        symbolSize: battleBet ? [80, 20] : 20,
+        symbolOffset: battleBet
+          ? [0, userIndex ? symbolOffset : -symbolOffset]
+          : 0,
+        label: {
+          show: battleBet,
+          position: userIndex ? ('top' as const) : ('bottom' as const),
+          color: userBet ? '#23CFB2' : '#F3617D',
+          fontWeight: 700,
+          formatter: userBet ? '↗️' : '↘️',
+        },
+      }
+    })
+
+  console.log(betPoint)
 
   const roundLines = roundSeparators.map((value) => ({
     xAxis: value,
@@ -92,8 +124,8 @@ export default function ({
             height: 20,
             formatter: (num) => num.toFixed(4),
           },
-          min: (val) => val.min - 0.0005,
-          max: (val) => val.max + 0.0005,
+          min: (val) => val.min - minMaxY,
+          max: (val) => val.max + minMaxY,
         }}
         series={{
           name: 'Token price',
@@ -113,7 +145,6 @@ export default function ({
               color: '#ffffff',
               width: 2,
             },
-            animationDurationUpdate: 1000,
           },
 
           markPoint: {
@@ -131,12 +162,12 @@ export default function ({
 
           showSymbol: false,
           lineStyle: {
-            color: '#FFE792',
+            color: lineColor,
             width: 4,
             cap: 'round',
             join: 'round',
             shadowBlur: 10,
-            shadowColor: '#E5FCB4',
+            shadowColor: colorToShadow[lineColor],
             shadowOffsetX: 1,
             shadowOffsetY: 0,
           },

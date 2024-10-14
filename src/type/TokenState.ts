@@ -10,4 +10,5 @@ export type GraphTokenData = {
   name: string
   value: GraphTokenValue
   userBet?: BetDirection
+  userIndex?: number | undefined
 }

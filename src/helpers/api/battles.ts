@@ -12,11 +12,16 @@ export function quitLobby() {
   return battlesApi.get('leave')
 }
 
-export function placeBattleBet(json: {
+export function placeBattleBet({
+  direction,
+  lobbyId,
+}: {
   direction: BetDirection
   lobbyId: string
 }) {
-  return battlesApi.post('bet', { json })
+  return battlesApi.post('bet', {
+    json: { direction: !direction, lobby_id: lobbyId },
+  })
 }
 
 export function createPrivateLobby(match_bet: number) {

@@ -5,20 +5,33 @@ import { BattlesWebsocketEvents } from 'type/Battles'
 import { navigate } from 'wouter-preact/use-hash-location'
 import getBetPoint from 'helpers/chart/getBetPoint'
 import clearPreviousBets from 'helpers/chart/clearPreviousBets'
+import { GraphTokenData } from 'type/TokenState'
 
 function processBetsConfirmed(data: BattlesWebsocketEvents) {
-  if (!('RoundEndTimeUnix' in data)) return
+  if (!('RoundEndsInSeconds' in data)) return
 
+  const nextRoundTime = Date.now() + data.RoundEndsInSeconds * 1000
   writeAtom(battleGameAtom, (prev) => ({
     ...prev,
-    roundSeparators: [...prev.roundSeparators, data.RoundEndTimeUnix * 1000],
+    roundSeparators: [...prev.roundSeparators, nextRoundTime],
   }))
 
-  for (const { Bets } of data.Bets) {
-    const latestDirection = Bets[Bets.length - 1]
-    // include bet in chart data to keep it smooth
-    writeAtom(priceHistoryAtom, (prev) => getBetPoint(prev, latestDirection))
+  const dataToWrite: GraphTokenData[] = []
+  const prev = readAtom(priceHistoryAtom)
+  for (const [userIndex, { Bets }] of data.Bets.entries()) {
+    const direction = Bets[Bets.length - 1]
+    dataToWrite.push(
+      getBetPoint({
+        prev,
+        direction,
+        userIndex: userIndex,
+      }).last
+    )
   }
+
+  // make sure to write into the atom only once
+  // include bet in chart data to keep it smooth, we push only latest bet
+  writeAtom(priceHistoryAtom, (prev) => [...prev, ...dataToWrite])
 
   return true
 }
@@ -39,7 +52,6 @@ function processBattleEnd(data: BattlesWebsocketEvents) {
 
   const betSize = readAtom(battleGameAtom).betSize
   writeAtom(battleGameAtom, emptyBattleGame)
-
   clearPreviousBets()
 
   navigate('/battle/lobby', {
@@ -50,12 +62,16 @@ function processBattleEnd(data: BattlesWebsocketEvents) {
 }
 
 function processBattleStart(data: BattlesWebsocketEvents) {
-  if (!('GameStartTimeUnix' in data)) return
+  if (!('GameStartsInSeconds' in data)) return
 
   clearPreviousBets()
   writeAtom(battleGameAtom, (prev) => ({
     ...prev,
-    gameStartTime: data.GameStartTimeUnix,
+    users: [
+      { avatar: '🤑', battleName: data.BattleName },
+      { avatar: '🍅', battleName: data.BattleName },
+    ],
+    gameStartTime: data.GameStartsInSeconds,
     betSize: data.BetSize,
   }))
   navigate('/battle/versus')

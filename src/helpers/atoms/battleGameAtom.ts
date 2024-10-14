@@ -15,6 +15,7 @@ export const emptyBattleGame: BattleGameState = {
   gameStartTime: 0,
   roundSeparators: [],
   betSize: 0,
+  users: [],
 }
 
 export default atom<BattleGameState>(emptyBattleGame)

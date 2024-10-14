@@ -1,14 +1,22 @@
-import { dataMaxLength } from 'helpers/atoms/priceHistoryAtom'
 import { GraphTokenData } from 'type/TokenState'
 
-export default function (prev: GraphTokenData[], direction: boolean) {
+export default function ({
+  prev,
+  direction,
+  userIndex,
+}: {
+  prev: GraphTokenData[]
+  direction: boolean
+  userIndex?: number
+}) {
   const lastIndex = prev.length - 1
   const last = prev[lastIndex]
 
   prev.splice(lastIndex, 1, {
-    name: last.name,
+    name: last.name + '-' + userIndex,
     value: last.value,
     userBet: Number(direction),
+    userIndex,
   })
-  return prev.slice(-dataMaxLength)
+  return { last, prev }
 }

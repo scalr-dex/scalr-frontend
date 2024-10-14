@@ -89,6 +89,7 @@ async function setupUser() {
     })
 
     const user = await response.json<ServerUser>()
+    console.log(user)
     const clientUser = {
       ticket: user.ticket,
       balance: user.points,
