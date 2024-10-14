@@ -9,12 +9,12 @@ import { EChart } from '@kbox-labs/react-echarts'
 import dayjs from 'dayjs'
 import { GraphTokenData } from 'type/TokenState'
 import { tick } from 'helpers/atoms/priceHistoryAtom'
-import getSvgAvatar from 'helpers/chart/getSvgAvatar'
 import ChartArrowUp from 'components/icons/ChartArrowUp'
 import ChartArrowDown from 'components/icons/ChartArrowDown'
+import emojiAvatarForString from 'helpers/emojiAvatarForString'
 
 const minMaxY = 0.0005
-const symbolOffset = 36
+const symbolOffset = 48
 
 const colorToShadow: { [color: string]: string } = {
   '#FFE792': '#E5FCB4',
@@ -44,25 +44,27 @@ export default function ({
         xAxis: value[0],
         yAxis: value[1],
         symbol: battleBet
-          ? getSvgAvatar(!!userIndex)
+          ? 'image://' + emojiAvatarForString(String(userIndex)).svg
           : userBet
             ? ChartArrowUp
             : ChartArrowDown,
-        symbolSize: battleBet ? [80, 20] : 20,
+        symbolSize: battleBet ? 40 : 16,
         symbolOffset: battleBet
           ? [0, userIndex ? symbolOffset : -symbolOffset]
           : 0,
+        shadowColor: battleBet ? 'none' : '#fff',
+        shadowBlur: battleBet ? 0 : 10,
+        shadowOffsetX: battleBet ? 0 : 1,
+        shadowOffsetY: 0,
         label: {
           show: battleBet,
           position: userIndex ? ('top' as const) : ('bottom' as const),
           color: userBet ? '#23CFB2' : '#F3617D',
           fontWeight: 700,
-          formatter: userBet ? '↗️' : '↘️',
+          formatter: userBet ? 'UP' : 'DOWN',
         },
       }
     })
-
-  console.log(betPoint)
 
   const roundLines = roundSeparators.map((value) => ({
     xAxis: value,
@@ -152,12 +154,7 @@ export default function ({
             itemStyle: {
               color: '#fff',
               borderColor: '#fff',
-              shadowBlur: 10,
-              shadowColor: '#fff',
-              shadowOffsetX: 1,
-              shadowOffsetY: 0,
             },
-            symbolSize: 16,
           },
 
           showSymbol: false,

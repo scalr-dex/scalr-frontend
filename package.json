@@ -18,6 +18,7 @@
     "@formkit/auto-animate": "^0.8.2",
     "@kbox-labs/react-echarts": "^1.2.1",
     "@sentry/react": "^8.27.0",
+    "@svgmoji/noto": "^3.2.0",
     "@tanstack/react-query": "^5.51.23",
     "@telegram-apps/sdk-react": "^2.0.5",
     "@tonconnect/ui": "^2.0.9",
@@ -35,6 +36,7 @@
     "react-pin-field": "^3.1.5",
     "react-range": "^1.10.0",
     "react-toastify": "^10.0.5",
+    "svgmoji": "^3.2.0",
     "wouter-preact": "^3.3.1"
   },
   "devDependencies": {
