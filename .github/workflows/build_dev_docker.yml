@@ -9,6 +9,9 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
+    environment:
+      name: dev-pages
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
@@ -35,8 +38,6 @@ jobs:
           password: ${{ secrets.GHCR_PAT }}
 
       - name: Build and push Docker image
-        environment:
-          name: dev-pages
         env:
           BRANCH: ${{ steps.extract_branch.outputs.branch }}
           COMMIT_MESSAGE: ${{ github.event.head_commit.message }}
@@ -56,6 +57,12 @@ jobs:
           else
             echo "No action defined for this branch/tag."
           fi
+  trigger_webhook:
+    runs-on: ubuntu-latest
+    environment:
+      name: dev-pages
+
+    steps:
       - name: Trigger Dev Deploy
         uses: distributhor/workflow-webhook@v3
         with:
