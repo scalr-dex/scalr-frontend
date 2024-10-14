@@ -57,12 +57,6 @@ jobs:
           else
             echo "No action defined for this branch/tag."
           fi
-  trigger_webhook:
-    runs-on: ubuntu-latest
-    environment:
-      name: dev-pages
-
-    steps:
       - name: Trigger Dev Deploy
         uses: distributhor/workflow-webhook@v3
         with:
