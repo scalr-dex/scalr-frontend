@@ -26,6 +26,7 @@ RUN yarn
 
 COPY . .
 
+
 RUN yarn install
 
 RUN yarn build
