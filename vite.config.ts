@@ -10,17 +10,7 @@ export default defineConfig(({ mode }) => {
   const minify = env['MINIFY'] === undefined ? true : Boolean(env['MINIFY'])
 
   return {
-    plugins: [
-      preact(),
-      tsconfigPaths(),
-      [
-        '@babel/plugin-transform-react-jsx',
-        {
-          pragma: 'h',
-          pragmaFrag: 'Fragment',
-        },
-      ] as unknown as Plugin,
-    ],
+    plugins: [preact(), tsconfigPaths()],
     preview: {
       port: 5173,
     },
