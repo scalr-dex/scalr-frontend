@@ -16,5 +16,8 @@
   },
   "editor.quickSuggestions": {
     "strings": true
+  },
+  "[dockerfile]": {
+    "editor.defaultFormatter": "foxundermoon.shell-format"
   }
 }
