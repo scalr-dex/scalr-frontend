@@ -56,18 +56,17 @@ jobs:
           VITE_ADSGRAM_BLOCK_ID: ${{secrets. VITE_ADSGRAM_BLOCK_ID }}
 
         run: |
-          echo "$VITE_ADSGRAM_BLOCK_ID" &&
           docker buildx build \
             --build-arg commit_sha=$GIT_HASH \
             --build-arg NODE_ENV=production \
-            --build-arg SENTRY_AUTH_TOKEN=$SENTRY_AUTH_TOKEN \
-            --build-arg SENTRY_URL=$SENTRY_URL \
-            --build-arg VITE_BACKEND_URL=$VITE_BACKEND_URL \
-            --build-arg VITE_AMPLITUDE_API_KEY=$VITE_AMPLITUDE_API_KEY \
-            --build-arg VITE_VITE_ANALYTICS_KEY=$VITE_VITE_ANALYTICS_KEY \
-            --build-arg VITE_APP_BASE_LINK=$VITE_APP_BASE_LINK \
-            --build-arg VITE_SENTRY_DSN=$VITE_SENTRY_DSN \
-            --build-arg VITE_ADSGRAM_BLOCK_ID=$VITE_ADSGRAM_BLOCK_ID \
+            --build-arg SENTRY_AUTH_TOKEN="$SENTRY_AUTH_TOKEN" \
+            --build-arg SENTRY_URL="$SENTRY_URL" \
+            --build-arg VITE_BACKEND_URL="$VITE_BACKEND_URL" \
+            --build-arg VITE_AMPLITUDE_API_KEY="$VITE_AMPLITUDE_API_KEY" \
+            --build-arg VITE_VITE_ANALYTICS_KEY="$VITE_VITE_ANALYTICS_KEY" \
+            --build-arg VITE_APP_BASE_LINK="$VITE_APP_BASE_LINK" \
+            --build-arg VITE_SENTRY_DSN="$VITE_SENTRY_DSN" \
+            --build-arg VITE_ADSGRAM_BLOCK_ID="$VITE_ADSGRAM_BLOCK_ID" \
             -t ghcr.io/scalr-dex/scalr-frontend:develop . --push
       - name: Trigger Dev Deploy
         uses: distributhor/workflow-webhook@v3
