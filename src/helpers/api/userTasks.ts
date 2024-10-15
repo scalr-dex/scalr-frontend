@@ -4,7 +4,10 @@ import UserTask from 'type/UserTask'
 import { successConfetti } from 'helpers/shootConfetti'
 import TrackerEvents from 'type/TrackerEvents'
 import { track } from 'helpers/api/analytics'
-import { increaseFailAmount } from 'helpers/atoms/taskFailCounter'
+import {
+  clearTaskFails,
+  increaseFailAmount,
+} from 'helpers/atoms/taskFailCounter'
 
 export async function getTasks() {
   try {
@@ -30,6 +33,7 @@ export async function markTaskDone(id: number) {
 export async function claimTask(id: number) {
   try {
     await backendKy().post(`tasks/claim/${id}`)
+    clearTaskFails(id)
     void successConfetti()
     track(TrackerEvents.taskClaimed, id)
   } catch (e) {
