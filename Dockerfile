@@ -26,8 +26,6 @@ RUN yarn
 
 COPY . .
 
-RUN yarn install
-
-RUN yarn build
+EXPOSE 5173
 
 CMD [yarn, prod]
