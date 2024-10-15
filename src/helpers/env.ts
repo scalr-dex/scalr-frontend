@@ -6,6 +6,6 @@ export default cleanEnv(import.meta.env, {
   VITE_APP_BASE_LINK: str(),
   VITE_SENTRY_DSN: str(),
   VITE_ANALYTICS_KEY: str({ default: 'G-EMH5CHPBXL' }),
-  VITE_ADSGRAM_BLOCK_ID: num({ default: 3152 }),
+  VITE_ADSGRAM_BLOCK_ID: num(),
   DEV: bool({ default: import.meta.env.DEV }),
 })
