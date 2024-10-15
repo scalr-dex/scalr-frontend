@@ -503,6 +503,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@babel/runtime@npm:^7.12.5, @babel/runtime@npm:^7.23.8":
+  version: 7.25.7
+  resolution: "@babel/runtime@npm:7.25.7"
+  dependencies:
+    regenerator-runtime: ^0.14.0
+  checksum: 1d6133ed1cf1de1533cfe84a4a8f94525271a0d93f6af4f2cdae14884ec3c8a7148664ddf7fd2a14f82cc4485904a1761821a55875ad241c8b4034e95e7134b2
+  languageName: node
+  linkType: hard
+
 "@babel/template@npm:^7.22.15":
   version: 7.22.15
   resolution: "@babel/template@npm:7.22.15"
@@ -1449,6 +1458,60 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@svgmoji/blob@npm:^3.2.0":
+  version: 3.2.0
+  resolution: "@svgmoji/blob@npm:3.2.0"
+  dependencies:
+    "@babel/runtime": ^7.12.5
+    "@svgmoji/core": ^3.2.0
+  checksum: fff9e6da5db6e3887ac7804bd36d304769c6a4aba069f873127be4a2879f0b93221113e4993b4d7a68046daa15d4ff7a2698ac3d6698dae9f2e4d36294d7967c
+  languageName: node
+  linkType: hard
+
+"@svgmoji/core@npm:^3.2.0":
+  version: 3.2.0
+  resolution: "@svgmoji/core@npm:3.2.0"
+  dependencies:
+    "@babel/runtime": ^7.12.5
+    emojibase: ^5.1.0
+    emojibase-regex: ^5.1.1
+    idb-keyval: ^5.0.2
+    match-sorter: ^6.2.0
+    type-fest: ^1.2.0
+  checksum: 0dc86e386fead04622a543dd9dfed1b57261e57ffbcf9b67913c0a8d2570ecebb8a62876aa4c31580854c0dea59a990af694abf35a5d5c365d6c40588a1c655c
+  languageName: node
+  linkType: hard
+
+"@svgmoji/noto@npm:^3.2.0":
+  version: 3.2.0
+  resolution: "@svgmoji/noto@npm:3.2.0"
+  dependencies:
+    "@babel/runtime": ^7.12.5
+    "@svgmoji/core": ^3.2.0
+  checksum: 1a9d9f6b6cb4a69a4059f5fad6d6a8e3d393671a20403593636fb83a20f787f77bc83f083790873fa32f918eea12942acc714a8306fcd6d1259cf4400f1a8993
+  languageName: node
+  linkType: hard
+
+"@svgmoji/openmoji@npm:^3.2.0":
+  version: 3.2.0
+  resolution: "@svgmoji/openmoji@npm:3.2.0"
+  dependencies:
+    "@babel/runtime": ^7.12.5
+    "@svgmoji/core": ^3.2.0
+  checksum: d88556f39e1a3ca6e16859854285264befa43abee2578ffbaa0d632a3e410db972401a10f7867fa2774fd24e86bba2631e735a9bbb8a3e8e2d475dec7e1a0e78
+  languageName: node
+  linkType: hard
+
+"@svgmoji/twemoji@npm:^3.2.0":
+  version: 3.2.0
+  resolution: "@svgmoji/twemoji@npm:3.2.0"
+  dependencies:
+    "@babel/runtime": ^7.12.5
+    "@svgmoji/core": ^3.2.0
+  checksum: e3eb418851ea0ebf89fb79573b1c350973db3db154d13f6890c7fa80cd240d3b073dc2e1fa9c1513576d23c98a147bb25bd7608d42b4a0cbe5bb06c784e7a9ef
+  languageName: node
+  linkType: hard
+
 "@tailwindcss/typography@npm:^0.5.13":
   version: 0.5.15
   resolution: "@tailwindcss/typography@npm:0.5.15"
@@ -1481,25 +1544,84 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@telegram-apps/sdk-react@npm:^1.1.3":
-  version: 1.1.3
-  resolution: "@telegram-apps/sdk-react@npm:1.1.3"
+"@telegram-apps/bridge@npm:^1.2.1":
+  version: 1.2.1
+  resolution: "@telegram-apps/bridge@npm:1.2.1"
   dependencies:
-    "@telegram-apps/sdk": ^1.1.3
+    "@telegram-apps/signals": ^1.0.1
+    "@telegram-apps/toolkit": ^1.0.0
+    "@telegram-apps/transformers": ^1.0.1
+    "@telegram-apps/types": ^1.0.1
+  checksum: 2da8d2090ef6f9d534577ab20f54f9365d4099881f6536de3319a9f405abeaf1ff9b9f9d2e8035913bdb3cc3ea12cec146f9e83de91f9ecfdaba0fb343aaa7bb
+  languageName: node
+  linkType: hard
+
+"@telegram-apps/navigation@npm:^1.0.3":
+  version: 1.0.3
+  resolution: "@telegram-apps/navigation@npm:1.0.3"
+  dependencies:
+    "@telegram-apps/bridge": ^1.2.1
+    "@telegram-apps/signals": ^1.0.1
+    "@telegram-apps/toolkit": ^1.0.0
+  checksum: 148454046ceaf799cbe7a0bbc932e9f4757f99c2fc7e92d9c1d6efc022a40569c5fabf97095d617be1bb92d3c2831f1c661406be5a1df30e11a8247dbee088d5
+  languageName: node
+  linkType: hard
+
+"@telegram-apps/sdk-react@npm:^2.0.5":
+  version: 2.0.5
+  resolution: "@telegram-apps/sdk-react@npm:2.0.5"
+  dependencies:
+    "@telegram-apps/sdk": ^2.4.0
   peerDependencies:
     "@types/react": ^17.0.0 || ^18.0.0
     react: ^17.0.0 || ^18.0.0
   peerDependenciesMeta:
     "@types/react":
       optional: true
-  checksum: f02871d90f3e8f97db348fea171429055251009efc2c6daf8abc25ecc57830b8f39ad90856b746ff8e1461159f9f6a1ada6f827e516fb9f1868450ec5dffc2a7
+  checksum: 1997be16ca942273a34398ccba22264e1972cec276338598ff43f5bd36a19ef9a6e5caff424a4cb6be568867a706af71f22871fa65947fc86ddacf2739946ab0
   languageName: node
   linkType: hard
 
-"@telegram-apps/sdk@npm:^1.1.3":
-  version: 1.1.3
-  resolution: "@telegram-apps/sdk@npm:1.1.3"
-  checksum: 5da6d8b6d208117fe4659a8f80d274a83298a7991bd300bfc6edfe65ad0c13330ab32642767d3f5c99073fae01a03a6467cd3acda1d251fb64edb7be0d2f33da
+"@telegram-apps/sdk@npm:^2.4.0":
+  version: 2.4.0
+  resolution: "@telegram-apps/sdk@npm:2.4.0"
+  dependencies:
+    "@telegram-apps/bridge": ^1.2.1
+    "@telegram-apps/navigation": ^1.0.3
+    "@telegram-apps/signals": ^1.0.1
+    "@telegram-apps/transformers": ^1.0.1
+  checksum: 471d86f0f79aa1b34ed98aac5ac43195770e25ca4176b283f7381ebd0401105dbb4a336e6b0952483d8f5abf72c5e8063d7f1e3503ba331a9d9299c1ba9bf653
+  languageName: node
+  linkType: hard
+
+"@telegram-apps/signals@npm:^1.0.1":
+  version: 1.0.1
+  resolution: "@telegram-apps/signals@npm:1.0.1"
+  checksum: 9e73b7ffa8781e452bcbba3c33de8b301fb5e39e02c88b24160026c8206a4dcdb465a309c0645a0f0b548be57789d0a5a054598242097d390021088a66cafe96
+  languageName: node
+  linkType: hard
+
+"@telegram-apps/toolkit@npm:^1.0.0":
+  version: 1.0.0
+  resolution: "@telegram-apps/toolkit@npm:1.0.0"
+  checksum: 46c340d78998c3750c32c4b887061214a308bc771f133b350bc39470a77663ada9f7be603bfecc01a5d31cf60f581224c822cfb73acdc7ca4529b9c8adb036a2
+  languageName: node
+  linkType: hard
+
+"@telegram-apps/transformers@npm:^1.0.1":
+  version: 1.0.1
+  resolution: "@telegram-apps/transformers@npm:1.0.1"
+  dependencies:
+    "@telegram-apps/toolkit": ^1.0.0
+    "@telegram-apps/types": ^1.0.1
+  checksum: 5a1f92dffe72aec4e4c81e537376da69af2ca295bb7cb6bc800f849780f864d5cd1056f1d7d91c54e27b26a1ff2d6df41c6c6e7db38453493b5fef43f39b1009
+  languageName: node
+  linkType: hard
+
+"@telegram-apps/types@npm:^1.0.1":
+  version: 1.0.1
+  resolution: "@telegram-apps/types@npm:1.0.1"
+  checksum: 61f1a8bd024dbcd862fb8b216d98518626268d7102c555af9651689c55497ed10e387091bf181ce5a0280ceb00da8fdcadda5b190c5889d7a683c62b261652fe
   languageName: node
   linkType: hard
 
@@ -2895,6 +3017,20 @@ __metadata:
   languageName: node
   linkType: hard
 
+"emojibase-regex@npm:^5.1.1":
+  version: 5.1.3
+  resolution: "emojibase-regex@npm:5.1.3"
+  checksum: 9f92a87a116023d6f2cac39ba3640ab5b78205be3ed4a0b600e829c2d24c08b87aa3c6d5fb4d547446a8c3969831aacd4ce0d404e60224077961789ec2100fd1
+  languageName: node
+  linkType: hard
+
+"emojibase@npm:^5.1.0":
+  version: 5.2.0
+  resolution: "emojibase@npm:5.2.0"
+  checksum: 1f311c9f9995343e09af4d505ff41d30a41cf3d8e41c5421fe99b476e32ce5a76b451a8951b159153519408d6fcaa130168c8f54f7e35f1a7303f39017ae0b27
+  languageName: node
+  linkType: hard
+
 "encoding@npm:^0.1.13":
   version: 0.1.13
   resolution: "encoding@npm:0.1.13"
@@ -4172,6 +4308,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"idb-keyval@npm:^5.0.2":
+  version: 5.1.5
+  resolution: "idb-keyval@npm:5.1.5"
+  dependencies:
+    safari-14-idb-fix: ^1.0.6
+  checksum: 6d71d975c5392ddce934a3617b169c25d3b3204f5203d2ffa182c253515922c787292d61eb738aa25ab80fa390e541a416376a6d62a0a2fe7cf112a758f2d8d9
+  languageName: node
+  linkType: hard
+
 "ignore@npm:^5.2.0":
   version: 5.3.2
   resolution: "ignore@npm:5.3.2"
@@ -4894,6 +5039,16 @@ __metadata:
     promise-retry: ^2.0.1
     ssri: ^10.0.0
   checksum: 5c9fad695579b79488fa100da05777213dd9365222f85e4757630f8dd2a21a79ddd3206c78cfd6f9b37346819681782b67900ac847a57cf04190f52dda5343fd
+  languageName: node
+  linkType: hard
+
+"match-sorter@npm:^6.2.0":
+  version: 6.3.4
+  resolution: "match-sorter@npm:6.3.4"
+  dependencies:
+    "@babel/runtime": ^7.23.8
+    remove-accents: 0.5.0
+  checksum: 950c1600173a639e216947559a389b64258d52f33aea3a6ddb97500589888b83c976a028f731f40bc08d9d8af20de7916992fabb403f38330183a1df44c7634b
   languageName: node
   linkType: hard
 
@@ -5817,6 +5972,18 @@ __metadata:
   languageName: node
   linkType: hard
 
+"react-pin-field@npm:^3.1.5":
+  version: 3.1.5
+  resolution: "react-pin-field@npm:3.1.5"
+  dependencies:
+    react-use-bireducer: ^1.1.1
+  peerDependencies:
+    react: ^18.2.0
+    react-dom: ^18.2.0
+  checksum: 15a543024fd81b61cc9fcd0b1f576a3beb620e3e187b7a8d064d3ed9ee697f77c4d92523eefb0dbf52427347800c525d05ea89012a9346ddb4cf6c5dd0fec07b
+  languageName: node
+  linkType: hard
+
 "react-range@npm:^1.10.0":
   version: 1.10.0
   resolution: "react-range@npm:1.10.0"
@@ -5836,6 +6003,16 @@ __metadata:
     react: ">=18"
     react-dom: ">=18"
   checksum: 982d33918c63e99464623a1b3b023ab5fe18fe341143cb0cb04287e37fd0611c560d9ef451e151ac8ade15a1cda09df09d4c442b3db582965d71aaf42d49b230
+  languageName: node
+  linkType: hard
+
+"react-use-bireducer@npm:^1.1.1":
+  version: 1.1.1
+  resolution: "react-use-bireducer@npm:1.1.1"
+  peerDependencies:
+    react: ^16.8 || ^17 || ^18
+    react-dom: ^16.8 || ^17 || ^18
+  checksum: 06417880953d3e48f8bc4510d067a82acb04028f137d8091b087f5b051972e59e30bebb86abfe6c65ca05651ebefed428b078825a42599b44be716ecbddb23bb
   languageName: node
   linkType: hard
 
@@ -5869,6 +6046,13 @@ __metadata:
     globalthis: ^1.0.3
     which-builtin-type: ^1.1.3
   checksum: 88e9e65a7eaa0bf8e9a8bbf8ac07571363bc333ba8b6769ed5e013e0042ed7c385e97fae9049510b3b5fe4b42472d8f32de9ce8ce84902bc4297d4bbe3777dba
+  languageName: node
+  linkType: hard
+
+"regenerator-runtime@npm:^0.14.0":
+  version: 0.14.1
+  resolution: "regenerator-runtime@npm:0.14.1"
+  checksum: 9f57c93277b5585d3c83b0cf76be47b473ae8c6d9142a46ce8b0291a04bb2cf902059f0f8445dcabb3fb7378e5fe4bb4ea1e008876343d42e46d3b484534ce38
   languageName: node
   linkType: hard
 
@@ -5918,6 +6102,13 @@ __metadata:
   dependencies:
     rc: ^1.0.1
   checksum: 6d223da41b04e1824f5faa63905c6f2e43b216589d72794111573f017352b790aef42cd1f826463062f89d804abb2027e3d9665d2a9a0426a11eedd04d470af3
+  languageName: node
+  linkType: hard
+
+"remove-accents@npm:0.5.0":
+  version: 0.5.0
+  resolution: "remove-accents@npm:0.5.0"
+  checksum: 7045b37015acb03df406d21f9cbe93c3fcf2034189f5d2e33b1dace9c7d6bdcd839929905ced21a5d76c58553557e1a42651930728702312a5774179d5b9147b
   languageName: node
   linkType: hard
 
@@ -6134,6 +6325,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"safari-14-idb-fix@npm:^1.0.6":
+  version: 1.0.6
+  resolution: "safari-14-idb-fix@npm:1.0.6"
+  checksum: 588cd632606ff0e47d64d0b71d88f9626f6187177a3187cb063a272ecb0412f7453f4e9321a9e731a1439b7830aa24f907e2338b402e1ef24e8d6a42f7ce8532
+  languageName: node
+  linkType: hard
+
 "safe-array-concat@npm:^1.0.1":
   version: 1.0.1
   resolution: "safe-array-concat@npm:1.0.1"
@@ -6215,9 +6413,10 @@ __metadata:
     "@preact/preset-vite": ^2.8.2
     "@sentry/react": ^8.27.0
     "@sentry/vite-plugin": ^2.22.3
+    "@svgmoji/noto": ^3.2.0
     "@tailwindcss/typography": ^0.5.13
     "@tanstack/react-query": ^5.51.23
-    "@telegram-apps/sdk-react": ^1.1.3
+    "@telegram-apps/sdk-react": ^2.0.5
     "@tonconnect/ui": ^2.0.9
     "@types/lodash": ^4.17.7
     "@types/node": ^20.12.12
@@ -6249,10 +6448,12 @@ __metadata:
     react-countup: ^6.5.3
     react-device-detect: ^2.2.3
     react-ga4: ^2.1.0
+    react-pin-field: ^3.1.5
     react-range: ^1.10.0
     react-toastify: ^10.0.5
     rollup-plugin-visualizer: ^5.12.0
     serve: ^14.2.3
+    svgmoji: ^3.2.0
     tailwindcss: ^3.4.3
     ts-node: ^10.9.2
     typescript: ^5.4.5
@@ -6704,6 +6905,20 @@ __metadata:
   languageName: node
   linkType: hard
 
+"svgmoji@npm:^3.2.0":
+  version: 3.2.0
+  resolution: "svgmoji@npm:3.2.0"
+  dependencies:
+    "@babel/runtime": ^7.12.5
+    "@svgmoji/blob": ^3.2.0
+    "@svgmoji/core": ^3.2.0
+    "@svgmoji/noto": ^3.2.0
+    "@svgmoji/openmoji": ^3.2.0
+    "@svgmoji/twemoji": ^3.2.0
+  checksum: 28046a09593f1395ccdce152cd1e52aff3e7c46587e1f0831f0c44c5f5e3f3bdf2a7174328ff6c333e649011676290398648e14ed9ec6040a2ed6e135cbff0e3
+  languageName: node
+  linkType: hard
+
 "synckit@npm:^0.9.1":
   version: 0.9.1
   resolution: "synckit@npm:0.9.1"
@@ -6930,6 +7145,13 @@ __metadata:
   dependencies:
     prelude-ls: ^1.2.1
   checksum: ec688ebfc9c45d0c30412e41ca9c0cdbd704580eb3a9ccf07b9b576094d7b86a012baebc95681999dd38f4f444afd28504cb3a89f2ef16b31d4ab61a0739025a
+  languageName: node
+  linkType: hard
+
+"type-fest@npm:^1.2.0":
+  version: 1.4.0
+  resolution: "type-fest@npm:1.4.0"
+  checksum: b011c3388665b097ae6a109a437a04d6f61d81b7357f74cbcb02246f2f5bd72b888ae33631b99871388122ba0a87f4ff1c94078e7119ff22c70e52c0ff828201
   languageName: node
   linkType: hard
 

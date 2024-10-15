@@ -18,6 +18,7 @@
   --accent: #4374ec;
   --accent-hover: #6d9efc;
   --selection: #6d9efc;
+  --accent-dark: #8160e1;
 
   --primary: #0e121b;
   --secondary: #171d26;
@@ -27,6 +28,7 @@
 
   --safe-area-bottom: 1.25rem;
   --footer-height: calc(var(--safe-area-bottom) * 4);
+  --safe-area-top: max(env(safe-area-inset-top), 0.75rem);
 
   --toastify-color-success: var(--success);
   --toastify-color-error: var(--error);
@@ -60,13 +62,13 @@ html {
 }
 
 .bg-special-gradient {
-  background: linear-gradient(to right, #3af3ff, #4986fb, #8160e1);
+  background: linear-gradient(to right, #3af3ff, #4986fb, var(--accent-dark));
 }
 
 .bg-border-gradient {
   background:
     linear-gradient(var(--primary), var(--primary)) padding-box,
-    linear-gradient(to right, #3af3ff, #4986fb, #8160e1) border-box;
+    linear-gradient(to right, #3af3ff, #4986fb, var(--accent-dark)) border-box;
   border: 1.5px solid transparent;
 }
 
@@ -149,8 +151,14 @@ html {
 .w-8 {
   width: 2rem;
 }
+.w-28 {
+  width: 7rem;
+}
 .h-8 {
   height: 2rem;
+}
+.h-28 {
+  height: 7rem;
 }
 .h-screen {
   height: 100dvh !important;

@@ -2,7 +2,7 @@ import Button from 'components/Button'
 import Step1 from 'components/Onboarding/Step1'
 import { useCallback, useState } from 'preact/hooks'
 import { useSetAtom } from 'jotai'
-import didOnboardAtom from 'helpers/atoms/UserStates'
+import { didOnboardAtom } from 'helpers/atoms/UserStates'
 import { JSX } from 'preact/jsx-runtime'
 import Step2 from 'components/Onboarding/Step2'
 import { useAutoAnimate } from '@formkit/auto-animate/react'
@@ -54,7 +54,7 @@ export default function () {
 
   return (
     <div
-      className="flex flex-col items-center justify-between pb-safe-bottom h-full shadow-onboarding"
+      className="flex flex-col h-full items-center justify-between shadow-onboarding"
       style={{
         background:
           'radial-gradient(ellipse at left, #133D8D60, transparent 50%), radial-gradient(circle at right, #133D8D70, transparent 60%)',

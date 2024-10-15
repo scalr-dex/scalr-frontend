@@ -1,12 +1,11 @@
-export type LeaderBoardUser = {
-  telegram_id: number
+import { PublicUser } from 'type/User'
+
+export type LeaderBoardUser = PublicUser & {
   points: number
   user_rank: number
-  userPfp: string // fetched by frontend from a separate endpoint
-  name?: string
 }
 
-export default interface LeaderBoardResponse {
+export interface LeaderBoardResponse {
   user: LeaderBoardUser // aka current user
   lb: LeaderBoardUser[]
   round_end_time: number // unix

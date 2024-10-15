@@ -11,24 +11,65 @@ import { GraphTokenData } from 'type/TokenState'
 import { tick } from 'helpers/atoms/priceHistoryAtom'
 import ChartArrowUp from 'components/icons/ChartArrowUp'
 import ChartArrowDown from 'components/icons/ChartArrowDown'
+import emojiAvatarForString from 'helpers/emojiAvatarForString'
+
+const minMaxY = 0.0005
+const symbolOffset = 48
+
+const colorToShadow: { [color: string]: string } = {
+  '#FFE792': '#E5FCB4',
+  '#B1C9F7': '#4785F6',
+}
 
 export default function ({
   data,
+  lineColor = '#B1C9F7',
+  roundSeparators = [],
   loading,
 }: {
   data: GraphTokenData[]
+  roundSeparators?: number[]
   loading: boolean
+  lineColor?: string
 }) {
   const loadingAnimation = loading ? 'animate-pulse' : ''
 
   const betPoint = data
     .filter(({ userBet }) => userBet !== undefined)
-    .map(({ value, name, userBet }) => ({
-      name,
-      xAxis: value[0],
-      yAxis: value[1],
-      symbol: userBet ? ChartArrowUp : ChartArrowDown,
-    }))
+    .map(({ value, name, userBet, battleBet }) => {
+      return {
+        name,
+        xAxis: value[0],
+        yAxis: value[1],
+        symbol: battleBet
+          ? 'image://' + emojiAvatarForString(battleBet.userId).svg
+          : userBet
+            ? ChartArrowUp
+            : ChartArrowDown,
+        symbolSize: battleBet ? 40 : 16,
+        symbolOffset: battleBet
+          ? [0, battleBet.userIndex ? symbolOffset : -symbolOffset]
+          : 0,
+        shadowColor: battleBet ? 'none' : '#fff',
+        shadowBlur: battleBet ? 0 : 10,
+        shadowOffsetX: battleBet ? 0 : 1,
+        shadowOffsetY: 0,
+        label: {
+          show: battleBet !== undefined,
+          position: battleBet?.userIndex
+            ? ('top' as const)
+            : ('bottom' as const),
+          color: battleBet?.direction ? '#23CFB2' : '#F3617D',
+          fontWeight: 700,
+          formatter: battleBet?.direction ? 'UP' : 'DOWN',
+        },
+      }
+    })
+
+  const roundLines = roundSeparators.map((value) => ({
+    xAxis: value,
+    name: 'Round Separator' + value,
+  }))
 
   return (
     <div
@@ -85,8 +126,8 @@ export default function ({
             height: 20,
             formatter: (num) => num.toFixed(4),
           },
-          min: (val) => val.min - 0.0005,
-          max: (val) => val.max + 0.0005,
+          min: (val) => val.min - minMaxY,
+          max: (val) => val.max + minMaxY,
         }}
         series={{
           name: 'Token price',
@@ -94,27 +135,36 @@ export default function ({
           type: 'line',
           data,
 
+          markLine: {
+            data: roundLines,
+
+            label: { show: false },
+            tooltip: { show: false },
+            symbol: ['diamond', 'diamond'],
+            symbolSize: 7,
+            lineStyle: {
+              type: 'dotted',
+              color: '#ffffff',
+              width: 2,
+            },
+          },
+
           markPoint: {
             data: betPoint,
             itemStyle: {
               color: '#fff',
               borderColor: '#fff',
-              shadowBlur: 10,
-              shadowColor: '#fff',
-              shadowOffsetX: 1,
-              shadowOffsetY: 0,
             },
-            symbolSize: 16,
           },
 
           showSymbol: false,
           lineStyle: {
-            color: '#B1C9F7',
+            color: lineColor,
             width: 4,
             cap: 'round',
             join: 'round',
             shadowBlur: 10,
-            shadowColor: '#4785F6',
+            shadowColor: colorToShadow[lineColor],
             shadowOffsetX: 1,
             shadowOffsetY: 0,
           },

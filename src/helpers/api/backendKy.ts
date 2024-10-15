@@ -3,9 +3,15 @@ import UserAtom from 'helpers/atoms/UserAtom'
 import env from 'helpers/env'
 import ky from 'ky'
 
-export default (initDataRaw?: string) =>
+export default ({
+  prefixUrlAppend = '',
+  initDataRaw,
+}: {
+  prefixUrlAppend?: string
+  initDataRaw?: string
+} = {}) =>
   ky.create({
-    prefixUrl: env.VITE_BACKEND_URL,
+    prefixUrl: env.VITE_BACKEND_URL + prefixUrlAppend,
     hooks: {
       beforeRequest: [
         (request) => {
