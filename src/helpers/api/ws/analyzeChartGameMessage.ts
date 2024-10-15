@@ -3,7 +3,7 @@ import priceHistoryAtom, { dataMaxLength } from 'helpers/atoms/priceHistoryAtom'
 import UserAtom, { userBetAtom } from 'helpers/atoms/UserAtom'
 import balanceChangeToast from 'helpers/sendToast'
 import { EventData, EventDataPriceChangeSingle } from 'type/WebsocketEvents'
-import getBetPoint from 'helpers/chart/getBetPoint'
+import addBetPoint from 'helpers/chart/addBetPoint'
 
 function getBetLostFromWsEventData(data: EventData) {
   if (Array.isArray(data) || data._ !== 'l') return
@@ -39,9 +39,8 @@ function getBetFromWsEventData(data: EventData) {
   }
 
   // include bet in chart data to keep it smooth
-  writeAtom(
-    priceHistoryAtom,
-    (prev) => getBetPoint({ prev, direction: bet.direction }).prev
+  writeAtom(priceHistoryAtom, (prev) =>
+    addBetPoint({ prev, direction: bet.direction })
   )
   return true
 }

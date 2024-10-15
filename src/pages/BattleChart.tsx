@@ -7,14 +7,19 @@ import BattleBetBlock from 'components/BattleGame/BattleBetBlock'
 import RoundCounter from 'components/BattleGame/RoundCounter'
 import BattleTimer from 'components/BattleGame/BattleTimer'
 import { BodyText, Header4 } from 'components/Text'
-import { useState } from 'preact/hooks'
+import { useEffect, useState } from 'preact/hooks'
 import { BetStatus } from 'type/Battles'
 import env from 'helpers/env'
+import { navigate } from 'wouter-preact/use-hash-location'
 
 export default function () {
   const data = useAtomValue(priceHistoryAtom)
   const gameStatus = useAtomValue(battleGameAtom)
   const [betStatus, setBetStatus] = useState(BetStatus.betBlocked)
+
+  useEffect(() => {
+    if (!gameStatus.gameStartTime) navigate('/battle/lobby')
+  }, [gameStatus.gameStartTime])
 
   const lastIndex = data.length - 1
   const lastValue = data[lastIndex]?.value
@@ -22,6 +27,8 @@ export default function () {
   const loading = !data.length
 
   const currentRoundIndex = gameStatus.roundSeparators.length - 1
+
+  console.log(gameStatus)
 
   return (
     <div className="flex flex-col h-full">

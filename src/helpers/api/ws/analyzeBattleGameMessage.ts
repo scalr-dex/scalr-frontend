@@ -3,7 +3,6 @@ import battleGameAtom, { emptyBattleGame } from 'helpers/atoms/battleGameAtom'
 import priceHistoryAtom from 'helpers/atoms/priceHistoryAtom'
 import { BattlesWebsocketEvents } from 'type/Battles'
 import { navigate } from 'wouter-preact/use-hash-location'
-import getBetPoint from 'helpers/chart/getBetPoint'
 import clearPreviousBets from 'helpers/chart/clearPreviousBets'
 import { GraphTokenData } from 'type/TokenState'
 import UserAtom from 'helpers/atoms/UserAtom'
@@ -17,26 +16,30 @@ function processBetsConfirmed(data: BattlesWebsocketEvents) {
     roundSeparators: [...prev.roundSeparators, nextRoundTime],
   }))
 
-  const dataToWrite: GraphTokenData[] = []
-  const prev = readAtom(priceHistoryAtom)
-  for (const [userIndex, { Bets, TelegramID }] of data.Bets.entries()) {
-    const direction = Bets[Bets.length - 1]
+  // make sure to write into the atom only once
+  // include bet in chart data to keep it smooth, we push only latest bet
+  writeAtom(priceHistoryAtom, (prev) => {
+    const priceHistoryWithBets: GraphTokenData[] = prev
+    const last = prev[prev.length - 1]
 
-    dataToWrite.push(
-      getBetPoint({
-        prev,
+    for (const [userIndex, { Bets, TelegramID }] of data.Bets.entries()) {
+      const direction = Bets[Bets.length - 1]
+
+      priceHistoryWithBets.push({
+        name: last.name + '-' + TelegramID,
+        value: last.value,
         battleBet: {
           userId: TelegramID,
           direction: Number(direction),
           userIndex,
         },
-      }).last
-    )
-  }
+      })
+    }
 
-  // make sure to write into the atom only once
-  // include bet in chart data to keep it smooth, we push only latest bet
-  writeAtom(priceHistoryAtom, (prev) => [...prev, ...dataToWrite])
+    console.log(priceHistoryWithBets)
+
+    return priceHistoryWithBets
+  })
 
   return true
 }
@@ -56,7 +59,7 @@ function processBattleEnd(data: BattlesWebsocketEvents) {
   if (!('WinnerTelegramID' in data)) return
 
   const betSize = readAtom(battleGameAtom).betSize
-  setTimeout(() => writeAtom(battleGameAtom, emptyBattleGame)) // timeout because score may be processed before empty game
+  writeAtom(battleGameAtom, emptyBattleGame)
   clearPreviousBets()
 
   navigate('/battle/lobby', {
@@ -71,15 +74,17 @@ function processBattleStart(data: BattlesWebsocketEvents) {
 
   clearPreviousBets()
   const user = readAtom(UserAtom)
-  writeAtom(battleGameAtom, (prev) => ({
-    ...prev,
+  writeAtom(battleGameAtom, {
+    lobbyId: '',
+    playerScore: [],
+    roundSeparators: [],
     users: [
       { battleName: String(user?.telegramId || 'none') },
       { battleName: data.BattleName },
     ],
     gameStartTime: data.GameStartsInSeconds,
     betSize: data.BetSize,
-  }))
+  })
   navigate('/battle/versus')
 
   return true

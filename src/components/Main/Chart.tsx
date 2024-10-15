@@ -35,8 +35,13 @@ export default function ({
   const loadingAnimation = loading ? 'animate-pulse' : ''
 
   const betPoint = data
-    .filter(({ userBet }) => userBet !== undefined)
+    .filter(
+      ({ userBet, battleBet }) =>
+        userBet !== undefined || battleBet !== undefined
+    )
     .map(({ value, name, userBet, battleBet }) => {
+      const isUp = battleBet?.direction || userBet
+
       return {
         name,
         xAxis: value[0],
@@ -59,9 +64,9 @@ export default function ({
           position: battleBet?.userIndex
             ? ('top' as const)
             : ('bottom' as const),
-          color: battleBet?.direction ? '#23CFB2' : '#F3617D',
+          color: isUp ? '#23CFB2' : '#F3617D',
           fontWeight: 700,
-          formatter: battleBet?.direction ? 'UP' : 'DOWN',
+          formatter: isUp ? 'UP' : 'DOWN',
         },
       }
     })
@@ -82,6 +87,7 @@ export default function ({
       <EChart
         animation
         animationDurationUpdate={tick}
+        animationEasingUpdate="linear"
         animationEasing="cubicInOut"
         animationDuration={1000}
         grid={{

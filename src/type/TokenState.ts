@@ -15,6 +15,6 @@ export type BattleBet = {
 export type GraphTokenData = {
   name: string
   value: GraphTokenValue
-  userBet?: BetDirection
+  userBet?: BetDirection | undefined
   battleBet?: BattleBet | undefined
 }

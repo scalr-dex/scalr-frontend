@@ -1,4 +1,3 @@
-import { dataMaxLength } from 'helpers/atoms/priceHistoryAtom'
 import { BattleBet, GraphTokenData } from 'type/TokenState'
 
 export default function ({
@@ -19,6 +18,5 @@ export default function ({
     userBet: Number(direction),
     battleBet,
   })
-  prev.slice(-dataMaxLength)
-  return { last, prev }
+  return prev
 }
