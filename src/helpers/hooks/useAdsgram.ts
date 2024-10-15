@@ -5,7 +5,7 @@ import { toast } from 'react-toastify'
 import { ShowPromiseResult, AdController } from 'type/adsgram'
 
 export interface AdsgramHookParams {
-  blockId?: string
+  blockId?: number
   onReward?: () => void
   onError?: (result: ShowPromiseResult) => void
 }
@@ -31,7 +31,7 @@ export default function useAdsgram({
   )
 
   useEffect(() => {
-    AdControllerRef.current = window.Adsgram?.init({ blockId })
+    AdControllerRef.current = window.Adsgram?.init({ blockId: String(blockId) })
   }, [blockId])
 
   return useCallback(async () => {
