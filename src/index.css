@@ -123,6 +123,7 @@ html {
 /* fixes toast centering on windows */
 .Toastify__toast-body {
   margin: 0 !important;
+  flex-direction: row-reverse;
 }
 
 .Toastify__toast-container--top-center {
