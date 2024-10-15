@@ -65,6 +65,7 @@ jobs:
           VITE_ADSGRAM_BLOCK_ID: ${{secrets. VITE_ADSGRAM_BLOCK_ID }}
 
         run: |
+          echo $VITE_ADSGRAM_BLOCK_ID &&
           docker buildx build \
             --build-arg commit_sha=$GIT_HASH \
             --build-arg NODE_ENV=production \
