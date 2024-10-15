@@ -1,4 +1,4 @@
-import { defineConfig, loadEnv } from 'vite'
+import { defineConfig, loadEnv, Plugin } from 'vite'
 import preact from '@preact/preset-vite'
 import tsconfigPaths from 'vite-tsconfig-paths'
 import { visualizer } from 'rollup-plugin-visualizer'
@@ -10,7 +10,17 @@ export default defineConfig(({ mode }) => {
   const minify = env['MINIFY'] === undefined ? true : Boolean(env['MINIFY'])
 
   return {
-    plugins: [preact(), tsconfigPaths()],
+    plugins: [
+      preact(),
+      tsconfigPaths(),
+      [
+        '@babel/plugin-transform-react-jsx',
+        {
+          pragma: 'h',
+          pragmaFrag: 'Fragment',
+        },
+      ] as unknown as Plugin,
+    ],
     preview: {
       port: 5173,
     },

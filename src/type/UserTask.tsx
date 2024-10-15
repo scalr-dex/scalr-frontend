@@ -1,7 +1,5 @@
 import Telegram from 'components/icons/socials/Telegram'
 import X from 'components/icons/socials/X'
-import { claimTask } from 'helpers/api/userTasks'
-import { setTaskPending } from 'helpers/atoms/pendingTasksAtom'
 import { JSX } from 'preact/jsx-runtime'
 import ButtonTypes from 'type/Button'
 
@@ -62,10 +60,4 @@ export const taskStatusToButtonText = {
   NotStarted: 'Start',
   ReadyToClaim: 'Claim',
   Claimed: 'Done',
-}
-
-export const taskStatusToCallback = {
-  NotStarted: setTaskPending,
-  ReadyToClaim: claimTask,
-  Claimed: () => Promise.resolve(),
 }

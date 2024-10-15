@@ -4,6 +4,7 @@ import UserTask from 'type/UserTask'
 import { successConfetti } from 'helpers/shootConfetti'
 import TrackerEvents from 'type/TrackerEvents'
 import { track } from 'helpers/api/analytics'
+import { increaseFailAmount } from 'helpers/atoms/taskFailCounter'
 
 export async function getTasks() {
   try {
@@ -15,9 +16,14 @@ export async function getTasks() {
 
 export async function markTaskDone(id: number) {
   try {
+    throw new Error('err')
     return await backendKy().post(`tasks/${id}`)
   } catch (e) {
-    handleError({ e })
+    increaseFailAmount(id)
+    handleError({
+      e,
+      toastMessage: 'Task not completed. Please try again',
+    })
   }
 }
 
@@ -29,7 +35,7 @@ export async function claimTask(id: number) {
   } catch (e) {
     handleError({
       e,
-      toastMessage: 'Failed to claim rewards 😿 Please try again later 🥺',
+      toastMessage: 'Failed to claim points. Please try again',
     })
   }
 }
