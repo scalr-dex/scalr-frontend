@@ -18,6 +18,19 @@ jobs:
 
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v1
+        with:
+          context: .
+          push: true
+          tags: user/app:latest
+          build-args: |
+            SENTRY_AUTH_TOKEN=${{ secrets.SENTRY_AUTH_TOKEN }}
+            SENTRY_URL=${{ secrets.SENTRY_URL }}
+            VITE_BACKEND_URL=${{ secrets.VITE_BACKEND_URL }}
+            VITE_AMPLITUDE_API_KEY=${{ secrets.VITE_AMPLITUDE_API_KEY }}
+            VITE_VITE_ANALYTICS_KEY=${{ secrets.VITE_ANALYTICS_KEY }}
+            VITE_APP_BASE_LINK=${{ secrets.VITE_APP_BASE_LINK }}
+            VITE_SENTRY_DSN=${{ secrets.VITE_SENTRY_DSN }}
+            VITE_ADSGRAM_BLOCK_ID=${{secrets. VITE_ADSGRAM_BLOCK_ID }}
 
       - name: Extract branch name
         shell: bash
@@ -42,15 +55,6 @@ jobs:
           BRANCH: ${{ steps.extract_branch.outputs.branch }}
           COMMIT_MESSAGE: ${{ github.event.head_commit.message }}
           GIT_HASH: ${{ steps.shorten_sha.outputs.short_sha }}
-
-          SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
-          SENTRY_URL: ${{ secrets.SENTRY_URL }}
-          VITE_BACKEND_URL: ${{ secrets.VITE_BACKEND_URL }}
-          VITE_AMPLITUDE_API_KEY: ${{ secrets.VITE_AMPLITUDE_API_KEY }}
-          VITE_VITE_ANALYTICS_KEY: ${{ secrets.VITE_ANALYTICS_KEY }}
-          VITE_APP_BASE_LINK: ${{ secrets.VITE_APP_BASE_LINK }}
-          VITE_SENTRY_DSN: ${{ secrets.VITE_SENTRY_DSN }}
-          VITE_ADSGRAM_BLOCK_ID: ${{secrets. VITE_ADSGRAM_BLOCK_ID }}
         run: |
           if [[ $COMMIT_MESSAGE == *"DEPLOY_DEV"* ]]; then
             docker buildx build --build-arg commit_sha=$GIT_HASH -t ghcr.io/scalr-dex/scalr-frontend:develop . --push
