@@ -1,4 +1,4 @@
-name: Docker Build Image
+name: Docker Build Dev Pages
 
 on:
   push:
@@ -7,6 +7,7 @@ on:
 
 jobs:
   build:
+    if: "!contains(github.event.head_commit.message, '[DEPLOY_DEV]')"
     runs-on: ubuntu-latest
 
     environment:
@@ -64,8 +65,7 @@ jobs:
           VITE_ADSGRAM_BLOCK_ID: ${{secrets. VITE_ADSGRAM_BLOCK_ID }}
 
         run: |
-          if [[ $COMMIT_MESSAGE == *"DEPLOY_DEV"* ]]; then
-            docker buildx build \
+          docker buildx build \
             --build-arg commit_sha=$GIT_HASH \
             --build-arg NODE_ENV=production \
             --build-arg SENTRY_AUTH_TOKEN=$SENTRY_AUTH_TOKEN \
@@ -77,9 +77,6 @@ jobs:
             --build-arg VITE_SENTRY_DSN=$VITE_SENTRY_DSN \
             --build-arg VITE_ADSGRAM_BLOCK_ID=$VITE_ADSGRAM_BLOCK_ID \
             -t ghcr.io/scalr-dex/scalr-frontend:develop . --push
-          else
-            echo "No action defined for this branch/tag."
-          fi
       - name: Trigger Dev Deploy
         uses: distributhor/workflow-webhook@v3
         with:
