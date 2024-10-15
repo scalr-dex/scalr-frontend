@@ -8,25 +8,23 @@ import UserAtom, { userBetAtom } from 'helpers/atoms/UserAtom'
 import placeBet from 'helpers/api/placeBet'
 import BetDirection from 'type/BetDirection'
 import { BodyText } from 'components/Text'
-import { roundDurationMs } from 'helpers/atoms/priceHistoryAtom'
+import priceHistoryAtom, {
+  roundDurationMs,
+} from 'helpers/atoms/priceHistoryAtom'
 import DailyClaim from 'components/Main/DailyClaim'
 import Points from 'components/Main/Points'
 import Timer from 'components/Main/Timer'
-import { GraphTokenValue } from 'type/TokenState'
 import formatUSA from 'helpers/formatters/formatUSA'
 import BoostPoints from 'components/Main/BoostPoints'
-import { boostStateAtom } from 'helpers/atoms/UserStates'
+import { betPercent, boostStateAtom } from 'helpers/atoms/UserStates'
 import BoostStates from 'type/BoostState'
+import handleError from 'helpers/handleError'
+import { readAtom } from 'helpers/atoms/atomStore'
 
-export default function ({
-  loading,
-  roundStart,
-}: {
-  loading?: boolean
-  roundStart: GraphTokenValue | undefined
-}) {
+export default function ({ loading }: { loading?: boolean }) {
   const user = useAtomValue(UserAtom)
   const [userBet, setUserBet] = useAtom(userBetAtom)
+  const [percent, setPercent] = useAtom(betPercent)
   const [processingBet, setProcessingBet] = useState(false)
   const [betValue, setBetValue] = useState(0)
   const [boostState, setBoostState] = useAtom(boostStateAtom)
@@ -39,37 +37,51 @@ export default function ({
   }, [setUserBet, userBet])
 
   useEffect(() => {
-    setBetValue(Math.round((user?.balance || 0) / 2))
-  }, [user?.balance])
+    const balance = user?.balance || 0
+    setBetValue(Math.round((balance * percent) / 100))
+  }, [percent, user?.balance])
+
+  useEffect(() => {
+    const balance = user?.balance
+    const betPercent = balance && betValue ? (betValue / balance) * 100 : 0
+    setPercent(betPercent)
+  }, [betValue, setPercent, user?.balance])
 
   const onClick = useCallback(
     async (direction: BetDirection) => {
-      if (!roundStart || !user || !user.balance) return
+      if (!user || !user.balance) return
 
-      setProcessingBet(true)
-      const bet = { amount: betValue, direction }
+      try {
+        setProcessingBet(true)
+        const bet = { amount: betValue, direction }
 
-      const shouldBoost = boostState === BoostStates.activated
-      setBoostState(shouldBoost ? BoostStates.locked : BoostStates.betNoBoost)
-      const success = await placeBet({
-        ...bet,
-        shouldBoost,
-      })
+        const shouldBoost = boostState === BoostStates.activated
+        setBoostState(shouldBoost ? BoostStates.locked : BoostStates.betNoBoost)
+        const { created_at } = await placeBet({
+          ...bet,
+          shouldBoost,
+        })
+        setTimeout(() => {
+          const data = readAtom(priceHistoryAtom).find(
+            ({ value }) => value[0] === created_at * 1000
+          )
 
-      setProcessingBet(false)
-      if (!success) {
-        setUserBet(null)
-        return
+          if (!data?.value) return
+
+          setUserBet({
+            ...bet,
+            value: data.value,
+            endTime: data.value[0] + roundDurationMs,
+          })
+          setProcessingBet(false)
+        }, 200)
+        setTimeout(() => setUserBet(null), roundDurationMs)
+      } catch (e) {
+        handleError({ e, toastMessage: 'Failed to place a bet 😥' })
+        setProcessingBet(false)
       }
-
-      setUserBet({
-        ...bet,
-        value: roundStart,
-        endTime: roundStart[0] + roundDurationMs,
-      })
-      setTimeout(() => setUserBet(null), roundDurationMs)
     },
-    [betValue, boostState, roundStart, setBoostState, setUserBet, user]
+    [betValue, boostState, setBoostState, setUserBet, user]
   )
 
   return (
@@ -103,7 +115,8 @@ export default function ({
               userBalance={user?.balance}
               value={betValue}
               setValue={setBetValue}
-              disabled={loading || !!userBet || !user?.balance}
+              percent={percent}
+              disabled={loading || processingBet || !!userBet || !user?.balance}
             />
             <div className="flex flex-row gap-x-1">
               <Button
