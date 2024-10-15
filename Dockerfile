@@ -30,4 +30,4 @@ RUN yarn install
 
 RUN yarn build
 
-CMD [yarn, prod]
+CMD ["yarn", "prod"]
