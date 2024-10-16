@@ -27,7 +27,7 @@ export default function ({
   URL,
   refetch,
 }: UserTask & { refetch: () => Promise<unknown> }) {
-  const failAmount = useAtomValue(taskFailCounterAtom)[TaskID]
+  const failAmount = useAtomValue(taskFailCounterAtom)[TaskID] || 0
 
   const utils = useUtils()
   const [loading, setLoading] = useState(false)
