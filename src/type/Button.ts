@@ -26,15 +26,15 @@ export interface ButtonProps extends JSX.HTMLAttributes<HTMLButtonElement> {
 
 export const buttonClassNames = (disabled?: boolean) => ({
   [ButtonTypes.accent]:
-    'bg-accent hover:bg-accent-hover focus:bg-accent-focus disabled:bg-accent-disabled disabled:text-white/75',
+    'bg-accent hover:bg-accent-hover focus-visible:bg-accent-focus disabled:bg-accent-disabled disabled:text-white/75',
   [ButtonTypes.secondary]:
     'text-primary bg-white hover:bg-opacity-90 active:bg-opacity-70 disabled:bg-opacity-60',
   [ButtonTypes.error]:
-    'text-primary bg-error hover:bg-opacity-90 focus:bg-opacity-70 disabled:bg-opacity-60',
+    'text-primary bg-error hover:bg-opacity-90 focus-visible:bg-opacity-70 disabled:bg-opacity-60',
   [ButtonTypes.success]:
-    'text-primary bg-success hover:bg-opacity-90 focus:bg-opacity-70 disabled:bg-opacity-60',
+    'text-primary bg-success hover:bg-opacity-90 focus-visible:bg-opacity-70 disabled:bg-opacity-60',
   [ButtonTypes.ghost]:
-    'text-white bg-transparent hover:text-opacity-90 focus:text-opacity-70 disabled:text-opacity-60',
+    'text-white bg-transparent hover:text-opacity-90 focus-visible:text-opacity-70 disabled:text-opacity-60',
   [ButtonTypes.neutral]:
     'bg-controls-tertiary hover:bg-controls-tertiary-hover active:bg-controls-tertiary-active disabled:bg-controls-tertiary-disabled',
   [ButtonTypes.outline]: 'bg-transparent border border-white-16',

@@ -20,15 +20,10 @@ export default function ({
 
   const onClick = useCallback(
     (e: OnClickEvent) => {
-      if (!allowDisabledClick && (isLoading || disabled)) {
-        setTimeout(e.currentTarget.blur, 150)
-
-        return
-      }
+      if (!allowDisabledClick && (isLoading || disabled)) return
 
       buttonProps.onClick?.(e)
       if (haptic) impact.impactOccurred(haptic)
-      setTimeout(e.currentTarget.blur, 150)
     },
     [allowDisabledClick, buttonProps, disabled, haptic, impact, isLoading]
   )
