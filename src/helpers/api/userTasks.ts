@@ -19,7 +19,6 @@ export async function getTasks() {
 
 export async function markTaskDone(id: number) {
   try {
-    throw new Error('err')
     return await backendKy().post(`tasks/${id}`)
   } catch (e) {
     increaseFailAmount(id)
