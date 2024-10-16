@@ -11,16 +11,7 @@ export default defineConfig(({ mode }) => {
   const minify = env['MINIFY'] === undefined ? true : Boolean(env['MINIFY'])
 
   return {
-    plugins: [
-      preact({
-        devToolsEnabled: true,
-        prefreshEnabled: false,
-        babel: {
-          plugins: [isProd ? '' : '@babel/plugin-transform-react-jsx-source'],
-        },
-      }),
-      tsconfigPaths(),
-    ],
+    plugins: [preact(), tsconfigPaths()],
     preview: {
       port: 5173,
     },
