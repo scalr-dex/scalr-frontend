@@ -1,7 +1,5 @@
 import Telegram from 'components/icons/socials/Telegram'
 import X from 'components/icons/socials/X'
-import { claimTask } from 'helpers/api/userTasks'
-import { setTaskPending } from 'helpers/atoms/pendingTasksAtom'
 import { JSX } from 'preact/jsx-runtime'
 import ButtonTypes from 'type/Button'
 
@@ -52,6 +50,9 @@ export const iconNumberToIcon = {
   30: <img src="img/collabs/move_logo.jpg" className="rounded-sm" />,
   31: <img src="img/collabs/meai_logo.jpg" className="rounded-sm" />,
   32: <img src="img/collabs/politicalwar_logo.jpg" className="rounded-sm" />,
+  33: <img src="img/collabs/alfa.jpg" className="rounded-sm" />,
+  34: <img src="img/collabs/clockiechaos_logo.jpg" className="rounded-sm" />,
+  35: <img src="img/collabs/eggdrop_logo.jpg" className="rounded-sm" />,
 } as { [num: number]: JSX.Element }
 
 export const taskStatusToButtonType = {
@@ -64,10 +65,4 @@ export const taskStatusToButtonText = {
   NotStarted: 'Start',
   ReadyToClaim: 'Claim',
   Claimed: 'Done',
-}
-
-export const taskStatusToCallback = {
-  NotStarted: setTaskPending,
-  ReadyToClaim: claimTask,
-  Claimed: () => Promise.resolve(),
 }

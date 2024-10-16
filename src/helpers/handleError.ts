@@ -1,5 +1,6 @@
 import { toast } from 'react-toastify'
 import Sentry from 'helpers/api/sentry'
+import Alert from 'components/icons/Alert'
 
 function checkErrorAndCapture(e: unknown, message?: string) {
   const extra = { message }
@@ -25,6 +26,6 @@ export default function ({
   sentryCapture?: boolean
 }) {
   console.error(e)
-  if (toastMessage) toast.error(toastMessage)
+  if (toastMessage) toast.error(toastMessage, { icon: Alert() })
   if (sentryCapture) checkErrorAndCapture(e, toastMessage)
 }
