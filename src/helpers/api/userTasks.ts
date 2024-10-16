@@ -29,6 +29,17 @@ export async function markTaskDone(id: number) {
   }
 }
 
+export async function checkTask(id: number) {
+  try {
+    return await backendKy().post(`tasks/check/${id}`)
+  } catch (e) {
+    handleError({
+      e,
+      toastMessage: 'Failed to check this task, please try again',
+    })
+  }
+}
+
 export async function claimTask(id: number) {
   try {
     await backendKy().post(`tasks/claim/${id}`)

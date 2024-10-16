@@ -6,7 +6,8 @@ import UserTask, {
 import { useCallback, useState } from 'preact/hooks'
 import { useUtils } from '@telegram-apps/sdk-react'
 import { claimTask, markTaskDone } from 'helpers/api/userTasks'
-import pendingTasksAtom, {
+import {
+  taskFailCounterAtom,
   failsBeforeClaim,
   increaseFailAmount,
 } from 'helpers/atoms/taskFailCounter'
@@ -26,26 +27,33 @@ export default function ({
   URL,
   refetch,
 }: UserTask & { refetch: () => Promise<unknown> }) {
-  const failAmount = useAtomValue(pendingTasksAtom)[TaskID]
+  const failAmount = useAtomValue(taskFailCounterAtom)[TaskID]
 
   const utils = useUtils()
   const [loading, setLoading] = useState(false)
   const buttonType = taskStatusToButtonType[Status]
   const hasClaimed = Status === 'Claimed'
 
+  const openTgLink = useCallback(
+    (url: string) => {
+      url.includes('t.me') ? utils.openTelegramLink(url) : utils.openLink(url)
+    },
+    [utils]
+  )
+
   const onClick = useCallback(async () => {
     setLoading(true)
 
-    if (failAmount >= failsBeforeClaim && Status !== 'ReadyToClaim') {
-      await markTaskDone(TaskID)
-      setLoading(false)
-    }
+    console.log(failAmount)
 
-    if (Status === 'ReadyToClaim') {
-      await claimTask(TaskID)
-      await refetch()
-      setLoading(false)
-      track(TrackerEvents.taskDone, TaskID)
+    if (failAmount >= failsBeforeClaim && Status !== 'ReadyToClaim') {
+      setTimeout(async () => {
+        await markTaskDone(TaskID)
+        await refetch()
+        setLoading(false)
+      }, 5000)
+      openTgLink(URL)
+      return
     }
 
     if (Status === 'NotStarted') {
@@ -58,13 +66,17 @@ export default function ({
         increaseFailAmount(TaskID)
         setLoading(false)
       }, 5000)
+      openTgLink(URL)
+      return
     }
 
-    // Should be at the end of callback to execute previous functions
-    if (Status !== 'ReadyToClaim') {
-      URL.includes('t.me') ? utils.openTelegramLink(URL) : utils.openLink(URL)
+    if (Status === 'ReadyToClaim') {
+      await claimTask(TaskID)
+      await refetch()
+      setLoading(false)
+      track(TrackerEvents.taskDone, TaskID)
     }
-  }, [Status, TaskID, URL, failAmount, refetch, utils])
+  }, [Status, TaskID, URL, failAmount, openTgLink, refetch])
 
   const isSpecial = specialTasks.includes(TaskID)
 

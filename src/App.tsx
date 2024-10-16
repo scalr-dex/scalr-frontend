@@ -84,6 +84,7 @@ function AppInner({ socket }: { socket: WebSocket }) {
             draggableDirection="y"
             hideProgressBar
             limit={1}
+            stacked
           />
         </Router>
       </QueryClientProvider>

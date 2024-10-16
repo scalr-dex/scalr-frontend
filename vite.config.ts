@@ -6,11 +6,21 @@ import { sentryVitePlugin } from '@sentry/vite-plugin'
 
 export default defineConfig(({ mode }) => {
   const env = Object.assign(process.env, loadEnv(mode, process.cwd(), ''))
+  const isProd = env['NODE_ENV'] === 'production'
 
   const minify = env['MINIFY'] === undefined ? true : Boolean(env['MINIFY'])
 
   return {
-    plugins: [preact(), tsconfigPaths()],
+    plugins: [
+      preact({
+        devToolsEnabled: true,
+        prefreshEnabled: false,
+        babel: {
+          plugins: [isProd ? '' : '@babel/plugin-transform-react-jsx-source'],
+        },
+      }),
+      tsconfigPaths(),
+    ],
     preview: {
       port: 5173,
     },
