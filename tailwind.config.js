@@ -77,6 +77,7 @@ module.exports = {
         'accent-focus': '#427AE4',
         'accent-disabled': '#345FB2',
         'accent-dimmed': '#B1C9F7',
+        'accent-alt': '#00FFFF',
         success: '#23CFB2',
         'success-light': '#CBECDE',
         'success-alt': '#E5FCB4',
