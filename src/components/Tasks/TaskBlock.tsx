@@ -50,12 +50,12 @@ export default function ({
     setLoading(true)
 
     if (failAmount >= failsBeforeClaim && Status !== 'ReadyToClaim') {
+      openTgLink(URL)
       setTimeout(async () => {
         await markTaskDone(TaskID)
         await refetch()
         setLoading(false)
       }, 5000)
-      openTgLink(URL)
       return
     }
 
