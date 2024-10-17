@@ -18,21 +18,21 @@ type StepToElement = { [step: number]: JSX.Element | string }
 type StepToString = { [step: number]: string }
 
 const stepToComponent: StepToElement = {
-  0: <Step1 />,
-  1: <Step2 />,
-  2: <Step3 />,
+  0: <Step3 />,
+  1: <Step1 />,
+  2: <Step2 />,
 }
 
 const stepToText: StepToString = {
-  0: 'Ok. All clear  🫡',
+  0: 'Wooow 🔥 I’m in  🚀',
   1: 'Cool 😎',
-  2: 'Wooow 🔥 I’m in  🚀',
+  2: 'Ok. All clear  🫡',
 }
 
 const stepToBg: StepToElement = {
-  0: <Step1Background />,
-  1: <Step2Background />,
-  2: <Step3Background />,
+  0: <Step3Background />,
+  1: <Step1Background />,
+  2: <Step2Background />,
 }
 
 export default function () {

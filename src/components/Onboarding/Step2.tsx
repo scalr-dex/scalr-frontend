@@ -10,7 +10,7 @@ export default function () {
       </Header1>
 
       <AccentText className="flex w-full justify-center text-center mt-5">
-        To get points for a ticket to the Major League
+        To earn points to get Scalr DEX airdrop
       </AccentText>
     </div>
   )
