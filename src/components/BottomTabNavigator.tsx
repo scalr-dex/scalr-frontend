@@ -1,14 +1,17 @@
 import MainSquare from 'components/icons/MainSquare'
 import { useLocation } from 'wouter-preact'
 import Cup from 'components/icons/Cup'
-import Gift from 'components/icons/Gift'
 import DollarCoin from 'components/icons/DollarCoin'
 import { trackNavigation } from 'helpers/api/analytics'
+import GiftWithNotifications from 'components/icons/GiftWithNotifications'
 
 const buttons = [
   { path: '/', component: <MainSquare /> },
   { path: 'leaderboards', component: <Cup /> },
-  { path: 'tasks', component: <Gift /> },
+  {
+    path: 'tasks',
+    component: <GiftWithNotifications />,
+  },
   { path: 'airdrop', component: <DollarCoin /> },
 ]
 

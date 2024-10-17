@@ -13,6 +13,7 @@ export interface ServerUser {
   invited_users: number
   multiplier_count: number
   remaining_ads: number
+  tasks_remaining: number
 }
 
 export interface ClientUser {
@@ -27,6 +28,7 @@ export interface ClientUser {
   invitedUsers: number
   boosts: number
   remainingAds: number
+  remainingTasks: number
 }
 
 export interface UserBet {

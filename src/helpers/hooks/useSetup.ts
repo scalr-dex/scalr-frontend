@@ -86,6 +86,7 @@ async function setupUser() {
     })
 
     const user = await response.json<ServerUser>()
+
     const clientUser = {
       ticket: user.ticket,
       balance: user.points,
@@ -98,6 +99,7 @@ async function setupUser() {
       invitedUsers: user.invited_users,
       boosts: user.multiplier_count,
       remainingAds: user.remaining_ads,
+      remainingTasks: user.tasks_remaining,
     }
 
     writeAtom(timeToRewardAtom, user.can_claim_daily_reward)

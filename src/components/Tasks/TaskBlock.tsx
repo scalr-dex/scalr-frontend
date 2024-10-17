@@ -11,12 +11,13 @@ import {
   failsBeforeClaim,
   increaseFailAmount,
 } from 'helpers/atoms/taskFailCounter'
-import { useAtomValue } from 'jotai'
+import { useAtomValue, useSetAtom } from 'jotai'
 import TrackerEvents from 'type/TrackerEvents'
 import { specialTasks } from 'helpers/sortTasks'
 import { track } from 'helpers/api/analytics'
 import TaskUi from 'components/Tasks/TaskUi'
 import handleError from 'helpers/handleError'
+import UserAtom from 'helpers/atoms/UserAtom'
 
 export default function ({
   IconNumber,
@@ -27,6 +28,7 @@ export default function ({
   URL,
   refetch,
 }: UserTask & { refetch: () => Promise<unknown> }) {
+  const setUser = useSetAtom(UserAtom)
   const failAmount = useAtomValue(taskFailCounterAtom)[TaskID] || 0
 
   const utils = useUtils()
@@ -76,10 +78,13 @@ export default function ({
     if (Status === 'ReadyToClaim') {
       await claimTask(TaskID)
       await refetch()
+      setUser((prev) =>
+        prev ? { ...prev, remainingTasks: prev.remainingTasks - 1 } : null
+      )
       setLoading(false)
       track(TrackerEvents.taskDone, TaskID)
     }
-  }, [Status, TaskID, URL, failAmount, openTgLink, refetch])
+  }, [Status, TaskID, URL, failAmount, openTgLink, refetch, setUser])
 
   const isSpecial = specialTasks.includes(TaskID)
 
