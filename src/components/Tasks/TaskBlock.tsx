@@ -44,8 +44,6 @@ export default function ({
   const onClick = useCallback(async () => {
     setLoading(true)
 
-    console.log(failAmount)
-
     if (failAmount >= failsBeforeClaim && Status !== 'ReadyToClaim') {
       setTimeout(async () => {
         await markTaskDone(TaskID)
