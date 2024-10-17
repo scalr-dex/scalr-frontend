@@ -42,6 +42,11 @@ export default function ({
   )
 
   const onClick = useCallback(async () => {
+    if (Status === 'Claimed') {
+      openTgLink(URL)
+      return
+    }
+
     setLoading(true)
 
     if (failAmount >= failsBeforeClaim && Status !== 'ReadyToClaim') {
