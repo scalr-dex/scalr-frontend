@@ -20,7 +20,7 @@ export function Header2({
   ...props
 }: ChildrenProp & JSX.HTMLAttributes<HTMLHeadingElement>) {
   return (
-    <h2 {...props} className={`text-3xl font-bold ${className}`}>
+    <h2 {...props} className={`text-3xl leading-9 font-bold ${className}`}>
       {children}
     </h2>
   )
@@ -56,7 +56,7 @@ export function AccentText({
   ...props
 }: ChildrenProp & JSX.HTMLAttributes<HTMLSpanElement>) {
   return (
-    <span {...props} className={`font-accent ${className}`}>
+    <span {...props} className={`font-accent leading-5 ${className}`}>
       {children}
     </span>
   )

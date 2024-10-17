@@ -28,12 +28,16 @@ export default function () {
   )
 
   return (
-    <div className="flex flex-col flex-1 gap-y-8 px-4">
-      <div className="flex flex-col gap-y-4 w-full items-center text-center">
-        <Logo size={68} />
+    <div className="flex flex-col flex-1 gap-y-8 px-4 my-4">
+      <div className="flex flex-col gap-y-2 w-full items-center text-center">
+        <Logo size={68} withBackground />
         <Header2>Tasks available</Header2>
         <AccentText>
-          We’ll reward you immediately with points after each task completion
+          Get rewarded instantly, and the reward will be added to your daily
+          claim
+        </AccentText>
+        <AccentText className="text-white/50">
+          Complete tasks for the Scalr DEX airdrop distribution 👀
         </AccentText>
       </div>
       <InviteFriends />
