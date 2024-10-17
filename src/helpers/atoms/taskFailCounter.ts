@@ -1,11 +1,11 @@
 import { atomWithStorage } from 'jotai/utils'
-import { writeAtom } from 'helpers/atoms/atomStore'
+import { storeVersion, writeAtom } from 'helpers/atoms/atomStore'
 
 export const failsBeforeClaim = 1
 
 export const taskFailCounterAtom = atomWithStorage<{
   [taskId: number]: number
-}>('taskFailCounter', {}, undefined, { getOnInit: true })
+}>(`taskFailCounter-${storeVersion}`, {}, undefined, { getOnInit: true })
 
 export function increaseFailAmount(taskId: number) {
   writeAtom(taskFailCounterAtom, (prev) => ({
