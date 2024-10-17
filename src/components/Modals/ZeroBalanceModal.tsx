@@ -14,7 +14,7 @@ function ModalBody() {
       <Header3>Oh no, you lost everything...</Header3>
       <BodyText>
         Get points by <span className="italic">completing tasks</span> and{' '}
-        <span className="italic">inviting friends</span>
+        <span className="italic">inviting friends.</span>
       </BodyText>
       <BodyText className="text-controls-tertiary-focus">
         Claimed amounts count toward the $SCR airdrop distribution 👀

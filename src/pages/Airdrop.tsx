@@ -8,7 +8,7 @@ export default function () {
     <div className="flex flex-col h-full w-full items-center justify-center gap-y-4 text-center px-4">
       <Header1>Scalr Airdrop</Header1>
       <Header3 className="italic !font-semibold">
-        Connect wallet to take part in $SCR tokens distribution
+        Connect wallet to take part in $SCR tokens distribution.
       </Header3>
       <Coin3D />
 

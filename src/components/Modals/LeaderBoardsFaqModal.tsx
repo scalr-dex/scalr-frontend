@@ -21,7 +21,7 @@ function ModalBody() {
           <li>+500 pts for 11th-25th</li>
         </ul>
         <br />
-        <p>Keep pushing to climb the ranks!💪</p>
+        <p>Keep pushing to climb the ranks! 💪</p>
         <br />
       </AccentText>
     </>

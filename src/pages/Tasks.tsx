@@ -34,7 +34,7 @@ export default function () {
         <Header2>Tasks available</Header2>
         <AccentText>
           Get rewarded instantly, and the reward will be added to your daily
-          claim
+          claim.
         </AccentText>
         <AccentText className="text-white/50">
           Complete tasks for the Scalr DEX airdrop distribution 👀
