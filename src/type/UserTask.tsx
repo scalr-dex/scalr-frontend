@@ -55,6 +55,7 @@ export const iconNumberToIcon = {
   35: <img src="img/collabs/eggdrop_logo.jpg" className="rounded-sm" />,
   36: <img src="img/collabs/cartparty.jpg" className="rounded-sm" />,
   37: <img src="img/collabs/p4l_logo.jpg" className="rounded-sm" />,
+  38: <img src="img/collabs/hive_logo.jpg" className="rounded-sm" />,
 } as { [num: number]: JSX.Element }
 
 export const taskStatusToButtonType = {
