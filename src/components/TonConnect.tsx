@@ -8,16 +8,29 @@ import Disconnect from 'components/icons/Disconnect'
 import Copy from 'components/icons/Copy'
 import truncate from 'helpers/truncate'
 import CheckMark from 'components/icons/CheckMark'
-import useTonConnect from 'helpers/hooks/useTonConnect'
+import {
+  useTonConnectUI,
+  toUserFriendlyAddress,
+  useTonWallet,
+} from 'lib/ui-react'
 
 export default function () {
-  const { address, tonConnect } = useTonConnect()
+  const [tonConnect] = useTonConnectUI()
+  const wallet = useTonWallet()
+  const [address, setAddress] = useState('')
   const [copied, setCopied] = useState(false)
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
     void tonConnect.connectionRestored.finally(() => setLoading(false))
   }, [tonConnect.connectionRestored])
+
+  useEffect(() => {
+    const toFormat = wallet?.account.address
+
+    const formatted = toFormat ? toUserFriendlyAddress(toFormat) : ''
+    setAddress(formatted)
+  }, [wallet?.account])
 
   useEffect(() => {
     const setAddress = async () => {
@@ -41,6 +54,8 @@ export default function () {
   }, [tonConnect])
 
   const onCopy = useCallback(async () => {
+    if (!address) return
+
     await navigator.clipboard.writeText(address)
     setCopied(true)
     setTimeout(() => setCopied(false), 1000)

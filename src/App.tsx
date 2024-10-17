@@ -23,6 +23,7 @@ import { ErrorBoundary } from '@sentry/react'
 import ErrorBoundaryFallback from 'components/ErrorBoundaryFallback'
 import { useHashLocation } from 'wouter-preact/use-hash-location'
 import LoaderFullPage from 'components/LoaderFullPage'
+import { THEME, TonConnectUIProvider } from 'lib/ui-react'
 
 const Onboarding = lazy(() => import('pages/Onboarding'))
 const Airdrop = lazy(() => import('pages/Airdrop'))
@@ -48,9 +49,17 @@ function AppInner({ socket }: { socket: WebSocket }) {
                   <Route
                     path="/airdrop"
                     component={() => (
-                      <Suspense fallback={<Loader full />}>
-                        <Airdrop />
-                      </Suspense>
+                      <TonConnectUIProvider
+                        manifestUrl={`${location.origin}/tonconnect-manifest.json`}
+                        actionsConfiguration={{
+                          twaReturnUrl: env.VITE_APP_BASE_LINK,
+                        }}
+                        uiPreferences={{ theme: THEME.DARK }}
+                      >
+                        <Suspense fallback={<Loader full />}>
+                          <Airdrop />
+                        </Suspense>
+                      </TonConnectUIProvider>
                     )}
                   />
                   <Route path="/" component={Main} />
