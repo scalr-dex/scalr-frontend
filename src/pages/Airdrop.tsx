@@ -11,7 +11,9 @@ export default function () {
         Connect wallet to take part in $SCR tokens distribution
       </Header3>
       <Coin3D />
+
       <TonConnect />
+
       <span>
         <Header4>Tokens will be distributed for:</Header4>
         <BodyText className="font-normal text-controls-tertiary-focus">
