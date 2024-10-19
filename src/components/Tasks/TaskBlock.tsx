@@ -5,7 +5,7 @@ import UserTask, {
 } from 'type/UserTask'
 import { useCallback, useState } from 'preact/hooks'
 import { useUtils } from '@telegram-apps/sdk-react'
-import { claimTask, markTaskDone } from 'helpers/api/userTasks'
+import { checkTask, claimTask } from 'helpers/api/userTasks'
 import {
   taskFailCounterAtom,
   failsBeforeClaim,
@@ -54,7 +54,7 @@ export default function ({
     if (failAmount >= failsBeforeClaim && Status !== 'ReadyToClaim') {
       openTgLink(URL)
       setTimeout(async () => {
-        await markTaskDone(TaskID)
+        await checkTask(TaskID)
         await refetch()
         setLoading(false)
       }, 5000)
