@@ -18,9 +18,11 @@ import { track } from 'helpers/api/analytics'
 import TaskUi from 'components/Tasks/TaskUi'
 import handleError from 'helpers/handleError'
 import UserAtom from 'helpers/atoms/UserAtom'
+import TaskIcon from 'components/Tasks/TaskIcon'
 
 export default function ({
   IconNumber,
+  IconURL,
   Name,
   RewardAmount,
   Status,
@@ -95,7 +97,9 @@ export default function ({
   return (
     <TaskUi
       className={`${opacity} ${specialStyle}`}
-      iconLeft={iconNumberToIcon[IconNumber]}
+      iconLeft={
+        IconURL ? <TaskIcon src={IconURL} /> : iconNumberToIcon[IconNumber]
+      }
       taskText={Name}
       rewardAmount={RewardAmount}
       buttonType={buttonType}
