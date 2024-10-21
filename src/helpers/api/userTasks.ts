@@ -4,10 +4,7 @@ import UserTask from 'type/UserTask'
 import { successConfetti } from 'helpers/shootConfetti'
 import TrackerEvents from 'type/TrackerEvents'
 import { track } from 'helpers/api/analytics'
-import {
-  clearTaskFails,
-  increaseFailAmount,
-} from 'helpers/atoms/taskFailCounter'
+import { clearTaskFails } from 'helpers/atoms/taskFailCounter'
 
 export async function getTasks() {
   try {
@@ -21,7 +18,6 @@ export async function markTaskDone(id: number) {
   try {
     return await backendKy().post(`tasks/${id}`)
   } catch (e) {
-    increaseFailAmount(id)
     handleError({
       e,
       toastMessage: 'Task not completed. Please try again',
@@ -31,7 +27,10 @@ export async function markTaskDone(id: number) {
 
 export async function checkTask(id: number) {
   try {
-    return await backendKy().post(`tasks/check/${id}`)
+    const res = await backendKy()
+      .post(`tasks/check/${id}`)
+      .json<{ ok: boolean }>()
+    if (res.ok) await markTaskDone(id)
   } catch (e) {
     handleError({
       e,
