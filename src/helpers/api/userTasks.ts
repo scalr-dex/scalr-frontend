@@ -30,7 +30,6 @@ export async function checkTask(id: number) {
     const res = await backendKy()
       .post(`tasks/check/${id}`)
       .json<{ ok: boolean }>()
-    console.log(res)
     if (res.ok) await markTaskDone(id)
     else
       handleError({
