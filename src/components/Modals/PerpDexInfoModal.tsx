@@ -9,6 +9,8 @@ import IconWithTexts from 'components/IconWithTexts'
 import Download from 'components/icons/Download'
 import TimerIcon from 'components/icons/TimerIcon'
 import Maximize from 'components/icons/Maximize'
+import DexInfoStonks from 'components/DexInfoStonks'
+import { useAutoAnimate } from '@formkit/auto-animate/react'
 
 const info = [
   {
@@ -35,17 +37,33 @@ const info = [
   },
 ]
 
-function ModalBody() {
+function ModalBody({ showCodeInput }: { showCodeInput: boolean }) {
+  const [parent] = useAutoAnimate()
+  const glow = showCodeInput ? 'drop-shadow-bulb-glow' : ''
+
   return (
-    <>
-      <img src="img/dex-scalr-stonks.png" className="w-64 h-32 mx-auto" />
-      <Header2>Scalr Perpetual DEX</Header2>
-      <BodyText className="text-white/50 leading-5">
-        A mobile-first, fast and reliable perpetual exchange designed for
-        seamless trading.
-      </BodyText>
-      {info.map(IconWithTexts)}
-    </>
+    <div className="flex flex-col gap-y-6" ref={parent}>
+      <DexInfoStonks />
+      <div
+        className={`flex flex-col gap-y-2 leading-5 text-center transition-all ${glow}`}
+      >
+        <Header2>Scalr Perpetual DEX</Header2>
+        {showCodeInput ? (
+          <BodyText>
+            Join the beta with invite code.{'\n'}Public access coming soon.
+          </BodyText>
+        ) : (
+          <span className="text-white/50">
+            A mobile-first, fast and reliable perpetual exchange designed for
+            seamless trading.
+          </span>
+        )}
+      </div>
+
+      {showCodeInput ? null : (
+        <div className="flex flex-col gap-y-5">{info.map(IconWithTexts)}</div>
+      )}
+    </div>
   )
 }
 
@@ -64,13 +82,15 @@ function ModalFooter({ setShowCodeInput }: { setShowCodeInput: () => void }) {
 export default function (props: DefaultModalProps) {
   const [showCodeInput, setShowCodeInput] = useState(false)
 
+  const footer = showCodeInput ? null : (
+    <ModalFooter setShowCodeInput={() => setShowCodeInput(true)} />
+  )
+
   return (
     <DefaultModal
       {...props}
-      body={ModalBody}
-      footer={() => (
-        <ModalFooter setShowCodeInput={() => setShowCodeInput(true)} />
-      )}
+      body={() => <ModalBody showCodeInput={showCodeInput} />}
+      footer={() => footer}
     />
   )
 }

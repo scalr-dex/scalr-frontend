@@ -19,17 +19,17 @@ export default function ({
 }: DefaultModalProps & {
   header?: (onClose: () => void) => JSX.Element
   body: () => JSX.Element
-  footer: (onClose: () => void) => JSX.Element
+  footer: (onClose: () => void) => JSX.Element | null
 }) {
   const onClose = () => setShowModal(false)
 
   return (
     <dialog
-      className="modal modal-bottom text-white"
+      className="modal modal-top text-white"
       open={showModal}
       onClose={onClose}
     >
-      <div className="modal-box bg-transparent max-h-[90dvh] !px-2 !pb-4">
+      <div className="modal-box bg-transparent max-h-[98dvh] !px-2 !pb-4">
         <div className="w-full p-4 flex flex-col gap-y-5 bg-secondary rounded-4xl">
           {header(onClose)}
           <div className="flex flex-col gap-y-4">{body()}</div>

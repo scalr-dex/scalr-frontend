@@ -13,7 +13,7 @@ export default function ({
   return (
     <div className="flex flex-row gap-x-4">
       <div className="text-alt">{icon}</div>
-      <div className="flex flex-col">
+      <div className="flex flex-col gap-y-1">
         <Header4>{topText}</Header4>
         <BodyText className="text-white/50 leading-5">{bottomText}</BodyText>
       </div>

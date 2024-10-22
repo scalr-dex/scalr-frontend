@@ -47,6 +47,16 @@ module.exports = {
       },
       dropShadow: {
         'glow-accent': '0 0 0.25rem var(--accent)',
+        'bulb-glow': [
+          '0 0.25rem 2rem #FFFFFF24',
+          '0 0.25rem 1.5rem #FFFFFF24',
+          '0 0 0.5rem #FFFFFF24',
+        ],
+        super: [
+          '0px 15px 40px 0px #00000066',
+          '0px 5px 10px 0px #00000033',
+          '0px 0px 0px 1px #0000001a',
+        ],
       },
       screens: {
         se: '375px',
