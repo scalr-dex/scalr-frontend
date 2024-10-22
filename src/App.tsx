@@ -24,6 +24,7 @@ import ErrorBoundaryFallback from 'components/ErrorBoundaryFallback'
 import { useHashLocation } from 'wouter-preact/use-hash-location'
 import LoaderFullPage from 'components/LoaderFullPage'
 import { THEME, TonConnectUIProvider } from 'lib/ui-react'
+import PerpDex from 'pages/PerpDex'
 
 const Onboarding = lazy(() => import('pages/Onboarding'))
 const Airdrop = lazy(() => import('pages/Airdrop'))
@@ -46,6 +47,7 @@ function AppInner({ socket }: { socket: WebSocket }) {
                 <>
                   <Route path="/tasks" component={Tasks} />
                   <Route path="/leaderboards" component={LeaderBoards} />
+                  <Route path="/perp" component={PerpDex} />
                   <Route
                     path="/airdrop"
                     component={() => (

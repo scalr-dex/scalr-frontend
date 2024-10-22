@@ -57,6 +57,11 @@ module.exports = {
       background: {
         'border-gradient':
           'linear-gradient(white, white) padding-box, linear-gradient(to right, darkblue, darkorchid) border-box',
+        'blue-vignette':
+          'radial-gradient(ellipse at left, #133D8D60, transparent 50%), radial-gradient(circle at right, #133D8D70, transparent 60%)',
+      },
+      backgroundImage: {
+        noise: 'url(./img/noise-effect.png)',
       },
       margin: { 1.5: '1.5px', 'safe-bottom': 'var(--safe-area-bottom)' },
       borderWidth: {

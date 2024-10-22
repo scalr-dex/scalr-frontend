@@ -53,13 +53,7 @@ export default function () {
   if (!imagesPreloaded) return <LoaderFullPage />
 
   return (
-    <div
-      className="flex flex-col items-center justify-between pb-safe-bottom h-full shadow-onboarding"
-      style={{
-        background:
-          'radial-gradient(ellipse at left, #133D8D60, transparent 50%), radial-gradient(circle at right, #133D8D70, transparent 60%)',
-      }}
-    >
+    <div className="flex flex-col items-center justify-between pb-safe-bottom h-full shadow-onboarding bg-blue-vignette">
       <>
         <div
           className="relative flex flex-col gap-y-2 items-center justify-center flex-1 w-full"
