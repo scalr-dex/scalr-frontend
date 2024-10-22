@@ -30,7 +30,13 @@ export async function checkTask(id: number) {
     const res = await backendKy()
       .post(`tasks/check/${id}`)
       .json<{ ok: boolean }>()
+    console.log(res)
     if (res.ok) await markTaskDone(id)
+    else
+      handleError({
+        e: 'Task not completed',
+        toastMessage: "You didn't complete the task",
+      })
   } catch (e) {
     handleError({
       e,
