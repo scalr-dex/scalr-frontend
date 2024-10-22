@@ -26,9 +26,9 @@ export default function ({
         </AccentText>
       </div>
 
-      <div className="flex flex-row items-center gap-x-4 text-sm">
-        <AccentText>{formatUSA(item.points)}</AccentText>
-        <AccentText className={`font-semibold text-center w-6 ${bg}`}>
+      <div className="flex flex-row items-center gap-x-2">
+        <AccentText className="text-xs">{formatUSA(item.points)}</AccentText>
+        <AccentText className={`font-semibold text-sm text-center w-6 ${bg}`}>
           {isTopThree ? '' : '#'}
           {index + 1}
         </AccentText>
