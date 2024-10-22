@@ -31,6 +31,11 @@ export async function checkTask(id: number) {
       .post(`tasks/check/${id}`)
       .json<{ ok: boolean }>()
     if (res.ok) await markTaskDone(id)
+    else
+      handleError({
+        e: 'Task not completed',
+        toastMessage: "You didn't complete the task",
+      })
   } catch (e) {
     handleError({
       e,
