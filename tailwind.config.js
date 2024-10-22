@@ -43,6 +43,7 @@ module.exports = {
           '0px 15px 40px 0px #00000066, 0px 5px 10px 0px #00000033, 0px 0px 0px 1px #0000001a',
         onboarding: '0px 16px 32px -8px #0C0C0D66',
         accent: '0 0 6px 2px #4374EC',
+        'inner-card-glow': 'inset 0 0 0.75rem #FFFFFF60',
       },
       dropShadow: {
         'glow-accent': '0 0 0.25rem var(--accent)',
@@ -60,12 +61,10 @@ module.exports = {
         'blue-vignette':
           'radial-gradient(ellipse at left, #133D8D60, transparent 50%), radial-gradient(circle at right, #133D8D70, transparent 60%)',
       },
-      backgroundImage: {
-        noise: 'url(./img/noise-effect.png)',
-      },
       margin: { 1.5: '1.5px', 'safe-bottom': 'var(--safe-area-bottom)' },
       borderWidth: {
         1.5: '1.5px',
+        5: '5px',
       },
       colors: {
         primary: '#0E121B',
@@ -82,6 +81,7 @@ module.exports = {
         'accent-focus': '#427AE4',
         'accent-disabled': '#345FB2',
         'accent-dimmed': '#B1C9F7',
+        'accent-dark': '#133D8D',
         'accent-alt': '#00FFFF',
         success: '#23CFB2',
         'success-light': '#CBECDE',
