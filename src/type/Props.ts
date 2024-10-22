@@ -11,8 +11,8 @@ export interface StyleProp {
   style?: Style
 }
 
-export interface OnClickProp {
-  onClick?: JSX.MouseEventHandler<HTMLButtonElement>
+export interface OnClickProp<T extends EventTarget> {
+  onClick?: JSX.MouseEventHandler<T>
 }
 
 export type OnClickEvent = JSX.TargetedMouseEvent<HTMLButtonElement>

@@ -6,6 +6,7 @@ enum ButtonTypes {
   success,
   error,
   accent,
+  alt,
   secondary,
   outline,
   ghost,
@@ -39,6 +40,7 @@ export const buttonClassNames = (disabled?: boolean) => ({
     'bg-controls-tertiary hover:bg-controls-tertiary-hover active:bg-controls-tertiary-active disabled:bg-controls-tertiary-disabled',
   [ButtonTypes.outline]: 'bg-transparent border border-white-16',
   [ButtonTypes.special]: `text-white ${disabled ? 'bg-border-gradient' : 'bg-special-gradient'} hover:opacity-90 active:opacity-90 font-medium disabled:bg-primary disabled:text-opacity-50`,
+  [ButtonTypes.alt]: `text-secondary font-semibold bg-alt hover:opacity-80 active:opacity-90 disabled:opacity-50 transition-opacity`,
 })
 
 export default ButtonTypes
