@@ -52,7 +52,7 @@ export default function ({
         await checkTask(TaskID)
         await refetch()
         setLoading(false)
-      }, 5000)
+      }, 1000)
       return
     }
 
