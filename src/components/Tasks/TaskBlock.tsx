@@ -6,17 +6,11 @@ import UserTask, {
 import { useCallback, useState } from 'preact/hooks'
 import { useUtils } from '@telegram-apps/sdk-react'
 import { checkTask, claimTask } from 'helpers/api/userTasks'
-import {
-  taskFailCounterAtom,
-  failsBeforeClaim,
-  increaseFailAmount,
-} from 'helpers/atoms/taskFailCounter'
-import { useAtomValue, useSetAtom } from 'jotai'
+import { useSetAtom } from 'jotai'
 import TrackerEvents from 'type/TrackerEvents'
 import { specialTasks } from 'helpers/sortTasks'
 import { track } from 'helpers/api/analytics'
 import TaskUi from 'components/Tasks/TaskUi'
-import handleError from 'helpers/handleError'
 import UserAtom from 'helpers/atoms/UserAtom'
 import TaskIcon from 'components/Tasks/TaskIcon'
 
@@ -31,7 +25,6 @@ export default function ({
   refetch,
 }: UserTask & { refetch: () => Promise<unknown> }) {
   const setUser = useSetAtom(UserAtom)
-  const failAmount = useAtomValue(taskFailCounterAtom)[TaskID] || 0
 
   const utils = useUtils()
   const [loading, setLoading] = useState(false)
@@ -53,27 +46,13 @@ export default function ({
 
     setLoading(true)
 
-    if (failAmount >= failsBeforeClaim && Status !== 'ReadyToClaim') {
+    if (Status === 'NotStarted') {
       openTgLink(URL)
       setTimeout(async () => {
         await checkTask(TaskID)
         await refetch()
         setLoading(false)
       }, 5000)
-      return
-    }
-
-    if (Status === 'NotStarted') {
-      setTimeout(() => {
-        handleError({
-          e: 'Task iteration',
-          sentryCapture: false,
-          toastMessage: 'Task not completed. Please try again',
-        })
-        increaseFailAmount(TaskID)
-        setLoading(false)
-      }, 5000)
-      openTgLink(URL)
       return
     }
 
@@ -86,7 +65,7 @@ export default function ({
       setLoading(false)
       track(TrackerEvents.taskDone, TaskID)
     }
-  }, [Status, TaskID, URL, failAmount, openTgLink, refetch, setUser])
+  }, [Status, TaskID, URL, openTgLink, refetch, setUser])
 
   const isSpecial = specialTasks.includes(TaskID)
 
