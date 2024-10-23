@@ -1,12 +1,13 @@
 import { BodyText, Header3 } from 'components/Text'
 import ScalrCoin from 'components/icons/coins/ScalrCoin'
+import { JSX } from 'preact/jsx-runtime'
 
 export default function ({
   header,
   subHeader,
 }: {
   header: string
-  subHeader: string
+  subHeader: JSX.Element | string
 }) {
   return (
     <div className="flex flex-row justify-between">

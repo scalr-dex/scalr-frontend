@@ -35,6 +35,8 @@ module.exports = {
         '1/10': '10%',
         '1/7': '15%',
         '1/5': '20%',
+        '4/5': '80%',
+        14.5: '3.625rem',
         'safe-bottom': 'var(--safe-area-bottom)',
         'footer-height': 'var(--footer-height)',
       },

@@ -5817,6 +5817,18 @@ __metadata:
   languageName: node
   linkType: hard
 
+"react-pin-field@npm:^3.1.5":
+  version: 3.1.5
+  resolution: "react-pin-field@npm:3.1.5"
+  dependencies:
+    react-use-bireducer: ^1.1.1
+  peerDependencies:
+    react: ^18.2.0
+    react-dom: ^18.2.0
+  checksum: 15a543024fd81b61cc9fcd0b1f576a3beb620e3e187b7a8d064d3ed9ee697f77c4d92523eefb0dbf52427347800c525d05ea89012a9346ddb4cf6c5dd0fec07b
+  languageName: node
+  linkType: hard
+
 "react-range@npm:^1.10.0":
   version: 1.10.0
   resolution: "react-range@npm:1.10.0"
@@ -5836,6 +5848,16 @@ __metadata:
     react: ">=18"
     react-dom: ">=18"
   checksum: 982d33918c63e99464623a1b3b023ab5fe18fe341143cb0cb04287e37fd0611c560d9ef451e151ac8ade15a1cda09df09d4c442b3db582965d71aaf42d49b230
+  languageName: node
+  linkType: hard
+
+"react-use-bireducer@npm:^1.1.1":
+  version: 1.1.1
+  resolution: "react-use-bireducer@npm:1.1.1"
+  peerDependencies:
+    react: ^16.8 || ^17 || ^18
+    react-dom: ^16.8 || ^17 || ^18
+  checksum: 06417880953d3e48f8bc4510d067a82acb04028f137d8091b087f5b051972e59e30bebb86abfe6c65ca05651ebefed428b078825a42599b44be716ecbddb23bb
   languageName: node
   linkType: hard
 
@@ -6249,6 +6271,7 @@ __metadata:
     react-countup: ^6.5.3
     react-device-detect: ^2.2.3
     react-ga4: ^2.1.0
+    react-pin-field: ^3.1.5
     react-range: ^1.10.0
     react-toastify: ^10.0.5
     rollup-plugin-visualizer: ^5.12.0

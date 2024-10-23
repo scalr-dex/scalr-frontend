@@ -24,4 +24,5 @@ export interface ChildrenProp {
 export interface DefaultModalProps {
   showModal: boolean
   setShowModal: (show: boolean) => void
+  onCloseCallback?: () => void
 }

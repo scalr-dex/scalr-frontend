@@ -17,7 +17,10 @@ export default function () {
         <NoisyCardBig
           header="Scalr Perpetual DEX"
           subHeader={
-            'Join the beta with invite code.\nPublic access coming soon.'
+            <>
+              <p>Join the beta with invite code</p>
+              <p>Public access coming soon.</p>
+            </>
           }
         />
         <PerpCardBlur />

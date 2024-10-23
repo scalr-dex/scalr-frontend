@@ -1,16 +1,15 @@
 import Button from 'components/Button'
-import { BodyText, Header2 } from 'components/Text'
+import { Header2 } from 'components/Text'
 import DefaultModal from 'components/Modals/DefaultModal'
 import ButtonTypes from 'type/Button'
 import { DefaultModalProps } from 'type/Props'
-import { useState } from 'preact/hooks'
+import { useCallback, useState } from 'preact/hooks'
 import Box from 'components/icons/Box'
 import IconWithTexts from 'components/IconWithTexts'
-import Download from 'components/icons/Download'
 import TimerIcon from 'components/icons/TimerIcon'
 import Maximize from 'components/icons/Maximize'
 import DexInfoStonks from 'components/DexInfoStonks'
-import { useAutoAnimate } from '@formkit/auto-animate/react'
+import PerpModalPinCode from 'components/PerpDex/PerpModalPinCode'
 
 const info = [
   {
@@ -18,11 +17,6 @@ const info = [
     topText: 'Liquidity Efficiency',
     bottomText:
       'Ensures plenty of liquidity for smooth trading and less price fluctuation',
-  },
-  {
-    icon: <Download />,
-    topText: 'Low Slippage',
-    bottomText: 'Reduces price impact, ensuring fair trades.',
   },
   {
     icon: <TimerIcon />,
@@ -38,20 +32,19 @@ const info = [
 ]
 
 function ModalBody({ showCodeInput }: { showCodeInput: boolean }) {
-  const [parent] = useAutoAnimate()
   const glow = showCodeInput ? 'drop-shadow-bulb-glow' : ''
 
   return (
-    <div className="flex flex-col gap-y-6" ref={parent}>
+    <div className="flex flex-col gap-y-6 h-[74dvh]">
       <DexInfoStonks />
-      <div
-        className={`flex flex-col gap-y-2 leading-5 text-center transition-all ${glow}`}
-      >
-        <Header2>Scalr Perpetual DEX</Header2>
+      <div className="flex flex-col gap-y-2 leading-5 text-center">
+        <Header2
+          className={`transition-all duration-1000 will-change-transform ${glow}`}
+        >
+          Scalr Perpetual DEX
+        </Header2>
         {showCodeInput ? (
-          <BodyText>
-            Join the beta with invite code.{'\n'}Public access coming soon.
-          </BodyText>
+          <PerpModalPinCode />
         ) : (
           <span className="text-white/50">
             A mobile-first, fast and reliable perpetual exchange designed for
@@ -81,6 +74,10 @@ function ModalFooter({ setShowCodeInput }: { setShowCodeInput: () => void }) {
 
 export default function (props: DefaultModalProps) {
   const [showCodeInput, setShowCodeInput] = useState(false)
+  const onClose = useCallback(() => {
+    props.setShowModal(false)
+    setTimeout(() => setShowCodeInput(false), 200)
+  }, [props])
 
   const footer = showCodeInput ? null : (
     <ModalFooter setShowCodeInput={() => setShowCodeInput(true)} />
@@ -89,6 +86,7 @@ export default function (props: DefaultModalProps) {
   return (
     <DefaultModal
       {...props}
+      onCloseCallback={onClose}
       body={() => <ModalBody showCodeInput={showCodeInput} />}
       footer={() => footer}
     />
