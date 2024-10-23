@@ -29,7 +29,7 @@ export default function ({
 
   return (
     <dialog
-      className="modal modal-top text-white"
+      className="modal modal-middle text-white"
       open={showModal}
       onClose={onClose}
     >

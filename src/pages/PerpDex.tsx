@@ -5,10 +5,12 @@ import PerpCardBlur from 'components/icons/PerpCardBlur'
 import { useState } from 'preact/hooks'
 import PerpDexInfoModal from 'components/Modals/PerpDex/PerpDexInfoModal'
 import ScalrAirdropModal from 'components/Modals/PerpDex/ScalrAirdropModal'
+import PartnershipModal from 'components/Modals/PerpDex/PartnershipModal'
 
 export default function () {
-  const [openAirdrop, setOpenAirdrop] = useState(false)
+  const [openAirdropModal, setOpenAirdropModal] = useState(false)
   const [openInfoModal, setOpenInfoModal] = useState(false)
+  const [openPartnershipModal, setOpenPartnershipModal] = useState(false)
 
   return (
     <div className="flex flex-col gap-y-4 pb-footer-height m-4">
@@ -33,7 +35,7 @@ export default function () {
           background:
             'url(./img/noise-effect.png), linear-gradient(to top, var(--accent-dark), var(--secondary), var(--secondary))',
         }}
-        onClick={() => setOpenAirdrop(true)}
+        onClick={() => setOpenAirdropModal(true)}
         className="relative p-4 h-60"
       >
         <NoisyCardBig
@@ -66,6 +68,7 @@ export default function () {
               'url(./img/noise-effect.png), linear-gradient(to right, #3284FE, #0B54E3) padding-box',
           }}
           className="h-40 p-2.5 border-5 border-white-16 shadow-inner-card-glow"
+          onClick={() => setOpenPartnershipModal(true)}
         >
           <NoisyCardSmall
             topText="You’re a KOL?"
@@ -79,8 +82,12 @@ export default function () {
         setShowModal={setOpenInfoModal}
       />
       <ScalrAirdropModal
-        showModal={openAirdrop}
-        setShowModal={setOpenAirdrop}
+        showModal={openAirdropModal}
+        setShowModal={setOpenAirdropModal}
+      />
+      <PartnershipModal
+        showModal={openPartnershipModal}
+        setShowModal={setOpenPartnershipModal}
       />
     </div>
   )
