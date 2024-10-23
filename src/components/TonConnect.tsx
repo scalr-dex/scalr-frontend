@@ -72,7 +72,7 @@ export default function () {
       <Button
         onClick={address ? onCopy : onConnect}
         className={`!w-full !px-2 !rounded-full !font-bold !font-accent ${padding}`}
-        buttonType={copied ? ButtonTypes.success : ButtonTypes.accent}
+        buttonType={copied ? ButtonTypes.success : ButtonTypes.secondary}
         isLoading={loading}
         iconLeft={
           address ? (
@@ -89,7 +89,11 @@ export default function () {
         {address ? truncate({ fullString: address }) : 'Connect Wallet'}
       </Button>
       {address ? (
-        <Button className="!rounded-full !w-16" onClick={onDisconnect}>
+        <Button
+          buttonType={ButtonTypes.secondary}
+          className="!rounded-full !w-16"
+          onClick={onDisconnect}
+        >
           <Disconnect />
         </Button>
       ) : null}

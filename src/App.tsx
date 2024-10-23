@@ -27,7 +27,6 @@ import { THEME, TonConnectUIProvider } from 'lib/ui-react'
 import PerpDex from 'pages/PerpDex'
 
 const Onboarding = lazy(() => import('pages/Onboarding'))
-const Airdrop = lazy(() => import('pages/Airdrop'))
 
 function AppInner({ socket }: { socket: WebSocket }) {
   useWebSocketData(socket)
@@ -47,9 +46,8 @@ function AppInner({ socket }: { socket: WebSocket }) {
                 <>
                   <Route path="/tasks" component={Tasks} />
                   <Route path="/leaderboards" component={LeaderBoards} />
-                  <Route path="/perp" component={PerpDex} />
                   <Route
-                    path="/airdrop"
+                    path="/perp"
                     component={() => (
                       <TonConnectUIProvider
                         manifestUrl={`${location.origin}/tonconnect-manifest.json`}
@@ -59,7 +57,7 @@ function AppInner({ socket }: { socket: WebSocket }) {
                         uiPreferences={{ theme: THEME.DARK }}
                       >
                         <Suspense fallback={<Loader full />}>
-                          <Airdrop />
+                          <PerpDex />
                         </Suspense>
                       </TonConnectUIProvider>
                     )}

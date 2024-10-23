@@ -12,8 +12,6 @@ export default function () {
       </Header3>
       <Coin3D />
 
-      <TonConnect />
-
       <span>
         <Header4>Tokens will be distributed for:</Header4>
         <BodyText className="font-normal text-controls-tertiary-focus">

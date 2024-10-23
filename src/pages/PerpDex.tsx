@@ -3,9 +3,11 @@ import NoisyCard from 'components/NoisyCard'
 import NoisyCardSmall from 'components/NoisyCardSmall'
 import PerpCardBlur from 'components/icons/PerpCardBlur'
 import { useState } from 'preact/hooks'
-import PerpDexInfoModal from 'components/Modals/PerpDexInfoModal'
+import PerpDexInfoModal from 'components/Modals/PerpDex/PerpDexInfoModal'
+import ScalrAirdropModal from 'components/Modals/PerpDex/ScalrAirdropModal'
 
 export default function () {
+  const [openAirdrop, setOpenAirdrop] = useState(false)
   const [openInfoModal, setOpenInfoModal] = useState(false)
 
   return (
@@ -31,6 +33,7 @@ export default function () {
           background:
             'url(./img/noise-effect.png), linear-gradient(to top, var(--accent-dark), var(--secondary), var(--secondary))',
         }}
+        onClick={() => setOpenAirdrop(true)}
         className="relative p-4 h-60"
       >
         <NoisyCardBig
@@ -74,6 +77,10 @@ export default function () {
       <PerpDexInfoModal
         showModal={openInfoModal}
         setShowModal={setOpenInfoModal}
+      />
+      <ScalrAirdropModal
+        showModal={openAirdrop}
+        setShowModal={setOpenAirdrop}
       />
     </div>
   )
