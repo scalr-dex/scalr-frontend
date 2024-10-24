@@ -1,6 +1,8 @@
 import Close from 'components/icons/Close'
 import { JSX } from 'preact/jsx-runtime'
 import { DefaultModalProps } from 'type/Props'
+import { Sheet, SheetRef } from 'react-modal-sheet'
+import { useRef } from 'preact/hooks'
 
 function DefaultHeader({ onClose }: { onClose: () => void }) {
   return (
@@ -22,30 +24,24 @@ export default function ({
   body: (onClose: () => void) => JSX.Element
   footer?: (onClose: () => void) => JSX.Element | null
 }) {
+  const ref = useRef<SheetRef>()
   const onClose = () => {
     onCloseCallback?.()
     setShowModal(false)
   }
 
   return (
-    <dialog
-      className="modal modal-bottom text-white"
-      open={showModal}
-      onClose={onClose}
-    >
-      <div className="modal-box bg-transparent max-h-[95vh] p-0">
-        <div className="w-full pt-4 px-4 flex flex-col gap-y-5 bg-secondary rounded-t-4xl rounded-b-xl overflow-x-clip">
-          {header(onClose)}
-          <div className="flex flex-col gap-y-4">{body(onClose)}</div>
-          {footer ? (
-            <div className="sticky bottom-4">{footer(onClose)}</div>
-          ) : null}
-        </div>
-      </div>
-
-      <form method="dialog" className="modal-backdrop bg-black bg-opacity-75">
-        <button>X</button>
-      </form>
-    </dialog>
+    <Sheet isOpen={showModal} onClose={onClose} ref={ref}>
+      <Sheet.Container>
+        <Sheet.Header />
+        <Sheet.Content style={{ paddingBottom: ref.current?.y }}>
+          <Sheet.Scroller>
+            <div className="flex flex-col gap-y-4 px-4">{body(onClose)}</div>
+            <div className="sticky bottom-4 px-4 pt-4">{footer?.(onClose)}</div>
+          </Sheet.Scroller>
+        </Sheet.Content>
+      </Sheet.Container>
+      <Sheet.Backdrop />
+    </Sheet>
   )
 }

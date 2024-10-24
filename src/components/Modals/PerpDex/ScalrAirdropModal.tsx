@@ -40,7 +40,7 @@ function ModalBody({ connectWallet }: { connectWallet: boolean }) {
   const glow = connectWallet ? 'drop-shadow-bulb-glow' : ''
 
   return (
-    <div className="flex flex-col gap-y-6 min-h-[70vh]">
+    <div className="flex flex-col gap-y-6">
       <img src="/img/dex-scalr-3d.png" className="w-64 self-center" />
       <div className="flex flex-col gap-y-2 leading-5 text-center">
         <Header2

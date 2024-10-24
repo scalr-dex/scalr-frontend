@@ -7,6 +7,7 @@ export default function ({ onClick }: { onClick: () => void }) {
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
       onClick={onClick}
+      className="cursor-pointer hover:opacity-90 active:opacity-80 transition-opacity"
     >
       <path
         d="M0 17C0 7.61116 7.61116 0 17 0C26.3888 0 34 7.61116 34 17C34 26.3888 26.3888 34 17 34C7.61116 34 0 26.3888 0 17Z"
