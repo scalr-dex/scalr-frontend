@@ -3,13 +3,15 @@ import { Header2 } from 'components/Text'
 import DefaultModal from 'components/Modals/DefaultModal'
 import ButtonTypes from 'type/Button'
 import { DefaultModalProps } from 'type/Props'
-import { useCallback, useState } from 'preact/hooks'
+import { useCallback, useEffect, useState } from 'preact/hooks'
 import IconWithTexts from 'components/IconWithTexts'
 import CheckCircle from 'components/icons/CheckCircle'
 import Percent from 'components/icons/Percent'
 import Cup from 'components/icons/Cup'
 import Gift from 'components/icons/Gift'
 import TonConnect from 'components/TonConnect'
+import { useTonConnectUI } from 'lib/ui-react'
+import { useAutoAnimate } from '@formkit/auto-animate/react'
 
 const info = [
   {
@@ -36,12 +38,22 @@ const info = [
   },
 ]
 
-function ModalBody({ connectWallet }: { connectWallet: boolean }) {
+function ModalBody({
+  connectWallet,
+  isConnected,
+}: {
+  connectWallet: boolean
+  isConnected: boolean
+}) {
+  const [parent] = useAutoAnimate()
   const glow = connectWallet ? 'drop-shadow-bulb-glow' : ''
 
   return (
-    <div className="flex flex-col gap-y-6 min-h-[70vh]">
-      <img src="/img/dex-scalr-3d.png" className="w-64 self-center" />
+    <div className="flex flex-col gap-y-6 px-4" ref={parent}>
+      <img
+        src="img/dex-scalr-3d.png"
+        className="h-32 self-center animate-fadeIn"
+      />
       <div className="flex flex-col gap-y-2 leading-5 text-center">
         <Header2
           className={`transition-all duration-1000 will-change-transform ${glow}`}
@@ -50,7 +62,9 @@ function ModalBody({ connectWallet }: { connectWallet: boolean }) {
         </Header2>
         <span className="text-white/50">
           {connectWallet
-            ? 'Connect wallet to secure your spot'
+            ? isConnected
+              ? "Nice, you're ready for airdrop"
+              : 'Connect wallet to secure your spot'
             : 'A mobile-first, fast and reliable perpetual exchange designed for seamless trading.'}
         </span>
       </div>
@@ -85,17 +99,38 @@ function ModalFooter({
 }
 
 export default function (props: DefaultModalProps) {
+  const [tonConnect] = useTonConnectUI()
   const [connectWallet, setConnectWallet] = useState(false)
+  const [dismissible, setDismissible] = useState(true)
   const onClose = useCallback(() => {
     props.setShowModal(false)
     setTimeout(() => setConnectWallet(false), 200)
   }, [props])
 
+  useEffect(() => {
+    const unsubscribe = tonConnect.onModalStateChange((state) =>
+      setDismissible(state.status === 'closed')
+    )
+
+    return () => {
+      unsubscribe()
+    }
+  }, [tonConnect])
+
   return (
     <DefaultModal
       {...props}
+      dismissible={dismissible}
       onCloseCallback={onClose}
-      body={() => <ModalBody connectWallet={connectWallet} />}
+      contentClassName="min-h-[70vh]"
+      bodyWrapperClassName="h-full"
+      footerWrapperClassName="flex-1 content-end"
+      body={() => (
+        <ModalBody
+          isConnected={tonConnect.connected}
+          connectWallet={connectWallet}
+        />
+      )}
       footer={() => (
         <ModalFooter
           connectWallet={connectWallet}

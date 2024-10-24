@@ -1,7 +1,7 @@
 /** @type {import('tailwindcss/defaultConfig')} */
 module.exports = {
   content: ['./index.html', './src/**/!(tailwind).{ts,tsx}'],
-  plugins: [require('@tailwindcss/typography'), require('daisyui')],
+  plugins: [require('@tailwindcss/typography')],
   future: { hoverOnlyWhenSupported: true },
 
   theme: {
@@ -14,6 +14,10 @@ module.exports = {
         '4xl': '2rem',
       },
       keyframes: {
+        fadeIn: {
+          from: { opacity: 0 },
+          to: { opacity: 1 },
+        },
         hovering: {
           '0%, 100%': { transform: 'translateY(0rem)' },
           '50%': { transform: 'translateY(0.5rem)' },
@@ -24,6 +28,7 @@ module.exports = {
         },
       },
       animation: {
+        fadeIn: 'fadeIn 0.5s ease-in-out',
         hovering: 'hovering 4s ease-in-out infinite',
         spin: 'spin 5s linear forwards infinite',
       },

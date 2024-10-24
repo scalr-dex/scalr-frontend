@@ -45,6 +45,10 @@ html {
   -moz-osx-font-smoothing: grayscale;
 }
 
+tc-root {
+  pointer-events: auto;
+}
+
 ::selection {
   background-color: var(--selection);
 }

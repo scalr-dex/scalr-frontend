@@ -8,7 +8,10 @@ import { useUtils } from '@telegram-apps/sdk-react'
 function ModalBody() {
   return (
     <>
-      <img src="img/scalr-wavy.png" className="mx-4 rounded-lg" />
+      <img
+        src="img/scalr-wavy.png"
+        className="mx-4 h-44 animate-fadeIn rounded-lg"
+      />
       <Header2 className="text-center">Interested in partnership?</Header2>
       <BodyText className="text-center">
         Send your links with a short note about yourself, and receive a special

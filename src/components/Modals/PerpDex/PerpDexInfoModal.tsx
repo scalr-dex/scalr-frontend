@@ -10,6 +10,7 @@ import TimerIcon from 'components/icons/TimerIcon'
 import Maximize from 'components/icons/Maximize'
 import DexInfoStonks from 'components/DexInfoStonks'
 import PerpModalPinCode from 'components/PerpDex/PerpModalPinCode'
+import { useAutoAnimate } from '@formkit/auto-animate/react'
 
 const info = [
   {
@@ -32,12 +33,13 @@ const info = [
 ]
 
 function ModalBody({ showCodeInput }: { showCodeInput: boolean }) {
+  const [parent] = useAutoAnimate()
   const glow = showCodeInput ? 'drop-shadow-bulb-glow' : ''
 
   return (
-    <div className="flex flex-col gap-y-6">
+    <div className="flex flex-col gap-y-6 px-4 min-h-[75vh]">
       <DexInfoStonks />
-      <div className="flex flex-col gap-y-2 leading-5 text-center">
+      <div className="flex flex-col gap-y-2 leading-5 text-center" ref={parent}>
         <Header2
           className={`transition-all duration-1000 will-change-transform ${glow}`}
         >

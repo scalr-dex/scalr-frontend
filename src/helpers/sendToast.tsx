@@ -12,6 +12,7 @@ export default function balanceChangeToast(delta: number, lost: boolean) {
   haptic.notificationOccurred(lost ? 'error' : 'success')
 
   toast(() => <BalanceChangeToast delta={delta} lost={lost} />)
+  writeAtom(showZeroBalanceModal, true)
 
   if (lost) {
     if (!readAtom(UserAtom)?.balance) {
