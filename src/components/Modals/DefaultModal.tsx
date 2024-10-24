@@ -29,15 +29,17 @@ export default function ({
 
   return (
     <dialog
-      className="modal modal-middle text-white"
+      className="modal modal-bottom text-white"
       open={showModal}
       onClose={onClose}
     >
-      <div className="modal-box bg-transparent max-h-[98dvh] !px-2 !pb-4">
-        <div className="w-full p-4 flex flex-col gap-y-5 bg-secondary rounded-4xl overflow-clip">
+      <div className="modal-box bg-transparent max-h-[95vh] p-0">
+        <div className="w-full pt-4 px-4 flex flex-col gap-y-5 bg-secondary rounded-t-4xl rounded-b-xl overflow-x-clip">
           {header(onClose)}
           <div className="flex flex-col gap-y-4">{body(onClose)}</div>
-          {footer ? <div className="mb-4">{footer(onClose)}</div> : null}
+          {footer ? (
+            <div className="sticky bottom-4">{footer(onClose)}</div>
+          ) : null}
         </div>
       </div>
 

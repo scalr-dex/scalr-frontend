@@ -102,6 +102,8 @@ module.exports = {
         error: '#F3617D',
 
         alt: '#FFE792',
+        'alt-hover': '#d9c47c',
+        'alt-active': '#baa96b',
 
         'white-16': '#ffffff16',
         skelton: '#DDDDDD60',

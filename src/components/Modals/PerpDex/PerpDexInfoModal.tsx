@@ -35,7 +35,7 @@ function ModalBody({ showCodeInput }: { showCodeInput: boolean }) {
   const glow = showCodeInput ? 'drop-shadow-bulb-glow' : ''
 
   return (
-    <div className="flex flex-col gap-y-6 h-[74dvh]">
+    <div className="flex flex-col gap-y-6">
       <DexInfoStonks />
       <div className="flex flex-col gap-y-2 leading-5 text-center">
         <Header2
