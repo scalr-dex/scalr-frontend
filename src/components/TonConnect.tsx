@@ -74,7 +74,7 @@ export default function () {
         className={`!w-full !px-2 !rounded-full !font-bold !font-accent ${padding}`}
         buttonType={copied ? ButtonTypes.success : ButtonTypes.secondary}
         isLoading={loading}
-        iconLeft={
+        iconRight={
           address ? (
             copied ? (
               <CheckMark />
@@ -82,7 +82,7 @@ export default function () {
               <Copy size={20} />
             )
           ) : (
-            <TonCoin size={36} />
+            <TonCoin className="text-white" size={16} inCircle />
           )
         }
       >
