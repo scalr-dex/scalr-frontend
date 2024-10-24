@@ -6,8 +6,11 @@ import { DefaultModalProps } from 'type/Props'
 
 function ModalBody() {
   return (
-    <>
-      <img src="img/rocket-halftone.png" className="w-32 mx-auto" />
+    <div className="flex flex-col gap-y-4 px-4">
+      <img
+        src="img/rocket-halftone.png"
+        className="h-32 animate-fadeIn mx-auto"
+      />
       <Header3>Scalr Win Multiplier 🚀</Header3>
       <p>Daily Claim refill a Scalr Win Multiplier.</p>
       <p>Click it to activate if available.</p>
@@ -15,7 +18,7 @@ function ModalBody() {
         Win up to x15 on your next bet. If you lose, only the regular amount is
         lost 🤑
       </p>
-    </>
+    </div>
   )
 }
 

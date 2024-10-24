@@ -7,8 +7,8 @@ import { navigate } from 'wouter-preact/use-hash-location'
 
 function ModalBody() {
   return (
-    <>
-      <img src="img/utya-sad.png" className="w-36 mx-auto" />
+    <div className="flex flex-col gap-y-4 px-4">
+      <img src="img/utya-sad.png" className="h-28 animate-fadeIn mx-auto" />
       <Header3>Claim isn't ready yet, but...</Header3>
       <BodyText>
         Get points by <span className="italic">completing tasks</span> and{' '}
@@ -18,7 +18,7 @@ function ModalBody() {
       <BodyText className="text-controls-tertiary-focus">
         Claimed amounts count toward the $SCR airdrop distribution 👀
       </BodyText>
-    </>
+    </div>
   )
 }
 

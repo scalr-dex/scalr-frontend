@@ -1,4 +1,4 @@
-export default function ({ onClick }: { onClick: () => void }) {
+export default function ({ onClick }: { onClick?: () => void }) {
   return (
     <svg
       width="34"

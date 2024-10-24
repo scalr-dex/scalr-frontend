@@ -18,7 +18,7 @@ function FloatingBubbles() {
 
 export default function () {
   return (
-    <div className="h-[70vh] relative flex flex-col">
+    <div className="relative flex flex-col">
       <BodyText className="z-10">
         Join the beta with invite code.
         <p>Public access coming soon.</p>
