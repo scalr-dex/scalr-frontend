@@ -52,7 +52,8 @@ function ModalBody({
     <div className="flex flex-col gap-y-6 px-4" ref={parent}>
       <img
         src="img/dex-scalr-3d.png"
-        className="h-32 self-center animate-fadeIn"
+        className="h-32 self-center opacity-0 transition-opacity"
+        onLoad={(e) => (e.currentTarget.style.opacity = '1')}
       />
       <div className="flex flex-col gap-y-2 leading-5 text-center">
         <Header2
