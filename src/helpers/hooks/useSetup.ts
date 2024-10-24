@@ -81,7 +81,7 @@ async function setupUser() {
 
     if (!initData || !initDataRaw || !initData.user) return
 
-    const response = await backendKy(initDataRaw).post('user', {
+    const response = await backendKy({ initDataRaw }).post('user', {
       searchParams: { code: initData.startParam || '' },
     })
 

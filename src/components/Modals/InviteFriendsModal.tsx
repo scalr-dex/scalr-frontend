@@ -16,7 +16,7 @@ import CheckMark from 'components/icons/CheckMark'
 
 function ModalBody() {
   return (
-    <AccentText className="mb-2">
+    <AccentText className="mb-2 px-4">
       <p>
         Earn{' '}
         <SpecialText
@@ -52,7 +52,7 @@ function ModalHeader({
   invitedUsers: number
 }) {
   return (
-    <div className="flex flex-row items-center justify-between">
+    <div className="flex flex-row w-full pl-4 items-center justify-between">
       <div className="flex flex-row gap-x-2 items-center">
         <div className="rounded-full bg-tertiary h-14 w-14 text-center leading-tight flex justify-center items-center">
           <Header3>🥳</Header3>

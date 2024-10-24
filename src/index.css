@@ -16,6 +16,7 @@
 
 :root {
   --accent: #4374ec;
+  --accent-dark: #133d8d;
   --accent-hover: #6d9efc;
   --selection: #6d9efc;
 
@@ -42,6 +43,10 @@ html {
   user-select: none;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+tc-root {
+  pointer-events: auto;
 }
 
 ::selection {

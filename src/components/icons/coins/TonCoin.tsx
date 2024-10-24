@@ -1,10 +1,13 @@
+import { ClassNameProp } from 'type/Props'
+
 export default function ({
+  className,
   size = 24,
   inCircle,
 }: {
   size?: number
   inCircle?: boolean
-}) {
+} & ClassNameProp) {
   return (
     <svg
       width={size}
@@ -12,11 +15,12 @@ export default function ({
       viewBox="0 0 24 24"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
+      className={className}
     >
       {inCircle ? (
         <path
           d="M12 22C17.5229 22 22 17.5229 22 12C22 6.47714 17.5229 2 12 2C6.47714 2 2 6.47714 2 12C2 17.5229 6.47714 22 12 22Z"
-          fill="#0098EA"
+          fill="#000"
         />
       ) : null}
       <path

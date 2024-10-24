@@ -44,7 +44,7 @@ export function Header4({
   ...props
 }: ChildrenProp & JSX.HTMLAttributes<HTMLHeadingElement>) {
   return (
-    <h4 {...props} className={`font-medium text-xl ${className}`}>
+    <h4 {...props} className={`font-medium text-xl leading-6 ${className}`}>
       {children}
     </h4>
   )

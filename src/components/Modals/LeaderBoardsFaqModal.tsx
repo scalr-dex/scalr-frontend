@@ -6,7 +6,7 @@ import { DefaultModalProps } from 'type/Props'
 
 function ModalBody() {
   return (
-    <>
+    <div className="flex flex-col gap-y-4 px-4">
       <Header3>Scalr Leaderboard</Header3>
       <AccentText>
         Leaderboard updates every 8 hours based on epoch bets volume (including
@@ -24,7 +24,7 @@ function ModalBody() {
         <p>Keep pushing to climb the ranks! 💪</p>
         <br />
       </AccentText>
-    </>
+    </div>
   )
 }
 
