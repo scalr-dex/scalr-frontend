@@ -45,8 +45,13 @@ html {
   -moz-osx-font-smoothing: grayscale;
 }
 
+/* Ton-Connect modal */
 tc-root {
   pointer-events: auto;
+}
+.go823957079 {
+  background-color: transparent !important;
+  backdrop-filter: blur(1rem);
 }
 
 ::selection {
