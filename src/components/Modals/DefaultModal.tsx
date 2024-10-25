@@ -33,12 +33,13 @@ export default function ({
       open={showModal}
       onOpenChange={(open) => (open ? null : onClose())}
       dismissible={dismissible}
+      snapPoints={[0.97]}
       repositionInputs={false}
     >
       <Drawer.Portal>
         <Drawer.Overlay className="fixed inset-0 bg-black/50 backdrop-blur-sm" />
         <Drawer.Content
-          className={`rounded-t-3xl bg-secondary h-fit max-h-[95vh] fixed bottom-0 left-0 right-0 outline-none ${contentClassName}`}
+          className={`rounded-t-3xl bg-secondary max-h-[95vh] fixed bottom-0 left-0 right-0 outline-none ${contentClassName}`}
         >
           <Drawer.Title className="hidden">Dialog window</Drawer.Title>
           <Drawer.Handle className="w-12 h-1 mb-1 mt-4" />
@@ -47,11 +48,11 @@ export default function ({
           </Drawer.Close>
 
           <div
-            className={`flex flex-col gap-y-4 max-h-[80vh] overflow-y-auto overflow-x-hidden pb-safe-bottom ${bodyWrapperClassName}`}
+            className={`flex flex-col gap-y-4 overflow-y-auto overflow-x-hidden ${bodyWrapperClassName}`}
           >
             {body(onClose)}
             <div
-              className={`sticky bottom-0 px-4 pt-4 ${footerWrapperClassName}`}
+              className={`sticky bottom-safe-bottom px-4 pt-4 pb-safe-bottom ${footerWrapperClassName}`}
             >
               {footer?.(onClose)}
             </div>

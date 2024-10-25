@@ -37,6 +37,9 @@ export default function ({
 
   return (
     <div className="flex flex-col gap-y-3 items-center" ref={parent}>
+      {error ? (
+        <BodyText className="text-sm text-error">{error}</BodyText>
+      ) : null}
       <div className="flex flex-row gap-x-1">
         <PinField
           disabled={loading}
@@ -49,9 +52,6 @@ export default function ({
           onComplete={onComplete}
         />
       </div>
-      {error ? (
-        <BodyText className="text-sm text-error">{error}</BodyText>
-      ) : null}
     </div>
   )
 }

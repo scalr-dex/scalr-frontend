@@ -37,17 +37,21 @@ function ModalBody({ showCodeInput }: { showCodeInput: boolean }) {
   const glow = showCodeInput ? 'drop-shadow-bulb-glow' : ''
 
   return (
-    <div className="flex flex-col gap-y-6 px-4 min-h-[75vh]">
-      <DexInfoStonks />
-      <div className="flex flex-col gap-y-2 leading-5 text-center" ref={parent}>
+    <div className="flex flex-col gap-y-6 px-4 h-[80vh]" ref={parent}>
+      {showCodeInput ? (
+        <PerpModalPinCode />
+      ) : (
+        <div className="h-32">
+          <DexInfoStonks />
+        </div>
+      )}
+      <div className="flex flex-col gap-y-2 leading-5 text-center">
         <Header2
           className={`transition-all duration-1000 will-change-transform ${glow}`}
         >
           Scalr Perpetual DEX
         </Header2>
-        {showCodeInput ? (
-          <PerpModalPinCode />
-        ) : (
+        {showCodeInput ? null : (
           <span className="text-white/50">
             A mobile-first, fast and reliable perpetual exchange designed for
             seamless trading.
@@ -88,6 +92,9 @@ export default function (props: DefaultModalProps) {
   return (
     <DefaultModal
       {...props}
+      contentClassName="min-h-[95vh]"
+      bodyWrapperClassName="h-[80vh]"
+      footerWrapperClassName="flex-1 content-end"
       onCloseCallback={onClose}
       body={() => <ModalBody showCodeInput={showCodeInput} />}
       footer={() => footer}

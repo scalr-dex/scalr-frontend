@@ -18,18 +18,17 @@ function FloatingBubbles() {
 
 export default function () {
   return (
-    <div className="relative flex flex-col">
-      <BodyText className="z-10">
-        Join the beta with invite code.
-        <p>Public access coming soon.</p>
-      </BodyText>
-      <BodyText className="mt-10 mb-2 z-10">Your code here</BodyText>
+    <div className="relative flex flex-col gap-y-2">
       <PinInput
         fontSize="text-3xl"
         boxSize="w-12 h-14.5"
         length={5}
         onFilledCallback={perpDex}
       />
+      <BodyText className="z-10 text-center">
+        Join the beta with invite code.
+        <p>Public access coming soon.</p>
+      </BodyText>
       <FloatingBubbles />
     </div>
   )
