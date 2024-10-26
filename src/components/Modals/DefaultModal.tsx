@@ -34,6 +34,7 @@ export default function ({
       onOpenChange={(open) => (open ? null : onClose())}
       dismissible={dismissible}
       repositionInputs={false}
+      noBodyStyles
     >
       <Drawer.Portal>
         <Drawer.Overlay className="fixed inset-0 bg-black/50 backdrop-blur-sm transition-all will-change-auto" />
