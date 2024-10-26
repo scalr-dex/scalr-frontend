@@ -11,15 +11,28 @@ import StonksCircle from 'components/icons/StonksCircle'
 import Feedback from 'components/icons/Feedback'
 import Triangle from 'components/icons/socials/Triangle'
 import TriangleAccelerated from 'components/Modals/PerpDex/TriangleAccelerated'
+import FooterSafeArea from 'components/FooterSafeArea'
+import useImagePreloader from 'helpers/hooks/useImagePreload'
+import LoaderFullPage from 'components/LoaderFullPage'
+
+const preloadList = [
+  'img/noise-effect.png',
+  'img/dex-scalr-3d.png',
+  'img/scalr-wavy.png',
+  'img/collabs/triangle_meme.png',
+]
 
 export default function () {
+  const { imagesPreloaded } = useImagePreloader(preloadList)
   const [openAirdropModal, setOpenAirdropModal] = useState(false)
   const [openInfoModal, setOpenInfoModal] = useState(false)
   const [openPartnershipModal, setOpenPartnershipModal] = useState(false)
   const [openTriangleModal, setOpenTriangleModal] = useState(false)
 
+  if (!imagesPreloaded) return <LoaderFullPage />
+
   return (
-    <div className="flex flex-col gap-y-4 pb-footer-height m-4">
+    <div className="flex flex-col gap-y-4 h-fit p-4">
       <NoisyCard
         className="p-4 h-60 relative overflow-hidden"
         onClick={() => setOpenInfoModal(true)}
@@ -40,7 +53,7 @@ export default function () {
       <NoisyCard
         style={{
           background:
-            'url(./img/noise-effect.png), linear-gradient(to top, var(--accent-dark), var(--secondary), var(--secondary))',
+            'url(img/noise-effect.png), linear-gradient(to top, var(--accent-dark), var(--secondary), var(--secondary))',
         }}
         onClick={() => setOpenAirdropModal(true)}
         className="relative p-4 h-60 justify-evenly"
@@ -59,7 +72,7 @@ export default function () {
         <NoisyCard
           style={{
             background:
-              'url(./img/noise-effect.png), linear-gradient(to right, #6CCAF2, #11A5E4) padding-box',
+              'url(img/noise-effect.png), linear-gradient(to right, #6CCAF2, #11A5E4) padding-box',
           }}
           className="h-40 p-2.5 border-5 border-white-16 shadow-inner-card-glow"
           onClick={() => setOpenTriangleModal(true)}
@@ -78,7 +91,7 @@ export default function () {
         <NoisyCard
           style={{
             background:
-              'url(./img/noise-effect.png), linear-gradient(to right, #3284FE, #0B54E3) padding-box',
+              'url(img/noise-effect.png), linear-gradient(to right, #3284FE, #0B54E3) padding-box',
           }}
           className="h-40 p-2.5 border-5 border-white-16 shadow-inner-card-glow"
           onClick={() => setOpenPartnershipModal(true)}
@@ -111,6 +124,7 @@ export default function () {
         showModal={openTriangleModal}
         setShowModal={setOpenTriangleModal}
       />
+      <FooterSafeArea />
     </div>
   )
 }
