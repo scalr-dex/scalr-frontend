@@ -43,15 +43,15 @@ export default function () {
             'url(./img/noise-effect.png), linear-gradient(to top, var(--accent-dark), var(--secondary), var(--secondary))',
         }}
         onClick={() => setOpenAirdropModal(true)}
-        className="relative p-4 h-60"
+        className="relative p-4 h-60 justify-evenly"
       >
         <NoisyCardBig
           header="Scalr Airdrop"
           subHeader="Take part in $SCR airdrop distribution."
           smallIcon={<ScalrCoin size={44} />}
         />
-        <div className="h-28 mt-2 w-full">
-          <img src="img/dex-scalr-3d.png" />
+        <div className="flex items-center justify-center">
+          <img src="img/dex-scalr-3d.png" className="w-full" />
         </div>
       </NoisyCard>
 
