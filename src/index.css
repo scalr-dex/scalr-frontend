@@ -37,13 +37,13 @@
   scroll-behavior: smooth !important;
   scrollbar-color: transparent !important;
   scrollbar-width: none !important;
-  overscroll-behavior: none;
 }
 
 html {
   user-select: none;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  overflow: hidden;
 }
 
 /* Ton-Connect modal */
