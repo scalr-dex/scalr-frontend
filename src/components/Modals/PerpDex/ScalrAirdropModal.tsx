@@ -123,7 +123,7 @@ export default function (props: DefaultModalProps) {
       {...props}
       dismissible={dismissible}
       onCloseCallback={onClose}
-      bodyWrapperClassName="max-h-[88vh]"
+      bodyWrapperClassName="min-h-[88vh] max-h-[88vh]"
       footerWrapperClassName="flex-1 content-end"
       body={() => (
         <ModalBody
