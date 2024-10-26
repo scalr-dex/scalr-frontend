@@ -92,8 +92,8 @@ export default function (props: DefaultModalProps) {
   return (
     <DefaultModal
       {...props}
-      contentClassName="min-h-[95vh]"
-      bodyWrapperClassName="h-[80vh]"
+      contentClassName="min-h-[90vh]"
+      bodyWrapperClassName="h-[90vh]"
       footerWrapperClassName="flex-1 content-end"
       onCloseCallback={onClose}
       body={() => <ModalBody showCodeInput={showCodeInput} />}

@@ -33,13 +33,14 @@ export default function ({
       open={showModal}
       onOpenChange={(open) => (open ? null : onClose())}
       dismissible={dismissible}
-      snapPoints={[0.97]}
+      snapPoints={[0.97, 1]}
+      fadeFromIndex={0}
       repositionInputs={false}
     >
       <Drawer.Portal>
         <Drawer.Overlay className="fixed inset-0 bg-black/50 backdrop-blur-sm" />
         <Drawer.Content
-          className={`rounded-t-3xl bg-secondary max-h-[95vh] fixed bottom-0 left-0 right-0 outline-none ${contentClassName}`}
+          className={`rounded-t-3xl bg-secondary fixed bottom-0 left-0 right-0 outline-none ${contentClassName}`}
         >
           <Drawer.Title className="hidden">Dialog window</Drawer.Title>
           <Drawer.Handle className="w-12 h-1 mb-1 mt-4" />

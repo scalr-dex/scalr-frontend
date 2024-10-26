@@ -10,7 +10,7 @@ function ModalBody() {
     <>
       <ImageAnimatedOnLoad
         src="img/collabs/triangle_meme.png"
-        className="self-center h-64 rounded-lg"
+        className="self-center h-56 rounded-lg"
       />
       <Header2 className="text-center">Triangle Accelerator Incubated</Header2>
       <BodyText className="text-center text-balance">
