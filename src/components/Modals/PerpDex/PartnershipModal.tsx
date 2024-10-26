@@ -4,14 +4,14 @@ import DefaultModal from 'components/Modals/DefaultModal'
 import ButtonTypes from 'type/Button'
 import { DefaultModalProps } from 'type/Props'
 import { useUtils } from '@telegram-apps/sdk-react'
+import ImageAnimatedOnLoad from 'components/ImageAnimatedOnLoad'
 
 function ModalBody() {
   return (
     <>
-      <img
+      <ImageAnimatedOnLoad
         src="img/scalr-wavy.png"
-        className="mx-4 h-44 rounded-lg opacity-0 transition-opacity"
-        onLoad={(e) => (e.currentTarget.style.opacity = '1')}
+        className="mx-4 h-44 rounded-lg"
       />
       <Header2 className="text-center px-4">Interested in partnership?</Header2>
       <BodyText className="text-center text-balance px-4">

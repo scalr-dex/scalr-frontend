@@ -12,6 +12,7 @@ import Gift from 'components/icons/Gift'
 import TonConnect from 'components/TonConnect'
 import { useTonConnectUI } from 'lib/ui-react'
 import { useAutoAnimate } from '@formkit/auto-animate/react'
+import ImageAnimatedOnLoad from 'components/ImageAnimatedOnLoad'
 
 const info = [
   {
@@ -50,10 +51,9 @@ function ModalBody({
 
   return (
     <div className="flex flex-col gap-y-6 px-4" ref={parent}>
-      <img
+      <ImageAnimatedOnLoad
         src="img/dex-scalr-3d.png"
-        className="h-32 self-center opacity-0 transition-opacity"
-        onLoad={(e) => (e.currentTarget.style.opacity = '1')}
+        className="h-32 self-center"
       />
       <div className="flex flex-col gap-y-2 leading-5 text-center">
         <Header2
