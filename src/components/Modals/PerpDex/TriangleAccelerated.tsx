@@ -40,7 +40,7 @@ export default function (props: DefaultModalProps) {
   return (
     <DefaultModal
       {...props}
-      bodyWrapperClassName="h-[80vh]"
+      bodyWrapperClassName="min-h-[70vh]"
       body={ModalBody}
       footer={(onClose) => <ModalFooter onClose={onClose} />}
     />

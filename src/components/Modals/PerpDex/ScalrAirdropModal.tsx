@@ -27,13 +27,13 @@ const info = [
     bottomText: 'Special tasks will boost your rank.\nDon’t miss it!',
   },
   {
-    icon: <Cup size={24} />,
+    icon: <Cup size={32} />,
     topText: 'Support from leaders',
     bottomText:
       'Backed by top advisors from Triangle Accelerator, Adsgram, hcl.finance fund, Trusted Volumes and PAKA fund.',
   },
   {
-    icon: <Gift />,
+    icon: <Gift size={32} />,
     topText: 'Bonuses from Perpetual DEX',
     bottomText: 'Top users get early beta access\nwith exclusive rewards.',
   },
