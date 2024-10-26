@@ -6,11 +6,17 @@ import { useState } from 'preact/hooks'
 import PerpDexInfoModal from 'components/Modals/PerpDex/PerpDexInfoModal'
 import ScalrAirdropModal from 'components/Modals/PerpDex/ScalrAirdropModal'
 import PartnershipModal from 'components/Modals/PerpDex/PartnershipModal'
+import ScalrCoin from 'components/icons/coins/ScalrCoin'
+import StonksCircle from 'components/icons/StonksCircle'
+import Feedback from 'components/icons/Feedback'
+import Triangle from 'components/icons/socials/Triangle'
+import TriangleAccelerated from 'components/Modals/PerpDex/TriangleAccelerated'
 
 export default function () {
   const [openAirdropModal, setOpenAirdropModal] = useState(false)
   const [openInfoModal, setOpenInfoModal] = useState(false)
   const [openPartnershipModal, setOpenPartnershipModal] = useState(false)
+  const [openTriangleModal, setOpenTriangleModal] = useState(false)
 
   return (
     <div className="flex flex-col gap-y-4 pb-footer-height m-4">
@@ -26,6 +32,7 @@ export default function () {
               <p>Public access coming soon.</p>
             </>
           }
+          smallIcon={<StonksCircle />}
         />
         <PerpCardBlur />
       </NoisyCard>
@@ -41,6 +48,7 @@ export default function () {
         <NoisyCardBig
           header="Scalr Airdrop"
           subHeader="Take part in $SCR airdrop distribution."
+          smallIcon={<ScalrCoin size={44} />}
         />
         <img
           src="img/dex-scalr-3d.png"
@@ -55,10 +63,16 @@ export default function () {
               'url(./img/noise-effect.png), linear-gradient(to right, #6CCAF2, #11A5E4) padding-box',
           }}
           className="h-40 p-2.5 border-5 border-white-16 shadow-inner-card-glow"
+          onClick={() => setOpenTriangleModal(true)}
         >
           <NoisyCardSmall
-            topText="Most Popular"
-            bottomText="Make an Onchain Deposit"
+            topText="With Guidance"
+            bottomText={
+              <>
+                <p>Triangle</p>Incubated
+              </>
+            }
+            icon={<Triangle />}
           />
         </NoisyCard>
 
@@ -71,8 +85,13 @@ export default function () {
           onClick={() => setOpenPartnershipModal(true)}
         >
           <NoisyCardSmall
-            topText="You’re a KOL?"
-            bottomText="Fill form and get early access with"
+            topText="KOL or feedback?"
+            bottomText={
+              <>
+                <p>Click to</p>contact us
+              </>
+            }
+            icon={<Feedback />}
           />
         </NoisyCard>
       </div>
@@ -88,6 +107,10 @@ export default function () {
       <PartnershipModal
         showModal={openPartnershipModal}
         setShowModal={setOpenPartnershipModal}
+      />
+      <TriangleAccelerated
+        showModal={openTriangleModal}
+        setShowModal={setOpenTriangleModal}
       />
     </div>
   )

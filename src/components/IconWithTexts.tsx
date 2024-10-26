@@ -15,7 +15,9 @@ export default function ({
       <div className="text-alt">{icon}</div>
       <div className="flex flex-col gap-y-1">
         <Header4>{topText}</Header4>
-        <BodyText className="text-white/50 leading-5">{bottomText}</BodyText>
+        <BodyText className="text-white/50 leading-5 whitespace-pre-wrap">
+          {bottomText}
+        </BodyText>
       </div>
     </div>
   )

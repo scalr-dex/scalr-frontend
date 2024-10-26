@@ -1,13 +1,14 @@
 import { BodyText, Header3 } from 'components/Text'
-import ScalrCoin from 'components/icons/coins/ScalrCoin'
 import { JSX } from 'preact/jsx-runtime'
 
 export default function ({
   header,
   subHeader,
+  smallIcon,
 }: {
   header: string
   subHeader: JSX.Element | string
+  smallIcon: JSX.Element
 }) {
   return (
     <div className="flex flex-row justify-between">
@@ -18,7 +19,7 @@ export default function ({
         </BodyText>
       </div>
 
-      <ScalrCoin size={44} />
+      {smallIcon}
     </div>
   )
 }

@@ -23,7 +23,7 @@ const info = [
   {
     icon: <Percent />,
     topText: 'Special Rewards',
-    bottomText: 'Special tasks will boost your rank. Don’t miss it!',
+    bottomText: 'Special tasks will boost your rank.\nDon’t miss it!',
   },
   {
     icon: <Cup size={24} />,
@@ -34,7 +34,7 @@ const info = [
   {
     icon: <Gift />,
     topText: 'Bonuses from Perpetual DEX',
-    bottomText: 'Top users get early beta access with exclusive rewards.',
+    bottomText: 'Top users get early beta access\nwith exclusive rewards.',
   },
 ]
 

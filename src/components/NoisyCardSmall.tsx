@@ -1,22 +1,22 @@
-import ScalrCoin from 'components/icons/coins/ScalrCoin'
-import { BodyText } from 'components/Text'
+import { BodyText, Header4 } from 'components/Text'
+import { JSX } from 'preact/jsx-runtime'
 
 export default function ({
   topText,
   bottomText,
+  icon,
 }: {
   topText: string
-  bottomText: string
+  bottomText: JSX.Element | string
+  icon: JSX.Element
 }) {
   return (
     <div className="w-full h-full flex flex-col content-between">
-      <div>
-        <ScalrCoin size={40} />
-      </div>
+      <div>{icon}</div>
 
       <div className="flex flex-col h-full justify-end">
         <BodyText className="font-semibold text-white/50">{topText}</BodyText>
-        <BodyText className="font-semibold font-sm">{bottomText}</BodyText>
+        <Header4 className="font-semibold font-sm">{bottomText}</Header4>
       </div>
     </div>
   )

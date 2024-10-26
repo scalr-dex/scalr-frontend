@@ -37,6 +37,7 @@
   scroll-behavior: smooth !important;
   scrollbar-color: transparent !important;
   scrollbar-width: none !important;
+  overscroll-behavior: none;
 }
 
 html {
@@ -71,6 +72,11 @@ tc-root {
 
 .bg-special-gradient {
   background: linear-gradient(to right, #3af3ff, #4986fb, #8160e1);
+}
+
+.bg-blue-vignette {
+  background: radial-gradient(ellipse at left, #133d8d60, transparent 50%),
+    radial-gradient(circle at right, #133d8d70, transparent 60%);
 }
 
 .bg-border-gradient {
