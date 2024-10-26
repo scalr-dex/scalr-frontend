@@ -30,7 +30,7 @@ const info = [
     icon: <Cup size={32} />,
     topText: 'Support from leaders',
     bottomText:
-      'Backed by top advisors from Triangle Accelerator, Adsgram, hcl.finance fund, Trusted Volumes and PAKA fund.',
+      'Backed by top advisors from Triangle Accelerator, Adsgram, Trusted Volumes and hcl.finance fund.',
   },
   {
     icon: <Gift size={32} />,
@@ -123,8 +123,7 @@ export default function (props: DefaultModalProps) {
       {...props}
       dismissible={dismissible}
       onCloseCallback={onClose}
-      contentClassName="min-h-[88vh]"
-      bodyWrapperClassName="h-[88vh]"
+      bodyWrapperClassName="max-h-[88vh]"
       footerWrapperClassName="flex-1 content-end"
       body={() => (
         <ModalBody
