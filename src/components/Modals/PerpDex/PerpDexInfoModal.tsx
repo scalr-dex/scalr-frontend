@@ -41,7 +41,7 @@ function ModalBody({ showCodeInput }: { showCodeInput: boolean }) {
       {showCodeInput ? (
         <PerpModalPinCode />
       ) : (
-        <div className="h-32">
+        <div className="flex w-full items-center justify-center pr-16 h-32">
           <DexInfoStonks />
         </div>
       )}
