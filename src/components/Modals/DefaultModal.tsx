@@ -1,45 +1,64 @@
 import Close from 'components/icons/Close'
 import { JSX } from 'preact/jsx-runtime'
-import { DefaultModalProps } from 'type/Props'
-
-function DefaultHeader({ onClose }: { onClose: () => void }) {
-  return (
-    <div className="w-full flex flex-row items-center justify-end">
-      <Close onClick={onClose} />
-    </div>
-  )
-}
+import { ClassName, DefaultModalProps } from 'type/Props'
+import { Drawer } from 'vaul'
 
 export default function ({
   showModal,
   setShowModal,
-  header = (onClose: () => void) => <DefaultHeader onClose={onClose} />,
+  onCloseCallback,
+  header = () => <Close />,
   body,
   footer,
+  dismissible = true,
+  contentClassName,
+  bodyWrapperClassName,
+  footerWrapperClassName,
 }: DefaultModalProps & {
   header?: (onClose: () => void) => JSX.Element
-  body: () => JSX.Element
-  footer: (onClose: () => void) => JSX.Element
+  body: (onClose: () => void) => JSX.Element
+  footer?: (onClose: () => void) => JSX.Element | null
+  dismissible?: boolean
+  contentClassName?: ClassName
+  bodyWrapperClassName?: ClassName
+  footerWrapperClassName?: ClassName
 }) {
-  const onClose = () => setShowModal(false)
+  const onClose = () => {
+    onCloseCallback?.()
+    setShowModal(false)
+  }
 
   return (
-    <dialog
-      className="modal modal-bottom text-white"
+    <Drawer.Root
       open={showModal}
-      onClose={onClose}
+      onOpenChange={(open) => (open ? null : onClose())}
+      dismissible={dismissible}
+      snapPoints={[0.97]}
+      repositionInputs={false}
     >
-      <div className="modal-box bg-transparent max-h-[90dvh] !px-2 !pb-4">
-        <div className="w-full p-4 flex flex-col gap-y-5 bg-secondary rounded-4xl">
-          {header(onClose)}
-          <div className="flex flex-col gap-y-4">{body()}</div>
-          <div className="mb-4">{footer(onClose)}</div>
-        </div>
-      </div>
+      <Drawer.Portal>
+        <Drawer.Overlay className="fixed inset-0 bg-black/50 backdrop-blur-sm" />
+        <Drawer.Content
+          className={`rounded-t-3xl bg-secondary max-h-[95vh] fixed bottom-0 left-0 right-0 outline-none ${contentClassName}`}
+        >
+          <Drawer.Title className="hidden">Dialog window</Drawer.Title>
+          <Drawer.Handle className="w-12 h-1 mb-1 mt-4" />
+          <Drawer.Close className="w-full flex flex-row items-center justify-end pb-6 pr-4">
+            {header(onClose)}
+          </Drawer.Close>
 
-      <form method="dialog" className="modal-backdrop bg-black bg-opacity-75">
-        <button>X</button>
-      </form>
-    </dialog>
+          <div
+            className={`flex flex-col gap-y-4 overflow-y-auto overflow-x-hidden ${bodyWrapperClassName}`}
+          >
+            {body(onClose)}
+            <div
+              className={`sticky bottom-safe-bottom px-4 pt-4 pb-safe-bottom ${footerWrapperClassName}`}
+            >
+              {footer?.(onClose)}
+            </div>
+          </div>
+        </Drawer.Content>
+      </Drawer.Portal>
+    </Drawer.Root>
   )
 }

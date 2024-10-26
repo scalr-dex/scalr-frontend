@@ -24,9 +24,9 @@ import ErrorBoundaryFallback from 'components/ErrorBoundaryFallback'
 import { useHashLocation } from 'wouter-preact/use-hash-location'
 import LoaderFullPage from 'components/LoaderFullPage'
 import { THEME, TonConnectUIProvider } from 'lib/ui-react'
+import PerpDex from 'pages/PerpDex'
 
 const Onboarding = lazy(() => import('pages/Onboarding'))
-const Airdrop = lazy(() => import('pages/Airdrop'))
 
 function AppInner({ socket }: { socket: WebSocket }) {
   useWebSocketData(socket)
@@ -38,7 +38,7 @@ function AppInner({ socket }: { socket: WebSocket }) {
       <QueryClientProvider client={queryClient}>
         <Router hook={useHashLocation}>
           <div
-            className="flex flex-col relative h-screen overflow-x-hidden max-w-prose text-white"
+            className="flex flex-col relative h-[100dvh] overflow-x-hidden max-w-prose text-white z-0"
             ref={parent}
           >
             <Switch>
@@ -47,7 +47,7 @@ function AppInner({ socket }: { socket: WebSocket }) {
                   <Route path="/tasks" component={Tasks} />
                   <Route path="/leaderboards" component={LeaderBoards} />
                   <Route
-                    path="/airdrop"
+                    path="/perp"
                     component={() => (
                       <TonConnectUIProvider
                         manifestUrl={`${location.origin}/tonconnect-manifest.json`}
@@ -57,7 +57,7 @@ function AppInner({ socket }: { socket: WebSocket }) {
                         uiPreferences={{ theme: THEME.DARK }}
                       >
                         <Suspense fallback={<Loader full />}>
-                          <Airdrop />
+                          <PerpDex />
                         </Suspense>
                       </TonConnectUIProvider>
                     )}

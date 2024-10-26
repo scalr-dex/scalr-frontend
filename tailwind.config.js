@@ -1,7 +1,7 @@
 /** @type {import('tailwindcss/defaultConfig')} */
 module.exports = {
   content: ['./index.html', './src/**/!(tailwind).{ts,tsx}'],
-  plugins: [require('@tailwindcss/typography'), require('daisyui')],
+  plugins: [require('@tailwindcss/typography')],
   future: { hoverOnlyWhenSupported: true },
 
   theme: {
@@ -14,6 +14,10 @@ module.exports = {
         '4xl': '2rem',
       },
       keyframes: {
+        fadeIn: {
+          from: { opacity: 0 },
+          to: { opacity: 1 },
+        },
         hovering: {
           '0%, 100%': { transform: 'translateY(0rem)' },
           '50%': { transform: 'translateY(0.5rem)' },
@@ -24,6 +28,7 @@ module.exports = {
         },
       },
       animation: {
+        fadeIn: 'fadeIn 0.5s ease-in-out',
         hovering: 'hovering 4s ease-in-out infinite',
         spin: 'spin 5s linear forwards infinite',
       },
@@ -35,6 +40,8 @@ module.exports = {
         '1/10': '10%',
         '1/7': '15%',
         '1/5': '20%',
+        '4/5': '80%',
+        14.5: '3.625rem',
         'safe-bottom': 'var(--safe-area-bottom)',
         'footer-height': 'var(--footer-height)',
       },
@@ -43,9 +50,20 @@ module.exports = {
           '0px 15px 40px 0px #00000066, 0px 5px 10px 0px #00000033, 0px 0px 0px 1px #0000001a',
         onboarding: '0px 16px 32px -8px #0C0C0D66',
         accent: '0 0 6px 2px #4374EC',
+        'inner-card-glow': 'inset 0 0 0.75rem #FFFFFF60',
       },
       dropShadow: {
         'glow-accent': '0 0 0.25rem var(--accent)',
+        'bulb-glow': [
+          '0 0.25rem 2rem #FFFFFF24',
+          '0 0.25rem 1.5rem #FFFFFF24',
+          '0 0 0.5rem #FFFFFF24',
+        ],
+        super: [
+          '0px 15px 40px 0px #00000066',
+          '0px 5px 10px 0px #00000033',
+          '0px 0px 0px 1px #0000001a',
+        ],
       },
       screens: {
         se: '375px',
@@ -61,6 +79,7 @@ module.exports = {
       margin: { 1.5: '1.5px', 'safe-bottom': 'var(--safe-area-bottom)' },
       borderWidth: {
         1.5: '1.5px',
+        5: '5px',
       },
       colors: {
         primary: '#0E121B',
@@ -77,6 +96,7 @@ module.exports = {
         'accent-focus': '#427AE4',
         'accent-disabled': '#345FB2',
         'accent-dimmed': '#B1C9F7',
+        'accent-dark': '#133D8D',
         'accent-alt': '#00FFFF',
         success: '#23CFB2',
         'success-light': '#CBECDE',
@@ -85,6 +105,8 @@ module.exports = {
         error: '#F3617D',
 
         alt: '#FFE792',
+        'alt-hover': '#d9c47c',
+        'alt-active': '#baa96b',
 
         'white-16': '#ffffff16',
         skelton: '#DDDDDD60',

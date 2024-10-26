@@ -12,7 +12,7 @@ const buttons = [
     path: 'tasks',
     component: <GiftWithNotifications />,
   },
-  { path: 'airdrop', component: <DollarCoin /> },
+  { path: 'perp', component: <DollarCoin /> },
 ]
 
 export default function () {
