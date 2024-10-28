@@ -22,8 +22,18 @@ export const iconNumberToComponent = (id: number) => {
   if (id === -2) return <span>⛰️</span>
   if (id === -1) return <WalletPlus />
   if (id === 0) return <span>👀</span>
-  if (id === 1) return <Telegram size={24} />
-  if (id === 2) return <X size={24} />
+  if (id === 1)
+    return (
+      <div className="w-full h-full">
+        <Telegram />
+      </div>
+    )
+  if (id === 2)
+    return (
+      <div className="w-full h-full">
+        <X size={24} />
+      </div>
+    )
 
   return <TaskIcon src={iconNumberToSrc[id]} />
 }

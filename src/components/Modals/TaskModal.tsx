@@ -24,7 +24,7 @@ function ModalBody({ IconURL, IconNumber, RewardAmount, Name }: UserTask) {
 
   return (
     <>
-      <div className="flex flex-col items-center gap-y-4 px-4">
+      <div className="flex flex-col items-center gap-y-4 px-4 h-44 w-44 rounded-lg object-cover self-center ">
         {imageSrc ? (
           <ImageAnimatedOnLoad
             className="h-44 w-44 rounded-lg object-cover self-center"
@@ -36,7 +36,7 @@ function ModalBody({ IconURL, IconNumber, RewardAmount, Name }: UserTask) {
         <TaskRewardBlock rewardAmount={RewardAmount} />
       </div>
       <Header2 className="px-4">{Name}</Header2>
-      <BodyText className="text-balance px-4">Play play play</BodyText>
+      <BodyText className="text-balance px-4">Check it out 😎</BodyText>
     </>
   )
 }
