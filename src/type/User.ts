@@ -26,6 +26,8 @@ export interface ClientUser {
   launchParams: LaunchParams
   tonAddress?: string
   username: string
+  firstName: string
+  lastName: string | undefined
   telegramId: number
   inviteLimit: number
   invitedUsers: number

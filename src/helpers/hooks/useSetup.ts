@@ -93,6 +93,8 @@ async function setupUser() {
       canClaimAmount: user.claim_amount,
       launchParams,
       username: initData.user.username || initData.user.firstName,
+      firstName: initData.user.firstName,
+      lastName: initData.user.lastName,
       telegramId: user.telegram_id,
       tonAddress: user.ton_address,
       inviteLimit: user.invite_limit,

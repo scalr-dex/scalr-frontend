@@ -1,5 +1,6 @@
 import Telegram from 'components/icons/socials/Telegram'
 import X from 'components/icons/socials/X'
+import WalletPlus from 'components/icons/WalletPlus'
 import TaskIcon from 'components/Tasks/TaskIcon'
 import ButtonTypes from 'type/Button'
 
@@ -18,7 +19,9 @@ export default interface UserTask {
 }
 
 export const iconNumberToComponent = (id: number) => {
-  if (id === 0) return <span className="font-bold">👀</span>
+  if (id === -2) return <span>⛰️</span>
+  if (id === -1) return <WalletPlus />
+  if (id === 0) return <span>👀</span>
   if (id === 1) return <Telegram size={24} />
   if (id === 2) return <X size={24} />
 

@@ -13,6 +13,9 @@ import TrackerEvents from 'type/TrackerEvents'
 import UserTask, { iconNumberToComponent, iconNumberToSrc } from 'type/UserTask'
 import { track } from 'helpers/api/analytics'
 import TaskRewardBlock from 'components/Tasks/TaskRewardBlock'
+import { successConfetti } from 'helpers/shootConfetti'
+import { invalidateQuery, QueryKeys } from 'helpers/queryClient'
+import { useAutoAnimate } from '@formkit/auto-animate/react'
 
 interface TaskModalProps extends DefaultModalProps, UserTask {}
 
@@ -44,6 +47,7 @@ function ModalFooter({
   TaskID,
   URL,
 }: { onClose: () => void } & UserTask) {
+  const [parent] = useAutoAnimate()
   const [loading, setLoading] = useState(false)
   const utils = useUtils()
   const setUser = useSetAtom(UserAtom)
@@ -55,18 +59,11 @@ function ModalFooter({
     [utils]
   )
   const onClick = useCallback(async () => {
-    if (Status === 'Claimed') {
-      openTgLink(URL)
-      return
-    }
-
     setLoading(true)
 
     if (Status === 'NotStarted') {
-      openTgLink(URL)
       setTimeout(async () => {
         await checkTask(TaskID)
-        // await refetch()
         setLoading(false)
       }, 1000)
       return
@@ -74,33 +71,36 @@ function ModalFooter({
 
     if (Status === 'ReadyToClaim') {
       await claimTask(TaskID)
-      //   await refetch()
       setUser((prev) =>
         prev ? { ...prev, remainingTasks: prev.remainingTasks - 1 } : null
       )
+      await invalidateQuery(QueryKeys.userTasks)
       setLoading(false)
+      onClose()
+      await successConfetti()
       track(TrackerEvents.taskDone, TaskID)
     }
-  }, [Status, TaskID, URL, openTgLink, setUser])
+  }, [Status, TaskID, onClose, setUser])
 
   return (
-    <div className="flex flex-col gap-y-4">
+    <div className="flex flex-col gap-y-4" ref={parent}>
       <Button
         buttonType={ButtonTypes.secondary}
         className="!rounded-full"
-        onClick={onClick}
-        isLoading={loading}
+        onClick={() => openTgLink(URL)}
       >
         Open task
       </Button>
-      <Button
-        buttonType={ButtonTypes.neutral}
-        className="!rounded-full"
-        onClick={onClose}
-        isLoading={loading}
-      >
-        Check task
-      </Button>
+      {Status === 'Claimed' ? null : (
+        <Button
+          buttonType={ButtonTypes.neutral}
+          className="!rounded-full"
+          onClick={onClick}
+          isLoading={loading}
+        >
+          Check task
+        </Button>
+      )}
     </div>
   )
 }

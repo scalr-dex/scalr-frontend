@@ -13,6 +13,7 @@ interface TaskUiProps
   taskText: string
   disabled?: boolean
   extraData?: string
+  loading?: boolean
 }
 
 function IconBlock({ icon }: IconProp) {
@@ -31,11 +32,21 @@ export default function ({
   disabled,
   taskText,
   extraData,
+  loading,
 }: TaskUiProps) {
+  const opacity = disabled
+    ? 'opacity-50 cursor-not-allowed'
+    : loading
+      ? 'animate-pulse'
+      : 'active:opacity-60 hover:animate-pulse cursor-pointer'
+
   return (
     <div
-      className={`flex flex-row items-center justify-between transition-opacity active:opacity-60 hover:animate-pulse cursor-pointer ${className}`}
-      onClick={onClick}
+      className={`flex flex-row items-center justify-between transition-opacity ${opacity} ${className}`}
+      onClick={(e) => {
+        if (loading || disabled) return
+        onClick?.(e)
+      }}
       disabled={disabled}
     >
       <div className="flex flex-row items-start gap-x-3">

@@ -22,14 +22,14 @@ export default function () {
 
   return (
     <footer className="fixed inset-x-0 bottom-safe-bottom flex justify-center items-center pointer-events-none">
-      <div className="w-fit shadow-super flex flex-row gap-x-8 items-center justify-center px-8 py-3 border border-white-16 bg-primary text-gray-500 rounded-3xl">
+      <div className="w-fit shadow-super flex flex-row gap-x-8 items-center justify-center px-8 py-3 border border-white-16 bg-primary text-gray-500 rounded-3xl pointer-events-auto">
         {buttons.map(({ path, component }, index) => (
           <button
             onClick={() => {
               setLocation(path)
               trackNavigation(path)
             }}
-            className={`pointer-events-auto w-6 h-6 ${latest.match(path) ? 'text-white' : 'text-opacity-50'} hover:text-gray-300 transition-colors hover:drop-shadow`}
+            className={`w-6 h-6 ${latest.match(path) ? 'text-white' : 'text-opacity-50'} hover:text-gray-300 transition-colors hover:drop-shadow`}
             key={'nav-link-' + index}
           >
             {component}
