@@ -1,6 +1,6 @@
 import { isTMA, retrieveLaunchParams } from '@telegram-apps/sdk-react'
 import backendKy from 'helpers/api/backendKy'
-import { ServerUser } from 'type/User'
+import { ClientUser, ServerUser } from 'type/User'
 import { useEffect, useState } from 'preact/hooks'
 import { writeAtom } from 'helpers/atoms/atomStore'
 import UserAtom, { timeToRewardAtom } from 'helpers/atoms/UserAtom'
@@ -87,7 +87,7 @@ async function setupUser() {
 
     const user = await response.json<ServerUser>()
 
-    const clientUser = {
+    const clientUser: ClientUser = {
       ticket: user.ticket,
       balance: user.points,
       canClaimAmount: user.claim_amount,
@@ -100,6 +100,9 @@ async function setupUser() {
       boosts: user.multiplier_count,
       remainingAds: user.remaining_ads,
       remainingTasks: user.tasks_remaining,
+      loginDays: user.login_days,
+      lastLoginDate: new Date(user.last_login_date),
+      nicknameClaimAvailable: user.nickname_claim_available,
     }
 
     writeAtom(timeToRewardAtom, user.can_claim_daily_reward)

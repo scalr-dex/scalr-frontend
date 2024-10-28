@@ -1,49 +1,50 @@
-import ButtonSmall from 'components/ButtonSmall'
 import { AccentText } from 'components/Text'
-import formatUSA from 'helpers/formatters/formatUSA'
 import { JSX } from 'preact/jsx-runtime'
-import { ButtonProps } from 'type/Button'
+import { ClassNameProp, OnClickProp } from 'type/Props'
+import TaskRewardBlock from 'components/Tasks/TaskRewardBlock'
 
-interface TaskUiProps extends ButtonProps {
-  rewardAmount: number | JSX.Element
+type IconProp = { icon: JSX.Element }
+
+interface TaskUiProps
+  extends OnClickProp<HTMLDivElement>,
+    ClassNameProp,
+    IconProp {
+  rewardAmount: number
   taskText: string
+  disabled?: boolean
+  extraData?: string
+}
+
+function IconBlock({ icon }: IconProp) {
+  return (
+    <div className="flex w-8 h-8 items-center justify-center rounded-lg border border-white border-opacity-5 overflow-clip">
+      {icon}
+    </div>
+  )
 }
 
 export default function ({
   className,
-  iconLeft,
+  icon,
   rewardAmount,
   onClick,
-  isLoading,
   disabled,
-  buttonType,
   taskText,
-  children,
-  allowDisabledClick = true,
+  extraData,
 }: TaskUiProps) {
   return (
-    <div className={`flex flex-row items-center justify-between ${className}`}>
-      <div className="flex flex-row items-center gap-x-3">
-        <div className="w-6 h-6">{iconLeft}</div>
+    <div
+      className={`flex flex-row items-center justify-between transition-opacity active:opacity-60 hover:animate-pulse cursor-pointer ${className}`}
+      onClick={onClick}
+      disabled={disabled}
+    >
+      <div className="flex flex-row items-start gap-x-3">
+        <IconBlock icon={icon} />
         <div className="flex flex-col gap-y-1">
           <AccentText className="font-bold">{taskText}</AccentText>
-          <AccentText>
-            {typeof rewardAmount === 'number'
-              ? `+${formatUSA(rewardAmount)} pts`
-              : rewardAmount}
-          </AccentText>
+          <TaskRewardBlock rewardAmount={rewardAmount} extraData={extraData} />
         </div>
       </div>
-      <ButtonSmall
-        buttonType={buttonType}
-        className="text-sm font-accent px-2.5 py-1.5 transition-all !min-w-24"
-        onClick={onClick}
-        isLoading={isLoading}
-        disabled={disabled}
-        allowDisabledClick={allowDisabledClick}
-      >
-        {children}
-      </ButtonSmall>
     </div>
   )
 }

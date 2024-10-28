@@ -99,7 +99,7 @@ function ModalFooter({ telegramId }: { telegramId: number }) {
       </Button>
       <Button
         onClick={onCopy}
-        buttonType={copied ? ButtonTypes.success : ButtonTypes.secondary}
+        buttonType={copied ? ButtonTypes.success : ButtonTypes.neutral}
         className="!rounded-full"
         iconRight={copied ? <CheckMark /> : <Copy />}
       >

@@ -14,6 +14,9 @@ export interface ServerUser {
   multiplier_count: number
   remaining_ads: number
   tasks_remaining: number
+  login_days: number
+  last_login_date: string // "2024-10-26T00:00:00Z"
+  nickname_claim_available: boolean
 }
 
 export interface ClientUser {
@@ -29,6 +32,9 @@ export interface ClientUser {
   boosts: number
   remainingAds: number
   remainingTasks: number
+  loginDays: number
+  lastLoginDate: Date
+  nicknameClaimAvailable: boolean
 }
 
 export interface UserBet {

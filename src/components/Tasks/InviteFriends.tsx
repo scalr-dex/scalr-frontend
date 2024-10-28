@@ -1,20 +1,21 @@
-import Button from 'components/Button'
 import { useState } from 'preact/hooks'
-import ButtonTypes from 'type/Button'
 import InviteFriendsModal from 'components/Modals/InviteFriendsModal'
+import TaskUi from 'components/Tasks/TaskUi'
+import UserCircle from 'components/icons/UserCircle'
 
 export default function () {
   const [modalOpen, setModalOpen] = useState(false)
 
   return (
     <div>
-      <Button
-        buttonType={ButtonTypes.secondary}
-        className="!rounded-full"
+      <TaskUi
+        icon={<UserCircle />}
+        rewardAmount={1500}
         onClick={() => setModalOpen(true)}
-      >
-        Invite frens
-      </Button>
+        taskText="Invite frens"
+        extraData="+3000 for Premium friends"
+      />
+
       <InviteFriendsModal showModal={modalOpen} setShowModal={setModalOpen} />
     </div>
   )
