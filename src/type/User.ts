@@ -15,7 +15,7 @@ export interface ServerUser {
   remaining_ads: number
   tasks_remaining: number
   login_days: number
-  last_login_date: string // "2024-10-26T00:00:00Z"
+  last_login_date: string
   nickname_claim_available: boolean
 }
 

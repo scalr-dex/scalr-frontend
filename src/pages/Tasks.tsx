@@ -36,7 +36,7 @@ export default function () {
         <Points amount={user?.balance} />
         <div className="flex flex-row gap-x-2 items-center">
           <ImgWithComponentFallback name={user?.username} />
-          <DailyStreakButton streak={user?.loginDays} />
+          <DailyStreakButton />
         </div>
       </div>
 
