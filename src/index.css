@@ -43,6 +43,9 @@ html {
   user-select: none;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+body {
   overflow: hidden;
 }
 
@@ -50,6 +53,8 @@ html {
 tc-root {
   pointer-events: auto;
 }
+
+/* Backdrop color for wallet modal */
 .go823957079 {
   background-color: transparent !important;
   backdrop-filter: blur(1rem);

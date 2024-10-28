@@ -1,7 +1,10 @@
 /** @type {import('tailwindcss/defaultConfig')} */
 module.exports = {
   content: ['./index.html', './src/**/!(tailwind).{ts,tsx}'],
-  plugins: [require('@tailwindcss/typography')],
+  plugins: [
+    require('@tailwindcss/typography'),
+    require('tailwindcss-animation-delay'),
+  ],
   future: { hoverOnlyWhenSupported: true },
 
   theme: {

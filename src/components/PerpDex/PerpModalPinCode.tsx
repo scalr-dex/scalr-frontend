@@ -6,10 +6,10 @@ import ModalBlurBg from 'components/PerpDex/ModalBlurBg'
 function FloatingBubbles() {
   return (
     <>
-      <div className="animate-pulse absolute -left-4/5 top-0 -z-0">
+      <div className="animation-delay-700 animate-pulse absolute left-3/4 top-0 -z-0">
         <ModalBlurBg />
       </div>
-      <div className="absolute -right-4/5 top-0 -z-0 animate-pulse">
+      <div className="animation-delay-700 animate-pulse absolute right-3/4 top-0 -z-0 ">
         <ModalBlurBg />
       </div>
     </>

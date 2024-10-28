@@ -6591,6 +6591,7 @@ __metadata:
     rollup-plugin-visualizer: ^5.12.0
     serve: ^14.2.3
     tailwindcss: ^3.4.3
+    tailwindcss-animation-delay: ^2.0.1
     ts-node: ^10.9.2
     typescript: ^5.4.5
     vaul: ^1.1.0
@@ -7049,6 +7050,15 @@ __metadata:
     "@pkgr/core": ^0.1.0
     tslib: ^2.6.2
   checksum: 4042941a4d939675f1d7b01124b8405b6ac616f3e3f396d00e46c67f38d0d5b7f9a1de05bc7ceea4ce80d967b450cfa2460e5f6aca81f7cea8f1a28be9392985
+  languageName: node
+  linkType: hard
+
+"tailwindcss-animation-delay@npm:^2.0.1":
+  version: 2.0.1
+  resolution: "tailwindcss-animation-delay@npm:2.0.1"
+  peerDependencies:
+    tailwindcss: ">=2.0.0 || >=3.0.0"
+  checksum: 7808d862bb1b237495f18d6e49c2c16ce297b4221a9327714fd04901c46e275496f9679e2d6baf37f0ba44fa48969be8ed7ce5c6aa2ba0b12b619198f068e8fd
   languageName: node
   linkType: hard
 

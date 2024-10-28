@@ -13,6 +13,7 @@ import TonConnect from 'components/TonConnect'
 import { useTonConnectUI } from 'lib/ui-react'
 import { useAutoAnimate } from '@formkit/auto-animate/react'
 import ImageAnimatedOnLoad from 'components/ImageAnimatedOnLoad'
+import ScrollFadeOverlay from 'components/ScrollFadeOverlay'
 
 const info = [
   {
@@ -50,30 +51,33 @@ function ModalBody({
   const glow = connectWallet ? 'drop-shadow-bulb-glow' : ''
 
   return (
-    <div className="flex flex-col gap-y-6 px-4" ref={parent}>
-      <ImageAnimatedOnLoad
-        src="img/dex-scalr-3d.png"
-        className="h-32 self-center"
-      />
-      <div className="flex flex-col gap-y-2 leading-5 text-center">
-        <Header2
-          className={`transition-all duration-1000 will-change-transform ${glow}`}
-        >
-          Scalr Airdrop
-        </Header2>
-        <span className="text-white/50">
-          {connectWallet
-            ? isConnected
-              ? "Nice, you're ready for airdrop"
-              : 'Connect wallet to secure your spot'
-            : 'A mobile-first, fast and reliable perpetual exchange designed for seamless trading.'}
-        </span>
-      </div>
+    <>
+      <div className="flex flex-col gap-y-6 px-4" ref={parent}>
+        <ImageAnimatedOnLoad
+          src="img/dex-scalr-3d.png"
+          className="h-32 self-center"
+        />
+        <div className="flex flex-col gap-y-2 leading-5 text-center">
+          <Header2
+            className={`transition-all duration-1000 will-change-transform ${glow}`}
+          >
+            Scalr Airdrop
+          </Header2>
+          <span className="text-white/50">
+            {connectWallet
+              ? isConnected
+                ? "Nice, you're ready for airdrop"
+                : 'Connect wallet to secure your spot'
+              : 'A mobile-first, fast and reliable perpetual exchange designed for seamless trading.'}
+          </span>
+        </div>
 
-      {connectWallet ? null : (
-        <div className="flex flex-col gap-y-5">{info.map(IconWithTexts)}</div>
-      )}
-    </div>
+        {connectWallet ? null : (
+          <div className="flex flex-col gap-y-5">{info.map(IconWithTexts)}</div>
+        )}
+      </div>
+      {connectWallet ? null : <ScrollFadeOverlay />}
+    </>
   )
 }
 
@@ -123,7 +127,7 @@ export default function (props: DefaultModalProps) {
       {...props}
       dismissible={dismissible}
       onCloseCallback={onClose}
-      bodyWrapperClassName="min-h-[88vh] max-h-[88vh]"
+      contentClassName="h-[98vh]"
       footerWrapperClassName="flex-1 content-end"
       body={() => (
         <ModalBody

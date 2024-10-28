@@ -11,6 +11,7 @@ import Maximize from 'components/icons/Maximize'
 import DexInfoStonks from 'components/DexInfoStonks'
 import PerpModalPinCode from 'components/PerpDex/PerpModalPinCode'
 import { useAutoAnimate } from '@formkit/auto-animate/react'
+import ScrollFadeOverlay from 'components/ScrollFadeOverlay'
 
 const info = [
   {
@@ -37,32 +38,38 @@ function ModalBody({ showCodeInput }: { showCodeInput: boolean }) {
   const glow = showCodeInput ? 'drop-shadow-bulb-glow' : ''
 
   return (
-    <div className="flex flex-col gap-y-6 px-4 h-[80vh]" ref={parent}>
-      {showCodeInput ? (
-        <PerpModalPinCode />
-      ) : (
-        <div className="flex w-full items-center justify-center pr-16 h-32">
-          <DexInfoStonks />
-        </div>
-      )}
-      <div className="flex flex-col gap-y-2 leading-5 text-center">
-        <Header2
-          className={`transition-all duration-1000 will-change-transform ${glow}`}
+    <>
+      <div className="flex flex-col gap-y-6 px-4 h-[80vh]">
+        <div
+          className="flex w-full items-center justify-center h-36"
+          ref={parent}
         >
-          Scalr Perpetual DEX
-        </Header2>
+          {showCodeInput ? (
+            <PerpModalPinCode />
+          ) : (
+            <DexInfoStonks className="pr-16" />
+          )}
+        </div>
+        <div className="flex flex-col gap-y-2 leading-5 text-center">
+          <Header2
+            className={`transition-all duration-500 will-change-transform ${glow}`}
+          >
+            Scalr Perpetual DEX
+          </Header2>
+          {showCodeInput ? null : (
+            <span className="text-white/50">
+              A mobile-first, fast and reliable perpetual exchange designed for
+              seamless trading.
+            </span>
+          )}
+        </div>
+
         {showCodeInput ? null : (
-          <span className="text-white/50">
-            A mobile-first, fast and reliable perpetual exchange designed for
-            seamless trading.
-          </span>
+          <div className="flex flex-col gap-y-5">{info.map(IconWithTexts)}</div>
         )}
       </div>
-
-      {showCodeInput ? null : (
-        <div className="flex flex-col gap-y-5">{info.map(IconWithTexts)}</div>
-      )}
-    </div>
+      <ScrollFadeOverlay />
+    </>
   )
 }
 
@@ -85,19 +92,16 @@ export default function (props: DefaultModalProps) {
     setTimeout(() => setShowCodeInput(false), 200)
   }, [props])
 
-  const footer = showCodeInput ? null : (
-    <ModalFooter setShowCodeInput={() => setShowCodeInput(true)} />
-  )
+  const footer = showCodeInput
+    ? null
+    : () => <ModalFooter setShowCodeInput={() => setShowCodeInput(true)} />
 
   return (
     <DefaultModal
       {...props}
-      contentClassName="min-h-[85vh]"
-      bodyWrapperClassName="h-[85vh]"
-      footerWrapperClassName="flex-1 content-end"
       onCloseCallback={onClose}
       body={() => <ModalBody showCodeInput={showCodeInput} />}
-      footer={() => footer}
+      footer={footer}
     />
   )
 }

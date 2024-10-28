@@ -1,12 +1,13 @@
-export default function () {
+import { ClassNameProp } from 'type/Props'
+
+export default function ({ className }: ClassNameProp) {
   return (
     <svg
-      width="295"
-      height="127"
+      height="144"
       viewBox="0 0 295 127"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
-      className="drop-shadow-lg"
+      className={`drop-shadow-lg ${className}`}
     >
       <g clip-path="url(#clip0_3892_90348)">
         <rect
