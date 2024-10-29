@@ -6,7 +6,6 @@ import { sentryVitePlugin } from '@sentry/vite-plugin'
 
 export default defineConfig(({ mode }) => {
   const env = Object.assign(process.env, loadEnv(mode, process.cwd(), ''))
-  const isProd = env['NODE_ENV'] === 'production'
 
   const minify = env['MINIFY'] === undefined ? true : Boolean(env['MINIFY'])
 
@@ -28,7 +27,7 @@ export default defineConfig(({ mode }) => {
             org: 'scalr',
             url: env['SENTRY_URL'],
             project: 'mini-app',
-            authToken: String(env['SENTRY_AUTH_TOKEN']),
+            authToken: env['SENTRY_AUTH_TOKEN'],
             reactComponentAnnotation: { enabled: true },
             sourcemaps: { filesToDeleteAfterUpload: '**/*.js.map' },
           }),
