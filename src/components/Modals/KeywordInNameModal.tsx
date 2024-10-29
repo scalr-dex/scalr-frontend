@@ -13,7 +13,7 @@ import Copy from 'components/icons/Copy'
 import { getDailyNickname } from 'helpers/api/dailyReward'
 import handleError from 'helpers/handleError'
 import { nameKeyword } from 'helpers/atoms/UserStates'
-import CheckMark from 'components/icons/CheckMark'
+import { useMiniApp } from '@telegram-apps/sdk-react'
 
 function ModalBody() {
   return (
@@ -34,7 +34,7 @@ function ModalBody() {
 }
 
 function ModalFooter() {
-  const [copied, setCopied] = useState(false)
+  const miniApp = useMiniApp()
   const [parent] = useAutoAnimate()
   const [loading, setLoading] = useState(false)
   const user = useAtomValue(UserAtom)
@@ -69,9 +69,8 @@ function ModalFooter() {
 
   const onCopy = useCallback(async () => {
     await navigator.clipboard.writeText(nameKeyword)
-    setCopied(true)
-    setTimeout(() => setCopied(false), 1500)
-  }, [])
+    miniApp.close()
+  }, [miniApp])
 
   return (
     <div className="flex flex-col gap-y-4" ref={parent}>
@@ -87,10 +86,10 @@ function ModalFooter() {
       <Button
         className="!rounded-full"
         onClick={onCopy}
-        buttonType={copied ? ButtonTypes.success : ButtonTypes.neutral}
-        iconRight={copied ? <CheckMark /> : <Copy />}
+        buttonType={ButtonTypes.neutral}
+        iconRight={<Copy />}
       >
-        {copied ? 'Copied' : 'Copy'}
+        Copy and close the app
       </Button>
     </div>
   )
