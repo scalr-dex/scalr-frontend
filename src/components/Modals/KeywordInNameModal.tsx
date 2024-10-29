@@ -24,7 +24,7 @@ function ModalBody() {
         <TaskRewardBlock rewardAmount={500} />
       </div>
       <Header2 className="px-4 text-balance">
-        Add {nameKeyword} to your first name
+        Add {nameKeyword} to your name
       </Header2>
       <BodyText className="text-balance px-4">
         Please note, that you need to wait a bit and re-open the app after you

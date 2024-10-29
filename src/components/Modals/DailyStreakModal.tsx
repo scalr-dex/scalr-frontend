@@ -1,25 +1,39 @@
 import Button from 'components/Button'
-import { BodyText, Header2 } from 'components/Text'
+import { BodyText, Header3 } from 'components/Text'
 import DefaultModal from 'components/Modals/DefaultModal'
 import ButtonTypes from 'type/Button'
 import { DefaultModalProps } from 'type/Props'
 import UserAtom from 'helpers/atoms/UserAtom'
-import { useAtom } from 'jotai'
+import { useAtom, useAtomValue } from 'jotai'
 import { useCallback, useState } from 'preact/hooks'
 import { getDailyStreak } from 'helpers/api/dailyReward'
 import handleError from 'helpers/handleError'
-import Fire from 'components/icons/Fire'
 import dayjs from 'dayjs'
 import useCountDown from 'helpers/hooks/useCountDown'
+import ImageAnimatedOnLoad from 'components/ImageAnimatedOnLoad'
 
 function ModalBody() {
+  const user = useAtomValue(UserAtom)
+
+  const loginDays = user?.loginDays || 1
+
   return (
     <>
-      <div className="px-4 h-44 w-44 self-center drop-shadow-bulb-glow">
-        <Fire />
+      <ImageAnimatedOnLoad
+        src="img/utya-burn.png"
+        className="h-44 self-center"
+      />
+      <div className="flex flex-col items-center justify-center gap-y-5">
+        <BodyText className="text-alt-dark text-6xl font-bold">
+          {loginDays}
+        </BodyText>
+        <Header3 className="text-alt-dark">
+          day{loginDays > 1 ? 's' : ''} streak!
+        </Header3>
+        <BodyText className="text-balance px-4">
+          Open Scalr each day to earn a streak reward.
+        </BodyText>
       </div>
-      <Header2 className="px-4">Keep your daily streak</Header2>
-      <BodyText className="text-balance px-4">And get rewarded 🎁</BodyText>
     </>
   )
 }
@@ -60,7 +74,7 @@ function ModalFooter() {
       isLoading={loading}
       disabled={!!time}
     >
-      {time ? dayjs({ seconds: time }).format('HH:mm:ss') : 'Check in 🔥'}
+      {time ? dayjs({ seconds: time }).format('HH:mm:ss') : 'Continue'}
     </Button>
   )
 }
