@@ -1,6 +1,7 @@
 import dayjs from 'dayjs'
 import { onDailyClaim } from 'helpers/api/dailyReward'
 import { timeToRewardAtom } from 'helpers/atoms/UserAtom'
+import { successConfetti } from 'helpers/shootConfetti'
 import { useAtom } from 'jotai'
 import { useCallback, useState } from 'preact/hooks'
 
@@ -15,9 +16,8 @@ export default function () {
     setLoading(true)
 
     const newTime = await onDailyClaim()
-    console.log(newTime)
-
     if (newTime) setTimeToReward(newTime)
+    await successConfetti()
     setLoading(false)
   }, [setTimeToReward])
 
