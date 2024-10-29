@@ -32,10 +32,10 @@ export default function () {
 
   return (
     <div className="flex flex-col flex-1 gap-y-8 px-4 my-4">
-      <div className="flex flex-row w-full items-center justify-between">
+      <div className="flex flex-row justify-between">
         <Points amount={user?.balance} />
         <div className="flex flex-row gap-x-2 items-center">
-          <ImgWithComponentFallback name={user?.username} />
+          <ImgWithComponentFallback name={user?.username} size={10} />
           <DailyStreakButton />
         </div>
       </div>
