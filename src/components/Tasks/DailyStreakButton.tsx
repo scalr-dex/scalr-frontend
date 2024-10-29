@@ -1,44 +1,26 @@
 import ButtonSmall from 'components/ButtonSmall'
 import Fire from 'components/icons/Fire'
-import dayjs from 'dayjs'
-import { getDailyStreak } from 'helpers/api/dailyReward'
+import DailyStreakModal from 'components/Modals/DailyStreakModal'
 import UserAtom from 'helpers/atoms/UserAtom'
-import handleError from 'helpers/handleError'
-import { useAtom } from 'jotai'
-import { useCallback } from 'preact/hooks'
+import { useAtomValue } from 'jotai'
+import { useState } from 'preact/hooks'
 import ButtonTypes from 'type/Button'
 
 export default function () {
-  const [user, setUser] = useAtom(UserAtom)
-
-  const canClaim = dayjs(user?.lastLoginDate).diff(dayjs(), 'days')
-
-  const onClick = useCallback(async () => {
-    try {
-      const { last_login_date, login_days } = await getDailyStreak()
-      setUser((prev) =>
-        prev
-          ? {
-              ...prev,
-              lastLoginDate: new Date(last_login_date),
-              loginDays: login_days,
-            }
-          : null
-      )
-    } catch (e) {
-      handleError({ e })
-    }
-  }, [setUser])
+  const [openModal, setOpenModal] = useState(false)
+  const user = useAtomValue(UserAtom)
 
   return (
-    <ButtonSmall
-      iconLeft={<Fire />}
-      buttonType={ButtonTypes.outline}
-      className="py-2 px-4"
-      onClick={onClick}
-      disabled={!canClaim}
-    >
-      {user?.loginDays}
-    </ButtonSmall>
+    <>
+      <ButtonSmall
+        iconLeft={<Fire size={24} />}
+        buttonType={ButtonTypes.outline}
+        className="py-2 px-4"
+        onClick={() => setOpenModal(true)}
+      >
+        {user?.loginDays}
+      </ButtonSmall>
+      <DailyStreakModal showModal={openModal} setShowModal={setOpenModal} />
+    </>
   )
 }
