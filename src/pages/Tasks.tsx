@@ -15,6 +15,7 @@ import UserAtom from 'helpers/atoms/UserAtom'
 import DailyStreakButton from 'components/Tasks/DailyStreakButton'
 import TaskSection from 'components/Tasks/TaskSection'
 import DailyTasks from 'components/Tasks/DailyTasks/index'
+import HorizontalCards from 'components/Tasks/HorizontalCards'
 
 export default function () {
   const user = useAtomValue(UserAtom)
@@ -31,7 +32,7 @@ export default function () {
   )
 
   return (
-    <div className="flex flex-col flex-1 gap-y-8 px-4 my-4">
+    <div className="flex flex-col flex-1 gap-y-8 px-4 my-4 overflow-x-clip">
       <div className="flex flex-row justify-between">
         <Points amount={user?.balance} />
         <div className="flex flex-row gap-x-2 items-center">
@@ -39,6 +40,8 @@ export default function () {
           <DailyStreakButton />
         </div>
       </div>
+
+      <HorizontalCards />
 
       <TaskSection>
         <InviteFriends />
