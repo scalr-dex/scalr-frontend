@@ -10,10 +10,10 @@ export default function () {
     <div>
       <TaskUi
         icon={<TwoUsers />}
-        rewardAmount={3000}
+        rewardAmount={6000}
         onClick={() => setModalOpen(true)}
         taskText="Invite frens"
-        extraData="+6000 for Premium"
+        extraData="Per each, 20 left today."
       />
 
       <InviteFriendsModal showModal={modalOpen} setShowModal={setModalOpen} />

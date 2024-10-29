@@ -11,7 +11,7 @@ export default function () {
   return (
     <TaskUi
       icon={iconNumberToComponent(-1)}
-      taskText="Points Daily Claim"
+      taskText="Daily points claim"
       rewardAmount={user?.canClaimAmount || 500}
       disabled={!canClaim}
       onClick={onClaimClick}

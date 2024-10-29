@@ -15,7 +15,7 @@ import ImageAnimatedOnLoad from 'components/ImageAnimatedOnLoad'
 function ModalBody() {
   const user = useAtomValue(UserAtom)
 
-  const loginDays = user?.loginDays || 1
+  const loginDays = user?.loginDays || 0
 
   return (
     <>
@@ -28,7 +28,7 @@ function ModalBody() {
           {loginDays}
         </BodyText>
         <Header3 className="text-alt-dark">
-          day{loginDays > 1 ? 's' : ''} streak!
+          day{loginDays === 1 ? '' : 's'} streak!
         </Header3>
         <BodyText className="text-balance px-4">
           Open Scalr each day to earn a streak reward.

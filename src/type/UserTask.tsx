@@ -31,7 +31,7 @@ export const iconNumberToComponent = (id: number) => {
   if (id === 2)
     return (
       <div className="w-full h-full">
-        <X size={24} />
+        <X />
       </div>
     )
 

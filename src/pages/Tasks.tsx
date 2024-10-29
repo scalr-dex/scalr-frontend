@@ -9,7 +9,6 @@ import UserTask from 'type/UserTask'
 import sortTasks from 'helpers/sortTasks'
 import FooterSafeArea from 'components/FooterSafeArea'
 import Points from 'components/Main/Points'
-import ImgWithComponentFallback from 'components/ImgWithComponentFallback'
 import { useAtomValue } from 'jotai'
 import UserAtom from 'helpers/atoms/UserAtom'
 import DailyStreakButton from 'components/Tasks/DailyStreakButton'
@@ -36,7 +35,6 @@ export default function () {
       <div className="flex flex-row justify-between">
         <Points amount={user?.balance} />
         <div className="flex flex-row gap-x-2 items-center">
-          <ImgWithComponentFallback name={user?.username} size={10} />
           <DailyStreakButton />
         </div>
       </div>

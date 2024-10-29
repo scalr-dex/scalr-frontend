@@ -76,6 +76,14 @@ function ModalFooter() {
   return (
     <div className="flex flex-col gap-y-4" ref={parent}>
       <Button
+        className="!rounded-full"
+        onClick={onCopy}
+        buttonType={ButtonTypes.neutral}
+        iconRight={<Copy />}
+      >
+        Copy and close the app
+      </Button>
+      <Button
         buttonType={ButtonTypes.secondary}
         className="!rounded-full"
         isLoading={loading}
@@ -83,14 +91,6 @@ function ModalFooter() {
         iconRight={disabled ? <CheckCircle /> : null}
       >
         {disabled ? 'Done' : 'Check 👀'}
-      </Button>
-      <Button
-        className="!rounded-full"
-        onClick={onCopy}
-        buttonType={ButtonTypes.neutral}
-        iconRight={<Copy />}
-      >
-        Copy and close the app
       </Button>
     </div>
   )
