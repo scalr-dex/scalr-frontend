@@ -11,7 +11,6 @@ import StonksCircle from 'components/icons/StonksCircle'
 import Feedback from 'components/icons/Feedback'
 import Triangle from 'components/icons/socials/Triangle'
 import TriangleAccelerated from 'components/Modals/PerpDex/TriangleAccelerated'
-import FooterSafeArea from 'components/FooterSafeArea'
 import useImagePreloader from 'helpers/hooks/useImagePreload'
 import LoaderFullPage from 'components/LoaderFullPage'
 
@@ -32,9 +31,9 @@ export default function () {
   if (!imagesPreloaded) return <LoaderFullPage />
 
   return (
-    <div className="flex flex-col gap-y-4 h-screen p-4">
+    <div className="flex flex-col gap-y-4 h-screen p-4 pb-footer-height">
       <NoisyCard
-        className="p-4 h-60 relative overflow-hidden"
+        className="p-4 h-full relative overflow-hidden"
         onClick={() => setOpenInfoModal(true)}
       >
         <NoisyCardBig
@@ -56,7 +55,7 @@ export default function () {
             'url(img/noise-effect.png), linear-gradient(to top, var(--accent-dark), var(--secondary), var(--secondary))',
         }}
         onClick={() => setOpenAirdropModal(true)}
-        className="relative p-4 h-60 justify-evenly"
+        className="relative p-4 h-full justify-evenly"
       >
         <NoisyCardBig
           header="Scalr Airdrop"
@@ -64,17 +63,17 @@ export default function () {
           smallIcon={<ScalrCoin size={44} />}
         />
         <div className="flex items-center justify-center">
-          <img src="img/dex-scalr-3d.png" className="w-full" />
+          <img src="img/dex-scalr-3d.png" className="h-32" />
         </div>
       </NoisyCard>
 
-      <div className="flex flex-row gap-x-4">
+      <div className="flex flex-row gap-x-4 h-full">
         <NoisyCard
           style={{
             background:
               'url(img/noise-effect.png), linear-gradient(to right, #6CCAF2, #11A5E4) padding-box',
           }}
-          className="h-40 p-2.5 border-5 border-white-16 shadow-inner-card-glow"
+          className="h-full p-2.5 border-5 border-white-16 shadow-inner-card-glow"
           onClick={() => setOpenTriangleModal(true)}
         >
           <NoisyCardSmall
@@ -93,7 +92,7 @@ export default function () {
             background:
               'url(img/noise-effect.png), linear-gradient(to right, #3284FE, #0B54E3) padding-box',
           }}
-          className="h-40 p-2.5 border-5 border-white-16 shadow-inner-card-glow"
+          className="h-full p-2.5 border-5 border-white-16 shadow-inner-card-glow"
           onClick={() => setOpenPartnershipModal(true)}
         >
           <NoisyCardSmall
@@ -124,7 +123,6 @@ export default function () {
         showModal={openTriangleModal}
         setShowModal={setOpenTriangleModal}
       />
-      <FooterSafeArea />
     </div>
   )
 }
