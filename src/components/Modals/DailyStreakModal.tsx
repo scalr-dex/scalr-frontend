@@ -28,7 +28,7 @@ function ModalFooter() {
   const [loading, setLoading] = useState(false)
   const [user, setUser] = useAtom(UserAtom)
   const [time, setTime] = useState(
-    dayjs(user?.lastLoginDate).add(1, 'day').diff(dayjs(), 'seconds')
+    dayjs(user?.lastLoginDate).endOf('day').diff(dayjs(), 'seconds')
   )
   useCountDown(setTime)
 
