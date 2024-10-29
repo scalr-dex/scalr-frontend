@@ -32,7 +32,7 @@ export default function () {
   if (!imagesPreloaded) return <LoaderFullPage />
 
   return (
-    <div className="flex flex-col gap-y-4 h-fit p-4">
+    <div className="flex flex-col gap-y-4 h-screen p-4">
       <NoisyCard
         className="p-4 h-60 relative overflow-hidden"
         onClick={() => setOpenInfoModal(true)}
