@@ -45,9 +45,7 @@ function ModalBody() {
         <p>We’re back with some exciting updates!</p>
         <p>Here’s what’s new:</p>
       </BodyText>
-      <div className="flex flex-col gap-y-5 px-4">
-        {bodyInfo.map(IconWithTexts)}
-      </div>
+      <div className="flex flex-col gap-y-5">{bodyInfo.map(IconWithTexts)}</div>
       <ScrollFadeOverlay />
     </>
   )
