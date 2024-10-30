@@ -8,7 +8,7 @@ import ImageAnimatedOnLoad from 'components/ImageAnimatedOnLoad'
 function ModalBody() {
   return (
     <div className="flex flex-col gap-y-4 text-center">
-      <ImageAnimatedOnLoad src="img/utya-energy.png" />
+      <ImageAnimatedOnLoad src="img/utya-energy.png" forModal />
       <Header3>Bet Energy</Header3>
       <BodyText className="text-balance">
         <p>You have daily energy for bets, refreshing every 24 hours. </p>
@@ -25,10 +25,9 @@ function ModalBody() {
 function ModalFooter({ onClose }: { onClose: () => void }) {
   return (
     <Button
-      buttonType={ButtonTypes.neutral}
+      buttonType={ButtonTypes.secondary}
       className="!rounded-full"
       onClick={onClose}
-      haptic={false}
     >
       🫡 Understood
     </Button>
