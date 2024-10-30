@@ -28,6 +28,7 @@
     "js-confetti": "^0.12.0",
     "ky": "^1.5.0",
     "preact": "^10.22.0",
+    "react-animated-counter": "^1.7.9",
     "react-countup": "^6.5.3",
     "react-device-detect": "^2.2.3",
     "react-ga4": "^2.1.0",

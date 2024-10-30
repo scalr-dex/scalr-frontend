@@ -11,6 +11,7 @@ import handleError from 'helpers/handleError'
 import dayjs from 'dayjs'
 import useCountDown from 'helpers/hooks/useCountDown'
 import ImageAnimatedOnLoad from 'components/ImageAnimatedOnLoad'
+import { AnimatedCounter } from 'react-animated-counter'
 
 function ModalBody() {
   const user = useAtomValue(UserAtom)
@@ -23,10 +24,18 @@ function ModalBody() {
         src="img/utya-burn.png"
         className="h-44 self-center"
       />
+
       <div className="flex flex-col items-center justify-center gap-y-5">
-        <BodyText className="text-alt-dark text-6xl font-bold">
-          {loginDays}
-        </BodyText>
+        <AnimatedCounter
+          value={loginDays}
+          includeDecimals={false}
+          fontSize="3.75rem"
+          digitStyles={{
+            color: '#FF9341',
+            fontWeight: 800,
+          }}
+          incrementColor="#FFE792"
+        />
         <Header3 className="text-alt-dark">
           day{loginDays === 1 ? '' : 's'} streak!
         </Header3>
@@ -44,6 +53,7 @@ function ModalFooter() {
   const [time, setTime] = useState(
     dayjs(user?.lastLoginDate).endOf('day').diff(dayjs(), 'seconds')
   )
+
   useCountDown(setTime)
 
   const onClick = useCallback(async () => {
@@ -72,7 +82,7 @@ function ModalFooter() {
       className="!rounded-full"
       onClick={onClick}
       isLoading={loading}
-      disabled={!!time}
+      disabled={time > 0}
     >
       {time ? dayjs({ seconds: time }).format('HH:mm:ss') : 'Continue'}
     </Button>
