@@ -1,6 +1,4 @@
 import ButtonSmall from 'components/ButtonSmall'
-import UserAtom from 'helpers/atoms/UserAtom'
-import { useAtomValue } from 'jotai'
 import { useState } from 'preact/hooks'
 import ButtonTypes from 'type/Button'
 import TicketPlus from 'components/Modals/TicketPlus'
@@ -8,7 +6,6 @@ import BattleTicketsModal from 'components/Modals/BattleTicketsModal'
 
 export default function () {
   const [openModal, setOpenModal] = useState(false)
-  const user = useAtomValue(UserAtom)
 
   return (
     <>
@@ -18,7 +15,7 @@ export default function () {
         className="py-2 px-4"
         onClick={() => setOpenModal(true)}
       >
-        {user?.remainingAds}
+        0
       </ButtonSmall>
       <BattleTicketsModal showModal={openModal} setShowModal={setOpenModal} />
     </>
