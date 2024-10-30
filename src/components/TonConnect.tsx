@@ -79,7 +79,7 @@ export default function () {
             copied ? (
               <CheckMark />
             ) : (
-              <Copy size={20} />
+              <Copy />
             )
           ) : (
             <TonCoin className="text-white" size={16} inCircle />
