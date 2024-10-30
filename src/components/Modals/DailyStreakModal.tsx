@@ -20,10 +20,7 @@ function ModalBody() {
 
   return (
     <>
-      <ImageAnimatedOnLoad
-        src="img/utya-burn.png"
-        className="h-44 self-center"
-      />
+      <ImageAnimatedOnLoad src="img/utya-burn.png" forModal />
 
       <div className="flex flex-col items-center justify-center gap-y-5">
         <AnimatedCounter

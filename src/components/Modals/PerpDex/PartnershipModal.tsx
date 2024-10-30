@@ -9,12 +9,9 @@ import ImageAnimatedOnLoad from 'components/ImageAnimatedOnLoad'
 function ModalBody() {
   return (
     <>
-      <ImageAnimatedOnLoad
-        src="img/scalr-wavy.png"
-        className="mx-4 h-44 rounded-lg"
-      />
-      <Header2 className="text-center px-4">Interested in partnership?</Header2>
-      <BodyText className="text-center text-balance px-4">
+      <ImageAnimatedOnLoad src="img/scalr-wavy.png" forModal />
+      <Header2 className="text-center">Interested in partnership?</Header2>
+      <BodyText className="text-center text-balance">
         Send your links with a short note about yourself, and receive a special
         offer from us 🌞
       </BodyText>

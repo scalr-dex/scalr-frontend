@@ -99,12 +99,12 @@ async function setupUser() {
       tonAddress: user.ton_address,
       inviteLimit: user.invite_limit,
       invitedUsers: user.invited_users,
-      boosts: user.multiplier_count,
       remainingAds: user.remaining_ads,
       remainingTasks: user.tasks_remaining,
       loginDays: user.login_days,
       lastLoginDate: new Date(user.last_login_date),
       nicknameClaimAvailable: user.nickname_claim_available,
+      betEnergy: user.bet_energy_left,
     }
 
     writeAtom(timeToRewardAtom, user.can_claim_daily_reward)

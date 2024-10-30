@@ -8,10 +8,7 @@ import ImageAnimatedOnLoad from 'components/ImageAnimatedOnLoad'
 function ModalBody() {
   return (
     <>
-      <ImageAnimatedOnLoad
-        src="img/collabs/triangle_meme.png"
-        className="self-center h-56 rounded-lg"
-      />
+      <ImageAnimatedOnLoad src="img/collabs/triangle_meme.png" forModal />
       <Header2 className="text-center">Triangle Accelerator Incubated</Header2>
       <BodyText className="text-center text-balance">
         Scalr is a member of the Triangle Accelerator and Ecosystem.

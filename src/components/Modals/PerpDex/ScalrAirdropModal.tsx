@@ -52,7 +52,7 @@ function ModalBody({
 
   return (
     <>
-      <div className="flex flex-col gap-y-6 px-4" ref={parent}>
+      <div className="flex flex-col gap-y-6" ref={parent}>
         <ImageAnimatedOnLoad
           src="img/dex-scalr-3d.png"
           className="h-32 self-center"

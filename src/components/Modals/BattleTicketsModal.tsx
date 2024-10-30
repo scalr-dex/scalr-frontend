@@ -1,20 +1,23 @@
 import Button from 'components/Button'
-import { Header3, AccentText } from 'components/Text'
+import { BodyText, Header3 } from 'components/Text'
 import DefaultModal from 'components/Modals/DefaultModal'
 import ButtonTypes from 'type/Button'
 import { DefaultModalProps } from 'type/Props'
+import ImageAnimatedOnLoad from 'components/ImageAnimatedOnLoad'
 
 function ModalBody() {
   return (
     <>
-      <Header3>Scalr Leaderboard</Header3>
-      <AccentText>
-        <p>The leaderboard shows your all-time points total. </p>
+      <ImageAnimatedOnLoad src="vid/utya-pair.gif" forModal />
+      <Header3 className="text-center px-4">Battle Tickets</Header3>
+      <BodyText className="text-center px-4">
+        <p>Your Battle Tickets are on the way! 🎟️</p>
+
         <p>
-          Keep climbing the ranks to secure a bigger share of the airdrop
-          rewards! 💪
+          Soon, you’ll be able to view your ticket balance, acquire additional
+          tickets, and access more items.
         </p>
-      </AccentText>
+      </BodyText>
     </>
   )
 }
@@ -22,11 +25,11 @@ function ModalBody() {
 function ModalFooter({ onClose }: { onClose: () => void }) {
   return (
     <Button
-      onClick={onClose}
       buttonType={ButtonTypes.secondary}
       className="!rounded-full"
+      onClick={onClose}
     >
-      Got it
+      🫡 Will wait
     </Button>
   )
 }

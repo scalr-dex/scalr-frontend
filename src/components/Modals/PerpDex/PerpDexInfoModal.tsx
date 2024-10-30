@@ -39,7 +39,7 @@ function ModalBody({ showCodeInput }: { showCodeInput: boolean }) {
 
   return (
     <>
-      <div className="flex flex-col gap-y-6 px-4 h-[80vh]">
+      <div className="flex flex-col gap-y-6 h-[80vh]">
         <div
           className="flex w-full items-center justify-center h-36"
           ref={parent}

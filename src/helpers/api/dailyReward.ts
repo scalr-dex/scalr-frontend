@@ -1,6 +1,4 @@
 import backendKy from 'helpers/api/backendKy'
-import { writeAtom } from 'helpers/atoms/atomStore'
-import UserAtom from 'helpers/atoms/UserAtom'
 import handleError from 'helpers/handleError'
 import TrackerEvents from 'type/TrackerEvents'
 import { track } from 'helpers/api/analytics'
@@ -16,10 +14,6 @@ export default async function claimDailyReward() {
 export async function onDailyClaim() {
   try {
     const newTime = await claimDailyReward()
-
-    writeAtom(UserAtom, (prev) =>
-      prev ? { ...prev, boosts: prev.boosts + 1 } : null
-    )
 
     track(TrackerEvents.claimDailyReward)
 

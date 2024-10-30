@@ -47,7 +47,7 @@ export default function ({
           </Drawer.Close>
 
           <div
-            className={`relative flex flex-col gap-y-4 max-h-[80vh] overflow-y-auto ${bodyWrapperClassName}`}
+            className={`relative flex flex-col gap-y-4 max-h-[80vh] px-4 overflow-y-auto ${bodyWrapperClassName}`}
           >
             {body(onClose)}
           </div>
