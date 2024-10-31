@@ -8,6 +8,8 @@ import Season2Modal from 'components/Modals/Season2Modal'
 import { onboardSeason2 } from 'helpers/atoms/UserStates'
 import SeasonStats from 'components/Modals/SeasonStats'
 import { useState } from 'preact/hooks'
+import useImagePreloader from 'helpers/hooks/useImagePreload'
+import LoaderFullPage from 'components/LoaderFullPage'
 
 function InnerMain() {
   const data = useAtomValue(priceHistoryAtom)
@@ -27,9 +29,14 @@ function InnerMain() {
   )
 }
 
+const mainPreloadList = ['img/season2.png', 'img/utya-win.png']
+
 export default function () {
   const [showS2Modal, setShowS2Modal] = useAtom(onboardSeason2)
   const [openStatsModal, setOpenStatsModal] = useState(false)
+  const { imagesPreloaded } = useImagePreloader(mainPreloadList)
+
+  if (!imagesPreloaded) return <LoaderFullPage />
 
   return (
     <div className="flex flex-col h-full">
