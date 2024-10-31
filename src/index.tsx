@@ -6,8 +6,10 @@ import { initSentry } from 'helpers/api/sentry'
 import { initAnalytics } from 'helpers/api/analytics'
 import dayjs from 'dayjs'
 import objectSupport from 'dayjs/plugin/objectSupport'
+import utc from 'dayjs/plugin/utc'
 
 dayjs.extend(objectSupport)
+dayjs.extend(utc)
 initSentry()
 initAnalytics()
 
