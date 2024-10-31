@@ -36,7 +36,7 @@ function ModalBody() {
         <Header3 className="text-alt-dark">
           day{loginDays === 1 ? '' : 's'} streak!
         </Header3>
-        <BodyText className="text-balance px-4">
+        <BodyText className="text-balance text-center px-4">
           Open Scalr each day to earn a streak reward.
         </BodyText>
       </div>
