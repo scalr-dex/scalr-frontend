@@ -26,32 +26,21 @@ export default function ({
   const user = useAtomValue(UserAtom)
   const [userBet, setUserBet] = useAtom(userBetAtom)
   const [processingBet, setProcessingBet] = useState(false)
-  const [betValue, setBetValue] = useState(0)
 
-  const disabled =
-    betValue <= 0 ||
-    loading ||
-    processingBet ||
-    !user?.balance ||
-    !user.betEnergy
+  const disabled = loading || processingBet || !user?.balance || !user.betEnergy
 
   useEffect(() => {
     // in case app reloads and timeout vanishes
     if (userBet && userBet.endTime < Date.now()) setUserBet(null)
   }, [setUserBet, userBet])
 
-  useEffect(() => {
-    setBetValue(Math.round((user?.balance || 0) / 2))
-  }, [user?.balance])
-
   const onClick = useCallback(
     async (direction: BetDirection) => {
       if (!roundStart || !user || !user.balance || !user.betEnergy) return
 
       setProcessingBet(true)
-      const bet = { amount: betValue, direction }
 
-      const success = await placeBet(bet)
+      const success = await placeBet({ direction })
 
       setProcessingBet(false)
       if (!success) {
@@ -60,13 +49,13 @@ export default function ({
       }
 
       setUserBet({
-        ...bet,
+        direction,
         value: roundStart,
         endTime: roundStart[0] + roundDurationMs,
       })
       setTimeout(() => setUserBet(null), roundDurationMs)
     },
-    [betValue, roundStart, setUserBet, user]
+    [roundStart, setUserBet, user]
   )
 
   return (
