@@ -9,7 +9,8 @@ function ModalBody() {
     <>
       <Header3>Scalr Leaderboard</Header3>
       <AccentText>
-        <p>The leaderboard shows your all-time points total. </p>
+        <p>The leaderboard shows your all-time points total.</p>
+        <br />
         <p>
           Keep climbing the ranks to secure a bigger share of the airdrop
           rewards! 💪

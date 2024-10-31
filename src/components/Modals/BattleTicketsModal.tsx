@@ -12,7 +12,7 @@ function ModalBody() {
       <Header3 className="text-center px-4">Battle Tickets</Header3>
       <BodyText className="text-center px-4">
         <p>Your Battle Tickets are on the way! 🎟️</p>
-
+        <br />
         <p>
           Soon, you’ll be able to view your ticket balance, acquire additional
           tickets, and access more items.

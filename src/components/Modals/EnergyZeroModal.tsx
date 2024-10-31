@@ -13,9 +13,9 @@ function ModalBody() {
       <Header3 className="text-center">Energy isn’t ready yet...</Header3>
       <BodyText className="text-balance">
         <p>You’ve maxed out your energy for today, nice work!</p>
-
+        <br />
         <p>Come back tomorrow for a fresh boost.</p>
-
+        <br />
         <p>
           Meanwhile, there are other ways to stack points toward the $SCR
           airdrop 👀

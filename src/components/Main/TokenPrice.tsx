@@ -52,8 +52,8 @@ export default function ({ price }: { price?: number }) {
       </div>
 
       <div className="flex flex-row gap-x-2 h-8">
-        <DailyStreakButton />
-        <BattleTicketButton />
+        <DailyStreakButton small />
+        <BattleTicketButton small />
       </div>
     </div>
   )

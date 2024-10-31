@@ -2,7 +2,7 @@ import Button from 'components/Button'
 import StonksArrow from 'components/icons/StonksArrow'
 import ButtonTypes from 'type/Button'
 import { useCallback, useEffect, useState } from 'preact/hooks'
-import { useAtom, useAtomValue } from 'jotai'
+import { useAtom } from 'jotai'
 import UserAtom, { userBetAtom } from 'helpers/atoms/UserAtom'
 import placeBet from 'helpers/api/placeBet'
 import BetDirection from 'type/BetDirection'
@@ -23,7 +23,7 @@ export default function ({
   loading?: boolean
   roundStart: GraphTokenValue | undefined
 }) {
-  const user = useAtomValue(UserAtom)
+  const [user, setUser] = useAtom(UserAtom)
   const [userBet, setUserBet] = useAtom(userBetAtom)
   const [processingBet, setProcessingBet] = useState(false)
 
@@ -34,7 +34,7 @@ export default function ({
     if (userBet && userBet.endTime < Date.now()) setUserBet(null)
   }, [setUserBet, userBet])
 
-  const onClick = useCallback(
+  const onBet = useCallback(
     async (direction: BetDirection) => {
       if (!roundStart || !user || !user.balance || !user.betEnergy) return
 
@@ -48,6 +48,7 @@ export default function ({
         return
       }
 
+      setUser({ ...user, betEnergy: user.betEnergy - 1 })
       setUserBet({
         direction,
         value: roundStart,
@@ -55,7 +56,7 @@ export default function ({
       })
       setTimeout(() => setUserBet(null), roundDurationMs)
     },
-    [roundStart, setUserBet, user]
+    [roundStart, setUserBet, user, setUser]
   )
 
   return (
@@ -95,7 +96,7 @@ export default function ({
             buttonType={ButtonTypes.success}
             iconRight={<StonksArrow size={16} />}
             disabled={disabled || !!userBet}
-            onClick={() => onClick(BetDirection.long)}
+            onClick={() => onBet(BetDirection.long)}
           >
             Higher
           </Button>
@@ -103,7 +104,7 @@ export default function ({
             buttonType={ButtonTypes.error}
             iconRight={<StonksArrow rotate={90} size={16} />}
             disabled={disabled || !!userBet}
-            onClick={() => onClick(BetDirection.short)}
+            onClick={() => onBet(BetDirection.short)}
           >
             Lower
           </Button>

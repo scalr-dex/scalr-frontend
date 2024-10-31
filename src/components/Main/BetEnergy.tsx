@@ -2,10 +2,10 @@ import Battery from 'components/icons/Battery'
 import EnergyInfoModal from 'components/Modals/EnergyInfoModal'
 import EnergyZeroModal from 'components/Modals/EnergyZeroModal'
 import InviteFriendsModal from 'components/Modals/InviteFriendsModal'
-import { BodyText } from 'components/Text'
 import { showZeroEnergyModal } from 'helpers/atoms/UserStates'
 import { useAtom } from 'jotai'
 import { useState } from 'preact/hooks'
+import { AnimatedCounter } from 'react-animated-counter'
 
 export default function ({
   betEnergy = 0,
@@ -19,7 +19,17 @@ export default function ({
   return (
     <div className="flex flex-row gap-x-1 items-center text-white/50">
       <Battery onClick={() => setOpenEnergyModal(true)} />
-      <BodyText className="text-sm font-semibold">{betEnergy}</BodyText>
+
+      <AnimatedCounter
+        value={betEnergy}
+        includeDecimals={false}
+        fontSize="0.875rem"
+        digitStyles={{
+          color: '#ffffff50',
+          fontWeight: 700,
+        }}
+        decrementColor="#ffffff"
+      />
 
       <EnergyZeroModal
         showModal={zeroEnergyModal}

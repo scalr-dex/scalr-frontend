@@ -18,7 +18,7 @@ export default function () {
   const loading = status === 'pending'
 
   return (
-    <div className="flex flex-col px-4 gap-y-10">
+    <div className="flex flex-col mt-2 px-4 gap-y-10">
       <YourPoints points={data?.user?.points} />
 
       <div className="flex flex-row items-center gap-x-1">

@@ -12,7 +12,7 @@ function ModalBody() {
       <Header3>Bet Energy</Header3>
       <BodyText className="text-balance">
         <p>You have daily energy for bets, refreshing every 24 hours. </p>
-
+        <br />
         <p>
           Each bet costs one Energy. Win to get rewards; lose, and the energy is
           burned.
