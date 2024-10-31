@@ -2,9 +2,14 @@ import { useState } from 'preact/hooks'
 import InviteFriendsModal from 'components/Modals/InviteFriendsModal'
 import TaskUi from 'components/Tasks/TaskUi'
 import TwoUsers from 'components/icons/TwoUsers'
+import { useAtomValue } from 'jotai'
+import UserAtom from 'helpers/atoms/UserAtom'
 
 export default function () {
+  const user = useAtomValue(UserAtom)
   const [modalOpen, setModalOpen] = useState(false)
+
+  const left = user ? user.inviteLimit - user.invitedUsers : 0
 
   return (
     <div>
@@ -13,7 +18,7 @@ export default function () {
         rewardAmount={6000}
         onClick={() => setModalOpen(true)}
         taskText="Invite frens"
-        extraData="Per each, 20 left today."
+        extraData={`Per each, ${left} left.`}
       />
 
       <InviteFriendsModal showModal={modalOpen} setShowModal={setModalOpen} />

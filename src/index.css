@@ -43,10 +43,12 @@ html {
   user-select: none;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  min-height: 100vh;
 }
 
 body {
   overflow: hidden;
+  min-height: 100vh;
 }
 
 /* Ton-Connect modal */

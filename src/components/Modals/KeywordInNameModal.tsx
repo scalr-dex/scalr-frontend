@@ -78,19 +78,19 @@ function ModalFooter() {
       <Button
         className="!rounded-full"
         onClick={onCopy}
-        buttonType={ButtonTypes.neutral}
+        buttonType={ButtonTypes.secondary}
         iconRight={<Copy />}
       >
         Copy and close the app
       </Button>
       <Button
-        buttonType={ButtonTypes.secondary}
+        buttonType={ButtonTypes.neutral}
         className="!rounded-full"
         isLoading={loading}
         onClick={onClick}
         iconRight={disabled ? <CheckCircle /> : null}
       >
-        {disabled ? 'Done' : 'Check 👀'}
+        {disabled ? 'Done' : 'Check task'}
       </Button>
     </div>
   )
