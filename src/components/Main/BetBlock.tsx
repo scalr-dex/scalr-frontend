@@ -10,14 +10,11 @@ import { BodyText } from 'components/Text'
 import { roundDurationMs } from 'helpers/atoms/priceHistoryAtom'
 import Timer from 'components/Main/Timer'
 import { GraphTokenValue } from 'type/TokenState'
-import formatUSA from 'helpers/formatters/formatUSA'
 import Points from 'components/Main/Points'
-import Battery from 'components/icons/Battery'
 import ButtonSmall from 'components/ButtonSmall'
 import Logo from 'components/icons/Logo'
 import { navigate } from 'wouter-preact/use-hash-location'
-import InviteFriendsModal from 'components/Modals/InviteFriendsModal'
-import EnergyInfoModal from 'components/Modals/EnergyInfoModal'
+import BetEnergy from 'components/Main/BetEnergy'
 
 export default function ({
   loading,
@@ -30,8 +27,6 @@ export default function ({
   const [userBet, setUserBet] = useAtom(userBetAtom)
   const [processingBet, setProcessingBet] = useState(false)
   const [betValue, setBetValue] = useState(0)
-  const [openEnergyModal, setOpenEnergyModal] = useState(false)
-  const [openFriendsModal, setOpenFriendsModal] = useState(false)
 
   const disabled =
     betValue <= 0 ||
@@ -80,12 +75,7 @@ export default function ({
         <Points amount={user?.balance} />
 
         <div className="flex flex-row gap-x-2.5 items-center">
-          <div className="flex flex-row gap-x-1 items-center text-white/50">
-            <Battery onClick={() => setOpenEnergyModal(true)} />
-            <BodyText className="text-sm font-semibold">
-              {user?.betEnergy || 0}
-            </BodyText>
-          </div>
+          <BetEnergy betEnergy={user?.betEnergy} />
           <ButtonSmall
             buttonType={ButtonTypes.secondary}
             iconRight={<Logo size={20} />}
@@ -100,7 +90,7 @@ export default function ({
         <div className="flex flex-col gap-y-2">
           <div className="flex flex-row items-center justify-between">
             <BodyText>
-              You bet <b>{formatUSA(userBet.amount)} pts</b>{' '}
+              You bet{' '}
               {userBet.direction ? (
                 <b className="text-error">DOWN</b>
               ) : (
@@ -130,15 +120,6 @@ export default function ({
           </Button>
         </div>
       )}
-
-      <EnergyInfoModal
-        showModal={openEnergyModal}
-        setShowModal={setOpenEnergyModal}
-      />
-      <InviteFriendsModal
-        showModal={openFriendsModal}
-        setShowModal={setOpenFriendsModal}
-      />
     </div>
   )
 }

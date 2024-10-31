@@ -41,7 +41,6 @@ export interface ClientUser {
 }
 
 export interface UserBet {
-  amount: number
   direction: BetDirection
 
   value: GraphTokenValue

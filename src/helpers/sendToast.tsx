@@ -3,8 +3,8 @@ import { toast } from 'react-toastify'
 import { sadConfetti, successConfetti } from 'helpers/shootConfetti'
 import { initHapticFeedback } from '@telegram-apps/sdk-react'
 import { readAtom, writeAtom } from 'helpers/atoms/atomStore'
-import { showZeroBalanceModal } from 'helpers/atoms/UserStates'
 import UserAtom from 'helpers/atoms/UserAtom'
+import { showZeroEnergyModal } from 'helpers/atoms/UserStates'
 
 export default function balanceChangeToast(delta: number, lost: boolean) {
   const haptic = initHapticFeedback()
@@ -12,12 +12,12 @@ export default function balanceChangeToast(delta: number, lost: boolean) {
 
   toast(() => <BalanceChangeToast delta={delta} lost={lost} />)
 
+  if (!readAtom(UserAtom)?.betEnergy) {
+    writeAtom(showZeroEnergyModal, true)
+  }
+
   if (lost) {
-    if (!readAtom(UserAtom)?.balance) {
-      writeAtom(showZeroBalanceModal, true)
-    } else {
-      void sadConfetti()
-    }
+    void sadConfetti()
   } else {
     void successConfetti()
   }

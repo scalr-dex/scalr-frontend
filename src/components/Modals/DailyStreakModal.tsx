@@ -66,6 +66,8 @@ function ModalFooter() {
             }
           : null
       )
+
+      setTime(dayjs(last_login_date).endOf('day').diff(dayjs(), 'seconds'))
     } catch (e) {
       handleError({ e })
     } finally {
@@ -73,15 +75,17 @@ function ModalFooter() {
     }
   }, [setUser])
 
+  const disabled = time > 0
+
   return (
     <Button
       buttonType={ButtonTypes.secondary}
       className="!rounded-full"
       onClick={onClick}
       isLoading={loading}
-      disabled={time > 0}
+      disabled={disabled}
     >
-      {time ? dayjs({ seconds: time }).format('HH:mm:ss') : 'Continue'}
+      {disabled ? dayjs({ seconds: time }).format('HH:mm:ss') : 'Continue'}
     </Button>
   )
 }
