@@ -1,3 +1,3 @@
-export default function ({ src }: { src: string }) {
-  return <img src={src} className="rounded-sm" />
+export default function ({ src }: { src?: string | undefined }) {
+  return <img src={src} className="rounded-md" />
 }

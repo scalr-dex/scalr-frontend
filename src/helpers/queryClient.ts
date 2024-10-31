@@ -7,6 +7,7 @@ export async function invalidateQuery(queryKey: QueryKeys) {
 }
 
 export enum QueryKeys {
+  dailyStreak,
   userTasks,
   leaderBoard,
   user,

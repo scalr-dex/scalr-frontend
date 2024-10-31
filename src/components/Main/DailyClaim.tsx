@@ -1,12 +1,9 @@
 import ButtonSmall from 'components/ButtonSmall'
 import dayjs from 'dayjs'
-import claimDailyReward from 'helpers/api/dailyReward'
 import { useCallback, useState } from 'preact/hooks'
 import objectSupport from 'dayjs/plugin/objectSupport'
 import ButtonTypes from 'type/Button'
-import { useAtom, useSetAtom } from 'jotai'
-import UserAtom, { timeToRewardAtom } from 'helpers/atoms/UserAtom'
-import TrackerEvents from 'type/TrackerEvents'
+import { useAtom } from 'jotai'
 import formatUSA from 'helpers/formatters/formatUSA'
 import ScalrCoin from 'components/icons/coins/ScalrCoin'
 import Logo from 'components/icons/Logo'
@@ -15,32 +12,15 @@ import ClaimTimeoutModal from 'components/Modals/ClaimTimeoutModal'
 import InviteFriendsModal from 'components/Modals/InviteFriendsModal'
 import { showZeroBalanceModal } from 'helpers/atoms/UserStates'
 import ZeroBalanceModal from 'components/Modals/ZeroBalanceModal'
-import { track } from 'helpers/api/analytics'
+import useTimeToReward from 'helpers/hooks/useTimeToReward'
 
 dayjs.extend(objectSupport)
 
 export default function ({ claimAmount }: { claimAmount: number | undefined }) {
-  const setUser = useSetAtom(UserAtom)
-  const [timeToReward, setTimeToReward] = useAtom(timeToRewardAtom)
-  const [loading, setLoading] = useState(false)
+  const { canClaim, loading, onClaimClick, seconds } = useTimeToReward()
   const [showModal, setShowModal] = useState(false)
   const [friendsModal, setShowFriendsModal] = useState(false)
   const [showZeroBalance, setShowZeroBalance] = useAtom(showZeroBalanceModal)
-
-  const seconds = dayjs(timeToReward).diff(dayjs(), 'seconds')
-  const canClaim = seconds < 0
-
-  const onClaimClick = useCallback(async () => {
-    setLoading(true)
-    const newTime = await claimDailyReward()
-    if (newTime) setTimeToReward(newTime)
-
-    setUser((prev) => (prev ? { ...prev, boosts: prev.boosts + 1 } : null))
-
-    track(TrackerEvents.claimDailyReward)
-
-    setLoading(false)
-  }, [setTimeToReward, setUser])
 
   const onTimeoutClick = useCallback(() => {
     setShowModal(true)

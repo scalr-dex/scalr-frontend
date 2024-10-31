@@ -1,7 +1,7 @@
 import Telegram from 'components/icons/socials/Telegram'
 import X from 'components/icons/socials/X'
+import WalletPlus from 'components/icons/WalletPlus'
 import TaskIcon from 'components/Tasks/TaskIcon'
-import { JSX } from 'preact/jsx-runtime'
 import ButtonTypes from 'type/Button'
 
 export type TaskStatus = 'NotStarted' | 'ReadyToClaim' | 'Claimed'
@@ -18,47 +18,67 @@ export default interface UserTask {
   canClaimAt?: number | undefined
 }
 
-export const iconNumberToIcon = {
-  0: <span className="font-bold">👀</span>, // ID reserved for ads
-  1: <Telegram />,
-  2: <X />,
-  3: <TaskIcon src="img/collabs/cyberFi.png" />,
-  4: <TaskIcon src="img/collabs/dormint.jpg" />,
-  5: <TaskIcon src="img/collabs/bro_logo.jpg" />,
-  6: <TaskIcon src="img/collabs/kolobok.jpg" />,
-  7: <TaskIcon src="img/collabs/makefrens_logo.jpg" />,
-  8: <TaskIcon src="img/collabs/arenagames_logo.png" />,
-  9: <TaskIcon src="img/collabs/kekokiller_logo.jpg" />,
-  10: <TaskIcon src="img/collabs/tappy_logo.jpg" />,
-  11: <TaskIcon src="img/collabs/resolv_logo.jpg" />,
-  12: <TaskIcon src="img/collabs/habit_logo.jpg" />,
-  13: <TaskIcon src="img/collabs/electionwars_logo.jpg" />,
-  14: <TaskIcon src="img/collabs/hamsterrepublic_logo.jpg" />,
-  15: <TaskIcon src="img/collabs/farmton_logo.jpg" />,
-  16: <TaskIcon src="img/collabs/soratopia_logo.png" />,
-  17: <TaskIcon src="img/collabs/monkeys_logo.jpg" />,
-  18: <TaskIcon src="img/collabs/shieldeum_logo.png" />,
-  19: <TaskIcon src="img/collabs/tonchi_logo.jpg" />,
-  20: <TaskIcon src="img/collabs/beambot_logo.jpg" />,
-  21: <TaskIcon src="img/collabs/gtap_logo.jpg" />,
-  22: <TaskIcon src="img/collabs/starduck_logo.jpg" />,
-  23: <TaskIcon src="img/collabs/greencoin_logo.jpeg" />,
-  24: <TaskIcon src="img/collabs/moondrop_logo.png" />,
-  25: <TaskIcon src="img/collabs/happyfarmer_logo.jpg" />,
-  26: <TaskIcon src="img/collabs/Easycake_logo.jpg" />,
-  27: <TaskIcon src="img/collabs/Filmtaptap_logo.jpg" />,
-  28: <TaskIcon src="img/collabs/Starlight_logo.jpg" />,
-  29: <TaskIcon src="img/collabs/Trumpfight_logo.jpg" />,
-  30: <TaskIcon src="img/collabs/move_logo.jpg" />,
-  31: <TaskIcon src="img/collabs/meai_logo.jpg" />,
-  32: <TaskIcon src="img/collabs/politicalwar_logo.jpg" />,
-  33: <TaskIcon src="img/collabs/alfa.jpg" />,
-  34: <TaskIcon src="img/collabs/clockiechaos_logo.jpg" />,
-  35: <TaskIcon src="img/collabs/eggdrop_logo.jpg" />,
-  36: <TaskIcon src="img/collabs/cartparty.jpg" />,
-  37: <TaskIcon src="img/collabs/p4l_logo.jpg" />,
-  38: <TaskIcon src="img/collabs/hive_logo.jpg" />,
-} as { [num: number]: JSX.Element }
+export const iconNumberToComponent = (id: number) => {
+  if (id === -2) return <span>⛰️</span>
+  if (id === -1) return <WalletPlus />
+  if (id === 0) return <span>👀</span>
+  if (id === 1)
+    return (
+      <div className="w-full h-full">
+        <Telegram />
+      </div>
+    )
+  if (id === 2)
+    return (
+      <div className="w-full h-full">
+        <X />
+      </div>
+    )
+
+  return <TaskIcon src={iconNumberToSrc[id]} />
+}
+
+export const iconNumberToSrc = {
+  0: '', // ID reserved for ads
+  1: '',
+  2: '',
+  3: 'img/collabs/cyberFi.png',
+  4: 'img/collabs/dormint.jpg',
+  5: 'img/collabs/bro_logo.jpg',
+  6: 'img/collabs/kolobok.jpg',
+  7: 'img/collabs/makefrens_logo.jpg',
+  8: 'img/collabs/arenagames_logo.png',
+  9: 'img/collabs/kekokiller_logo.jpg',
+  10: 'img/collabs/tappy_logo.jpg',
+  11: 'img/collabs/resolv_logo.jpg',
+  12: 'img/collabs/habit_logo.jpg',
+  13: 'img/collabs/electionwars_logo.jpg',
+  14: 'img/collabs/hamsterrepublic_logo.jpg',
+  15: 'img/collabs/farmton_logo.jpg',
+  16: 'img/collabs/soratopia_logo.png',
+  17: 'img/collabs/monkeys_logo.jpg',
+  18: 'img/collabs/shieldeum_logo.png',
+  19: 'img/collabs/tonchi_logo.jpg',
+  20: 'img/collabs/beambot_logo.jpg',
+  21: 'img/collabs/gtap_logo.jpg',
+  22: 'img/collabs/starduck_logo.jpg',
+  23: 'img/collabs/greencoin_logo.jpeg',
+  24: 'img/collabs/moondrop_logo.png',
+  25: 'img/collabs/happyfarmer_logo.jpg',
+  26: 'img/collabs/Easycake_logo.jpg',
+  27: 'img/collabs/Filmtaptap_logo.jpg',
+  28: 'img/collabs/Starlight_logo.jpg',
+  29: 'img/collabs/Trumpfight_logo.jpg',
+  30: 'img/collabs/move_logo.jpg',
+  31: 'img/collabs/meai_logo.jpg',
+  32: 'img/collabs/politicalwar_logo.jpg',
+  33: 'img/collabs/alfa.jpg',
+  34: 'img/collabs/clockiechaos_logo.jpg',
+  35: 'img/collabs/eggdrop_logo.jpg',
+  36: 'img/collabs/cartparty.jpg',
+  37: 'img/collabs/p4l_logo.jpg',
+  38: 'img/collabs/hive_logo.jpg',
+} as { [id: number]: string }
 
 export const taskStatusToButtonType = {
   NotStarted: ButtonTypes.secondary,

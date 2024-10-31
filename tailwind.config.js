@@ -110,6 +110,7 @@ module.exports = {
         alt: '#FFE792',
         'alt-hover': '#d9c47c',
         'alt-active': '#baa96b',
+        'alt-dark': '#FF9341',
 
         'white-16': '#ffffff16',
         skelton: '#DDDDDD60',

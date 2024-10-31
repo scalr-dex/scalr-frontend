@@ -3,8 +3,7 @@ import UserAtom from 'helpers/atoms/UserAtom'
 import useAdsgram from 'helpers/hooks/useAdsgram'
 import { useAtom } from 'jotai'
 import { useCallback } from 'preact/hooks'
-import ButtonTypes from 'type/Button'
-import { iconNumberToIcon } from 'type/UserTask'
+import { iconNumberToComponent } from 'type/UserTask'
 
 export default function () {
   const [user, setUser] = useAtom(UserAtom)
@@ -18,15 +17,12 @@ export default function () {
 
   return (
     <TaskUi
-      iconLeft={iconNumberToIcon[0]}
-      taskText={`Watch short video (${user?.remainingAds} left)`}
-      rewardAmount={hasAds ? 10000 : <span>Come back tomorrow</span>}
-      buttonType={ButtonTypes.accent}
+      icon={iconNumberToComponent(0)}
+      taskText="Watch short video"
+      rewardAmount={10000}
       onClick={showAd}
+      extraData={`Per each. ${user?.remainingAds} left today.`}
       disabled={!hasAds}
-      allowDisabledClick={false}
-    >
-      Watch
-    </TaskUi>
+    />
   )
 }

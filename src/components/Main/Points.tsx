@@ -13,7 +13,7 @@ export default function ({ amount = 0 }: { amount?: number | undefined }) {
   const gap = amount >= 100000000 ? 'gap-x-1.5' : 'gap-x-2'
 
   return (
-    <div className={`flex flex-row items-center container ${gap}`}>
+    <div className={`flex flex-row items-center ${gap}`}>
       <ScalrCoin size={28} />
       <CountUp
         end={amount}

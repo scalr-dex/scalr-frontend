@@ -1,6 +1,4 @@
 import { useQuery } from '@tanstack/react-query'
-import Logo from 'components/icons/Logo'
-import { AccentText, Header2 } from 'components/Text'
 import InviteFriends from 'components/Tasks/InviteFriends'
 import TaskBlock from 'components/Tasks/TaskBlock'
 import TaskSkeleton from 'components/Tasks/TaskSkeleton'
@@ -8,13 +6,17 @@ import { getTasks } from 'helpers/api/userTasks'
 import { QueryKeys } from 'helpers/queryClient'
 import { useCallback } from 'preact/hooks'
 import UserTask from 'type/UserTask'
-import { useAutoAnimate } from '@formkit/auto-animate/react'
 import sortTasks from 'helpers/sortTasks'
-import AdBlock from 'components/Tasks/AdBlock'
 import FooterSafeArea from 'components/FooterSafeArea'
+import Points from 'components/Main/Points'
+import { useAtomValue } from 'jotai'
+import UserAtom from 'helpers/atoms/UserAtom'
+import TaskSection from 'components/Tasks/TaskSection'
+import DailyTasks from 'components/Tasks/DailyTasks/index'
+import HorizontalCards from 'components/Tasks/HorizontalCards'
 
 export default function () {
-  const [parent] = useAutoAnimate()
+  const user = useAtomValue(UserAtom)
   const { data, refetch } = useQuery({
     queryKey: [QueryKeys.userTasks],
     queryFn: getTasks,
@@ -28,25 +30,25 @@ export default function () {
   )
 
   return (
-    <div className="flex flex-col flex-1 gap-y-8 px-4 my-4">
-      <div className="flex flex-col gap-y-2 w-full items-center text-center">
-        <Logo size={68} withBackground />
-        <Header2>Tasks available</Header2>
-        <AccentText>
-          Get rewarded instantly, and the reward will be added to your daily
-          claim.
-        </AccentText>
-        <AccentText className="text-white/50">
-          Complete tasks for the Scalr DEX airdrop distribution 👀
-        </AccentText>
+    <div className="flex flex-col flex-1 gap-y-8 px-4 my-4 overflow-x-clip">
+      <div className="flex flex-row justify-between">
+        <Points amount={user?.balance} />
       </div>
-      <InviteFriends />
-      <div className="flex flex-col gap-y-6" ref={parent}>
-        <AdBlock />
+
+      <HorizontalCards />
+
+      <TaskSection>
+        <InviteFriends />
+      </TaskSection>
+
+      <DailyTasks />
+
+      <TaskSection headerText="One-time tasks">
         {data
           ? data.sort(sortTasks).map(renderTask)
           : [...Array(5)].map(() => <TaskSkeleton />)}
-      </div>
+      </TaskSection>
+
       <FooterSafeArea />
     </div>
   )

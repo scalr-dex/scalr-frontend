@@ -8,13 +8,13 @@ const defaultFallback = (name: string) => (
 )
 
 export default function ({
-  name,
+  name = '0',
   imgUrl,
   fallback = defaultFallback,
   className = 'rounded-full bg-controls-tertiary-focus flex items-center justify-center',
   size = 8,
 }: {
-  name: string
+  name?: string | undefined
   imgUrl?: string | undefined
   fallback?: (name: string) => JSX.Element
   size?: number

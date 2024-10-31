@@ -43,7 +43,7 @@ export default function ({
       onClick={onClick}
       className={`flex flex-row gap-x-2 items-center justify-center w-full rounded-lg p-4 transition-colors font-semibold outline-none ${buttonStyles} ${className}`}
     >
-      {isLoading ? <Loader /> : content}
+      {isLoading ? <Loader size={24} /> : content}
     </button>
   )
 }

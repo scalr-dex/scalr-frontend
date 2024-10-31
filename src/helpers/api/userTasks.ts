@@ -6,17 +6,20 @@ import TrackerEvents from 'type/TrackerEvents'
 import { track } from 'helpers/api/analytics'
 import { clearTaskFails } from 'helpers/atoms/taskFailCounter'
 
+const tasksBackend = backendKy({ prefixUrlAppend: '/tasks' })
+
 export async function getTasks() {
   try {
     return await backendKy().get('tasks').json<UserTask[]>()
   } catch (e) {
     handleError({ e })
+    return []
   }
 }
 
 export async function markTaskDone(id: number) {
   try {
-    return await backendKy().post(`tasks/${id}`)
+    return await tasksBackend.post(String(id))
   } catch (e) {
     handleError({
       e,
@@ -27,9 +30,7 @@ export async function markTaskDone(id: number) {
 
 export async function checkTask(id: number) {
   try {
-    const res = await backendKy()
-      .post(`tasks/check/${id}`)
-      .json<{ ok: boolean }>()
+    const res = await tasksBackend.post(`check/${id}`).json<{ ok: boolean }>()
     if (res.ok) await markTaskDone(id)
     else
       handleError({
@@ -41,12 +42,13 @@ export async function checkTask(id: number) {
       e,
       toastMessage: 'Failed to check this task, please try again',
     })
+    return { ok: false }
   }
 }
 
 export async function claimTask(id: number) {
   try {
-    await backendKy().post(`tasks/claim/${id}`)
+    await tasksBackend.post(`claim/${id}`)
     clearTaskFails(id)
     void successConfetti()
     track(TrackerEvents.taskClaimed, id)

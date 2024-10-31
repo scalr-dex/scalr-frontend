@@ -92,7 +92,7 @@ function AppInner({ socket }: { socket: WebSocket }) {
             toastClassName="!bg-tertiary !rounded-xl !w-[96dvw] !ml-[2dvw] !shadow-super !top-4 !font-semibold"
             draggableDirection="y"
             hideProgressBar
-            limit={1}
+            limit={3}
             stacked
           />
         </Router>

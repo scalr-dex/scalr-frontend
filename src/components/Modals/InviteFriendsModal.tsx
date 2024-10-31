@@ -23,7 +23,7 @@ function ModalBody() {
           leftIcon={<Logo size={18} />}
           className="bg-tertiary !py-1 !px-1.5 !mx-1 -rotate-3"
         >
-          1,500
+          3,000
         </SpecialText>{' '}
         for each friend
       </p>
@@ -34,7 +34,7 @@ function ModalBody() {
           leftIcon={<Logo size={18} />}
           className="bg-special-gradient !py-0.5 !px-1.5 !mx-1 rotate-2"
         >
-          3,000
+          6,000
         </SpecialText>{' '}
         for each friend with Premium.
       </p>
@@ -99,7 +99,7 @@ function ModalFooter({ telegramId }: { telegramId: number }) {
       </Button>
       <Button
         onClick={onCopy}
-        buttonType={copied ? ButtonTypes.success : ButtonTypes.secondary}
+        buttonType={copied ? ButtonTypes.success : ButtonTypes.neutral}
         className="!rounded-full"
         iconRight={copied ? <CheckMark /> : <Copy />}
       >

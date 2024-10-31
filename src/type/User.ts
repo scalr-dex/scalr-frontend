@@ -14,6 +14,9 @@ export interface ServerUser {
   multiplier_count: number
   remaining_ads: number
   tasks_remaining: number
+  login_days: number
+  last_login_date: string
+  nickname_claim_available: boolean
 }
 
 export interface ClientUser {
@@ -23,12 +26,17 @@ export interface ClientUser {
   launchParams: LaunchParams
   tonAddress?: string
   username: string
+  firstName: string
+  lastName: string | undefined
   telegramId: number
   inviteLimit: number
   invitedUsers: number
   boosts: number
   remainingAds: number
   remainingTasks: number
+  loginDays: number
+  lastLoginDate: Date
+  nicknameClaimAvailable: boolean
 }
 
 export interface UserBet {

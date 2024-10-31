@@ -1,7 +1,7 @@
-import { CSSProperties } from 'react';
+import { CSSProperties } from 'react'
 export interface TonConnectButtonProps {
-    className?: string;
-    style?: CSSProperties;
+  className?: string
+  style?: CSSProperties
 }
-declare const _default: import("react").NamedExoticComponent<TonConnectButtonProps>;
-export default _default;
+declare const _default: import('react').NamedExoticComponent<TonConnectButtonProps>
+export default _default
