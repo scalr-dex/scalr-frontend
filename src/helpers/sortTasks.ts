@@ -1,6 +1,6 @@
 import UserTask from 'type/UserTask'
 
-export const specialTasks = [7, 18]
+export const specialTasks = [1, 7]
 
 export default function (a: UserTask, b: UserTask) {
   const aIsSpecial = specialTasks.includes(a.TaskID)
