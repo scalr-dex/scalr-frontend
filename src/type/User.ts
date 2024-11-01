@@ -17,6 +17,7 @@ export interface ServerUser {
   login_days: number
   last_login_date: string
   nickname_claim_available: boolean
+  bet_energy_left: number
 }
 
 export interface ClientUser {
@@ -31,16 +32,15 @@ export interface ClientUser {
   telegramId: number
   inviteLimit: number
   invitedUsers: number
-  boosts: number
   remainingAds: number
   remainingTasks: number
   loginDays: number
   lastLoginDate: Date
   nicknameClaimAvailable: boolean
+  betEnergy: number
 }
 
 export interface UserBet {
-  amount: number
   direction: BetDirection
 
   value: GraphTokenValue

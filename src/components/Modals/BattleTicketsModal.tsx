@@ -1,5 +1,5 @@
 import Button from 'components/Button'
-import { Header3 } from 'components/Text'
+import { BodyText, Header3 } from 'components/Text'
 import DefaultModal from 'components/Modals/DefaultModal'
 import ButtonTypes from 'type/Button'
 import { DefaultModalProps } from 'type/Props'
@@ -7,19 +7,18 @@ import ImageAnimatedOnLoad from 'components/ImageAnimatedOnLoad'
 
 function ModalBody() {
   return (
-    <div className="flex flex-col gap-y-4 px-4">
-      <ImageAnimatedOnLoad
-        src="img/rocket-halftone.png"
-        className="h-32 mx-auto"
-      />
-      <Header3>Scalr Win Multiplier 🚀</Header3>
-      <p>Daily Claim refill a Scalr Win Multiplier.</p>
-      <p>Click it to activate if available.</p>
-      <p>
-        Win up to x15 on your next bet. If you lose, only the regular amount is
-        lost 🤑
-      </p>
-    </div>
+    <>
+      <ImageAnimatedOnLoad src="vid/utya-pair.gif" forModal />
+      <Header3 className="text-center px-4">Battle Tickets</Header3>
+      <BodyText className="text-center px-4">
+        <p>Your Battle Tickets are on the way! 🎟️</p>
+        <br />
+        <p>
+          Soon, you’ll be able to view your ticket balance, acquire additional
+          tickets, and access more items.
+        </p>
+      </BodyText>
+    </>
   )
 }
 
@@ -29,9 +28,8 @@ function ModalFooter({ onClose }: { onClose: () => void }) {
       buttonType={ButtonTypes.secondary}
       className="!rounded-full"
       onClick={onClose}
-      haptic={false}
     >
-      OMG
+      🫡 Will wait
     </Button>
   )
 }

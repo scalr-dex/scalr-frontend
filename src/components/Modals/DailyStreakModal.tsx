@@ -4,14 +4,18 @@ import DefaultModal from 'components/Modals/DefaultModal'
 import ButtonTypes from 'type/Button'
 import { DefaultModalProps } from 'type/Props'
 import UserAtom from 'helpers/atoms/UserAtom'
-import { useAtom, useAtomValue } from 'jotai'
-import { useCallback, useState } from 'preact/hooks'
+import { useAtom, useAtomValue, useSetAtom } from 'jotai'
+import { useCallback, useEffect, useState } from 'preact/hooks'
 import { getDailyStreak } from 'helpers/api/dailyReward'
 import handleError from 'helpers/handleError'
 import dayjs from 'dayjs'
 import useCountDown from 'helpers/hooks/useCountDown'
 import ImageAnimatedOnLoad from 'components/ImageAnimatedOnLoad'
 import { AnimatedCounter } from 'react-animated-counter'
+import didOnboardAtom, {
+  onboardedS2Atom,
+  showDailyStreakModal,
+} from 'helpers/atoms/UserStates'
 
 function ModalBody() {
   const user = useAtomValue(UserAtom)
@@ -20,10 +24,7 @@ function ModalBody() {
 
   return (
     <>
-      <ImageAnimatedOnLoad
-        src="img/utya-burn.png"
-        className="h-44 self-center"
-      />
+      <ImageAnimatedOnLoad src="img/utya-burn.png" forModal />
 
       <div className="flex flex-col items-center justify-center gap-y-5">
         <AnimatedCounter
@@ -39,7 +40,7 @@ function ModalBody() {
         <Header3 className="text-alt-dark">
           day{loginDays === 1 ? '' : 's'} streak!
         </Header3>
-        <BodyText className="text-balance px-4">
+        <BodyText className="text-balance text-center px-4">
           Open Scalr each day to earn a streak reward.
         </BodyText>
       </div>
@@ -48,10 +49,13 @@ function ModalBody() {
 }
 
 function ModalFooter() {
+  const setModalOpen = useSetAtom(showDailyStreakModal)
+  const didOnboard = useAtomValue(didOnboardAtom)
+  const onboardedS2 = useAtomValue(onboardedS2Atom)
   const [loading, setLoading] = useState(false)
   const [user, setUser] = useAtom(UserAtom)
   const [time, setTime] = useState(
-    dayjs(user?.lastLoginDate).endOf('day').diff(dayjs(), 'seconds')
+    dayjs(user?.lastLoginDate).utc().endOf('day').diff(dayjs().utc(), 'seconds')
   )
 
   useCountDown(setTime)
@@ -69,6 +73,10 @@ function ModalFooter() {
             }
           : null
       )
+
+      setTime(
+        dayjs(last_login_date).utc().endOf('day').diff(dayjs().utc(), 'seconds')
+      )
     } catch (e) {
       handleError({ e })
     } finally {
@@ -76,15 +84,23 @@ function ModalFooter() {
     }
   }, [setUser])
 
+  const disabled = time > 0
+
+  useEffect(() => {
+    if (disabled || !onboardedS2 || !didOnboard) return
+    setModalOpen(true)
+    setTimeout(onClick, 300)
+  }, [disabled, setModalOpen, onClick, didOnboard, onboardedS2])
+
   return (
     <Button
       buttonType={ButtonTypes.secondary}
       className="!rounded-full"
       onClick={onClick}
       isLoading={loading}
-      disabled={time > 0}
+      disabled={disabled}
     >
-      {time ? dayjs({ seconds: time }).format('HH:mm:ss') : 'Continue'}
+      {disabled ? dayjs({ seconds: time }).format('HH:mm:ss') : 'Continue'}
     </Button>
   )
 }

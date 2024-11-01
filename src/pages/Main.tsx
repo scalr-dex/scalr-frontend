@@ -1,11 +1,17 @@
-import BetBlock from 'components/Main/BetBlock'
 import Chart from 'components/Main/Chart'
 import TokenPrice from 'components/Main/TokenPrice'
-import { useAtomValue } from 'jotai'
+import { useAtom, useAtomValue, useSetAtom } from 'jotai'
 import priceHistoryAtom from 'helpers/atoms/priceHistoryAtom'
 import FooterSafeArea from 'components/FooterSafeArea'
+import BetBlock from 'components/Main/BetBlock'
+import Season2Modal from 'components/Modals/Season2Modal'
+import { onboardedS2Atom, showDailyStreakModal } from 'helpers/atoms/UserStates'
+import SeasonStats from 'components/Modals/SeasonStats'
+import { useState } from 'preact/hooks'
+import useImagePreloader from 'helpers/hooks/useImagePreload'
+import LoaderFullPage from 'components/LoaderFullPage'
 
-export default function () {
+function InnerMain() {
   const data = useAtomValue(priceHistoryAtom)
 
   const lastIndex = data.length - 1
@@ -14,11 +20,43 @@ export default function () {
   const loading = !data.length
 
   return (
-    <div className="flex flex-col min-h-screen">
+    <>
       <TokenPrice price={lastValue?.[1]} />
       <Chart data={data} loading={loading} />
       <BetBlock loading={loading} roundStart={lastValue} />
       <FooterSafeArea />
+    </>
+  )
+}
+
+const mainPreloadList = ['img/season2.png', 'img/utya-win.png']
+
+export default function () {
+  const setDailyStreakModal = useSetAtom(showDailyStreakModal)
+  const [onboardedS2, setOnboardedS2] = useAtom(onboardedS2Atom)
+  const [showS2Modal, setShowS2Modal] = useState(!onboardedS2)
+  const [openStatsModal, setOpenStatsModal] = useState(false)
+  const { imagesPreloaded } = useImagePreloader(mainPreloadList)
+
+  if (!imagesPreloaded) return <LoaderFullPage />
+
+  return (
+    <div className="flex flex-col h-full">
+      <InnerMain />
+
+      <Season2Modal
+        showModal={showS2Modal}
+        setShowModal={setShowS2Modal}
+        onCloseCallback={() => setTimeout(() => setOpenStatsModal(true), 200)}
+      />
+      <SeasonStats
+        showModal={openStatsModal}
+        setShowModal={setOpenStatsModal}
+        onCloseCallback={() => {
+          setOnboardedS2(false)
+          setTimeout(() => setDailyStreakModal(true), 200)
+        }}
+      />
     </div>
   )
 }

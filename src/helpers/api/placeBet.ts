@@ -4,24 +4,14 @@ import BetDirection from 'type/BetDirection'
 import TrackerEvents from 'type/TrackerEvents'
 import { track } from 'helpers/api/analytics'
 
-export default async function ({
-  amount,
-  direction,
-  shouldBoost,
-}: {
-  amount: number
-  direction: BetDirection
-  shouldBoost: boolean
-}) {
+export default async function ({ direction }: { direction: BetDirection }) {
   try {
     const json = {
-      amount: String(amount),
       direction: BetDirection[direction],
-      multiplier_enabled: shouldBoost,
     }
 
     await backendKy().post('bet/v2', { json })
-    track(TrackerEvents.placeBet, amount, BetDirection[direction])
+    track(TrackerEvents.placeBet, direction)
     return true
   } catch (e) {
     handleError({ e, toastMessage: 'Failed to place a bet 😥' })

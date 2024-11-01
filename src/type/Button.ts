@@ -1,6 +1,7 @@
 import { ImpactHapticFeedbackStyle } from '@telegram-apps/sdk-react'
 import { ComponentChildren } from 'preact'
 import { JSX } from 'preact/jsx-runtime'
+import { ClassName } from 'type/Props'
 
 enum ButtonTypes {
   success,
@@ -23,6 +24,7 @@ export interface ButtonProps extends JSX.HTMLAttributes<HTMLButtonElement> {
   disabled?: boolean | undefined
   allowDisabledClick?: boolean | undefined
   haptic?: ImpactHapticFeedbackStyle | false
+  contentClassName?: ClassName
 }
 
 export const buttonClassNames = (disabled?: boolean) => ({

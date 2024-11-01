@@ -1,7 +1,7 @@
 import GetHelp from 'components/icons/GetHelp'
 import { Header3 } from 'components/Text'
 import UserList from 'components/LeaderBoards/UserList'
-import YourEpochVolume from 'components/LeaderBoards/YourEpochVolume'
+import YourPoints from 'components/LeaderBoards/YourPoints'
 import YourPosition from 'components/LeaderBoards/YourPosition'
 import LeaderBoardsFaqModal from 'components/Modals/LeaderBoardsFaqModal'
 import UserAtom from 'helpers/atoms/UserAtom'
@@ -18,8 +18,8 @@ export default function () {
   const loading = status === 'pending'
 
   return (
-    <div className="flex flex-col px-4 gap-y-10">
-      <YourEpochVolume points={data?.user?.points} endTime={data?.endTime} />
+    <div className="flex flex-col mt-2 px-4 gap-y-10">
+      <YourPoints points={data?.user?.points} />
 
       <div className="flex flex-row items-center gap-x-1">
         <Header3>Leaderboard</Header3>

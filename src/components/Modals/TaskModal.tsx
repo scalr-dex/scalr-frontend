@@ -24,10 +24,11 @@ function ModalBody({ IconURL, IconNumber, RewardAmount, Name }: UserTask) {
 
   return (
     <>
-      <div className="flex flex-col items-center gap-y-4 px-4 h-44 w-44 rounded-lg object-cover self-center ">
+      <div className="flex flex-col items-center gap-y-4 rounded-lg object-cover self-center ">
         {imageSrc ? (
           <ImageAnimatedOnLoad
-            className="h-44 w-44 rounded-lg object-cover self-center"
+            forModal
+            className="w-44 object-cover"
             src={imageSrc}
           />
         ) : (

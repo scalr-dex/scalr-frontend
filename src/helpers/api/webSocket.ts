@@ -6,10 +6,6 @@ export function getWebsocketTicket() {
   return backendKy().get('ticket').json<{ ticket: string }>()
 }
 
-function getBetLostFromWsEventData(data: EventData) {
-  if (!Array.isArray(data) && data._ === 'l') return data
-}
-
 function getBalanceChangeFromWsEventData(data: EventData) {
   if (!Array.isArray(data) && data._ === 'b')
     return { balance: Number(data.b), event: data.e, delta: data.d }
@@ -48,9 +44,6 @@ export default function ({ data }: { data: string }) {
 
   const price = getPriceChangeFromWsEventData(parsed)
   if (price) return { price }
-
-  const lost = getBetLostFromWsEventData(parsed)
-  if (lost) return { lost }
 
   const claim = getClaimFromWsEventData(parsed)
   if (claim) return { claim }

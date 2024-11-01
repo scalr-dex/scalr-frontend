@@ -1,6 +1,5 @@
 import { atom } from 'jotai'
 import { atomWithStorage } from 'jotai/utils'
-import BoostStates from 'type/BoostState'
 
 export const nameKeyword = '🌀SCALR'
 
@@ -8,5 +7,9 @@ export default atomWithStorage('didOnboard', false, undefined, {
   getOnInit: true,
 })
 
-export const showZeroBalanceModal = atom(false)
-export const boostStateAtom = atom(BoostStates.disabled)
+export const onboardedS2Atom = atomWithStorage('onboardedS2', true, undefined, {
+  getOnInit: true,
+})
+
+export const showZeroEnergyModal = atom(false)
+export const showDailyStreakModal = atom(false)

@@ -6148,16 +6148,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-range@npm:^1.10.0":
-  version: 1.10.0
-  resolution: "react-range@npm:1.10.0"
-  peerDependencies:
-    react: "*"
-    react-dom: "*"
-  checksum: 50dd2a7bdf011d74553a56f700da79d7a6cb9a45b31b719355dfb7331b124c364c59ae873d2f4b52b68aff8bf5869381f94fd63e1080e143c9892d1b95e33723
-  languageName: node
-  linkType: hard
-
 "react-remove-scroll-bar@npm:^2.3.6":
   version: 2.3.6
   resolution: "react-remove-scroll-bar@npm:2.3.6"
@@ -6643,7 +6633,6 @@ __metadata:
     react-device-detect: ^2.2.3
     react-ga4: ^2.1.0
     react-pin-field: ^3.1.5
-    react-range: ^1.10.0
     react-toastify: ^10.0.5
     rollup-plugin-visualizer: ^5.12.0
     serve: ^14.2.3

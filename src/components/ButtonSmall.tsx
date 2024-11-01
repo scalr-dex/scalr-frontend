@@ -14,6 +14,7 @@ export default function ({
   disabled,
   allowDisabledClick,
   haptic = 'soft',
+  contentClassName,
   ...buttonProps
 }: ButtonProps) {
   const impact = useHapticFeedback()
@@ -29,7 +30,9 @@ export default function ({
   )
 
   const content = (
-    <div className="flex flex-row w-full items-center justify-center gap-x-1">
+    <div
+      className={`flex flex-row w-full items-center justify-center gap-x-1 ${contentClassName}`}
+    >
       {iconLeft}
       {children}
       {iconRight}

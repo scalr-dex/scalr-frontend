@@ -4,7 +4,7 @@ import TaskBlock from 'components/Tasks/TaskBlock'
 import TaskSkeleton from 'components/Tasks/TaskSkeleton'
 import { getTasks } from 'helpers/api/userTasks'
 import { QueryKeys } from 'helpers/queryClient'
-import { useCallback } from 'preact/hooks'
+import { useCallback, useState } from 'preact/hooks'
 import UserTask from 'type/UserTask'
 import sortTasks from 'helpers/sortTasks'
 import FooterSafeArea from 'components/FooterSafeArea'
@@ -14,8 +14,13 @@ import UserAtom from 'helpers/atoms/UserAtom'
 import TaskSection from 'components/Tasks/TaskSection'
 import DailyTasks from 'components/Tasks/DailyTasks/index'
 import HorizontalCards from 'components/Tasks/HorizontalCards'
+import DocumentPaper from 'components/icons/DocumentPaper'
+import SeasonStats from 'components/Modals/SeasonStats'
+import BattleTicketButton from 'components/BattleTicketButton'
+import DailyStreakButton from 'components/Tasks/DailyStreakButton'
 
 export default function () {
+  const [openStatsModal, setOpenStatsModal] = useState(false)
   const user = useAtomValue(UserAtom)
   const { data, refetch } = useQuery({
     queryKey: [QueryKeys.userTasks],
@@ -33,6 +38,11 @@ export default function () {
     <div className="flex flex-col flex-1 gap-y-8 px-4 my-4 overflow-x-clip">
       <div className="flex flex-row justify-between">
         <Points amount={user?.balance} />
+        <div className="flex flex-row gap-x-2 items-center">
+          <DocumentPaper onClick={() => setOpenStatsModal(true)} />
+          <DailyStreakButton />
+          <BattleTicketButton />
+        </div>
       </div>
 
       <HorizontalCards />
@@ -50,6 +60,11 @@ export default function () {
       </TaskSection>
 
       <FooterSafeArea />
+
+      <SeasonStats
+        showModal={openStatsModal}
+        setShowModal={setOpenStatsModal}
+      />
     </div>
   )
 }

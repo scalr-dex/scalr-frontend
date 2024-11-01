@@ -4,39 +4,46 @@ import DefaultModal from 'components/Modals/DefaultModal'
 import ButtonTypes from 'type/Button'
 import { DefaultModalProps } from 'type/Props'
 import { navigate } from 'wouter-preact/use-hash-location'
-import WatchFilled from 'components/icons/WatchFilled'
-import useAdsgram from 'helpers/hooks/useAdsgram'
 import ImageAnimatedOnLoad from 'components/ImageAnimatedOnLoad'
 
 function ModalBody() {
   return (
-    <div className="flex flex-col gap-y-4 px-4">
+    <div className="flex flex-col gap-y-4">
       <ImageAnimatedOnLoad src="img/utya-sad.png" className="h-28 mx-auto" />
-      <Header3>Oh no, you lost everything...</Header3>
-      <BodyText>
-        Get points by <span className="italic">completing tasks</span> and{' '}
-        <span className="italic">inviting friends.</span>
-      </BodyText>
-      <BodyText className="text-controls-tertiary-focus">
-        Claimed amounts count toward the $SCR airdrop distribution 👀
+      <Header3 className="text-center">Energy isn’t ready yet...</Header3>
+      <BodyText className="text-balance">
+        <p>You’ve maxed out your energy for today, nice work!</p>
+        <br />
+        <p>Come back tomorrow for a fresh boost.</p>
+        <br />
+        <p>
+          Meanwhile, there are other ways to stack points toward the $SCR
+          airdrop 👀
+        </p>
       </BodyText>
     </div>
   )
 }
 
-function ModalFooter({ onClose }: { onClose: () => void }) {
-  const showAd = useAdsgram({ onReward: onClose })
-
+function ModalFooter({
+  onClose,
+  setShowFriendsModal,
+}: {
+  onClose: () => void
+  setShowFriendsModal: (bool: boolean) => void
+}) {
   return (
     <div className="flex flex-col gap-y-4">
       <Button
         buttonType={ButtonTypes.secondary}
         className="!rounded-full"
-        onClick={showAd}
+        onClick={() => {
+          onClose()
+          setTimeout(() => setShowFriendsModal(true))
+        }}
         haptic={false}
-        iconRight={<WatchFilled />}
       >
-        Watch short video
+        Invite friends
       </Button>
       <Button
         buttonType={ButtonTypes.neutral}
@@ -53,12 +60,21 @@ function ModalFooter({ onClose }: { onClose: () => void }) {
   )
 }
 
-export default function (props: DefaultModalProps) {
+export default function (
+  props: DefaultModalProps & {
+    setShowFriendsModal: (bool: boolean) => void
+  }
+) {
   return (
     <DefaultModal
       {...props}
       body={ModalBody}
-      footer={(onClose) => <ModalFooter onClose={onClose} />}
+      footer={(onClose) => (
+        <ModalFooter
+          onClose={onClose}
+          setShowFriendsModal={props.setShowFriendsModal}
+        />
+      )}
     />
   )
 }

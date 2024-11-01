@@ -11,6 +11,7 @@ export enum QueryKeys {
   userTasks,
   leaderBoard,
   user,
+  genesis,
 }
 
 export default queryClient

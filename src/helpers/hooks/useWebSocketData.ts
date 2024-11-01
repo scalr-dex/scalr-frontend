@@ -16,7 +16,7 @@ export default function (socket: WebSocket) {
     if (!socket) return
 
     const update = (msg: { data: string }) => {
-      const { balance, lost, price, claim, bet } = analyzeMessage(msg)
+      const { balance, price, claim, bet } = analyzeMessage(msg)
 
       if (balance) {
         if (balance.balance !== undefined) {
@@ -25,16 +25,14 @@ export default function (socket: WebSocket) {
           )
         }
 
-        if (balance.event === 'BetWon') {
-          balanceChangeToast(balance.delta, false)
+        const betChange =
+          balance.event === 'BetWon' || balance.event === 'BetLost'
+        if (betChange) {
+          balanceChangeToast(balance.delta, betChange)
           setUserBet(null)
         }
       }
 
-      if (lost) {
-        balanceChangeToast(lost.l, true)
-        setUserBet(null)
-      }
       if (claim) {
         setUser((prev) =>
           prev ? { ...prev, canClaimAmount: claim.amount } : null

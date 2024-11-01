@@ -1,33 +1,35 @@
 import Button from 'components/Button'
-import { Header3, AccentText } from 'components/Text'
+import { Header3, BodyText } from 'components/Text'
 import DefaultModal from 'components/Modals/DefaultModal'
 import ButtonTypes from 'type/Button'
 import { DefaultModalProps } from 'type/Props'
+import ImageAnimatedOnLoad from 'components/ImageAnimatedOnLoad'
 
 function ModalBody() {
   return (
-    <>
-      <Header3>Scalr Leaderboard</Header3>
-      <AccentText>
-        <p>The leaderboard shows your all-time points total.</p>
+    <div className="flex flex-col gap-y-4 text-center">
+      <ImageAnimatedOnLoad src="img/utya-energy.png" forModal />
+      <Header3>Bet Energy</Header3>
+      <BodyText className="text-balance">
+        <p>You have daily energy for bets, refreshing every 24 hours. </p>
         <br />
         <p>
-          Keep climbing the ranks to secure a bigger share of the airdrop
-          rewards! 💪
+          Each bet costs one Energy. Win to get rewards; lose, and the energy is
+          burned.
         </p>
-      </AccentText>
-    </>
+      </BodyText>
+    </div>
   )
 }
 
 function ModalFooter({ onClose }: { onClose: () => void }) {
   return (
     <Button
-      onClick={onClose}
       buttonType={ButtonTypes.secondary}
       className="!rounded-full"
+      onClick={onClose}
     >
-      Got it
+      🫡 Understood
     </Button>
   )
 }
