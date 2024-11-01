@@ -33,7 +33,8 @@ const mainPreloadList = ['img/season2.png', 'img/utya-win.png']
 
 export default function () {
   const setDailyStreakModal = useSetAtom(showDailyStreakModal)
-  const [showS2Modal, setShowS2Modal] = useAtom(onboardSeason2)
+  const [onboardedS2, setOnboardedS2] = useAtom(onboardSeason2)
+  const [showS2Modal, setShowS2Modal] = useState(onboardedS2)
   const [openStatsModal, setOpenStatsModal] = useState(false)
   const { imagesPreloaded } = useImagePreloader(mainPreloadList)
 
@@ -51,7 +52,10 @@ export default function () {
       <SeasonStats
         showModal={openStatsModal}
         setShowModal={setOpenStatsModal}
-        onCloseCallback={() => setTimeout(() => setDailyStreakModal(true), 200)}
+        onCloseCallback={() => {
+          setOnboardedS2(true)
+          setTimeout(() => setDailyStreakModal(true), 200)
+        }}
       />
     </div>
   )

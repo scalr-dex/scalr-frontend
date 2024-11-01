@@ -4,7 +4,7 @@ import DefaultModal from 'components/Modals/DefaultModal'
 import ButtonTypes from 'type/Button'
 import { DefaultModalProps } from 'type/Props'
 import UserAtom from 'helpers/atoms/UserAtom'
-import { useAtom, useAtomValue } from 'jotai'
+import { useAtom, useAtomValue, useSetAtom } from 'jotai'
 import { useCallback, useEffect, useState } from 'preact/hooks'
 import { getDailyStreak } from 'helpers/api/dailyReward'
 import handleError from 'helpers/handleError'
@@ -12,7 +12,10 @@ import dayjs from 'dayjs'
 import useCountDown from 'helpers/hooks/useCountDown'
 import ImageAnimatedOnLoad from 'components/ImageAnimatedOnLoad'
 import { AnimatedCounter } from 'react-animated-counter'
-import { showDailyStreakModal } from 'helpers/atoms/UserStates'
+import didOnboardAtom, {
+  onboardSeason2,
+  showDailyStreakModal,
+} from 'helpers/atoms/UserStates'
 
 function ModalBody() {
   const user = useAtomValue(UserAtom)
@@ -46,7 +49,9 @@ function ModalBody() {
 }
 
 function ModalFooter() {
-  const isModalOpen = useAtomValue(showDailyStreakModal)
+  const setModalOpen = useSetAtom(showDailyStreakModal)
+  const didOnboard = useAtomValue(didOnboardAtom)
+  const onboardedS2 = useAtomValue(onboardSeason2)
   const [loading, setLoading] = useState(false)
   const [user, setUser] = useAtom(UserAtom)
   const [time, setTime] = useState(
@@ -82,9 +87,10 @@ function ModalFooter() {
   const disabled = time > 0
 
   useEffect(() => {
-    if (!isModalOpen || disabled) return
+    if (disabled || !onboardedS2 || !didOnboard) return
+    setModalOpen(true)
     setTimeout(onClick, 200)
-  }, [disabled, isModalOpen, onClick])
+  }, [disabled, setModalOpen, onClick, onboardedS2, didOnboard])
 
   return (
     <Button
