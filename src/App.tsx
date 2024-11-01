@@ -14,7 +14,7 @@ import queryClient from 'helpers/queryClient'
 import AppStatus from 'type/AppStatus'
 import SplashScreen from 'components/SplashScreen'
 import { useAtomValue } from 'jotai'
-import didOnboardAtom from 'helpers/atoms/UserStates'
+import didOnboardAtom, { onboardedS2Atom } from 'helpers/atoms/UserStates'
 import useWebSocketData from 'helpers/hooks/useWebSocketData'
 import { lazy, Suspense } from 'preact/compat'
 import Loader from 'components/Loader'
@@ -32,6 +32,9 @@ function AppInner({ socket }: { socket: WebSocket }) {
   useWebSocketData(socket)
   const [parent] = useAutoAnimate()
   const didOnboard = useAtomValue(didOnboardAtom)
+  const onboardedS2 = useAtomValue(onboardedS2Atom)
+
+  const onboarded = didOnboard && onboardedS2
 
   return (
     <SDKProvider debug={env.DEV} acceptCustomStyles>
@@ -79,7 +82,7 @@ function AppInner({ socket }: { socket: WebSocket }) {
               <Route path="/404" component={NotFound} />
             </Switch>
           </div>
-          {didOnboard ? <BottomTabNavigator /> : null}
+          {onboarded ? <BottomTabNavigator /> : null}
           <ToastContainer
             draggable
             position="top-center"
