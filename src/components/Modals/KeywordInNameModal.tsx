@@ -21,7 +21,7 @@ function ModalBody() {
     <>
       <div className="flex flex-col items-center gap-y-4 px-4 h-44 w-44 rounded-lg object-cover self-center ">
         <span className="text-9xl leading-[1.05]">🌀</span>
-        <TaskRewardBlock rewardAmount={500} />
+        <TaskRewardBlock rewardAmount={2000} />
       </div>
       <Header2 className="px-4 text-balance">
         Add {nameKeyword} to your name
