@@ -7,14 +7,9 @@ export default atomWithStorage('didOnboard', false, undefined, {
   getOnInit: true,
 })
 
-export const onboardSeason2 = atomWithStorage(
-  'onboardSeason2',
-  true,
-  undefined,
-  {
-    getOnInit: true,
-  }
-)
+export const onboardedS2Atom = atomWithStorage('onboardedS2', true, undefined, {
+  getOnInit: true,
+})
 
 export const showZeroEnergyModal = atom(false)
 export const showDailyStreakModal = atom(false)

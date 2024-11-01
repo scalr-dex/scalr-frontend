@@ -13,7 +13,7 @@ import useCountDown from 'helpers/hooks/useCountDown'
 import ImageAnimatedOnLoad from 'components/ImageAnimatedOnLoad'
 import { AnimatedCounter } from 'react-animated-counter'
 import didOnboardAtom, {
-  onboardSeason2,
+  onboardedS2Atom,
   showDailyStreakModal,
 } from 'helpers/atoms/UserStates'
 
@@ -51,7 +51,7 @@ function ModalBody() {
 function ModalFooter() {
   const setModalOpen = useSetAtom(showDailyStreakModal)
   const didOnboard = useAtomValue(didOnboardAtom)
-  const shoulOnboardS2 = useAtomValue(onboardSeason2)
+  const onboardedS2 = useAtomValue(onboardedS2Atom)
   const [loading, setLoading] = useState(false)
   const [user, setUser] = useAtom(UserAtom)
   const [time, setTime] = useState(
@@ -87,10 +87,10 @@ function ModalFooter() {
   const disabled = time > 0
 
   useEffect(() => {
-    if (disabled || shoulOnboardS2 || !didOnboard) return
+    if (disabled || !onboardedS2 || !didOnboard) return
     setModalOpen(true)
     setTimeout(onClick, 300)
-  }, [disabled, setModalOpen, onClick, shoulOnboardS2, didOnboard])
+  }, [disabled, setModalOpen, onClick, didOnboard, onboardedS2])
 
   return (
     <Button
