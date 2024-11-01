@@ -5,6 +5,7 @@ import { toast } from 'react-toastify'
 import { ShowPromiseResult, AdController } from 'type/adsgram'
 
 export interface AdsgramHookParams {
+  rewardAmount: number
   blockId?: number
   onReward?: () => void
   onError?: (result: ShowPromiseResult) => void
@@ -14,13 +15,14 @@ export default function useAdsgram({
   blockId = env.VITE_ADSGRAM_BLOCK_ID,
   onReward,
   onError,
+  rewardAmount,
 }: AdsgramHookParams) {
   const AdControllerRef = useRef<AdController | undefined>(undefined)
 
   const reward = useCallback(() => {
     onReward?.()
-    toast.success('Nice, you got +10,000 pts 😎')
-  }, [onReward])
+    toast.success(`Nice, you got ${rewardAmount} pts 😎`)
+  }, [onReward, rewardAmount])
   const catchError = useCallback(
     (result: ShowPromiseResult) => {
       onError?.(result)
