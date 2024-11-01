@@ -27,8 +27,9 @@ export default function (socket: WebSocket) {
 
         const betChange =
           balance.event === 'BetWon' || balance.event === 'BetLost'
+
         if (betChange) {
-          balanceChangeToast(balance.delta, betChange)
+          balanceChangeToast(balance.delta, balance.event === 'BetLost')
           setUserBet(null)
         }
       }
