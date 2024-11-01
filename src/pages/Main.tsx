@@ -53,7 +53,7 @@ export default function () {
         showModal={openStatsModal}
         setShowModal={setOpenStatsModal}
         onCloseCallback={() => {
-          setOnboardedS2(false)
+          setOnboardedS2(true)
           setTimeout(() => setDailyStreakModal(true), 200)
         }}
       />
