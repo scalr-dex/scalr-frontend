@@ -89,7 +89,7 @@ function ModalFooter() {
   useEffect(() => {
     if (disabled || shoulOnboardS2 || !didOnboard) return
     setModalOpen(true)
-    setTimeout(onClick, 200)
+    setTimeout(onClick, 300)
   }, [disabled, setModalOpen, onClick, shoulOnboardS2, didOnboard])
 
   return (
