@@ -19,7 +19,7 @@ export default function () {
     <TaskUi
       icon={iconNumberToComponent(0)}
       taskText="Watch short video"
-      rewardAmount={10000}
+      rewardAmount={500}
       onClick={showAd}
       extraData={`Per each. ${user?.remainingAds} left today.`}
       disabled={!hasAds}
