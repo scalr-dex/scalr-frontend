@@ -12,7 +12,7 @@ export default function () {
       <TaskUi
         icon={iconNumberToComponent(-2)}
         taskText={`${nameKeyword} in name`}
-        rewardAmount={500}
+        rewardAmount={2000}
         onClick={() => setModalOpen(true)}
       />
       <KeywordInNameModal showModal={modalOpen} setShowModal={setModalOpen} />
