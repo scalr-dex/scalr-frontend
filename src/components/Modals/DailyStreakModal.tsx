@@ -51,7 +51,7 @@ function ModalBody() {
 function ModalFooter() {
   const setModalOpen = useSetAtom(showDailyStreakModal)
   const didOnboard = useAtomValue(didOnboardAtom)
-  const onboardedS2 = useAtomValue(onboardSeason2)
+  const shoulOnboardS2 = useAtomValue(onboardSeason2)
   const [loading, setLoading] = useState(false)
   const [user, setUser] = useAtom(UserAtom)
   const [time, setTime] = useState(
@@ -87,10 +87,10 @@ function ModalFooter() {
   const disabled = time > 0
 
   useEffect(() => {
-    if (disabled || !onboardedS2 || !didOnboard) return
+    if (disabled || shoulOnboardS2 || !didOnboard) return
     setModalOpen(true)
     setTimeout(onClick, 200)
-  }, [disabled, setModalOpen, onClick, onboardedS2, didOnboard])
+  }, [disabled, setModalOpen, onClick, shoulOnboardS2, didOnboard])
 
   return (
     <Button
