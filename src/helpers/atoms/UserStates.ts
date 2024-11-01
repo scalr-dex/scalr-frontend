@@ -17,3 +17,4 @@ export const onboardSeason2 = atomWithStorage(
 )
 
 export const showZeroEnergyModal = atom(false)
+export const showDailyStreakModal = atom(false)

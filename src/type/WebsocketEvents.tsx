@@ -1,7 +1,6 @@
 export type EventData =
   | EventDataPriceChange
   | EventDataBalanceChange
-  | EventDataBetLost
   | EventClaim
   | EventBet
 
@@ -15,7 +14,7 @@ export type EventDataPriceChange =
   | EventDataPriceChangeSingle
   | EventDataPriceChangeSingle[]
 
-export type BalanceChangeEvent = 'BetWon' | 'Claim'
+export type BalanceChangeEvent = 'BetWon' | 'Claim' | 'BetLost'
 
 export type EventDataBalanceChange = {
   _: 'b'
@@ -28,10 +27,6 @@ export type EventBet = {
   a: number // amount
   d: boolean // direction, false=short, true=long
   c: number // timestamp
-}
-export type EventDataBetLost = {
-  _: 'l'
-  l: number // lost amount
 }
 export type EventClaim = {
   _: 'c'

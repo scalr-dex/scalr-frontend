@@ -2,13 +2,13 @@ import ButtonSmall from 'components/ButtonSmall'
 import Fire from 'components/icons/Fire'
 import DailyStreakModal from 'components/Modals/DailyStreakModal'
 import UserAtom from 'helpers/atoms/UserAtom'
-import { useAtomValue } from 'jotai'
-import { useState } from 'preact/hooks'
+import { showDailyStreakModal } from 'helpers/atoms/UserStates'
+import { useAtom, useAtomValue } from 'jotai'
 import ButtonTypes from 'type/Button'
 
 export default function ({ small }: { small?: boolean }) {
-  const [openModal, setOpenModal] = useState(false)
   const user = useAtomValue(UserAtom)
+  const [openModal, setOpenModal] = useAtom(showDailyStreakModal)
 
   return (
     <>

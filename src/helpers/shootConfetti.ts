@@ -1,9 +1,8 @@
-import JSConfetti from 'js-confetti'
-
-const jsConfetti = new JSConfetti()
+import jsConfettiAtom from 'helpers/atoms/jsConfettiAtom'
+import { readAtom } from 'helpers/atoms/atomStore'
 
 export const successConfetti = () =>
-  jsConfetti.addConfetti({ confettiColors: ['#4374EC'] })
+  readAtom(jsConfettiAtom).addConfetti({ confettiColors: ['#4374EC'] })
 
 export const sadConfetti = () =>
-  jsConfetti.addConfetti({ emojis: ['😓', '📉', '🥀'] })
+  readAtom(jsConfettiAtom).addConfetti({ emojis: ['😓', '📉', '🥀'] })

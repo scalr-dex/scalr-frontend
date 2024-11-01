@@ -5,13 +5,14 @@ import ButtonTypes from 'type/Button'
 import { DefaultModalProps } from 'type/Props'
 import UserAtom from 'helpers/atoms/UserAtom'
 import { useAtom, useAtomValue } from 'jotai'
-import { useCallback, useState } from 'preact/hooks'
+import { useCallback, useEffect, useState } from 'preact/hooks'
 import { getDailyStreak } from 'helpers/api/dailyReward'
 import handleError from 'helpers/handleError'
 import dayjs from 'dayjs'
 import useCountDown from 'helpers/hooks/useCountDown'
 import ImageAnimatedOnLoad from 'components/ImageAnimatedOnLoad'
 import { AnimatedCounter } from 'react-animated-counter'
+import { showDailyStreakModal } from 'helpers/atoms/UserStates'
 
 function ModalBody() {
   const user = useAtomValue(UserAtom)
@@ -45,6 +46,7 @@ function ModalBody() {
 }
 
 function ModalFooter() {
+  const isModalOpen = useAtomValue(showDailyStreakModal)
   const [loading, setLoading] = useState(false)
   const [user, setUser] = useAtom(UserAtom)
   const [time, setTime] = useState(
@@ -78,6 +80,11 @@ function ModalFooter() {
   }, [setUser])
 
   const disabled = time > 0
+
+  useEffect(() => {
+    if (!isModalOpen || disabled) return
+    setTimeout(onClick, 200)
+  }, [disabled, isModalOpen, onClick])
 
   return (
     <Button
