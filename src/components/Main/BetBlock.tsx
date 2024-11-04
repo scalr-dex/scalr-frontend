@@ -15,7 +15,7 @@ import ButtonSmall from 'components/ButtonSmall'
 import Logo from 'components/icons/Logo'
 import { navigate } from 'wouter-preact/use-hash-location'
 import BetEnergy from 'components/Main/BetEnergy'
-import { showZeroEnergyModal } from 'helpers/atoms/UserStates'
+import modalsAtom, { AvailableModals } from 'helpers/atoms/modalsAtom'
 
 export default function ({
   loading,
@@ -27,7 +27,7 @@ export default function ({
   const [user, setUser] = useAtom(UserAtom)
   const [userBet, setUserBet] = useAtom(userBetAtom)
   const [processingBet, setProcessingBet] = useState(false)
-  const displayZeroEnergyModal = useSetAtom(showZeroEnergyModal)
+  const setModal = useSetAtom(modalsAtom)
 
   const disabled = loading || processingBet || !user?.balance
 
@@ -40,7 +40,7 @@ export default function ({
     async (direction: BetDirection) => {
       if (!roundStart || !user || !user.balance) return
       if (!user.betEnergy) {
-        displayZeroEnergyModal(true)
+        setModal(AvailableModals.betEnergyZero)
         return
       }
 
@@ -62,7 +62,7 @@ export default function ({
       })
       setTimeout(() => setUserBet(null), roundDurationMs)
     },
-    [roundStart, user, setUser, setUserBet, displayZeroEnergyModal]
+    [roundStart, user, setUser, setUserBet, setModal]
   )
 
   return (

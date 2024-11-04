@@ -8,14 +8,15 @@ export default function () {
 
   if (activeModal === null) return null
 
-  return modalToComponent[activeModal]({
+  return modalToComponent[activeModal].component({
     showModal: open,
     setShowModal: () => {
       setOpen(false)
+      // required for smooth open-close transitions
       setTimeout(() => {
         setActiveModal(null)
         setOpen(true)
-      }, 200)
+      }, 100)
     },
   })
 }

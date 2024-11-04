@@ -10,16 +10,14 @@ export default function ({ small }: { small?: boolean }) {
   const setOpenModal = useSetAtom(modalsAtom)
 
   return (
-    <>
-      <ButtonSmall
-        iconLeft={<Fire size={24} />}
-        buttonType={ButtonTypes.outline}
-        className={small ? 'py-2 !min-w-14' : 'py-2 px-4'}
-        contentClassName={small ? '!gap-x-0' : ''}
-        onClick={() => setOpenModal(AvailableModals.dailyStreakModal)}
-      >
-        {user?.loginDays}
-      </ButtonSmall>
-    </>
+    <ButtonSmall
+      iconLeft={<Fire size={24} />}
+      buttonType={ButtonTypes.outline}
+      className={small ? 'py-2 !min-w-14' : 'py-2 px-4'}
+      contentClassName={small ? '!gap-x-0' : ''}
+      onClick={() => setOpenModal(AvailableModals.dailyStreak)}
+    >
+      {user?.loginDays}
+    </ButtonSmall>
   )
 }

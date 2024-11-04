@@ -91,10 +91,10 @@ export default function () {
       {address ? (
         <Button
           buttonType={ButtonTypes.secondary}
-          className="!rounded-full !w-16"
+          className="!rounded-full !w-16 aspect-square"
           onClick={onDisconnect}
         >
-          <Disconnect />
+          <Disconnect size={16} />
         </Button>
       ) : null}
     </div>

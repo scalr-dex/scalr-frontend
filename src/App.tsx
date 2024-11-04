@@ -25,6 +25,7 @@ import { useHashLocation } from 'wouter-preact/use-hash-location'
 import LoaderFullPage from 'components/LoaderFullPage'
 import { THEME, TonConnectUIProvider } from 'lib/ui-react'
 import PerpDex from 'pages/PerpDex'
+import Modals from 'components/Modals'
 
 const Onboarding = lazy(() => import('pages/Onboarding'))
 
@@ -39,66 +40,67 @@ function AppInner({ socket }: { socket: WebSocket }) {
   return (
     <SDKProvider debug={env.DEV} acceptCustomStyles>
       <QueryClientProvider client={queryClient}>
-        <Router hook={useHashLocation}>
-          <div
-            className="flex flex-col relative h-[100dvh] overflow-x-hidden max-w-prose text-white z-0"
-            ref={parent}
-          >
-            <Switch>
-              {didOnboard ? (
-                <>
-                  <Route path="/tasks" component={Tasks} />
-                  <Route path="/leaderboards" component={LeaderBoards} />
-                  <Route
-                    path="/perp"
-                    component={() => (
-                      <TonConnectUIProvider
-                        manifestUrl={`${location.origin}/tonconnect-manifest.json`}
-                        actionsConfiguration={{
-                          twaReturnUrl: env.VITE_APP_BASE_LINK,
-                        }}
-                        uiPreferences={{ theme: THEME.DARK }}
-                      >
+        <TonConnectUIProvider
+          manifestUrl={`${location.origin}/tonconnect-manifest.json`}
+          actionsConfiguration={{
+            twaReturnUrl: env.VITE_APP_BASE_LINK,
+          }}
+          uiPreferences={{ theme: THEME.DARK }}
+        >
+          <Router hook={useHashLocation}>
+            <div
+              className="flex flex-col relative h-[100dvh] overflow-x-hidden max-w-prose text-white z-0"
+              ref={parent}
+            >
+              <Switch>
+                {didOnboard ? (
+                  <>
+                    <Route path="/tasks" component={Tasks} />
+                    <Route path="/leaderboards" component={LeaderBoards} />
+                    <Route
+                      path="/perp"
+                      component={() => (
                         <Suspense fallback={<Loader full />}>
                           <PerpDex />
                         </Suspense>
-                      </TonConnectUIProvider>
+                      )}
+                    />
+                    <Route path="/" component={Main} />
+                  </>
+                ) : (
+                  <Route
+                    path="/"
+                    component={() => (
+                      <Suspense fallback={<LoaderFullPage />}>
+                        <Onboarding />
+                      </Suspense>
                     )}
                   />
-                  <Route path="/" component={Main} />
-                </>
-              ) : (
-                <Route
-                  path="/"
-                  component={() => (
-                    <Suspense fallback={<LoaderFullPage />}>
-                      <Onboarding />
-                    </Suspense>
-                  )}
-                />
-              )}
+                )}
 
-              <Redirect to="/" />
-              <Route path="/404" component={NotFound} />
-            </Switch>
-          </div>
-          {onboarded ? <BottomTabNavigator /> : null}
-          <ToastContainer
-            draggable
-            position="top-center"
-            pauseOnHover
-            pauseOnFocusLoss
-            closeOnClick
-            closeButton={false}
-            autoClose={3000}
-            theme="dark"
-            toastClassName="!bg-tertiary !rounded-xl !w-[96dvw] !ml-[2dvw] !shadow-super !top-4 !font-semibold"
-            draggableDirection="y"
-            hideProgressBar
-            limit={3}
-            stacked
-          />
-        </Router>
+                <Redirect to="/" />
+                <Route path="/404" component={NotFound} />
+              </Switch>
+            </div>
+            {onboarded ? <BottomTabNavigator /> : null}
+            <ToastContainer
+              draggable
+              position="top-center"
+              pauseOnHover
+              pauseOnFocusLoss
+              closeOnClick
+              closeButton={false}
+              autoClose={3000}
+              theme="dark"
+              toastClassName="!bg-tertiary !rounded-xl !w-[96dvw] !ml-[2dvw] !shadow-super !top-4 !font-semibold"
+              draggableDirection="y"
+              hideProgressBar
+              limit={3}
+              stacked
+            />
+            <Modals />
+          </Router>
+        </TonConnectUIProvider>
       </QueryClientProvider>
     </SDKProvider>
   )

@@ -5,6 +5,8 @@ import ButtonTypes from 'type/Button'
 import { DefaultModalProps } from 'type/Props'
 import { navigate } from 'wouter-preact/use-hash-location'
 import ImageAnimatedOnLoad from 'components/ImageAnimatedOnLoad'
+import { useSetAtom } from 'jotai'
+import modalsAtom, { AvailableModals } from 'helpers/atoms/modalsAtom'
 
 function ModalBody() {
   return (
@@ -25,13 +27,9 @@ function ModalBody() {
   )
 }
 
-function ModalFooter({
-  onClose,
-  setShowFriendsModal,
-}: {
-  onClose: () => void
-  setShowFriendsModal: (bool: boolean) => void
-}) {
+function ModalFooter({ onClose }: { onClose: () => void }) {
+  const setModal = useSetAtom(modalsAtom)
+
   return (
     <div className="flex flex-col gap-y-4">
       <Button
@@ -39,7 +37,7 @@ function ModalFooter({
         className="!rounded-full"
         onClick={() => {
           onClose()
-          setTimeout(() => setShowFriendsModal(true))
+          setTimeout(() => setModal(AvailableModals.inviteFriends), 200)
         }}
         haptic={false}
       >
@@ -60,21 +58,12 @@ function ModalFooter({
   )
 }
 
-export default function (
-  props: DefaultModalProps & {
-    setShowFriendsModal: (bool: boolean) => void
-  }
-) {
+export default function (props: DefaultModalProps) {
   return (
     <DefaultModal
       {...props}
       body={ModalBody}
-      footer={(onClose) => (
-        <ModalFooter
-          onClose={onClose}
-          setShowFriendsModal={props.setShowFriendsModal}
-        />
-      )}
+      footer={(onClose) => <ModalFooter onClose={onClose} />}
     />
   )
 }
