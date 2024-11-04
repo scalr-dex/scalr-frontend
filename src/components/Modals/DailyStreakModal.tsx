@@ -11,11 +11,11 @@ import handleError from 'helpers/handleError'
 import dayjs from 'dayjs'
 import useCountDown from 'helpers/hooks/useCountDown'
 import ImageAnimatedOnLoad from 'components/ImageAnimatedOnLoad'
-import { AnimatedCounter } from 'react-animated-counter'
 import didOnboardAtom, {
   onboardedS2Atom,
   showDailyStreakModal,
 } from 'helpers/atoms/UserStates'
+import MotionNumber from 'motion-number'
 
 function ModalBody() {
   const user = useAtomValue(UserAtom)
@@ -27,15 +27,9 @@ function ModalBody() {
       <ImageAnimatedOnLoad src="img/utya-burn.png" forModal />
 
       <div className="flex flex-col items-center justify-center gap-y-5">
-        <AnimatedCounter
+        <MotionNumber
           value={loginDays}
-          includeDecimals={false}
-          fontSize="3.75rem"
-          digitStyles={{
-            color: '#FF9341',
-            fontWeight: 800,
-          }}
-          incrementColor="#FFE792"
+          style={{ fontSize: '3.75rem', color: '#FF9341', fontWeight: 800 }}
         />
         <Header3 className="text-alt-dark">
           day{loginDays === 1 ? '' : 's'} streak!

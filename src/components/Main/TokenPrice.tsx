@@ -6,7 +6,7 @@ import DailyStreakButton from 'components/Tasks/DailyStreakButton'
 import { Header2, Header4 } from 'components/Text'
 import { userBetAtom } from 'helpers/atoms/UserAtom'
 import { useAtomValue } from 'jotai'
-import CountUp from 'react-countup'
+import MotionNumber from 'motion-number'
 
 export default function ({ price }: { price?: number }) {
   const roundStartPrice = useAtomValue(userBetAtom)
@@ -29,12 +29,9 @@ export default function ({ price }: { price?: number }) {
           <Header2>
             <Header4 className="inline">$</Header4>
             {price ? (
-              <CountUp
-                end={price}
-                decimal="."
-                decimals={4}
-                preserveValue
-                duration={0.5}
+              <MotionNumber
+                value={price}
+                format={{ minimumFractionDigits: 4 }}
               />
             ) : (
               <DotsLoader />

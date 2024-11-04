@@ -610,22 +610,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@emotion/is-prop-valid@npm:^0.8.2":
-  version: 0.8.8
-  resolution: "@emotion/is-prop-valid@npm:0.8.8"
-  dependencies:
-    "@emotion/memoize": 0.7.4
-  checksum: bb7ec6d48c572c540e24e47cc94fc2f8dec2d6a342ae97bc9c8b6388d9b8d283862672172a1bb62d335c02662afe6291e10c71e9b8642664a8b43416cdceffac
-  languageName: node
-  linkType: hard
-
-"@emotion/memoize@npm:0.7.4":
-  version: 0.7.4
-  resolution: "@emotion/memoize@npm:0.7.4"
-  checksum: 4e3920d4ec95995657a37beb43d3f4b7d89fed6caa2b173a4c04d10482d089d5c3ea50bbc96618d918b020f26ed6e9c4026bbd45433566576c1f7b056c3271dc
-  languageName: node
-  linkType: hard
-
 "@esbuild/aix-ppc64@npm:0.21.5":
   version: 0.21.5
   resolution: "@esbuild/aix-ppc64@npm:0.21.5"
@@ -2810,13 +2794,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"countup.js@npm:^2.8.0":
-  version: 2.8.0
-  resolution: "countup.js@npm:2.8.0"
-  checksum: bfded0c6051b79be5f07c097f97bc39f29e95b92b01077fc214ee118b0afbc53988b3a491e2319ea7a1896014a9cda52f150722ccce9afd677faea5ade1274dd
-  languageName: node
-  linkType: hard
-
 "create-require@npm:^1.1.0":
   version: 1.1.1
   resolution: "create-require@npm:1.1.1"
@@ -3989,24 +3966,23 @@ __metadata:
   languageName: node
   linkType: hard
 
-"framer-motion@npm:^10.11.4":
-  version: 10.18.0
-  resolution: "framer-motion@npm:10.18.0"
+"framer-motion@npm:^11.11.11":
+  version: 11.11.11
+  resolution: "framer-motion@npm:11.11.11"
   dependencies:
-    "@emotion/is-prop-valid": ^0.8.2
     tslib: ^2.4.0
   peerDependencies:
+    "@emotion/is-prop-valid": "*"
     react: ^18.0.0
     react-dom: ^18.0.0
-  dependenciesMeta:
+  peerDependenciesMeta:
     "@emotion/is-prop-valid":
       optional: true
-  peerDependenciesMeta:
     react:
       optional: true
     react-dom:
       optional: true
-  checksum: b43f1edcfc8c2226e3325517612d2abb7455455c4d2232d62499d70a603a51ffdd6a810aa7b5e783a25860856ec6c6e5b3bcf749846facedc54a063f9a548f0b
+  checksum: 12a358dafdd5239ea6eaad87fa7783dad7c009b639b6e087574f3515dfa4c4bd02ed4fcde61522f6db3a311e353333455d0b0e9d413a2662265330055672eeb6
   languageName: node
   linkType: hard
 
@@ -5125,13 +5101,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"lodash@npm:^4.17.21":
-  version: 4.17.21
-  resolution: "lodash@npm:4.17.21"
-  checksum: eb835a2e51d381e561e508ce932ea50a8e5a68f4ebdd771ea240d3048244a8d13658acbd502cd4829768c56f2e16bdd4340b9ea141297d472517b83868e677f7
-  languageName: node
-  linkType: hard
-
 "loose-envify@npm:^1.0.0, loose-envify@npm:^1.4.0":
   version: 1.4.0
   resolution: "loose-envify@npm:1.4.0"
@@ -5429,6 +5398,17 @@ __metadata:
   bin:
     mkdirp: bin/cmd.js
   checksum: a96865108c6c3b1b8e1d5e9f11843de1e077e57737602de1b82030815f311be11f96f09cce59bd5b903d0b29834733e5313f9301e3ed6d6f6fba2eae0df4298f
+  languageName: node
+  linkType: hard
+
+"motion-number@npm:^0.1.7":
+  version: 0.1.7
+  resolution: "motion-number@npm:0.1.7"
+  peerDependencies:
+    framer-motion: ^11.3.19
+    react: ^18.0.0
+    react-dom: ^18.0.0
+  checksum: cf0c419bfe0b7902b6c6184bd38d1061a1361bcf77c12009d4a29930f74d4b54f5e0a3f16154760b3678cde9f90650c43d838e526896b11ee61059e92f3f6ff2
   languageName: node
   linkType: hard
 
@@ -6087,29 +6067,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-animated-counter@npm:^1.7.9":
-  version: 1.7.9
-  resolution: "react-animated-counter@npm:1.7.9"
-  dependencies:
-    framer-motion: ^10.11.4
-    lodash: ^4.17.21
-  peerDependencies:
-    react: ">=16"
-  checksum: c58b7c5399e03b57a3240b5458000864b1a4376daaa24dd6374e0ce30a0c76c2dcdc2beb14511c0273f0ee378f9a599699626cc970abb2897dde66d9b6cbf605
-  languageName: node
-  linkType: hard
-
-"react-countup@npm:^6.5.3":
-  version: 6.5.3
-  resolution: "react-countup@npm:6.5.3"
-  dependencies:
-    countup.js: ^2.8.0
-  peerDependencies:
-    react: ">= 16.3.0"
-  checksum: c9a9776737a469e68beb035b81334879bac2e7d8edb1721f97d115d7b88e87d6ad62fc99083e329650b4416fe33d85b33211719afd531b83399e12d7ded25f89
-  languageName: node
-  linkType: hard
-
 "react-device-detect@npm:^2.2.3":
   version: 2.2.3
   resolution: "react-device-detect@npm:2.2.3"
@@ -6621,15 +6578,15 @@ __metadata:
     eslint-plugin-react: ^7.34.2
     eslint-plugin-react-hooks: ^4.6.2
     eslint-plugin-simple-import-sort: ^12.1.1
+    framer-motion: ^11.11.11
     globals: ^15.9.0
     jotai: ^2.8.2
     js-confetti: ^0.12.0
     ky: ^1.5.0
+    motion-number: ^0.1.7
     postcss: ^8.4.38
     preact: ^10.22.0
     prettier: ^3.2.5
-    react-animated-counter: ^1.7.9
-    react-countup: ^6.5.3
     react-device-detect: ^2.2.3
     react-ga4: ^2.1.0
     react-pin-field: ^3.1.5
@@ -7297,7 +7254,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"tslib@npm:^2.0.0, tslib@npm:^2.4.0":
+"tslib@npm:^2.0.0":
   version: 2.8.0
   resolution: "tslib@npm:2.8.0"
   checksum: de852ecd81adfdb4870927e250763345f07dc13fe7f395ce261424966bb122a0992ad844c3ec875c9e63e72afe2220a150712984e44dfd1a8a7e538a064e3d46
@@ -7308,6 +7265,13 @@ __metadata:
   version: 2.7.0
   resolution: "tslib@npm:2.7.0"
   checksum: 1606d5c89f88d466889def78653f3aab0f88692e80bb2066d090ca6112ae250ec1cfa9dbfaab0d17b60da15a4186e8ec4d893801c67896b277c17374e36e1d28
+  languageName: node
+  linkType: hard
+
+"tslib@npm:^2.4.0":
+  version: 2.8.1
+  resolution: "tslib@npm:2.8.1"
+  checksum: e4aba30e632b8c8902b47587fd13345e2827fa639e7c3121074d5ee0880723282411a8838f830b55100cbe4517672f84a2472667d355b81e8af165a55dc6203a
   languageName: node
   linkType: hard
 
