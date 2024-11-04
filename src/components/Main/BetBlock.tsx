@@ -2,8 +2,8 @@ import Button from 'components/Button'
 import StonksArrow from 'components/icons/StonksArrow'
 import ButtonTypes from 'type/Button'
 import { useCallback, useEffect, useState } from 'preact/hooks'
-import { useAtom, useSetAtom } from 'jotai'
-import UserAtom, { userBetAtom } from 'helpers/atoms/UserAtom'
+import { useAtom, useAtomValue, useSetAtom } from 'jotai'
+import UserAtom, { userBalanceAtom, userBetAtom } from 'helpers/atoms/UserAtom'
 import placeBet from 'helpers/api/placeBet'
 import BetDirection from 'type/BetDirection'
 import { BodyText } from 'components/Text'
@@ -25,11 +25,12 @@ export default function ({
   roundStart: GraphTokenValue | undefined
 }) {
   const [user, setUser] = useAtom(UserAtom)
+  const userBalance = useAtomValue(userBalanceAtom)
   const [userBet, setUserBet] = useAtom(userBetAtom)
   const [processingBet, setProcessingBet] = useState(false)
   const displayZeroEnergyModal = useSetAtom(showZeroEnergyModal)
 
-  const disabled = loading || processingBet || !user?.balance
+  const disabled = loading || processingBet || !userBalance
 
   useEffect(() => {
     // in case app reloads and timeout vanishes
@@ -38,7 +39,7 @@ export default function ({
 
   const onBet = useCallback(
     async (direction: BetDirection) => {
-      if (!roundStart || !user || !user.balance) return
+      if (!roundStart || !user || !userBalance) return
       if (!user.betEnergy) {
         displayZeroEnergyModal(true)
         return
@@ -62,13 +63,13 @@ export default function ({
       })
       setTimeout(() => setUserBet(null), roundDurationMs)
     },
-    [roundStart, user, setUser, setUserBet, displayZeroEnergyModal]
+    [roundStart, user, userBalance, setUser, setUserBet, displayZeroEnergyModal]
   )
 
   return (
     <div className="flex flex-col h-28 gap-y-5 px-4">
       <div className="flex flex-row items-center justify-between">
-        <Points amount={user?.balance} />
+        <Points />
 
         <div className="flex flex-row gap-x-2.5 items-center">
           <BetEnergy betEnergy={user?.betEnergy} />

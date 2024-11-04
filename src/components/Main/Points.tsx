@@ -1,7 +1,11 @@
 import ScalrCoin from 'components/icons/coins/ScalrCoin'
+import { userBalanceAtom } from 'helpers/atoms/UserAtom'
+import { useAtomValue } from 'jotai'
 import MotionNumber from 'motion-number'
 
-export default function ({ amount = 0 }: { amount?: number | undefined }) {
+export default function () {
+  const amount = useAtomValue(userBalanceAtom)
+
   const fontSize =
     amount >= 100000
       ? amount >= 1000000
