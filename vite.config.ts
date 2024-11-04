@@ -27,6 +27,16 @@ export default defineConfig(({ mode }) => {
             org: 'scalr',
             url: env['SENTRY_URL'],
             project: 'mini-app',
+            release: {
+              name: crypto.randomUUID(),
+
+              uploadLegacySourcemaps: [
+                {
+                  paths: ['dist/assets'],
+                  urlPrefix: '~/assets',
+                },
+              ],
+            },
             authToken: env['SENTRY_AUTH_TOKEN'],
             reactComponentAnnotation: { enabled: true },
             sourcemaps: { filesToDeleteAfterUpload: '**/*.js.map' },
