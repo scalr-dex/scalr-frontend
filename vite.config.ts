@@ -3,6 +3,7 @@ import preact from '@preact/preset-vite'
 import tsconfigPaths from 'vite-tsconfig-paths'
 import { visualizer } from 'rollup-plugin-visualizer'
 import { sentryVitePlugin } from '@sentry/vite-plugin'
+import { v4 } from 'uuid'
 
 export default defineConfig(({ mode }) => {
   const env = Object.assign(process.env, loadEnv(mode, process.cwd(), ''))
@@ -28,7 +29,7 @@ export default defineConfig(({ mode }) => {
             url: env['SENTRY_URL'],
             project: 'mini-app',
             release: {
-              name: crypto.randomUUID(),
+              name: v4(),
 
               uploadLegacySourcemaps: [
                 {
