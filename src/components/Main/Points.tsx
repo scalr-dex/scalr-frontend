@@ -1,7 +1,7 @@
 import ScalrCoin from 'components/icons/coins/ScalrCoin'
 import MotionNumber from 'motion-number'
 
-export default function ({ amount = 0 }: { amount?: number | undefined }) {
+export default function ({ amount }: { amount: number }) {
   const fontSize =
     amount >= 100000
       ? amount >= 1000000

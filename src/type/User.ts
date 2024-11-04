@@ -23,7 +23,6 @@ export interface ServerUser {
 export interface ClientUser {
   ticket: string
   canClaimAmount: number
-  balance: number
   launchParams: LaunchParams
   tonAddress?: string
   username: string

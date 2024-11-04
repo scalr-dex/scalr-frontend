@@ -1,7 +1,7 @@
 import { BodyText } from 'components/Text'
 import Points from 'components/Main/Points'
 
-export default function ({ points }: { points: number | undefined }) {
+export default function ({ points = 0 }: { points: number | undefined }) {
   return (
     <div className="flex flex-col gap-y-4">
       <BodyText className="font-semibold">Your points</BodyText>
