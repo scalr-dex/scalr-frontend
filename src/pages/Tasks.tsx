@@ -16,8 +16,11 @@ import DocumentPaper from 'components/icons/DocumentPaper'
 import SeasonStats from 'components/Modals/SeasonStats'
 import BattleTicketButton from 'components/BattleTicketButton'
 import DailyStreakButton from 'components/Tasks/DailyStreakButton'
+import { useAtomValue } from 'jotai'
+import { userBalanceAtom } from 'helpers/atoms/UserAtom'
 
 export default function () {
+  const userBalance = useAtomValue(userBalanceAtom)
   const [openStatsModal, setOpenStatsModal] = useState(false)
   const { data, refetch } = useQuery({
     queryKey: [QueryKeys.userTasks],
@@ -34,7 +37,7 @@ export default function () {
   return (
     <div className="flex flex-col flex-1 gap-y-8 px-4 my-4 overflow-x-clip">
       <div className="flex flex-row justify-between">
-        <Points />
+        <Points amount={userBalance} />
         <div className="flex flex-row gap-x-2 items-center">
           <DocumentPaper onClick={() => setOpenStatsModal(true)} />
           <DailyStreakButton />

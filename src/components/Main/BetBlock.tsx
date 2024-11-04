@@ -69,7 +69,7 @@ export default function ({
   return (
     <div className="flex flex-col h-28 gap-y-5 px-4">
       <div className="flex flex-row items-center justify-between">
-        <Points />
+        <Points amount={userBalance} />
 
         <div className="flex flex-row gap-x-2.5 items-center">
           <BetEnergy betEnergy={user?.betEnergy} />
