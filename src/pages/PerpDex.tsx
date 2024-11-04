@@ -2,17 +2,14 @@ import NoisyCardBig from 'components/NoisyCardBig'
 import NoisyCard from 'components/NoisyCard'
 import NoisyCardSmall from 'components/NoisyCardSmall'
 import PerpCardBlur from 'components/icons/PerpCardBlur'
-import { useState } from 'preact/hooks'
-import PerpDexInfoModal from 'components/Modals/PerpDex/PerpDexInfoModal'
-import ScalrAirdropModal from 'components/Modals/PerpDex/ScalrAirdropModal'
-import PartnershipModal from 'components/Modals/PerpDex/PartnershipModal'
 import ScalrCoin from 'components/icons/coins/ScalrCoin'
 import StonksCircle from 'components/icons/StonksCircle'
 import Feedback from 'components/icons/Feedback'
 import Triangle from 'components/icons/socials/Triangle'
-import TriangleAccelerated from 'components/Modals/PerpDex/TriangleAccelerated'
 import useImagePreloader from 'helpers/hooks/useImagePreload'
 import LoaderFullPage from 'components/LoaderFullPage'
+import { useSetAtom } from 'jotai'
+import modalsAtom, { AvailableModals } from 'helpers/atoms/modalsAtom'
 
 const preloadList = [
   'img/noise-effect.png',
@@ -23,10 +20,7 @@ const preloadList = [
 
 export default function () {
   const { imagesPreloaded } = useImagePreloader(preloadList)
-  const [openAirdropModal, setOpenAirdropModal] = useState(false)
-  const [openInfoModal, setOpenInfoModal] = useState(false)
-  const [openPartnershipModal, setOpenPartnershipModal] = useState(false)
-  const [openTriangleModal, setOpenTriangleModal] = useState(false)
+  const setModal = useSetAtom(modalsAtom)
 
   if (!imagesPreloaded) return <LoaderFullPage />
 
@@ -34,7 +28,7 @@ export default function () {
     <div className="flex flex-col gap-y-4 h-screen p-4 pb-footer-height">
       <NoisyCard
         className="p-4 h-full relative overflow-hidden"
-        onClick={() => setOpenInfoModal(true)}
+        onClick={() => setModal(AvailableModals.perpInfo)}
       >
         <NoisyCardBig
           header="Scalr Perpetual DEX"
@@ -54,7 +48,7 @@ export default function () {
           background:
             'url(img/noise-effect.png), linear-gradient(to top, var(--accent-dark), var(--secondary), var(--secondary))',
         }}
-        onClick={() => setOpenAirdropModal(true)}
+        onClick={() => setModal(AvailableModals.airdropInfo)}
         className="relative p-4 h-full justify-evenly"
       >
         <NoisyCardBig
@@ -72,7 +66,7 @@ export default function () {
               'url(img/noise-effect.png), linear-gradient(to right, #6CCAF2, #11A5E4) padding-box',
           }}
           className="h-full p-2.5 border-5 border-white-16 shadow-inner-card-glow"
-          onClick={() => setOpenTriangleModal(true)}
+          onClick={() => setModal(AvailableModals.triangleAccelerated)}
         >
           <NoisyCardSmall
             topText="With Guidance"
@@ -91,7 +85,7 @@ export default function () {
               'url(img/noise-effect.png), linear-gradient(to right, #3284FE, #0B54E3) padding-box',
           }}
           className="h-full p-2.5 border-5 border-white-16 shadow-inner-card-glow"
-          onClick={() => setOpenPartnershipModal(true)}
+          onClick={() => setModal(AvailableModals.partnershipInfo)}
         >
           <NoisyCardSmall
             topText="KOL or feedback?"
@@ -104,23 +98,6 @@ export default function () {
           />
         </NoisyCard>
       </div>
-
-      <PerpDexInfoModal
-        showModal={openInfoModal}
-        setShowModal={setOpenInfoModal}
-      />
-      <ScalrAirdropModal
-        showModal={openAirdropModal}
-        setShowModal={setOpenAirdropModal}
-      />
-      <PartnershipModal
-        showModal={openPartnershipModal}
-        setShowModal={setOpenPartnershipModal}
-      />
-      <TriangleAccelerated
-        showModal={openTriangleModal}
-        setShowModal={setOpenTriangleModal}
-      />
     </div>
   )
 }

@@ -3,15 +3,14 @@ import { Header3 } from 'components/Text'
 import UserList from 'components/LeaderBoards/UserList'
 import YourPoints from 'components/LeaderBoards/YourPoints'
 import YourPosition from 'components/LeaderBoards/YourPosition'
-import LeaderBoardsFaqModal from 'components/Modals/LeaderBoardsFaqModal'
 import UserAtom from 'helpers/atoms/UserAtom'
 import useLeaderBoard from 'helpers/hooks/useLeaderBoard'
-import { useAtomValue } from 'jotai'
-import { useState } from 'preact/hooks'
+import { useAtomValue, useSetAtom } from 'jotai'
 import FooterSafeArea from 'components/FooterSafeArea'
+import modalsAtom, { AvailableModals } from 'helpers/atoms/modalsAtom'
 
 export default function () {
-  const [modalOpen, setModalOpen] = useState(false)
+  const setModalOpen = useSetAtom(modalsAtom)
   const user = useAtomValue(UserAtom)
   const { data, status } = useLeaderBoard()
 
@@ -23,7 +22,10 @@ export default function () {
 
       <div className="flex flex-row items-center gap-x-1">
         <Header3>Leaderboard</Header3>
-        <GetHelp onClick={() => setModalOpen(true)} size={20} />
+        <GetHelp
+          onClick={() => setModalOpen(AvailableModals.leaderBoardInfo)}
+          size={20}
+        />
       </div>
       <YourPosition
         userName={user?.username}
@@ -31,7 +33,6 @@ export default function () {
         loading={loading}
       />
       <UserList users={data?.lb} loading={loading} />
-      <LeaderBoardsFaqModal showModal={modalOpen} setShowModal={setModalOpen} />
       <FooterSafeArea />
     </div>
   )

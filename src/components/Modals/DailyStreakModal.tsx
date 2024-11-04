@@ -11,11 +11,9 @@ import handleError from 'helpers/handleError'
 import dayjs from 'dayjs'
 import useCountDown from 'helpers/hooks/useCountDown'
 import ImageAnimatedOnLoad from 'components/ImageAnimatedOnLoad'
-import didOnboardAtom, {
-  onboardedS2Atom,
-  showDailyStreakModal,
-} from 'helpers/atoms/UserStates'
+import didOnboardAtom, { onboardedS2Atom } from 'helpers/atoms/UserStates'
 import MotionNumber from 'motion-number'
+import modalsAtom, { AvailableModals } from 'helpers/atoms/modalsAtom'
 
 function ModalBody() {
   const user = useAtomValue(UserAtom)
@@ -43,7 +41,7 @@ function ModalBody() {
 }
 
 function ModalFooter() {
-  const setModalOpen = useSetAtom(showDailyStreakModal)
+  const setModal = useSetAtom(modalsAtom)
   const didOnboard = useAtomValue(didOnboardAtom)
   const onboardedS2 = useAtomValue(onboardedS2Atom)
   const [loading, setLoading] = useState(false)
@@ -82,9 +80,9 @@ function ModalFooter() {
 
   useEffect(() => {
     if (disabled || !onboardedS2 || !didOnboard) return
-    setModalOpen(true)
+    setModal(AvailableModals.dailyStreak)
     setTimeout(onClick, 300)
-  }, [disabled, setModalOpen, onClick, didOnboard, onboardedS2])
+  }, [disabled, setModal, onClick, didOnboard, onboardedS2])
 
   return (
     <Button

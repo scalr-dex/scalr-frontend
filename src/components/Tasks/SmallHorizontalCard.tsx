@@ -1,10 +1,13 @@
 import { BodyText, Header3 } from 'components/Text'
-import { navigate } from 'wouter-preact/use-hash-location'
+import modalsAtom, { AvailableModals } from 'helpers/atoms/modalsAtom'
+import { useSetAtom } from 'jotai'
 
 export default function () {
+  const setModal = useSetAtom(modalsAtom)
+
   return (
     <div
-      onClick={() => navigate('/perp')}
+      onClick={() => setModal(AvailableModals.airdropInfo)}
       style={{
         background:
           'url(img/noise-effect.png), linear-gradient(to top, var(--accent-dark), var(--secondary), var(--secondary))',
