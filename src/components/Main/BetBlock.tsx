@@ -2,7 +2,7 @@ import Button from 'components/Button'
 import StonksArrow from 'components/icons/StonksArrow'
 import ButtonTypes from 'type/Button'
 import { useCallback, useEffect, useState } from 'preact/hooks'
-import { useAtom } from 'jotai'
+import { useAtom, useSetAtom } from 'jotai'
 import UserAtom, { userBetAtom } from 'helpers/atoms/UserAtom'
 import placeBet from 'helpers/api/placeBet'
 import BetDirection from 'type/BetDirection'
@@ -15,6 +15,7 @@ import ButtonSmall from 'components/ButtonSmall'
 import Logo from 'components/icons/Logo'
 import { navigate } from 'wouter-preact/use-hash-location'
 import BetEnergy from 'components/Main/BetEnergy'
+import { showZeroEnergyModal } from 'helpers/atoms/UserStates'
 
 export default function ({
   loading,
@@ -26,8 +27,9 @@ export default function ({
   const [user, setUser] = useAtom(UserAtom)
   const [userBet, setUserBet] = useAtom(userBetAtom)
   const [processingBet, setProcessingBet] = useState(false)
+  const displayZeroEnergyModal = useSetAtom(showZeroEnergyModal)
 
-  const disabled = loading || processingBet || !user?.balance || !user.betEnergy
+  const disabled = loading || processingBet || !user?.balance
 
   useEffect(() => {
     // in case app reloads and timeout vanishes
@@ -36,7 +38,11 @@ export default function ({
 
   const onBet = useCallback(
     async (direction: BetDirection) => {
-      if (!roundStart || !user || !user.balance || !user.betEnergy) return
+      if (!roundStart || !user || !user.balance) return
+      if (!user.betEnergy) {
+        displayZeroEnergyModal(true)
+        return
+      }
 
       setProcessingBet(true)
 
@@ -56,7 +62,7 @@ export default function ({
       })
       setTimeout(() => setUserBet(null), roundDurationMs)
     },
-    [roundStart, setUserBet, user, setUser]
+    [roundStart, user, setUser, setUserBet, displayZeroEnergyModal]
   )
 
   return (

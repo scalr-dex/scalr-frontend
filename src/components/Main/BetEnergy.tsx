@@ -17,8 +17,11 @@ export default function ({
   const [openFriendsModal, setOpenFriendsModal] = useState(false)
 
   return (
-    <div className="flex flex-row gap-x-1 items-center text-white/50">
-      <Battery onClick={() => setOpenEnergyModal(true)} />
+    <div
+      className="flex flex-row gap-x-1 items-center text-white/50 hover:text-white/80 active:text-white transition-colors cursor-pointer"
+      onClick={() => setOpenEnergyModal(true)}
+    >
+      <Battery />
 
       <AnimatedCounter
         value={betEnergy}
