@@ -1,4 +1,3 @@
-import { atom } from 'jotai'
 import { atomWithStorage } from 'jotai/utils'
 
 export const nameKeyword = '🌀SCALR'
@@ -15,6 +14,3 @@ export const onboardedS2Atom = atomWithStorage(
     getOnInit: true,
   }
 )
-
-export const showZeroEnergyModal = atom(false)
-export const showDailyStreakModal = atom(false)

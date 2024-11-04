@@ -5,11 +5,12 @@ import priceHistoryAtom from 'helpers/atoms/priceHistoryAtom'
 import FooterSafeArea from 'components/FooterSafeArea'
 import BetBlock from 'components/Main/BetBlock'
 import Season2Modal from 'components/Modals/Season2Modal'
-import { onboardedS2Atom, showDailyStreakModal } from 'helpers/atoms/UserStates'
+import { onboardedS2Atom } from 'helpers/atoms/UserStates'
 import SeasonStats from 'components/Modals/SeasonStats'
 import { useState } from 'preact/hooks'
 import useImagePreloader from 'helpers/hooks/useImagePreload'
 import LoaderFullPage from 'components/LoaderFullPage'
+import modalsAtom, { AvailableModals } from 'helpers/atoms/modalsAtom'
 
 function InnerMain() {
   const data = useAtomValue(priceHistoryAtom)
@@ -32,7 +33,7 @@ function InnerMain() {
 const mainPreloadList = ['img/season2.png', 'img/utya-win.png']
 
 export default function () {
-  const setDailyStreakModal = useSetAtom(showDailyStreakModal)
+  const setModal = useSetAtom(modalsAtom)
   const [onboardedS2, setOnboardedS2] = useAtom(onboardedS2Atom)
   const [showS2Modal, setShowS2Modal] = useState(!onboardedS2)
   const [openStatsModal, setOpenStatsModal] = useState(false)
@@ -54,7 +55,7 @@ export default function () {
         setShowModal={setOpenStatsModal}
         onCloseCallback={() => {
           setOnboardedS2(true)
-          setTimeout(() => setDailyStreakModal(true), 200)
+          setTimeout(() => setModal(AvailableModals.dailyStreak), 200)
         }}
       />
     </div>
