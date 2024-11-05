@@ -102,7 +102,6 @@ function ModalFooter({
     <div className="flex flex-col gap-y-4" ref={parent}>
       <Button
         buttonType={ButtonTypes.secondary}
-        className="!rounded-full"
         onClick={() => openTgLink(URL)}
       >
         Open task
@@ -114,7 +113,6 @@ function ModalFooter({
               ? ButtonTypes.success
               : ButtonTypes.neutral
           }
-          className="!rounded-full"
           onClick={onClick}
           isLoading={loading}
         >

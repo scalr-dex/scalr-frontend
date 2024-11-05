@@ -53,11 +53,7 @@ function ModalBody() {
 
 function ModalFooter({ onClose }: { onClose: () => void }) {
   return (
-    <Button
-      className="!rounded-full"
-      onClick={onClose}
-      buttonType={ButtonTypes.alt}
-    >
+    <Button onClick={onClose} buttonType={ButtonTypes.alt}>
       🔥🔥 Understood. Let’s go!
     </Button>
   )

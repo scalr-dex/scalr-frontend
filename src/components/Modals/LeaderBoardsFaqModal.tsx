@@ -22,11 +22,7 @@ function ModalBody() {
 
 function ModalFooter({ onClose }: { onClose: () => void }) {
   return (
-    <Button
-      onClick={onClose}
-      buttonType={ButtonTypes.secondary}
-      className="!rounded-full"
-    >
+    <Button onClick={onClose} buttonType={ButtonTypes.secondary}>
       Got it
     </Button>
   )

@@ -11,8 +11,9 @@ export default function ({ small }: { small?: boolean }) {
     <ButtonSmall
       iconLeft={<TicketPlus />}
       buttonType={ButtonTypes.outline}
-      className={small ? 'py-2 !min-w-14' : 'py-2 px-4'}
-      contentClassName={small ? '!gap-x-0' : ''}
+      className={
+        small ? 'py-1.25 px-2 !min-w-fit border-none' : 'py-2 px-4 border-none'
+      }
       onClick={() => setModal(AvailableModals.battleTickets)}
     >
       0

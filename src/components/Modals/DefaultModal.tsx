@@ -15,8 +15,8 @@ export default function ({
   bodyWrapperClassName,
   footerWrapperClassName,
 }: DefaultModalProps & {
-  header?: (onClose: () => void) => JSX.Element
-  body: (onClose: () => void) => JSX.Element
+  header?: (onClose: () => void) => JSX.Element | null
+  body: (onClose: () => void) => JSX.Element | null
   footer?: ((onClose: () => void) => JSX.Element) | null
   dismissible?: boolean
   contentClassName?: ClassName

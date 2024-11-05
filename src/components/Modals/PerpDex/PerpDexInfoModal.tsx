@@ -77,7 +77,6 @@ function ModalFooter({ setShowCodeInput }: { setShowCodeInput: () => void }) {
   return (
     <Button
       buttonType={ButtonTypes.alt}
-      className="!rounded-full"
       onClick={() => requestAnimationFrame(setShowCodeInput)}
     >
       Join the beta

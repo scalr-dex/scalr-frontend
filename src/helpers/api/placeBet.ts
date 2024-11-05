@@ -4,13 +4,19 @@ import BetDirection from 'type/BetDirection'
 import TrackerEvents from 'type/TrackerEvents'
 import { track } from 'helpers/api/analytics'
 
+const betController = backendKy({ prefixUrlAppend: '/bet' })
+
+export function upgradeLevel() {
+  return betController.get('upgrade').json()
+}
+
 export default async function ({ direction }: { direction: BetDirection }) {
   try {
     const json = {
       direction: BetDirection[direction],
     }
 
-    await backendKy().post('bet/v2', { json })
+    await backendKy().post('bet', { json })
     track(TrackerEvents.placeBet, direction)
     return true
   } catch (e) {

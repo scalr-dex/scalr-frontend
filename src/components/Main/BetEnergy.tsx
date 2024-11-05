@@ -12,7 +12,7 @@ export default function ({
 
   return (
     <div
-      className="flex flex-row gap-x-1 items-center text-white/50 hover:text-white/80 active:text-white font-semibold text-sm transition-colors cursor-pointer"
+      className="flex flex-row gap-x-1 items-center text-white/75 hover:text-white/80 active:text-white/50 font-semibold text-sm transition-colors cursor-pointer"
       onClick={() => setModal(AvailableModals.betEnergyInfo)}
     >
       <Battery />

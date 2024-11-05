@@ -34,7 +34,6 @@ function ModalFooter({ onClose }: { onClose: () => void }) {
     <div className="flex flex-col gap-y-4">
       <Button
         buttonType={ButtonTypes.secondary}
-        className="!rounded-full"
         onClick={() => {
           onClose()
           setTimeout(() => setModal(AvailableModals.inviteFriends), 200)
@@ -45,7 +44,6 @@ function ModalFooter({ onClose }: { onClose: () => void }) {
       </Button>
       <Button
         buttonType={ButtonTypes.neutral}
-        className="!rounded-full"
         onClick={() => {
           onClose()
           navigate('/tasks')

@@ -16,6 +16,7 @@ import Logo from 'components/icons/Logo'
 import { navigate } from 'wouter-preact/use-hash-location'
 import BetEnergy from 'components/Main/BetEnergy'
 import modalsAtom, { AvailableModals } from 'helpers/atoms/modalsAtom'
+import LevelUpgrade from 'components/Main/LevelUpgrade'
 
 export default function ({
   loading,
@@ -69,10 +70,13 @@ export default function ({
   return (
     <div className="flex flex-col h-28 gap-y-5 px-4">
       <div className="flex flex-row items-center justify-between">
-        <Points amount={userBalance} />
+        <div className="flex flex-row gap-x-2">
+          <Points amount={userBalance} />
+          <LevelUpgrade />
+          <BetEnergy betEnergy={user?.betEnergy} />
+        </div>
 
         <div className="flex flex-row gap-x-2.5 items-center">
-          <BetEnergy betEnergy={user?.betEnergy} />
           <ButtonSmall
             buttonType={ButtonTypes.secondary}
             iconRight={<Logo size={20} />}

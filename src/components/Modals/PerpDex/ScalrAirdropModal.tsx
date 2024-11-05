@@ -93,11 +93,7 @@ function ModalFooter({
   }
 
   return (
-    <Button
-      buttonType={ButtonTypes.alt}
-      className="!rounded-full"
-      onClick={setConnectWallet}
-    >
+    <Button buttonType={ButtonTypes.alt} onClick={setConnectWallet}>
       Secure Your Spot Now
     </Button>
   )

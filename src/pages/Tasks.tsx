@@ -4,7 +4,7 @@ import TaskBlock from 'components/Tasks/TaskBlock'
 import TaskSkeleton from 'components/Tasks/TaskSkeleton'
 import { getTasks } from 'helpers/api/userTasks'
 import { QueryKeys } from 'helpers/queryClient'
-import { useCallback, useState } from 'preact/hooks'
+import { useCallback } from 'preact/hooks'
 import UserTask from 'type/UserTask'
 import sortTasks from 'helpers/sortTasks'
 import FooterSafeArea from 'components/FooterSafeArea'
@@ -13,15 +13,15 @@ import TaskSection from 'components/Tasks/TaskSection'
 import DailyTasks from 'components/Tasks/DailyTasks/index'
 import HorizontalCards from 'components/Tasks/HorizontalCards'
 import DocumentPaper from 'components/icons/DocumentPaper'
-import SeasonStats from 'components/Modals/SeasonStats'
 import BattleTicketButton from 'components/BattleTicketButton'
 import DailyStreakButton from 'components/Tasks/DailyStreakButton'
-import { useAtomValue } from 'jotai'
+import { useAtomValue, useSetAtom } from 'jotai'
 import { userBalanceAtom } from 'helpers/atoms/UserAtom'
+import modalsAtom, { AvailableModals } from 'helpers/atoms/modalsAtom'
 
 export default function () {
+  const setModal = useSetAtom(modalsAtom)
   const userBalance = useAtomValue(userBalanceAtom)
-  const [openStatsModal, setOpenStatsModal] = useState(false)
   const { data, refetch } = useQuery({
     queryKey: [QueryKeys.userTasks],
     queryFn: getTasks,
@@ -39,7 +39,9 @@ export default function () {
       <div className="flex flex-row justify-between">
         <Points amount={userBalance} />
         <div className="flex flex-row gap-x-2 items-center">
-          <DocumentPaper onClick={() => setOpenStatsModal(true)} />
+          <DocumentPaper
+            onClick={() => setModal(AvailableModals.season1stats)}
+          />
           <DailyStreakButton />
           <BattleTicketButton />
         </div>
@@ -60,11 +62,6 @@ export default function () {
       </TaskSection>
 
       <FooterSafeArea />
-
-      <SeasonStats
-        showModal={openStatsModal}
-        setShowModal={setOpenStatsModal}
-      />
     </div>
   )
 }

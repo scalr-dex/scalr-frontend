@@ -18,6 +18,11 @@ export interface ServerUser {
   last_login_date: string
   nickname_claim_available: boolean
   bet_energy_left: number
+  bet_level: number
+  bet_size: number
+  bet_win: number
+  bet_loss: number
+  bet_upgrade_price: number
 }
 
 export interface ClientUser {
@@ -37,6 +42,13 @@ export interface ClientUser {
   lastLoginDate: Date
   nicknameClaimAvailable: boolean
   betEnergy: number
+  level: {
+    current: number
+    betSize: number
+    betWin: number
+    betLoss: number
+    betUpgradePrice: number
+  }
 }
 
 export interface UserBet {
