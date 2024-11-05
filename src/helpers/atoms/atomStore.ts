@@ -1,6 +1,6 @@
 import { getDefaultStore } from 'jotai/vanilla'
 
-export const storeVersion = '0.0.1'
+export const storeVersion = '0.0.2'
 
 const store = getDefaultStore()
 
