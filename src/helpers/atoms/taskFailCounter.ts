@@ -1,7 +1,7 @@
 import { atomWithStorage } from 'jotai/utils'
 import { storeVersion, writeAtom } from 'helpers/atoms/atomStore'
 
-export const failsBeforeClaim = 1
+export const failsBeforeClaim = 2
 
 export const taskFailCounterAtom = atomWithStorage<{
   [taskId: number]: number

@@ -7,7 +7,7 @@ import { useUtils } from '@telegram-apps/sdk-react'
 import ImageAnimatedOnLoad from 'components/ImageAnimatedOnLoad'
 import { checkTask, claimTask } from 'helpers/api/userTasks'
 import UserAtom from 'helpers/atoms/UserAtom'
-import { useSetAtom } from 'jotai'
+import { useAtomValue, useSetAtom } from 'jotai'
 import { useCallback, useState } from 'preact/hooks'
 import TrackerEvents from 'type/TrackerEvents'
 import UserTask, { iconNumberToComponent, iconNumberToSrc } from 'type/UserTask'
@@ -16,6 +16,12 @@ import TaskRewardBlock from 'components/Tasks/TaskRewardBlock'
 import { successConfetti } from 'helpers/shootConfetti'
 import { invalidateQuery, QueryKeys } from 'helpers/queryClient'
 import { useAutoAnimate } from '@formkit/auto-animate/react'
+import {
+  failsBeforeClaim,
+  increaseFailAmount,
+  taskFailCounterAtom,
+} from 'helpers/atoms/taskFailCounter'
+import handleError from 'helpers/handleError'
 
 interface TaskModalProps extends DefaultModalProps, UserTask {}
 
@@ -48,6 +54,7 @@ function ModalFooter({
   TaskID,
   URL,
 }: { onClose: () => void } & UserTask) {
+  const failAmount = useAtomValue(taskFailCounterAtom)
   const [parent] = useAutoAnimate()
   const [loading, setLoading] = useState(false)
   const utils = useUtils()
@@ -64,9 +71,17 @@ function ModalFooter({
 
     if (Status === 'NotStarted') {
       setTimeout(async () => {
-        await checkTask(TaskID)
+        if (!failAmount[TaskID] || failAmount[TaskID] < failsBeforeClaim) {
+          increaseFailAmount(TaskID)
+          const e = "You didn't complete the task"
+          handleError({ e, toastMessage: e })
+        } else {
+          await checkTask(TaskID)
+          await invalidateQuery(QueryKeys.userTasks)
+        }
         setLoading(false)
       }, 1000)
+
       return
     }
 
@@ -81,7 +96,7 @@ function ModalFooter({
       await successConfetti()
       track(TrackerEvents.taskDone, TaskID)
     }
-  }, [Status, TaskID, onClose, setUser])
+  }, [Status, TaskID, failAmount, onClose, setUser])
 
   return (
     <div className="flex flex-col gap-y-4" ref={parent}>
@@ -94,12 +109,16 @@ function ModalFooter({
       </Button>
       {Status === 'Claimed' ? null : (
         <Button
-          buttonType={ButtonTypes.neutral}
+          buttonType={
+            Status === 'ReadyToClaim'
+              ? ButtonTypes.success
+              : ButtonTypes.neutral
+          }
           className="!rounded-full"
           onClick={onClick}
           isLoading={loading}
         >
-          Check task
+          {Status === 'ReadyToClaim' ? 'Claim' : 'Check task'}
         </Button>
       )}
     </div>
