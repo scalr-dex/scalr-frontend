@@ -10,7 +10,7 @@ import Maximize from 'components/icons/Maximize'
 import DexInfoStonks from 'components/DexInfoStonks'
 import PerpModalPinCode from 'components/PerpDex/PerpModalPinCode'
 import ScrollFadeOverlay from 'components/ScrollFadeOverlay'
-import { atom, useAtomValue } from 'jotai'
+import { atom, useAtom, useAtomValue } from 'jotai'
 import { writeAtom } from 'helpers/atoms/atomStore'
 import { useAutoAnimate } from '@formkit/auto-animate/react'
 
@@ -39,6 +39,7 @@ const info = [
 function ModalBody() {
   const [parent] = useAutoAnimate()
   const showCodeInput = useAtomValue(showCodeInputAtom)
+
   const glow = showCodeInput ? 'drop-shadow-bulb-glow' : ''
 
   return (
@@ -79,13 +80,15 @@ function ModalBody() {
 }
 
 function ModalFooter() {
+  const [showCodeInput, setShowCodeInput] = useAtom(showCodeInputAtom)
+
+  if (showCodeInput) return null
+
   return (
     <Button
       buttonType={ButtonTypes.alt}
       className="!rounded-full"
-      onClick={() =>
-        requestAnimationFrame(() => writeAtom(showCodeInputAtom, true))
-      }
+      onClick={() => requestAnimationFrame(() => setShowCodeInput(true))}
     >
       Join the beta
     </Button>
