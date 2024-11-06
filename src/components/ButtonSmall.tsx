@@ -20,7 +20,7 @@ export default function ({
   const impact = useHapticFeedback()
 
   const onClick = useCallback(
-    (e: OnClickEvent) => {
+    (e: OnClickEvent<HTMLButtonElement>) => {
       if (!allowDisabledClick && (isLoading || disabled)) return
 
       buttonProps.onClick?.(e)
