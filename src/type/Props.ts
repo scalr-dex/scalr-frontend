@@ -1,9 +1,7 @@
-import { ComponentChildren, JSX } from 'preact'
+import { HTMLAttributes, ReactNode } from 'react'
 
-export type ClassName = JSX.HTMLAttributes<HTMLDivElement>['className']
-export type Style = JSX.HTMLAttributes<HTMLDivElement>['style']
-
-export type ImgProps = JSX.HTMLAttributes<HTMLImageElement>
+export type ClassName = HTMLAttributes<HTMLDivElement>['className']
+export type Style = HTMLAttributes<HTMLDivElement>['style']
 
 export interface ClassNameProp {
   className?: ClassName
@@ -13,18 +11,23 @@ export interface StyleProp {
   style?: Style
 }
 
-export interface OnClickProp<T extends EventTarget> {
-  onClick?: JSX.MouseEventHandler<T>
+export type OnClickEvent<T extends Element> = React.MouseEvent<T>
+export interface OnClickProp<T extends Element> {
+  onClick?: OnClickEvent<T>
+}
+export type OnClickPropVoid = {
+  onClick?: () => void
 }
 
-export type OnClickEvent = JSX.TargetedMouseEvent<HTMLButtonElement>
+export type IconProp = { icon: ReactNode }
 
 export interface ChildrenProp {
-  children: ComponentChildren
+  children?: ReactNode
 }
 
 export interface DefaultModalProps {
   showModal: boolean
   setShowModal: (show: boolean) => void
   onCloseCallback?: () => void
+  dismissible?: boolean
 }

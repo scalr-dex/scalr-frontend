@@ -1,5 +1,5 @@
 import MainSquare from 'components/icons/MainSquare'
-import { useLocation } from 'wouter-preact'
+import { useLocation } from 'wouter'
 import Cup from 'components/icons/Cup'
 import DollarCoin from 'components/icons/DollarCoin'
 import { trackNavigation } from 'helpers/api/analytics'

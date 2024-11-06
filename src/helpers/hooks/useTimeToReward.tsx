@@ -2,7 +2,7 @@ import dayjs from 'dayjs'
 import { onDailyClaim } from 'helpers/api/dailyReward'
 import { timeToRewardAtom } from 'helpers/atoms/UserAtom'
 import { useAtom } from 'jotai'
-import { useCallback, useState } from 'preact/hooks'
+import { useCallback, useState } from 'react'
 
 export default function () {
   const [loading, setLoading] = useState(false)

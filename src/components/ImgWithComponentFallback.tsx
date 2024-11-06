@@ -1,6 +1,5 @@
 import safeExtractCharAt from 'helpers/formatters/safeExtractCharAt'
-import { useState } from 'preact/hooks'
-import { JSX } from 'preact/jsx-runtime'
+import { ReactNode, useState } from 'react'
 import { ClassNameProp } from 'type/Props'
 
 const defaultFallback = (name: string) => (
@@ -16,7 +15,7 @@ export default function ({
 }: {
   name?: string | undefined
   imgUrl?: string | undefined
-  fallback?: (name: string) => JSX.Element
+  fallback?: (name: string) => ReactNode
   size?: number
 } & ClassNameProp) {
   const [imgLoadError, setImgLoadError] = useState(false)

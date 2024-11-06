@@ -3,7 +3,7 @@ import ButtonTypes from 'type/Button'
 import TonCoin from 'components/icons/coins/TonCoin'
 import { setTonAddress } from 'helpers/api/user'
 import handleError from 'helpers/handleError'
-import { useEffect, useCallback, useState } from 'preact/hooks'
+import { useEffect, useCallback, useState } from 'react'
 import Disconnect from 'components/icons/Disconnect'
 import Copy from 'components/icons/Copy'
 import truncate from 'helpers/truncate'
@@ -12,7 +12,7 @@ import {
   useTonConnectUI,
   toUserFriendlyAddress,
   useTonWallet,
-} from 'lib/ui-react'
+} from '@tonconnect/ui-react'
 
 export default function () {
   const [tonConnect] = useTonConnectUI()

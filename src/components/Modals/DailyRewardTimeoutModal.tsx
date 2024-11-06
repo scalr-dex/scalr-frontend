@@ -4,26 +4,25 @@ import DefaultModal from 'components/Modals/DefaultModal'
 import ButtonTypes from 'type/Button'
 import { DefaultModalProps } from 'type/Props'
 import { navigate } from 'wouter/use-hash-location'
-import ImageAnimatedOnLoad from 'components/ImageAnimatedOnLoad'
 import { useSetAtom } from 'jotai'
 import modalsAtom, { AvailableModals } from 'helpers/atoms/modalsAtom'
+import ImageAnimatedOnLoad from 'components/ImageAnimatedOnLoad'
 
 function ModalBody() {
   return (
-    <div className="flex flex-col gap-y-4">
-      <ImageAnimatedOnLoad src="img/utya-sad.png" className="h-28 mx-auto" />
-      <Header3 className="text-center">Energy isn’t ready yet...</Header3>
-      <BodyText className="text-balance">
-        <p>You’ve maxed out your energy for today, nice work!</p>
-        <br />
-        <p>Come back tomorrow for a fresh boost.</p>
-        <br />
-        <p>
-          Meanwhile, there are other ways to stack points toward the $SCR
-          airdrop 👀
-        </p>
+    <>
+      <ImageAnimatedOnLoad src="img/utya-sad.png" forModal />
+
+      <Header3>Claim isn't ready yet, but...</Header3>
+      <BodyText>
+        Get points by <span className="italic">completing tasks</span> and{' '}
+        <span className="italic">inviting friends</span>. Instantly add rewards
+        to your daily claim total.
       </BodyText>
-    </div>
+      <BodyText className="text-controls-tertiary-focus">
+        Claimed amounts count toward the $SCR airdrop distribution 👀
+      </BodyText>
+    </>
   )
 }
 

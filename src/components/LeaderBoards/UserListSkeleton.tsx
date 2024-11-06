@@ -13,8 +13,8 @@ function ItemSkeleton() {
 export default function () {
   return (
     <div className="flex flex-col gap-y-6 justify-between items-center px-4 py-3 bg-tertiary border-b border-white border-opacity-5 rounded-xl">
-      {[...Array(21)].map(() => (
-        <ItemSkeleton />
+      {[...Array(21)].map((_, index) => (
+        <ItemSkeleton key={`user-list-skeleton-${index}`} />
       ))}
     </div>
   )

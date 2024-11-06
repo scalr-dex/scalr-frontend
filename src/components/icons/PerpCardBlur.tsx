@@ -24,7 +24,10 @@ export default function () {
           fill="#AD6EFF"
         />
       </g>
-      <g style="mix-blend-mode:overlay" filter="url(#filter2_f_3915_90797)">
+      <g
+        style={{ mixBlendMode: 'overlay' }}
+        filter="url(#filter2_f_3915_90797)"
+      >
         <ellipse
           cx="133.507"
           cy="87.624"
@@ -34,7 +37,10 @@ export default function () {
           fill="#6D8DFD"
         />
       </g>
-      <g style="mix-blend-mode:overlay" filter="url(#filter3_f_3915_90797)">
+      <g
+        style={{ mixBlendMode: 'overlay' }}
+        filter="url(#filter3_f_3915_90797)"
+      >
         <ellipse
           cx="99.4083"
           cy="75.5408"
@@ -44,7 +50,10 @@ export default function () {
           fill="#C395FF"
         />
       </g>
-      <g style="mix-blend-mode:overlay" filter="url(#filter4_f_3915_90797)">
+      <g
+        style={{ mixBlendMode: 'overlay' }}
+        filter="url(#filter4_f_3915_90797)"
+      >
         <ellipse
           cx="79.2275"
           cy="106.802"
@@ -54,7 +63,10 @@ export default function () {
           fill="#E1A1FF"
         />
       </g>
-      <g style="mix-blend-mode:overlay" filter="url(#filter5_f_3915_90797)">
+      <g
+        style={{ mixBlendMode: 'overlay' }}
+        filter="url(#filter5_f_3915_90797)"
+      >
         <ellipse
           cx="79.6705"
           cy="154.242"
@@ -64,7 +76,10 @@ export default function () {
           fill="#FFA0CE"
         />
       </g>
-      <g style="mix-blend-mode:overlay" filter="url(#filter6_f_3915_90797)">
+      <g
+        style={{ mixBlendMode: 'overlay' }}
+        filter="url(#filter6_f_3915_90797)"
+      >
         <ellipse
           cx="110.82"
           cy="180.366"
@@ -82,9 +97,9 @@ export default function () {
           width="185.708"
           height="178.814"
           filterUnits="userSpaceOnUse"
-          color-interpolation-filters="sRGB"
+          colorInterpolationFilters="sRGB"
         >
-          <feFlood flood-opacity="0" result="BackgroundImageFix" />
+          <feFlood floodOpacity="0" result="BackgroundImageFix" />
           <feBlend
             mode="normal"
             in="SourceGraphic"
@@ -103,9 +118,9 @@ export default function () {
           width="150.874"
           height="131.779"
           filterUnits="userSpaceOnUse"
-          color-interpolation-filters="sRGB"
+          colorInterpolationFilters="sRGB"
         >
-          <feFlood flood-opacity="0" result="BackgroundImageFix" />
+          <feFlood floodOpacity="0" result="BackgroundImageFix" />
           <feBlend
             mode="normal"
             in="SourceGraphic"
@@ -124,9 +139,9 @@ export default function () {
           width="175.697"
           height="174.693"
           filterUnits="userSpaceOnUse"
-          color-interpolation-filters="sRGB"
+          colorInterpolationFilters="sRGB"
         >
-          <feFlood flood-opacity="0" result="BackgroundImageFix" />
+          <feFlood floodOpacity="0" result="BackgroundImageFix" />
           <feBlend
             mode="normal"
             in="SourceGraphic"
@@ -145,9 +160,9 @@ export default function () {
           width="136.062"
           height="136.187"
           filterUnits="userSpaceOnUse"
-          color-interpolation-filters="sRGB"
+          colorInterpolationFilters="sRGB"
         >
-          <feFlood flood-opacity="0" result="BackgroundImageFix" />
+          <feFlood floodOpacity="0" result="BackgroundImageFix" />
           <feBlend
             mode="normal"
             in="SourceGraphic"
@@ -166,9 +181,9 @@ export default function () {
           width="157.161"
           height="170.228"
           filterUnits="userSpaceOnUse"
-          color-interpolation-filters="sRGB"
+          colorInterpolationFilters="sRGB"
         >
-          <feFlood flood-opacity="0" result="BackgroundImageFix" />
+          <feFlood floodOpacity="0" result="BackgroundImageFix" />
           <feBlend
             mode="normal"
             in="SourceGraphic"
@@ -187,9 +202,9 @@ export default function () {
           width="153.859"
           height="154.409"
           filterUnits="userSpaceOnUse"
-          color-interpolation-filters="sRGB"
+          colorInterpolationFilters="sRGB"
         >
-          <feFlood flood-opacity="0" result="BackgroundImageFix" />
+          <feFlood floodOpacity="0" result="BackgroundImageFix" />
           <feBlend
             mode="normal"
             in="SourceGraphic"
@@ -208,9 +223,9 @@ export default function () {
           width="155.491"
           height="156.712"
           filterUnits="userSpaceOnUse"
-          color-interpolation-filters="sRGB"
+          colorInterpolationFilters="sRGB"
         >
-          <feFlood flood-opacity="0" result="BackgroundImageFix" />
+          <feFlood floodOpacity="0" result="BackgroundImageFix" />
           <feBlend
             mode="normal"
             in="SourceGraphic"

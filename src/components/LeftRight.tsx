@@ -1,7 +1,7 @@
-import { JSX } from 'preact/compat'
 import { BodyText } from 'components/Text'
 import { ChildrenProp } from 'type/Props'
 import formatUSA from 'helpers/formatters/formatUSA'
+import { ReactNode } from 'react'
 
 export function RightWithSkeletonLoader({
   isLoading,
@@ -18,7 +18,7 @@ export default function ({
   children,
   shouldFormat,
 }: {
-  left: JSX.Element | string
+  left: ReactNode
   isLoading: boolean
   shouldFormat?: boolean
 } & ChildrenProp) {

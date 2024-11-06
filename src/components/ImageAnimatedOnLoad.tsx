@@ -1,14 +1,16 @@
-import { ImgProps } from 'type/Props'
+import { ClassNameProp } from 'type/Props'
 
-export default function (props: ImgProps & { forModal?: boolean }) {
-  const modalStyle = props.forModal
-    ? 'self-center min-h-44 h-44 rounded-lg'
-    : ''
+export default function ({
+  src,
+  forModal,
+  className,
+}: { src?: string; forModal?: boolean } & ClassNameProp) {
+  const modalStyle = forModal ? 'self-center min-h-44 h-44 rounded-lg' : ''
 
   return (
     <img
-      {...props}
-      className={`animate-fadeIn opacity-0 transition-opacity ${modalStyle} ${props.className}`}
+      src={src}
+      className={`animate-fadeIn opacity-0 transition-opacity ${modalStyle} ${className}`}
       onLoad={(e) => (e.currentTarget.style.opacity = '1')}
     />
   )

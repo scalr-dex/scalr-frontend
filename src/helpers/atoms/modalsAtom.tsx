@@ -10,6 +10,8 @@ import ScalrAirdropModal from 'components/Modals/PerpDex/ScalrAirdropModal'
 import TriangleAccelerated from 'components/Modals/PerpDex/TriangleAccelerated'
 import { atom } from 'jotai'
 
+export const modalDismissibleAtom = atom(true)
+
 export enum AvailableModals {
   betEnergyInfo,
   betEnergyZero,

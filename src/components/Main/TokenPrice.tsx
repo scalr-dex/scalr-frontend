@@ -6,7 +6,7 @@ import DailyStreakButton from 'components/Tasks/DailyStreakButton'
 import { Header2, Header4 } from 'components/Text'
 import { userBetAtom } from 'helpers/atoms/UserAtom'
 import { useAtomValue } from 'jotai'
-import MotionNumber from 'motion-number'
+import MotionNumber from '@number-flow/react'
 
 export default function ({ price }: { price?: number }) {
   const roundStartPrice = useAtomValue(userBetAtom)
@@ -26,17 +26,19 @@ export default function ({ price }: { price?: number }) {
         </div>
 
         <div className="flex flex-col">
-          <Header2>
+          <span>
             <Header4 className="inline">$</Header4>
-            {price ? (
-              <MotionNumber
-                value={price}
-                format={{ minimumFractionDigits: 4 }}
-              />
-            ) : (
-              <DotsLoader />
-            )}
-          </Header2>
+            <Header2 className="inline">
+              {price ? (
+                <MotionNumber
+                  value={price}
+                  format={{ minimumFractionDigits: 4 }}
+                />
+              ) : (
+                <DotsLoader />
+              )}
+            </Header2>
+          </span>
           {shouldDisplayDelta ? (
             <div
               className={`flex flex-row gap-x-2 items-center font-semibold ${textColor}`}

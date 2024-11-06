@@ -1,7 +1,7 @@
 import { isTMA, retrieveLaunchParams } from '@telegram-apps/sdk-react'
 import backendKy from 'helpers/api/backendKy'
 import { ClientUser, ServerUser } from 'type/User'
-import { useEffect, useState } from 'preact/hooks'
+import { useEffect, useState } from 'react'
 import { writeAtom } from 'helpers/atoms/atomStore'
 import UserAtom, {
   timeToRewardAtom,

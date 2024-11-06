@@ -1,5 +1,4 @@
 import { defineConfig, loadEnv, Plugin } from 'vite'
-import preact from '@preact/preset-vite'
 import tsconfigPaths from 'vite-tsconfig-paths'
 import { visualizer } from 'rollup-plugin-visualizer'
 import { sentryVitePlugin } from '@sentry/vite-plugin'
@@ -11,7 +10,7 @@ export default defineConfig(({ mode }) => {
   const minify = env['MINIFY'] === undefined ? true : Boolean(env['MINIFY'])
 
   return {
-    plugins: [preact(), tsconfigPaths()],
+    plugins: [tsconfigPaths()],
     preview: {
       port: 5173,
     },

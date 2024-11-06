@@ -1,9 +1,11 @@
-import { ChildrenProp, ClassNameProp, OnClickProp, StyleProp } from 'type/Props'
+import {
+  ChildrenProp,
+  ClassNameProp,
+  OnClickPropVoid,
+  StyleProp,
+} from 'type/Props'
 
-type NoisyCardProps = ChildrenProp &
-  ClassNameProp &
-  StyleProp &
-  OnClickProp<HTMLDivElement>
+type NoisyCardProps = ChildrenProp & ClassNameProp & StyleProp & OnClickPropVoid
 
 export default function ({
   children,
