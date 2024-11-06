@@ -7,11 +7,14 @@ import ImageAnimatedOnLoad from 'components/ImageAnimatedOnLoad'
 import ScrollFadeOverlay from 'components/ScrollFadeOverlay'
 import { useAtom, useAtomValue } from 'jotai'
 import UserAtom, { userBalanceAtom } from 'helpers/atoms/UserAtom'
-import CheckMark from 'components/icons/CheckMark'
 import { useCallback, useState } from 'preact/hooks'
 import handleError from 'helpers/handleError'
 import { upgradeLevel } from 'helpers/api/placeBet'
 import ScalrCoin from 'components/icons/coins/ScalrCoin'
+import Check from 'components/icons/Check'
+import Star from 'components/icons/Star'
+import formatUSA from 'helpers/formatters/formatUSA'
+import { successConfetti } from 'helpers/shootConfetti'
 
 function ModalBody() {
   const user = useAtomValue(UserAtom)
@@ -28,7 +31,7 @@ function ModalBody() {
         </BodyText>
 
         <div className="flex flex-row gap-x-2">
-          <CheckMark className="mr-1" />
+          <Check className="mr-1" />
 
           <span className="line-through text-white/50">
             {user.level.betWin}
@@ -41,7 +44,7 @@ function ModalBody() {
         </div>
 
         <div className="flex flex-row gap-x-2">
-          <CheckMark className="mr-1" />
+          <Check className="mr-1" />
 
           <span className="line-through text-white/50">
             {user.level.betLoss}
@@ -58,8 +61,9 @@ function ModalBody() {
   )
 }
 
-function ModalFooter({ onClose }: { onClose: () => void }) {
-  const [loading, setLoading] = useState(false)
+function ModalFooter() {
+  const [pointsLoading, setPointsLoading] = useState(false)
+  const [starsLoading, setStarsLoading] = useState(false)
   const userBalance = useAtomValue(userBalanceAtom)
   const [user, setUser] = useAtom(UserAtom)
 
@@ -68,51 +72,77 @@ function ModalFooter({ onClose }: { onClose: () => void }) {
   const onPointsUpgrade = useCallback(async () => {
     try {
       if (disabled) return
-      const res = await upgradeLevel()
-      console.log(res)
+      const { bet_level, bet_loss, bet_size, bet_upgrade_price, bet_win } =
+        await upgradeLevel()
 
       setUser((prev) =>
         prev
           ? {
               ...prev,
-              level: { ...prev.level, current: prev.level.current + 1 },
+              level: {
+                current: bet_level,
+                betLoss: bet_loss,
+                betSize: bet_size,
+                betUpgradePrice: bet_upgrade_price,
+                betWin: bet_win,
+              },
             }
           : prev
       )
+
+      await successConfetti()
     } catch (e) {
       handleError({ e, toastMessage: 'Failed to upgrade' })
     } finally {
-      setLoading(false)
+      setPointsLoading(false)
+      setStarsLoading(false)
     }
   }, [disabled, setUser])
 
   return (
     <div className="flex flex-col gap-y-4">
       <Button
-        onClick={onClose}
+        onClick={() => {
+          setStarsLoading(true)
+          void onPointsUpgrade()
+        }}
         buttonType={ButtonTypes.secondary}
-        isLoading={loading}
+        isLoading={starsLoading}
+        disabled={pointsLoading}
+        className="h-12.5"
+        iconRight={
+          <div className="flex flex-row gap-x-1 items-center rounded-full bg-tertiary pl-1 pr-2 py-1">
+            <Star size={20} />
+            <BodyText className="font-semibold text-sm text-white">50</BodyText>
+          </div>
+        }
       >
-        Upgrade for (⭐ 50)
+        Upgrade for
       </Button>
       <Button
-        onClick={onPointsUpgrade}
+        onClick={() => {
+          setPointsLoading(true)
+          void onPointsUpgrade()
+        }}
         buttonType={ButtonTypes.secondary}
-        isLoading={loading}
-        disabled={disabled}
+        isLoading={pointsLoading}
+        disabled={disabled || starsLoading}
+        className="h-12.5"
+        iconRight={
+          <div className="flex flex-row gap-x-1 items-center rounded-full bg-tertiary pl-1 pr-2 py-1">
+            <ScalrCoin size={20} />
+            <BodyText className="font-semibold text-sm text-white">
+              {formatUSA(user?.level.betUpgradePrice || 0)}
+            </BodyText>
+          </div>
+        }
       >
-        Upgrade for (258,000 pts)
+        Upgrade for
       </Button>
     </div>
   )
 }
 
 export default function (props: DefaultModalProps) {
-  return (
-    <DefaultModal
-      {...props}
-      body={ModalBody}
-      footer={(onClose) => <ModalFooter onClose={onClose} />}
-    />
-  )
+  return <DefaultModal {...props} body={ModalBody} footer={ModalFooter} />
 }

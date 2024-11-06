@@ -102,20 +102,22 @@ export default function ({
           </div>
         </div>
       ) : (
-        <div className="flex flex-row gap-x-1 w-full">
+        <div className="flex flex-row gap-x-3 w-full">
           <Button
             buttonType={ButtonTypes.success}
-            iconRight={<StonksArrow size={16} />}
+            iconLeft={<StonksArrow size={10} />}
             disabled={disabled || !!userBet}
             onClick={() => onBet(BetDirection.long)}
+            className="border-2 border-white/50 py-2"
           >
             Higher
           </Button>
           <Button
             buttonType={ButtonTypes.error}
-            iconRight={<StonksArrow rotate={90} size={16} />}
+            iconLeft={<StonksArrow rotate={90} size={10} />}
             disabled={disabled || !!userBet}
             onClick={() => onBet(BetDirection.short)}
+            className="border-2 border-white/50 py-2"
           >
             Lower
           </Button>
