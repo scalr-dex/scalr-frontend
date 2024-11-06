@@ -1,10 +1,15 @@
+import { track } from '@amplitude/analytics-browser'
 import dayjs from 'dayjs'
-import { onDailyClaim } from 'helpers/api/dailyReward'
+import claimDailyReward from 'helpers/api/dailyReward'
+import modalsAtom, { AvailableModals } from 'helpers/atoms/modalsAtom'
 import { timeToRewardAtom } from 'helpers/atoms/UserAtom'
-import { useAtom } from 'jotai'
+import handleError from 'helpers/handleError'
+import { useAtom, useSetAtom } from 'jotai'
 import { useCallback, useState } from 'preact/hooks'
+import TrackerEvents from 'type/TrackerEvents'
 
 export default function () {
+  const setModal = useSetAtom(modalsAtom)
   const [loading, setLoading] = useState(false)
   const [timeToReward, setTimeToReward] = useAtom(timeToRewardAtom)
 
@@ -12,12 +17,24 @@ export default function () {
   const canClaim = seconds < 0
 
   const onClaimClick = useCallback(async () => {
-    setLoading(true)
+    if (!canClaim) {
+      setModal(AvailableModals.dailyRewardTimeout)
+      return
+    }
 
-    const newTime = await onDailyClaim()
-    if (newTime) setTimeToReward(newTime)
-    setLoading(false)
-  }, [setTimeToReward])
+    try {
+      setLoading(true)
+
+      const newTime = await claimDailyReward()
+      setTimeToReward(newTime)
+
+      track(TrackerEvents.claimDailyReward)
+    } catch (e) {
+      handleError({ e, toastMessage: 'Failed to claim' })
+    } finally {
+      setLoading(false)
+    }
+  }, [canClaim, setModal, setTimeToReward])
 
   return { loading, canClaim, onClaimClick, seconds }
 }

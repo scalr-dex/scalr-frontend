@@ -1,4 +1,5 @@
 import BattleTicketsModal from 'components/Modals/BattleTicketsModal'
+import DailyRewardTimeoutModal from 'components/Modals/DailyRewardTimeoutModal'
 import DailyStreakModal from 'components/Modals/DailyStreakModal'
 import EnergyInfoModal from 'components/Modals/EnergyInfoModal'
 import EnergyZeroModal from 'components/Modals/EnergyZeroModal'
@@ -16,6 +17,7 @@ export enum AvailableModals {
   betEnergyInfo,
   betEnergyZero,
   dailyStreak,
+  dailyRewardTimeout,
   battleTickets,
   inviteFriends,
   perpInfo,
@@ -31,6 +33,7 @@ export const modalToComponent = {
   [AvailableModals.betEnergyInfo]: { component: EnergyInfoModal },
   [AvailableModals.betEnergyZero]: { component: EnergyZeroModal },
   [AvailableModals.dailyStreak]: { component: DailyStreakModal },
+  [AvailableModals.dailyRewardTimeout]: { component: DailyRewardTimeoutModal },
   [AvailableModals.battleTickets]: { component: BattleTicketsModal },
   [AvailableModals.inviteFriends]: { component: InviteFriendsModal },
   [AvailableModals.perpInfo]: { component: PerpDexInfoModal },

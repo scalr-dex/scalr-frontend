@@ -11,12 +11,10 @@ import { roundDurationMs } from 'helpers/atoms/priceHistoryAtom'
 import Timer from 'components/Main/Timer'
 import { GraphTokenValue } from 'type/TokenState'
 import Points from 'components/Main/Points'
-import ButtonSmall from 'components/ButtonSmall'
-import Logo from 'components/icons/Logo'
-import { navigate } from 'wouter-preact/use-hash-location'
 import BetEnergy from 'components/Main/BetEnergy'
 import modalsAtom, { AvailableModals } from 'helpers/atoms/modalsAtom'
 import LevelUpgrade from 'components/Main/LevelUpgrade'
+import DailyClaim from 'components/Main/DailyClaim'
 
 export default function ({
   loading,
@@ -76,16 +74,7 @@ export default function ({
           <BetEnergy betEnergy={user?.betEnergy} />
         </div>
 
-        <div className="flex flex-row gap-x-2.5 items-center">
-          <ButtonSmall
-            buttonType={ButtonTypes.secondary}
-            iconRight={<Logo size={20} />}
-            className="pr-2 pl-3 py-1"
-            onClick={() => navigate('/tasks')}
-          >
-            Get
-          </ButtonSmall>
-        </div>
+        <DailyClaim />
       </div>
       {userBet ? (
         <div className="flex flex-col gap-y-2">
