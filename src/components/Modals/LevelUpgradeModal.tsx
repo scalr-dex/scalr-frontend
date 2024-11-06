@@ -109,7 +109,7 @@ function ModalFooter() {
         buttonType={ButtonTypes.secondary}
         isLoading={starsLoading}
         disabled={pointsLoading}
-        className="h-12.5"
+        className="h-12.5 hidden"
         iconRight={
           <div className="flex flex-row gap-x-1 items-center rounded-full bg-tertiary pl-1 pr-2 py-1">
             <Star size={20} />
