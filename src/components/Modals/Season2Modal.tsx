@@ -67,7 +67,7 @@ export default function (props: DefaultModalProps) {
   return (
     <DefaultModal
       {...props}
-      body={ModalBody}
+      body={() => <ModalBody />}
       footer={(onClose) => <ModalFooter onClose={onClose} />}
     />
   )

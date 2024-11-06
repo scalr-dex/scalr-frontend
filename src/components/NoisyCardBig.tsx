@@ -1,5 +1,5 @@
 import { BodyText, Header3 } from 'components/Text'
-import { JSX } from 'preact/jsx-runtime'
+import { ReactNode } from 'react'
 
 export default function ({
   header,
@@ -7,8 +7,8 @@ export default function ({
   smallIcon,
 }: {
   header: string
-  subHeader: JSX.Element | string
-  smallIcon: JSX.Element
+  subHeader: ReactNode | string
+  smallIcon: ReactNode
 }) {
   return (
     <div className="flex flex-row justify-between">

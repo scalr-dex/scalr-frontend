@@ -4,7 +4,7 @@ import TaskBlock from 'components/Tasks/TaskBlock'
 import TaskSkeleton from 'components/Tasks/TaskSkeleton'
 import { getTasks } from 'helpers/api/userTasks'
 import { QueryKeys } from 'helpers/queryClient'
-import { useCallback, useState } from 'preact/hooks'
+import { useCallback, useState } from 'react'
 import UserTask from 'type/UserTask'
 import sortTasks from 'helpers/sortTasks'
 import FooterSafeArea from 'components/FooterSafeArea'
@@ -56,7 +56,9 @@ export default function () {
       <TaskSection headerText="One-time tasks">
         {data
           ? data.sort(sortTasks).map(renderTask)
-          : [...Array(5)].map(() => <TaskSkeleton />)}
+          : [...Array(5)].map((_, index) => (
+              <TaskSkeleton key={`task-skeleton-${index}`} />
+            ))}
       </TaskSection>
 
       <FooterSafeArea />

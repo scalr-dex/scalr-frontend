@@ -24,8 +24,8 @@ export function BronzeLeague() {
           y2="21"
           gradientUnits="userSpaceOnUse"
         >
-          <stop stop-color="#E5A352" />
-          <stop offset="1" stop-color="#8E4418" />
+          <stop stopColor="#E5A352" />
+          <stop offset="1" stopColor="#8E4418" />
         </linearGradient>
       </defs>
     </svg>
@@ -58,8 +58,8 @@ export function SilverLeague() {
           y2="21"
           gradientUnits="userSpaceOnUse"
         >
-          <stop stop-color="white" />
-          <stop offset="1" stop-color="#B7BFCA" />
+          <stop stopColor="white" />
+          <stop offset="1" stopColor="#B7BFCA" />
         </linearGradient>
       </defs>
     </svg>
@@ -92,8 +92,8 @@ export function GoldLeague() {
           y2="21"
           gradientUnits="userSpaceOnUse"
         >
-          <stop stop-color="#FFF197" />
-          <stop offset="1" stop-color="#DDA40E" />
+          <stop stopColor="#FFF197" />
+          <stop offset="1" stopColor="#DDA40E" />
         </linearGradient>
       </defs>
     </svg>
@@ -126,8 +126,8 @@ export function PlatinumLeague() {
           y2="21"
           gradientUnits="userSpaceOnUse"
         >
-          <stop stop-color="white" />
-          <stop offset="1" stop-color="#3B3B3B" />
+          <stop stopColor="white" />
+          <stop offset="1" stopColor="#3B3B3B" />
         </linearGradient>
       </defs>
     </svg>
@@ -160,8 +160,8 @@ export function DiamondLeague() {
           y2="20"
           gradientUnits="userSpaceOnUse"
         >
-          <stop stop-color="white" />
-          <stop offset="1" stop-color="#1CFDFF" />
+          <stop stopColor="white" />
+          <stop offset="1" stopColor="#1CFDFF" />
         </linearGradient>
       </defs>
     </svg>

@@ -1,4 +1,4 @@
-import { Dispatch, StateUpdater, useEffect } from 'preact/hooks'
+import { Dispatch, StateUpdater, useEffect } from 'react'
 
 export default function (setTime: Dispatch<StateUpdater<number>>, step = 1) {
   useEffect(() => {

@@ -1,5 +1,5 @@
 import ScalrCoin from 'components/icons/coins/ScalrCoin'
-import MotionNumber from 'motion-number'
+import MotionNumber from '@number-flow/react'
 
 export default function ({ amount }: { amount: number }) {
   const fontSize =

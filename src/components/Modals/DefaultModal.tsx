@@ -1,5 +1,5 @@
 import Close from 'components/icons/Close'
-import { JSX } from 'preact/jsx-runtime'
+import { ReactNode, useCallback } from 'react'
 import { ClassName, DefaultModalProps } from 'type/Props'
 import { Drawer } from 'vaul'
 
@@ -15,18 +15,17 @@ export default function ({
   bodyWrapperClassName,
   footerWrapperClassName,
 }: DefaultModalProps & {
-  header?: (onClose: () => void) => JSX.Element
-  body: (onClose: () => void) => JSX.Element
-  footer?: ((onClose: () => void) => JSX.Element) | null
-  dismissible?: boolean
+  header?: (onClose: () => void) => ReactNode
+  body: (onClose: () => void) => ReactNode
+  footer?: ((onClose: () => void) => ReactNode) | null
   contentClassName?: ClassName
   bodyWrapperClassName?: ClassName
   footerWrapperClassName?: ClassName
 }) {
-  const onClose = () => {
+  const onClose = useCallback(() => {
     onCloseCallback?.()
     setShowModal(false)
-  }
+  }, [onCloseCallback, setShowModal])
 
   return (
     <Drawer.Root
@@ -36,6 +35,7 @@ export default function ({
       repositionInputs={false}
     >
       <Drawer.Portal>
+        <Drawer.Description>Modal</Drawer.Description>
         <Drawer.Overlay className="fixed inset-0 bg-black/50 backdrop-blur-sm transition-all will-change-auto" />
         <Drawer.Content
           className={`flex flex-col rounded-t-3xl bg-secondary max-h-[98vh] fixed bottom-0 left-0 right-0 outline-none ${contentClassName}`}

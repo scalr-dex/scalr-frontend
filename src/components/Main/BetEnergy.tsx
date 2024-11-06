@@ -1,7 +1,7 @@
 import Battery from 'components/icons/Battery'
 import modalsAtom, { AvailableModals } from 'helpers/atoms/modalsAtom'
 import { useSetAtom } from 'jotai'
-import MotionNumber from 'motion-number'
+import MotionNumber from '@number-flow/react'
 
 export default function ({
   betEnergy = 0,

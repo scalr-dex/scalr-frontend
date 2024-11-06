@@ -1,6 +1,6 @@
 import UserAtom, { userBalanceAtom, userBetAtom } from 'helpers/atoms/UserAtom'
 import { useSetAtom } from 'jotai'
-import { useEffect } from 'preact/hooks'
+import { useEffect } from 'react'
 import analyzeMessage from 'helpers/api/webSocket'
 import priceHistoryAtom from 'helpers/atoms/priceHistoryAtom'
 import balanceChangeToast from 'helpers/sendToast'

@@ -1,14 +1,8 @@
 import { AccentText } from 'components/Text'
-import { JSX } from 'preact/jsx-runtime'
-import { ClassNameProp, OnClickProp } from 'type/Props'
+import { ClassNameProp, IconProp, OnClickPropVoid } from 'type/Props'
 import TaskRewardBlock from 'components/Tasks/TaskRewardBlock'
 
-type IconProp = { icon: JSX.Element }
-
-interface TaskUiProps
-  extends OnClickProp<HTMLDivElement>,
-    ClassNameProp,
-    IconProp {
+interface TaskUiProps extends OnClickPropVoid, ClassNameProp, IconProp {
   rewardAmount: number
   taskText: string
   disabled?: boolean
@@ -43,11 +37,10 @@ export default function ({
   return (
     <div
       className={`flex flex-row items-center justify-between transition-opacity ${opacity} ${className}`}
-      onClick={(e) => {
+      onClick={() => {
         if (loading || disabled) return
-        onClick?.(e)
+        onClick?.()
       }}
-      disabled={disabled}
     >
       <div className="flex flex-row items-start gap-x-3">
         <IconBlock icon={icon} />

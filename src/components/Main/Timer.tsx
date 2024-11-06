@@ -1,7 +1,7 @@
 import DotsLoader from 'components/DotsLoader'
 import dayjs from 'dayjs'
 import useCountDown from 'helpers/hooks/useCountDown'
-import { useState, useEffect } from 'preact/hooks'
+import { useState, useEffect } from 'react'
 import { ClassNameProp } from 'type/Props'
 
 export default function ({

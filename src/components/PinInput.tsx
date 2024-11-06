@@ -1,5 +1,5 @@
 import handleError from 'helpers/handleError'
-import { useCallback, useState } from 'preact/hooks'
+import { useCallback, useState } from 'react'
 import { PinField } from 'react-pin-field'
 import { BodyText } from 'components/Text'
 import { ClassName } from 'type/Props'

@@ -1,5 +1,5 @@
 import { Header1, Header2 } from 'components/Text'
-import { useLocation } from 'wouter-preact'
+import { useLocation } from 'wouter'
 
 export default function () {
   const [, setLocation] = useLocation()
