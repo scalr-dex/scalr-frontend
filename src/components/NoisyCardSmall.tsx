@@ -1,5 +1,5 @@
 import { BodyText, Header4 } from 'components/Text'
-import { JSX } from 'preact/jsx-runtime'
+import { ReactNode } from 'react'
 
 export default function ({
   topText,
@@ -7,8 +7,8 @@ export default function ({
   icon,
 }: {
   topText: string
-  bottomText: JSX.Element | string
-  icon: JSX.Element
+  bottomText: ReactNode | string
+  icon: ReactNode
 }) {
   return (
     <div className="w-full h-full flex flex-col content-between">

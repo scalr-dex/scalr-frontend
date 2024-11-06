@@ -1,4 +1,4 @@
-import { useState } from 'preact/hooks'
+import { useState } from 'react'
 import InviteFriendsModal from 'components/Modals/InviteFriendsModal'
 import TaskUi from 'components/Tasks/TaskUi'
 import TwoUsers from 'components/icons/TwoUsers'

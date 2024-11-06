@@ -1,5 +1,5 @@
 import UserTask, { iconNumberToComponent } from 'type/UserTask'
-import { useState } from 'preact/hooks'
+import { useState } from 'react'
 import { specialTasks } from 'helpers/sortTasks'
 import TaskUi from 'components/Tasks/TaskUi'
 import TaskIcon from 'components/Tasks/TaskIcon'

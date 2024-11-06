@@ -18,7 +18,7 @@ import {
   PlatinumLeague,
   SilverLeague,
 } from 'components/icons/Leagues'
-import { JSX } from 'preact/jsx-runtime'
+import { ReactNode } from 'react'
 
 const leagueToComponent = {
   'Bronze League': <BronzeLeague />,
@@ -26,7 +26,7 @@ const leagueToComponent = {
   'Gold League': <GoldLeague />,
   'Platinum League': <PlatinumLeague />,
   'Diamond League': <DiamondLeague />,
-} as { [key: string]: JSX.Element }
+} as { [key: string]: ReactNode }
 
 function StatsSection({ children }: ChildrenProp) {
   return <div className="flex flex-col gap-y-2">{children}</div>

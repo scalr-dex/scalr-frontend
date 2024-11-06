@@ -3,17 +3,22 @@ import { Header2 } from 'components/Text'
 import DefaultModal from 'components/Modals/DefaultModal'
 import ButtonTypes from 'type/Button'
 import { DefaultModalProps } from 'type/Props'
-import { useCallback, useEffect, useState } from 'preact/hooks'
+import { useEffect } from 'react'
 import IconWithTexts from 'components/IconWithTexts'
 import CheckCircle from 'components/icons/CheckCircle'
 import Percent from 'components/icons/Percent'
 import Cup from 'components/icons/Cup'
 import Gift from 'components/icons/Gift'
 import TonConnect from 'components/TonConnect'
-import { useTonConnectUI } from 'lib/ui-react'
+import { useTonConnectUI } from '@tonconnect/ui-react'
 import { useAutoAnimate } from '@formkit/auto-animate/react'
 import ImageAnimatedOnLoad from 'components/ImageAnimatedOnLoad'
 import ScrollFadeOverlay from 'components/ScrollFadeOverlay'
+import { atom, useAtom, useAtomValue, useSetAtom } from 'jotai'
+import { writeAtom } from 'helpers/atoms/atomStore'
+import { modalDismissibleAtom } from 'helpers/atoms/modalsAtom'
+
+const connectStepAtom = atom(false)
 
 const info = [
   {
@@ -40,15 +45,12 @@ const info = [
   },
 ]
 
-function ModalBody({
-  connectWallet,
-  isConnected,
-}: {
-  connectWallet: boolean
-  isConnected: boolean
-}) {
+function ModalBody() {
+  const connectStep = useAtomValue(connectStepAtom)
+  const [tonConnect] = useTonConnectUI()
   const [parent] = useAutoAnimate()
-  const glow = connectWallet ? 'drop-shadow-bulb-glow' : ''
+
+  const glow = connectStep ? 'drop-shadow-bulb-glow' : ''
 
   return (
     <>
@@ -64,79 +66,65 @@ function ModalBody({
             Scalr Airdrop
           </Header2>
           <span className="text-white/50">
-            {connectWallet
-              ? isConnected
+            {connectStep
+              ? tonConnect.connected
                 ? "Nice, you're ready for airdrop"
                 : 'Connect wallet to secure your spot'
               : 'A mobile-first, fast and reliable perpetual exchange designed for seamless trading.'}
           </span>
         </div>
 
-        {connectWallet ? null : (
-          <div className="flex flex-col gap-y-5">{info.map(IconWithTexts)}</div>
+        {connectStep ? null : (
+          <div className="flex flex-col gap-y-5">
+            {info.map((props) => (
+              <IconWithTexts {...props} key={props.topText} />
+            ))}
+          </div>
         )}
       </div>
-      {connectWallet ? null : <ScrollFadeOverlay />}
+      {connectStep ? null : <ScrollFadeOverlay />}
     </>
   )
 }
 
-function ModalFooter({
-  connectWallet,
-  setConnectWallet,
-}: {
-  connectWallet: boolean
-  setConnectWallet: () => void
-}) {
-  if (connectWallet) {
+function ModalFooter() {
+  const setModalDismissible = useSetAtom(modalDismissibleAtom)
+  const [connectStep, setConnectStep] = useAtom(connectStepAtom)
+  const [tonConnect] = useTonConnectUI()
+
+  useEffect(() => {
+    const unsubscribe = tonConnect.onModalStateChange((state) =>
+      setModalDismissible(state.status === 'closed')
+    )
+
+    return () => {
+      unsubscribe()
+    }
+  }, [setModalDismissible, tonConnect])
+
+  if (connectStep) {
     return <TonConnect />
   }
 
   return (
-    <Button buttonType={ButtonTypes.alt} onClick={setConnectWallet}>
+    <Button buttonType={ButtonTypes.alt} onClick={() => setConnectStep(true)}>
       Secure Your Spot Now
     </Button>
   )
 }
 
 export default function (props: DefaultModalProps) {
-  const [tonConnect] = useTonConnectUI()
-  const [connectWallet, setConnectWallet] = useState(false)
-  const [dismissible, setDismissible] = useState(true)
-  const onClose = useCallback(() => {
-    props.setShowModal(false)
-    setTimeout(() => setConnectWallet(false), 200)
-  }, [props])
-
-  useEffect(() => {
-    const unsubscribe = tonConnect.onModalStateChange((state) =>
-      setDismissible(state.status === 'closed')
-    )
-
-    return () => {
-      unsubscribe()
-    }
-  }, [tonConnect])
-
   return (
     <DefaultModal
       {...props}
-      dismissible={dismissible}
-      onCloseCallback={onClose}
+      onCloseCallback={() => {
+        props.setShowModal(false)
+        setTimeout(() => writeAtom(connectStepAtom, false), 200)
+      }}
       contentClassName="h-[98vh]"
       footerWrapperClassName="flex-1 content-end"
-      body={() => (
-        <ModalBody
-          isConnected={tonConnect.connected}
-          connectWallet={connectWallet}
-        />
-      )}
-      footer={() => (
-        <ModalFooter
-          connectWallet={connectWallet}
-          setConnectWallet={() => setConnectWallet(true)}
-        />
-      )}
+      body={ModalBody}
+      footer={ModalFooter}
     />
   )
 }

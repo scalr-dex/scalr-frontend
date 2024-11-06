@@ -1,12 +1,12 @@
 import { useHapticFeedback } from '@telegram-apps/sdk-react'
-import { JSX } from 'preact/jsx-runtime'
+import { HTMLAttributes } from 'react'
 import { ChildrenProp } from 'type/Props'
 
 export function Header1({
   children,
   className,
   ...props
-}: ChildrenProp & JSX.HTMLAttributes<HTMLHeadingElement>) {
+}: ChildrenProp & HTMLAttributes<HTMLHeadingElement>) {
   return (
     <h2 {...props} className={`text-4.5xl font-bold ${className}`}>
       {children}
@@ -18,7 +18,7 @@ export function Header2({
   children,
   className,
   ...props
-}: ChildrenProp & JSX.HTMLAttributes<HTMLHeadingElement>) {
+}: ChildrenProp & HTMLAttributes<HTMLHeadingElement>) {
   return (
     <h2 {...props} className={`text-3xl leading-9 font-bold ${className}`}>
       {children}
@@ -30,7 +30,7 @@ export function Header3({
   children,
   className,
   ...props
-}: ChildrenProp & JSX.HTMLAttributes<HTMLHeadingElement>) {
+}: ChildrenProp & HTMLAttributes<HTMLHeadingElement>) {
   return (
     <h2 {...props} className={`text-2xl leading-7 font-bold ${className}`}>
       {children}
@@ -42,7 +42,7 @@ export function Header4({
   children,
   className,
   ...props
-}: ChildrenProp & JSX.HTMLAttributes<HTMLHeadingElement>) {
+}: ChildrenProp & HTMLAttributes<HTMLHeadingElement>) {
   return (
     <h4 {...props} className={`font-medium text-xl leading-6 ${className}`}>
       {children}
@@ -54,7 +54,7 @@ export function AccentText({
   children,
   className,
   ...props
-}: ChildrenProp & JSX.HTMLAttributes<HTMLSpanElement>) {
+}: ChildrenProp & HTMLAttributes<HTMLSpanElement>) {
   return (
     <span {...props} className={`font-accent leading-5 ${className}`}>
       {children}
@@ -66,7 +66,7 @@ export function BodyText({
   children,
   className,
   ...props
-}: ChildrenProp & JSX.HTMLAttributes<HTMLSpanElement>) {
+}: ChildrenProp & HTMLAttributes<HTMLSpanElement>) {
   return (
     <span {...props} className={className}>
       {children}
@@ -81,7 +81,7 @@ export function SpecialText({
   withShadow,
   ...props
 }: ChildrenProp &
-  JSX.HTMLAttributes<HTMLSpanElement> & {
+  HTMLAttributes<HTMLSpanElement> & {
     leftIcon?: JSX.Element
     withShadow?: boolean
   }) {

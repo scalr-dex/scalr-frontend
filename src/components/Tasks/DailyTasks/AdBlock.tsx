@@ -2,7 +2,7 @@ import TaskUi from 'components/Tasks/TaskUi'
 import UserAtom from 'helpers/atoms/UserAtom'
 import useAdsgram from 'helpers/hooks/useAdsgram'
 import { useAtom } from 'jotai'
-import { useCallback } from 'preact/hooks'
+import { useCallback } from 'react'
 import { iconNumberToComponent } from 'type/UserTask'
 
 const rewardAmount = 500

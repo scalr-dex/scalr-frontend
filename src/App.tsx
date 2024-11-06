@@ -3,7 +3,7 @@ import BottomTabNavigator from 'components/BottomTabNavigator'
 import NotFound from 'pages/NotFound'
 import Tasks from 'pages/Tasks'
 import { ToastContainer } from 'react-toastify'
-import { Router, Switch, Route, Redirect } from 'wouter-preact'
+import { Router, Switch, Route, Redirect } from 'wouter'
 import { SDKProvider } from '@telegram-apps/sdk-react'
 import useSetup from 'helpers/hooks/useSetup'
 import BrowserInvite from 'pages/BrowserInvite'
@@ -16,15 +16,15 @@ import SplashScreen from 'components/SplashScreen'
 import { useAtomValue } from 'jotai'
 import didOnboardAtom, { onboardedS2Atom } from 'helpers/atoms/UserStates'
 import useWebSocketData from 'helpers/hooks/useWebSocketData'
-import { lazy, Suspense } from 'preact/compat'
 import Loader from 'components/Loader'
 import Main from 'pages/Main'
 import { ErrorBoundary } from '@sentry/react'
 import ErrorBoundaryFallback from 'components/ErrorBoundaryFallback'
-import { useHashLocation } from 'wouter-preact/use-hash-location'
+import { useHashLocation } from 'wouter/use-hash-location'
 import LoaderFullPage from 'components/LoaderFullPage'
-import { THEME, TonConnectUIProvider } from 'lib/ui-react'
+import { THEME, TonConnectUIProvider } from '@tonconnect/ui-react'
 import PerpDex from 'pages/PerpDex'
+import { lazy, Suspense } from 'react'
 import Modals from 'components/Modals'
 
 const Onboarding = lazy(() => import('pages/Onboarding'))
@@ -43,7 +43,7 @@ function AppInner({ socket }: { socket: WebSocket }) {
         <TonConnectUIProvider
           manifestUrl={`${location.origin}/tonconnect-manifest.json`}
           actionsConfiguration={{
-            twaReturnUrl: env.VITE_APP_BASE_LINK,
+            twaReturnUrl: env.VITE_APP_BASE_LINK as `${string}://${string}`,
           }}
           uiPreferences={{ theme: THEME.DARK }}
         >

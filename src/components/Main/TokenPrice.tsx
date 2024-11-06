@@ -8,7 +8,7 @@ import { Header2, Header4 } from 'components/Text'
 import modalsAtom, { AvailableModals } from 'helpers/atoms/modalsAtom'
 import { userBetAtom } from 'helpers/atoms/UserAtom'
 import { useAtomValue, useSetAtom } from 'jotai'
-import MotionNumber from 'motion-number'
+import MotionNumber from '@number-flow/react'
 
 export default function ({ price }: { price?: number }) {
   const setModal = useSetAtom(modalsAtom)
@@ -29,17 +29,19 @@ export default function ({ price }: { price?: number }) {
         </div>
 
         <div className="flex flex-col">
-          <Header2>
+          <span>
             <Header4 className="inline">$</Header4>
-            {price ? (
-              <MotionNumber
-                value={price}
-                format={{ minimumFractionDigits: 4 }}
-              />
-            ) : (
-              <DotsLoader />
-            )}
-          </Header2>
+            <Header2 className="inline">
+              {price ? (
+                <MotionNumber
+                  value={price}
+                  format={{ minimumFractionDigits: 4 }}
+                />
+              ) : (
+                <DotsLoader />
+              )}
+            </Header2>
+          </span>
           {shouldDisplayDelta ? (
             <div
               className={`flex flex-row gap-x-2 items-center font-semibold ${textColor}`}

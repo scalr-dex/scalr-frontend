@@ -1,15 +1,14 @@
-import { JSX } from 'preact/jsx-runtime'
 import { Header4, BodyText } from 'components/Text'
+import { IconProp } from 'type/Props'
 
 export default function ({
   icon,
   topText,
   bottomText,
 }: {
-  icon: JSX.Element
   topText: string
   bottomText: string
-}) {
+} & IconProp) {
   return (
     <div className="flex flex-row gap-x-4">
       <div className="text-alt">{icon}</div>

@@ -5,8 +5,8 @@ import modalsAtom, { AvailableModals } from 'helpers/atoms/modalsAtom'
 import { timeToRewardAtom } from 'helpers/atoms/UserAtom'
 import handleError from 'helpers/handleError'
 import { useAtom, useSetAtom } from 'jotai'
-import { useCallback, useState } from 'preact/hooks'
 import TrackerEvents from 'type/TrackerEvents'
+import { useCallback, useState } from 'react'
 
 export default function () {
   const setModal = useSetAtom(modalsAtom)

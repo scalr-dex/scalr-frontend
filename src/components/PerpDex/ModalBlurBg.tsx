@@ -26,7 +26,10 @@ export default function ({ className }: ClassNameProp) {
           fill="#AD6EFF"
         />
       </g>
-      <g style="mix-blend-mode:overlay" filter="url(#filter2_f_3970_27811)">
+      <g
+        style={{ mixBlendMode: 'overlay' }}
+        filter="url(#filter2_f_3970_27811)"
+      >
         <ellipse
           cx="83.7506"
           cy="66.8796"
@@ -36,7 +39,10 @@ export default function ({ className }: ClassNameProp) {
           fill="#557AFF"
         />
       </g>
-      <g style="mix-blend-mode:overlay" filter="url(#filter3_f_3970_27811)">
+      <g
+        style={{ mixBlendMode: 'overlay' }}
+        filter="url(#filter3_f_3970_27811)"
+      >
         <ellipse
           cx="39.5171"
           cy="39"
@@ -46,7 +52,10 @@ export default function ({ className }: ClassNameProp) {
           fill="#C395FF"
         />
       </g>
-      <g style="mix-blend-mode:overlay" filter="url(#filter4_f_3970_27811)">
+      <g
+        style={{ mixBlendMode: 'overlay' }}
+        filter="url(#filter4_f_3970_27811)"
+      >
         <ellipse
           cx="65.3054"
           cy="72.5"
@@ -56,7 +65,10 @@ export default function ({ className }: ClassNameProp) {
           fill="#EDC8FF"
         />
       </g>
-      <g style="mix-blend-mode:overlay" filter="url(#filter5_f_3970_27811)">
+      <g
+        style={{ mixBlendMode: 'overlay' }}
+        filter="url(#filter5_f_3970_27811)"
+      >
         <ellipse
           cx="55.0861"
           cy="57.0886"
@@ -66,7 +78,10 @@ export default function ({ className }: ClassNameProp) {
           fill="#FFA0CE"
         />
       </g>
-      <g style="mix-blend-mode:overlay" filter="url(#filter6_f_3970_27811)">
+      <g
+        style={{ mixBlendMode: 'overlay' }}
+        filter="url(#filter6_f_3970_27811)"
+      >
         <ellipse
           cx="58.8702"
           cy="56.9738"
@@ -84,9 +99,9 @@ export default function ({ className }: ClassNameProp) {
           width="346.84"
           height="396.285"
           filterUnits="userSpaceOnUse"
-          color-interpolation-filters="sRGB"
+          colorInterpolationFilters="sRGB"
         >
-          <feFlood flood-opacity="0" result="BackgroundImageFix" />
+          <feFlood floodOpacity="0" result="BackgroundImageFix" />
           <feBlend
             mode="normal"
             in="SourceGraphic"
@@ -105,9 +120,9 @@ export default function ({ className }: ClassNameProp) {
           width="282.105"
           height="246.398"
           filterUnits="userSpaceOnUse"
-          color-interpolation-filters="sRGB"
+          colorInterpolationFilters="sRGB"
         >
-          <feFlood flood-opacity="0" result="BackgroundImageFix" />
+          <feFlood floodOpacity="0" result="BackgroundImageFix" />
           <feBlend
             mode="normal"
             in="SourceGraphic"
@@ -126,9 +141,9 @@ export default function ({ className }: ClassNameProp) {
           width="328.512"
           height="326.637"
           filterUnits="userSpaceOnUse"
-          color-interpolation-filters="sRGB"
+          colorInterpolationFilters="sRGB"
         >
-          <feFlood flood-opacity="0" result="BackgroundImageFix" />
+          <feFlood floodOpacity="0" result="BackgroundImageFix" />
           <feBlend
             mode="normal"
             in="SourceGraphic"
@@ -147,9 +162,9 @@ export default function ({ className }: ClassNameProp) {
           width="254.402"
           height="254.639"
           filterUnits="userSpaceOnUse"
-          color-interpolation-filters="sRGB"
+          colorInterpolationFilters="sRGB"
         >
-          <feFlood flood-opacity="0" result="BackgroundImageFix" />
+          <feFlood floodOpacity="0" result="BackgroundImageFix" />
           <feBlend
             mode="normal"
             in="SourceGraphic"
@@ -168,9 +183,9 @@ export default function ({ className }: ClassNameProp) {
           width="308.148"
           height="319.672"
           filterUnits="userSpaceOnUse"
-          color-interpolation-filters="sRGB"
+          colorInterpolationFilters="sRGB"
         >
-          <feFlood flood-opacity="0" result="BackgroundImageFix" />
+          <feFlood floodOpacity="0" result="BackgroundImageFix" />
           <feBlend
             mode="normal"
             in="SourceGraphic"
@@ -189,9 +204,9 @@ export default function ({ className }: ClassNameProp) {
           width="287.684"
           height="288.711"
           filterUnits="userSpaceOnUse"
-          color-interpolation-filters="sRGB"
+          colorInterpolationFilters="sRGB"
         >
-          <feFlood flood-opacity="0" result="BackgroundImageFix" />
+          <feFlood floodOpacity="0" result="BackgroundImageFix" />
           <feBlend
             mode="normal"
             in="SourceGraphic"
@@ -210,9 +225,9 @@ export default function ({ className }: ClassNameProp) {
           width="290.738"
           height="293.021"
           filterUnits="userSpaceOnUse"
-          color-interpolation-filters="sRGB"
+          colorInterpolationFilters="sRGB"
         >
-          <feFlood flood-opacity="0" result="BackgroundImageFix" />
+          <feFlood floodOpacity="0" result="BackgroundImageFix" />
           <feBlend
             mode="normal"
             in="SourceGraphic"

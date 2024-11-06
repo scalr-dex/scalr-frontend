@@ -1,6 +1,6 @@
 import SmallHorizontalCard from 'components/Tasks/SmallHorizontalCard'
 import useHorizontalScroll from 'helpers/hooks/useHorizontalScroll'
-import { useRef } from 'preact/hooks'
+import { useRef } from 'react'
 
 export default function () {
   const container = useRef<HTMLDivElement>(null)

@@ -1,6 +1,5 @@
 import { ImpactHapticFeedbackStyle } from '@telegram-apps/sdk-react'
-import { ComponentChildren } from 'preact'
-import { JSX } from 'preact/jsx-runtime'
+import { HTMLAttributes, ReactNode } from 'react'
 import { ClassName } from 'type/Props'
 
 enum ButtonTypes {
@@ -15,9 +14,9 @@ enum ButtonTypes {
   special,
 }
 
-export interface ButtonProps extends JSX.HTMLAttributes<HTMLButtonElement> {
+export interface ButtonProps extends HTMLAttributes<HTMLButtonElement> {
   buttonType?: ButtonTypes | undefined
-  children: ComponentChildren
+  children: ReactNode
   iconLeft?: JSX.Element | null
   iconRight?: JSX.Element | null
   isLoading?: boolean | undefined

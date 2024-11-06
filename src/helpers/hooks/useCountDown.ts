@@ -1,6 +1,6 @@
-import { Dispatch, StateUpdater, useEffect } from 'preact/hooks'
+import { Dispatch, SetStateAction, useEffect } from 'react'
 
-export default function (setTime: Dispatch<StateUpdater<number>>, step = 1) {
+export default function (setTime: Dispatch<SetStateAction<number>>, step = 1) {
   useEffect(() => {
     const interval = setInterval(() => {
       setTime((prev) => (prev ? prev - step : 0))

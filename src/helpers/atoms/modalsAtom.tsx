@@ -13,6 +13,8 @@ import TriangleAccelerated from 'components/Modals/PerpDex/TriangleAccelerated'
 import SeasonStats from 'components/Modals/SeasonStats'
 import { atom } from 'jotai'
 
+export const modalDismissibleAtom = atom(true)
+
 export enum AvailableModals {
   betEnergyInfo,
   betEnergyZero,

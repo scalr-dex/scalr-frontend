@@ -3,15 +3,18 @@ import { Header2 } from 'components/Text'
 import DefaultModal from 'components/Modals/DefaultModal'
 import ButtonTypes from 'type/Button'
 import { DefaultModalProps } from 'type/Props'
-import { useCallback, useState } from 'preact/hooks'
 import Box from 'components/icons/Box'
 import IconWithTexts from 'components/IconWithTexts'
 import TimerIcon from 'components/icons/TimerIcon'
 import Maximize from 'components/icons/Maximize'
 import DexInfoStonks from 'components/DexInfoStonks'
 import PerpModalPinCode from 'components/PerpDex/PerpModalPinCode'
-import { useAutoAnimate } from '@formkit/auto-animate/react'
 import ScrollFadeOverlay from 'components/ScrollFadeOverlay'
+import { atom, useAtom, useAtomValue } from 'jotai'
+import { writeAtom } from 'helpers/atoms/atomStore'
+import { useAutoAnimate } from '@formkit/auto-animate/react'
+
+const showCodeInputAtom = atom(false)
 
 const info = [
   {
@@ -33,17 +36,16 @@ const info = [
   },
 ]
 
-function ModalBody({ showCodeInput }: { showCodeInput: boolean }) {
+function ModalBody() {
   const [parent] = useAutoAnimate()
+  const showCodeInput = useAtomValue(showCodeInputAtom)
+
   const glow = showCodeInput ? 'drop-shadow-bulb-glow' : ''
 
   return (
-    <>
-      <div className="flex flex-col gap-y-6 h-[80vh]">
-        <div
-          className="flex w-full items-center justify-center h-36"
-          ref={parent}
-        >
+    <div>
+      <div className="flex flex-col gap-y-6 h-[80vh]" ref={parent}>
+        <div className="flex w-full items-center justify-center h-36">
           {showCodeInput ? (
             <PerpModalPinCode />
           ) : (
@@ -65,19 +67,27 @@ function ModalBody({ showCodeInput }: { showCodeInput: boolean }) {
         </div>
 
         {showCodeInput ? null : (
-          <div className="flex flex-col gap-y-5">{info.map(IconWithTexts)}</div>
+          <div className="flex flex-col gap-y-5">
+            {info.map((props) => (
+              <IconWithTexts {...props} key={props.topText} />
+            ))}
+          </div>
         )}
       </div>
-      <ScrollFadeOverlay />
-    </>
+      {showCodeInput ? null : <ScrollFadeOverlay />}
+    </div>
   )
 }
 
-function ModalFooter({ setShowCodeInput }: { setShowCodeInput: () => void }) {
+function ModalFooter() {
+  const [showCodeInput, setShowCodeInput] = useAtom(showCodeInputAtom)
+
+  if (showCodeInput) return null
+
   return (
     <Button
       buttonType={ButtonTypes.alt}
-      onClick={() => requestAnimationFrame(setShowCodeInput)}
+      onClick={() => requestAnimationFrame(() => setShowCodeInput(true))}
     >
       Join the beta
     </Button>
@@ -85,22 +95,15 @@ function ModalFooter({ setShowCodeInput }: { setShowCodeInput: () => void }) {
 }
 
 export default function (props: DefaultModalProps) {
-  const [showCodeInput, setShowCodeInput] = useState(false)
-  const onClose = useCallback(() => {
-    props.setShowModal(false)
-    setTimeout(() => setShowCodeInput(false), 200)
-  }, [props])
-
-  const footer = showCodeInput
-    ? null
-    : () => <ModalFooter setShowCodeInput={() => setShowCodeInput(true)} />
-
   return (
     <DefaultModal
       {...props}
-      onCloseCallback={onClose}
-      body={() => <ModalBody showCodeInput={showCodeInput} />}
-      footer={footer}
+      onCloseCallback={() => {
+        props.setShowModal(false)
+        setTimeout(() => writeAtom(showCodeInputAtom, false), 200)
+      }}
+      body={ModalBody}
+      footer={ModalFooter}
     />
   )
 }
