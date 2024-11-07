@@ -70,6 +70,7 @@ jobs:
             --build-arg VITE_APP_BASE_LINK=$VITE_APP_BASE_LINK \
             --build-arg VITE_SENTRY_DSN=$VITE_SENTRY_DSN \
             --build-arg VITE_ADSGRAM_BLOCK_ID=$VITE_ADSGRAM_BLOCK_ID \
+            --build-arg VITE_SPOT_AD_KEY=$VITE_SPOT_AD_KEY \
             -t ghcr.io/scalr-dex/scalr-frontend:develop . --push
       - name: Trigger Dev Deploy
         uses: distributhor/workflow-webhook@v3
