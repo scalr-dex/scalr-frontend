@@ -68,7 +68,7 @@ export function BodyText({
   ...props
 }: ChildrenProp & HTMLAttributes<HTMLSpanElement>) {
   return (
-    <span {...props} className={className}>
+    <span {...props} className={`font-accent ${className}`}>
       {children}
     </span>
   )

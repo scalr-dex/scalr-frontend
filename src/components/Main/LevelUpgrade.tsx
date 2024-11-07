@@ -14,7 +14,7 @@ export default function () {
   return (
     <ButtonSmall
       onClick={() => setModal(AvailableModals.levelUpgrade)}
-      className="min-w-fit px-2 border border-white-16"
+      className="min-w-fit h-7.5 px-2 border border-white-16 font-accent"
       buttonType={ButtonTypes.neutral}
       iconRight={<ArrowTopCircle />}
     >

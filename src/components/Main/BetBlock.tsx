@@ -68,7 +68,7 @@ export default function ({
   return (
     <div className="flex flex-col h-28 gap-y-5 px-4">
       <div className="flex flex-row items-center justify-between">
-        <div className="flex flex-row gap-x-2">
+        <div className="flex flex-row items-center gap-x-2">
           <Points amount={userBalance} />
           <LevelUpgrade />
           <BetEnergy betEnergy={user?.betEnergy} />
@@ -99,7 +99,7 @@ export default function ({
             onClick={() => onBet(BetDirection.long)}
             className="border-2 border-white/50 py-2"
           >
-            Higher
+            <BodyText>Higher</BodyText>
           </Button>
           <Button
             buttonType={ButtonTypes.error}
@@ -108,7 +108,7 @@ export default function ({
             onClick={() => onBet(BetDirection.short)}
             className="border-2 border-white/50 py-2"
           >
-            Lower
+            <BodyText>Lower</BodyText>
           </Button>
         </div>
       )}
