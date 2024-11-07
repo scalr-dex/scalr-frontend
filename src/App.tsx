@@ -26,6 +26,7 @@ import { THEME, TonConnectUIProvider } from '@tonconnect/ui-react'
 import PerpDex from 'pages/PerpDex'
 import { lazy, Suspense } from 'react'
 import Modals from 'components/Modals'
+import Market from 'pages/Market'
 
 const Onboarding = lazy(() => import('pages/Onboarding'))
 
@@ -55,6 +56,7 @@ function AppInner({ socket }: { socket: WebSocket }) {
               <Switch>
                 {didOnboard ? (
                   <>
+                    <Route path="/market" component={Market} />
                     <Route path="/tasks" component={Tasks} />
                     <Route path="/leaderboards" component={LeaderBoards} />
                     <Route

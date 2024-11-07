@@ -13,6 +13,7 @@ const buttons = [
     component: <GiftWithNotifications />,
   },
   { path: 'perp', component: <DollarCoin /> },
+  { path: 'market', component: <span>🧺</span> },
 ]
 
 export default function () {
