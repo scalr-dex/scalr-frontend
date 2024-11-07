@@ -35,6 +35,7 @@ jobs:
           VITE_APP_BASE_LINK: ${{ secrets.VITE_APP_BASE_LINK }}
           VITE_SENTRY_DSN: ${{ secrets.VITE_SENTRY_DSN }}
           VITE_ADSGRAM_BLOCK_ID: ${{secrets.VITE_ADSGRAM_BLOCK_ID }}
+          VITE_SPOT_AD_KEY: ${{secrets.VITE_SPOT_AD_KEY }}
         shell: bash
       - name: Setup Pages
         uses: actions/configure-pages@v2

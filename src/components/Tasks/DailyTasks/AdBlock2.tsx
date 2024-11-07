@@ -1,4 +1,5 @@
 import TaskUi from 'components/Tasks/TaskUi'
+import env from 'helpers/env'
 import { iconNumberToComponent } from 'type/UserTask'
 
 declare global {
@@ -17,7 +18,7 @@ export default function () {
       rewardAmount={500}
       onClick={() => {
         window.showAd(
-          '123',
+          env.VITE_SPOT_AD_KEY,
           () => alert('Success'),
           () => alert('Err')
         )
