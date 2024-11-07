@@ -107,11 +107,7 @@ function ModalFooter() {
   }
 
   return (
-    <Button
-      buttonType={ButtonTypes.alt}
-      className="!rounded-full"
-      onClick={() => setConnectStep(true)}
-    >
+    <Button buttonType={ButtonTypes.alt} onClick={() => setConnectStep(true)}>
       Secure Your Spot Now
     </Button>
   )

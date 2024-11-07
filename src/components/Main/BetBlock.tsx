@@ -11,11 +11,10 @@ import { roundDurationMs } from 'helpers/atoms/priceHistoryAtom'
 import Timer from 'components/Main/Timer'
 import { GraphTokenValue } from 'type/TokenState'
 import Points from 'components/Main/Points'
-import ButtonSmall from 'components/ButtonSmall'
-import Logo from 'components/icons/Logo'
-import { navigate } from 'wouter/use-hash-location'
 import BetEnergy from 'components/Main/BetEnergy'
 import modalsAtom, { AvailableModals } from 'helpers/atoms/modalsAtom'
+import LevelUpgrade from 'components/Main/LevelUpgrade'
+import DailyClaim from 'components/Main/DailyClaim'
 
 export default function ({
   loading,
@@ -69,19 +68,13 @@ export default function ({
   return (
     <div className="flex flex-col h-28 gap-y-5 px-4">
       <div className="flex flex-row items-center justify-between">
-        <Points amount={userBalance} />
-
-        <div className="flex flex-row gap-x-2.5 items-center">
+        <div className="flex flex-row items-center gap-x-2">
+          <Points amount={userBalance} />
+          <LevelUpgrade />
           <BetEnergy betEnergy={user?.betEnergy} />
-          <ButtonSmall
-            buttonType={ButtonTypes.secondary}
-            iconRight={<Logo size={20} />}
-            className="pr-2 pl-3 py-1"
-            onClick={() => navigate('/tasks')}
-          >
-            Get
-          </ButtonSmall>
         </div>
+
+        <DailyClaim />
       </div>
       {userBet ? (
         <div className="flex flex-col gap-y-2">
@@ -98,22 +91,24 @@ export default function ({
           </div>
         </div>
       ) : (
-        <div className="flex flex-row gap-x-1 w-full">
+        <div className="flex flex-row gap-x-3 w-full">
           <Button
             buttonType={ButtonTypes.success}
-            iconRight={<StonksArrow size={16} />}
+            iconLeft={<StonksArrow size={10} />}
             disabled={disabled || !!userBet}
             onClick={() => onBet(BetDirection.long)}
+            className="border-2 border-white/50 py-2"
           >
-            Higher
+            <BodyText>Higher</BodyText>
           </Button>
           <Button
             buttonType={ButtonTypes.error}
-            iconRight={<StonksArrow rotate={90} size={16} />}
+            iconLeft={<StonksArrow rotate={90} size={10} />}
             disabled={disabled || !!userBet}
             onClick={() => onBet(BetDirection.short)}
+            className="border-2 border-white/50 py-2"
           >
-            Lower
+            <BodyText>Lower</BodyText>
           </Button>
         </div>
       )}

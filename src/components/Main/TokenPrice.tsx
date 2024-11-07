@@ -1,14 +1,17 @@
 import BattleTicketButton from 'components/BattleTicketButton'
 import DotsLoader from 'components/DotsLoader'
 import TonCoin from 'components/icons/coins/TonCoin'
+import DocumentPaper from 'components/icons/DocumentPaper'
 import StonksArrow from 'components/icons/StonksArrow'
 import DailyStreakButton from 'components/Tasks/DailyStreakButton'
 import { Header2, Header4 } from 'components/Text'
+import modalsAtom, { AvailableModals } from 'helpers/atoms/modalsAtom'
 import { userBetAtom } from 'helpers/atoms/UserAtom'
-import { useAtomValue } from 'jotai'
+import { useAtomValue, useSetAtom } from 'jotai'
 import MotionNumber from '@number-flow/react'
 
 export default function ({ price }: { price?: number }) {
+  const setModal = useSetAtom(modalsAtom)
   const roundStartPrice = useAtomValue(userBetAtom)
   const shouldDisplayDelta = price && roundStartPrice?.value
   const delta = shouldDisplayDelta ? price - roundStartPrice.value[1] : 0
@@ -50,7 +53,11 @@ export default function ({ price }: { price?: number }) {
         </div>
       </div>
 
-      <div className="flex flex-row gap-x-2 h-8">
+      <div className="flex flex-row items-center gap-x-2 h-8">
+        <DocumentPaper
+          size={20}
+          onClick={() => setModal(AvailableModals.season1stats)}
+        />
         <DailyStreakButton small />
         <BattleTicketButton small />
       </div>

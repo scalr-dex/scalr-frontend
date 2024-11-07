@@ -15,8 +15,8 @@ export default function ({
   bodyWrapperClassName,
   footerWrapperClassName,
 }: DefaultModalProps & {
-  header?: (onClose: () => void) => ReactNode
-  body: (onClose: () => void) => ReactNode
+  header?: (onClose: () => void) => ReactNode | null
+  body: (onClose: () => void) => ReactNode | null
   footer?: ((onClose: () => void) => ReactNode) | null
   contentClassName?: ClassName
   bodyWrapperClassName?: ClassName

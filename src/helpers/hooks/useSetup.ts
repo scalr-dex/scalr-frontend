@@ -88,30 +88,57 @@ async function setupUser() {
       searchParams: { code: initData.startParam || '' },
     })
 
-    const user = await response.json<ServerUser>()
+    const {
+      ticket,
+      claim_amount,
+      telegram_id,
+      ton_address,
+      invite_limit,
+      invited_users,
+      remaining_ads,
+      tasks_remaining,
+      login_days,
+      last_login_date,
+      nickname_claim_available,
+      bet_energy_left,
+      bet_level,
+      bet_loss,
+      bet_size,
+      bet_upgrade_price,
+      bet_win,
+      can_claim_daily_reward,
+      points,
+    } = await response.json<ServerUser>()
 
     const clientUser: ClientUser = {
-      ticket: user.ticket,
-      canClaimAmount: user.claim_amount,
+      ticket,
+      canClaimAmount: claim_amount,
       launchParams,
       username: initData.user.username || initData.user.firstName,
       firstName: initData.user.firstName,
       lastName: initData.user.lastName,
-      telegramId: user.telegram_id,
-      tonAddress: user.ton_address,
-      inviteLimit: user.invite_limit,
-      invitedUsers: user.invited_users,
-      remainingAds: user.remaining_ads,
-      remainingTasks: user.tasks_remaining,
-      loginDays: user.login_days,
-      lastLoginDate: new Date(user.last_login_date),
-      nicknameClaimAvailable: user.nickname_claim_available,
-      betEnergy: user.bet_energy_left,
+      telegramId: telegram_id,
+      tonAddress: ton_address,
+      inviteLimit: invite_limit,
+      invitedUsers: invited_users,
+      remainingAds: remaining_ads,
+      remainingTasks: tasks_remaining,
+      loginDays: login_days,
+      lastLoginDate: new Date(last_login_date),
+      nicknameClaimAvailable: nickname_claim_available,
+      betEnergy: bet_energy_left,
+      level: {
+        current: bet_level,
+        betSize: bet_size,
+        betWin: bet_win,
+        betLoss: bet_loss,
+        betUpgradePrice: bet_upgrade_price,
+      },
     }
 
-    writeAtom(timeToRewardAtom, user.can_claim_daily_reward)
+    writeAtom(timeToRewardAtom, can_claim_daily_reward)
     writeAtom(UserAtom, clientUser)
-    writeAtom(userBalanceAtom, user.points)
+    writeAtom(userBalanceAtom, points)
     return clientUser
   } catch (e) {
     handleError({ e })

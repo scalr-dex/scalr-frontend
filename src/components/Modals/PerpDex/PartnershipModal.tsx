@@ -26,16 +26,11 @@ function ModalFooter({ onClose }: { onClose: () => void }) {
     <div className="flex flex-col gap-y-4">
       <Button
         buttonType={ButtonTypes.secondary}
-        className="!rounded-full"
         onClick={() => utils.openTelegramLink('https://t.me/c333line')}
       >
         Send the info
       </Button>
-      <Button
-        buttonType={ButtonTypes.neutral}
-        className="!rounded-full"
-        onClick={onClose}
-      >
+      <Button buttonType={ButtonTypes.neutral} onClick={onClose}>
         Close
       </Button>
     </div>

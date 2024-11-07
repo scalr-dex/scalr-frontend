@@ -1,4 +1,9 @@
-export default function ({ size = 20 }: { size?: number }) {
+import { ClassNameProp } from 'type/Props'
+
+export default function ({
+  size = 20,
+  className,
+}: { size?: number } & ClassNameProp) {
   return (
     <svg
       width={size}
@@ -6,6 +11,7 @@ export default function ({ size = 20 }: { size?: number }) {
       viewBox="0 0 20 20"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
+      className={className}
     >
       <path
         fillRule="evenodd"

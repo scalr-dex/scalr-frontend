@@ -87,7 +87,6 @@ function ModalFooter() {
   return (
     <Button
       buttonType={ButtonTypes.secondary}
-      className="!rounded-full"
       onClick={onClick}
       isLoading={loading}
       disabled={disabled}

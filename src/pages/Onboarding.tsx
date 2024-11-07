@@ -66,7 +66,7 @@ export default function () {
           />
           {stepToComponent[step]}
         </div>
-        <Button className="!w-56 !rounded-full mb-2" onClick={onClick}>
+        <Button className="!w-56 mb-2" onClick={onClick}>
           {stepToText[step]}
         </Button>
       </>

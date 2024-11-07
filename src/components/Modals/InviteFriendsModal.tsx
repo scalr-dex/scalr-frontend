@@ -91,7 +91,6 @@ function ModalFooter({ telegramId }: { telegramId: number }) {
       <Button
         onClick={onShare}
         buttonType={ButtonTypes.secondary}
-        className="!rounded-full"
         iconRight={<Share />}
         isLoading={!telegramId}
       >
@@ -100,7 +99,6 @@ function ModalFooter({ telegramId }: { telegramId: number }) {
       <Button
         onClick={onCopy}
         buttonType={copied ? ButtonTypes.success : ButtonTypes.neutral}
-        className="!rounded-full"
         iconRight={copied ? <CheckMark /> : <Copy />}
       >
         {copied ? 'Copied' : 'Copy link'}

@@ -2,7 +2,15 @@ import { LaunchParams } from '@telegram-apps/sdk-react'
 import BetDirection from 'type/BetDirection'
 import { GraphTokenValue } from 'type/TokenState'
 
-export interface ServerUser {
+export type ServerUserLevelData = {
+  bet_level: number
+  bet_size: number
+  bet_win: number
+  bet_loss: number
+  bet_upgrade_price: number
+}
+
+export interface ServerUser extends ServerUserLevelData {
   can_claim_daily_reward: string
   claim_amount: number
   points: number
@@ -37,6 +45,13 @@ export interface ClientUser {
   lastLoginDate: Date
   nicknameClaimAvailable: boolean
   betEnergy: number
+  level: {
+    current: number
+    betSize: number
+    betWin: number
+    betLoss: number
+    betUpgradePrice: number
+  }
 }
 
 export interface UserBet {

@@ -14,7 +14,7 @@ import { getDailyNickname } from 'helpers/api/dailyReward'
 import handleError from 'helpers/handleError'
 import { nameKeyword } from 'helpers/atoms/UserStates'
 import { useMiniApp } from '@telegram-apps/sdk-react'
-import CheckCircle from 'components/icons/CheckCircle'
+import CheckMark from 'components/icons/CheckMark'
 
 function ModalBody() {
   return (
@@ -76,7 +76,6 @@ function ModalFooter() {
   return (
     <div className="flex flex-col gap-y-4" ref={parent}>
       <Button
-        className="!rounded-full"
         onClick={onCopy}
         buttonType={ButtonTypes.secondary}
         iconRight={<Copy />}
@@ -85,10 +84,9 @@ function ModalFooter() {
       </Button>
       <Button
         buttonType={ButtonTypes.neutral}
-        className="!rounded-full"
         isLoading={loading}
         onClick={onClick}
-        iconRight={disabled ? <CheckCircle /> : null}
+        iconRight={disabled ? <CheckMark /> : null}
       >
         {disabled ? 'Done' : 'Check task'}
       </Button>
