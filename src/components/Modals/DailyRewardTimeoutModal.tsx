@@ -3,7 +3,7 @@ import { Header3, BodyText } from 'components/Text'
 import DefaultModal from 'components/Modals/DefaultModal'
 import ButtonTypes from 'type/Button'
 import { DefaultModalProps } from 'type/Props'
-import { navigate } from 'wouter/use-hash-location'
+import { useNavigate } from 'react-router-dom'
 import { useSetAtom } from 'jotai'
 import modalsAtom, { AvailableModals } from 'helpers/atoms/modalsAtom'
 import ImageAnimatedOnLoad from 'components/ImageAnimatedOnLoad'
@@ -27,6 +27,7 @@ function ModalBody() {
 }
 
 function ModalFooter({ onClose }: { onClose: () => void }) {
+  const navigate = useNavigate()
   const setModal = useSetAtom(modalsAtom)
 
   return (

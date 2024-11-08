@@ -1,5 +1,5 @@
 import MainSquare from 'components/icons/MainSquare'
-import { useLocation } from 'wouter'
+import { NavLink } from 'react-router-dom'
 import Cup from 'components/icons/Cup'
 import DollarCoin from 'components/icons/DollarCoin'
 import { trackNavigation } from 'helpers/api/analytics'
@@ -16,24 +16,22 @@ const buttons = [
 ]
 
 export default function () {
-  const [location, setLocation] = useLocation()
-
-  const latest = location.split('/')[1] || '/'
-
   return (
     <footer className="fixed inset-x-0 bottom-safe-bottom flex justify-center items-center pointer-events-none">
       <div className="w-fit shadow-super flex flex-row gap-x-8 items-center justify-center px-8 py-3 border border-white-16 bg-primary text-gray-500 rounded-3xl pointer-events-auto">
         {buttons.map(({ path, component }, index) => (
-          <button
+          <NavLink
             onClick={() => {
-              setLocation(path)
               trackNavigation(path)
             }}
-            className={`w-6 h-6 ${latest.match(path) ? 'text-white' : 'text-opacity-50'} hover:text-gray-300 transition-colors hover:drop-shadow`}
+            to={path}
             key={'nav-link-' + index}
+            className={({ isActive }) =>
+              `w-6 h-6 text-opacity-50 ${isActive && 'text-white'} hover:text-gray-300 transition-colors hover:drop-shadow`
+            }
           >
             {component}
-          </button>
+          </NavLink>
         ))}
       </div>
     </footer>

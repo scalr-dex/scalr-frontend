@@ -3,7 +3,6 @@ import BottomTabNavigator from 'components/BottomTabNavigator'
 import NotFound from 'pages/NotFound'
 import Tasks from 'pages/Tasks'
 import { ToastContainer } from 'react-toastify'
-import { Router, Switch, Route, Redirect } from 'wouter'
 import useSetup from 'helpers/hooks/useSetup'
 import BrowserInvite from 'pages/BrowserInvite'
 import LeaderBoards from 'pages/Leaderboards'
@@ -19,12 +18,25 @@ import Loader from 'components/Loader'
 import Main from 'pages/Main'
 import { ErrorBoundary } from '@sentry/react'
 import ErrorBoundaryFallback from 'components/ErrorBoundaryFallback'
-import { useHashLocation } from 'wouter/use-hash-location'
 import LoaderFullPage from 'components/LoaderFullPage'
 import { THEME, TonConnectUIProvider } from '@tonconnect/ui-react'
 import PerpDex from 'pages/PerpDex'
-import { lazy, Suspense } from 'react'
+import { lazy, Suspense, useEffect, useMemo } from 'react'
 import Modals from 'components/Modals'
+import {
+  createBrowserRouter,
+  HashRouter,
+  Route,
+  Routes,
+} from 'react-router-dom'
+import { useIntegration } from '@telegram-apps/react-router-integration'
+
+const navigator = createBrowserRouter([
+  {
+    path: '/',
+    element: <Main />,
+  },
+])
 
 const Onboarding = lazy(() => import('pages/Onboarding'))
 
@@ -45,30 +57,30 @@ function AppInner({ socket }: { socket: WebSocket }) {
         }}
         uiPreferences={{ theme: THEME.DARK }}
       >
-        <Router hook={useHashLocation}>
+        <HashRouter>
           <div
             className="flex flex-col relative h-[100dvh] overflow-x-hidden max-w-prose text-white z-0"
             ref={parent}
           >
-            <Switch>
+            <Routes>
               {didOnboard ? (
                 <>
-                  <Route path="/tasks" component={Tasks} />
-                  <Route path="/leaderboards" component={LeaderBoards} />
+                  <Route path="/tasks" Component={Tasks} />
+                  <Route path="/leaderboards" Component={LeaderBoards} />
                   <Route
                     path="/perp"
-                    component={() => (
+                    Component={() => (
                       <Suspense fallback={<Loader full />}>
                         <PerpDex />
                       </Suspense>
                     )}
                   />
-                  <Route path="/" component={Main} />
+                  <Route path="/" Component={Main} />
                 </>
               ) : (
                 <Route
                   path="/"
-                  component={() => (
+                  Component={() => (
                     <Suspense fallback={<LoaderFullPage />}>
                       <Onboarding />
                     </Suspense>
@@ -76,9 +88,8 @@ function AppInner({ socket }: { socket: WebSocket }) {
                 />
               )}
 
-              <Redirect to="/" />
-              <Route path="/404" component={NotFound} />
-            </Switch>
+              <Route path="/404" Component={NotFound} />
+            </Routes>
           </div>
           {onboarded ? <BottomTabNavigator /> : null}
           <ToastContainer
@@ -97,7 +108,7 @@ function AppInner({ socket }: { socket: WebSocket }) {
             stacked
           />
           <Modals />
-        </Router>
+        </HashRouter>
       </TonConnectUIProvider>
     </QueryClientProvider>
   )
