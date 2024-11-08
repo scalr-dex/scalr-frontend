@@ -20,7 +20,6 @@
     "@number-flow/react": "^0.3.0",
     "@sentry/react": "^8.27.0",
     "@tanstack/react-query": "^5.51.23",
-    "@telegram-apps/react-router-integration": "^1.0.1",
     "@telegram-apps/sdk-react": "^2.0.9",
     "@tonconnect/ui-react": "^2.0.9",
     "dayjs": "^1.11.12",

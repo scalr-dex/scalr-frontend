@@ -1408,21 +1408,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@telegram-apps/react-router-integration@npm:^1.0.1":
-  version: 1.0.1
-  resolution: "@telegram-apps/react-router-integration@npm:1.0.1"
-  peerDependencies:
-    "@telegram-apps/sdk": ^1
-    "@types/react": ^17.0.0 || ^18.0.0
-    react: ^17.0.0 || ^18.0.0
-    react-router-dom: ^6.22.3
-  peerDependenciesMeta:
-    "@types/react":
-      optional: true
-  checksum: 98da89cbb5c07e2a8555e2b7bb8fa2b25a18a0ca7a55934c250e647d98be18d0a50b394d529dea5d3f3e35dff633f795fee1a9964567e579d5b455c68784f446
-  languageName: node
-  linkType: hard
-
 "@telegram-apps/sdk-react@npm:^2.0.9":
   version: 2.0.9
   resolution: "@telegram-apps/sdk-react@npm:2.0.9"
@@ -6201,7 +6186,6 @@ __metadata:
     "@sentry/vite-plugin": ^2.22.3
     "@tailwindcss/typography": ^0.5.13
     "@tanstack/react-query": ^5.51.23
-    "@telegram-apps/react-router-integration": ^1.0.1
     "@telegram-apps/sdk-react": ^2.0.9
     "@tonconnect/ui-react": ^2.0.9
     "@types/lodash": ^4.17.7

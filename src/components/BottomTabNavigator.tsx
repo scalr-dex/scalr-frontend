@@ -6,7 +6,7 @@ import { trackNavigation } from 'helpers/api/analytics'
 import GiftWithNotifications from 'components/icons/GiftWithNotifications'
 
 const buttons = [
-  { path: '/', component: <MainSquare /> },
+  { path: 'main', component: <MainSquare /> },
   { path: 'leaderboards', component: <Cup /> },
   {
     path: 'tasks',
@@ -27,7 +27,7 @@ export default function () {
             to={path}
             key={'nav-link-' + index}
             className={({ isActive }) =>
-              `w-6 h-6 text-opacity-50 ${isActive && 'text-white'} hover:text-gray-300 transition-colors hover:drop-shadow`
+              `w-6 h-6 text-opacity-50 ${isActive ? 'text-white' : ''} hover:text-gray-300 transition-colors hover:drop-shadow`
             }
           >
             {component}
