@@ -11,7 +11,7 @@ import handleError from 'helpers/handleError'
 import dayjs from 'dayjs'
 import useCountDown from 'helpers/hooks/useCountDown'
 import ImageAnimatedOnLoad from 'components/ImageAnimatedOnLoad'
-import didOnboardAtom, { onboardedS2Atom } from 'helpers/atoms/UserStates'
+import { didOnboardAtom, onboardedS2Atom } from 'helpers/atoms/UserStates'
 import MotionNumber from '@number-flow/react'
 import modalsAtom, { AvailableModals } from 'helpers/atoms/modalsAtom'
 

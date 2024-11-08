@@ -1,8 +1,8 @@
 import { Header1, Header2 } from 'components/Text'
-import { useLocation } from 'wouter'
+import { useNavigate } from 'react-router-dom'
 
 export default function () {
-  const [, setLocation] = useLocation()
+  const navigate = useNavigate()
 
   return (
     <div className="flex flex-1 flex-col items-center justify-center">
@@ -10,7 +10,7 @@ export default function () {
         404
       </Header1>
       <Header2>
-        <button onClick={() => setLocation('/')} className="underline">
+        <button onClick={() => navigate('/')} className="underline">
           Go to main
         </button>
       </Header2>
