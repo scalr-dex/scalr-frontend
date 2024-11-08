@@ -3,7 +3,6 @@ import { BodyText, Header2 } from 'components/Text'
 import DefaultModal from 'components/Modals/DefaultModal'
 import ButtonTypes from 'type/Button'
 import { DefaultModalProps } from 'type/Props'
-import { useUtils } from '@telegram-apps/sdk-react'
 import ImageAnimatedOnLoad from 'components/ImageAnimatedOnLoad'
 import { checkTask, claimTask } from 'helpers/api/userTasks'
 import UserAtom from 'helpers/atoms/UserAtom'
@@ -22,6 +21,7 @@ import {
   taskFailCounterAtom,
 } from 'helpers/atoms/taskFailCounter'
 import handleError from 'helpers/handleError'
+import safeOpenLink from 'helpers/safeOpenLink'
 
 interface TaskModalProps extends DefaultModalProps, UserTask {}
 
@@ -57,15 +57,8 @@ function ModalFooter({
   const failAmount = useAtomValue(taskFailCounterAtom)
   const [parent] = useAutoAnimate()
   const [loading, setLoading] = useState(false)
-  const utils = useUtils()
   const setUser = useSetAtom(UserAtom)
 
-  const openTgLink = useCallback(
-    (url: string) => {
-      url.includes('t.me') ? utils.openTelegramLink(url) : utils.openLink(url)
-    },
-    [utils]
-  )
   const onClick = useCallback(async () => {
     setLoading(true)
 
@@ -102,7 +95,7 @@ function ModalFooter({
     <div className="flex flex-col gap-y-4" ref={parent}>
       <Button
         buttonType={ButtonTypes.secondary}
-        onClick={() => openTgLink(URL)}
+        onClick={() => safeOpenLink(URL)}
       >
         Open task
       </Button>
