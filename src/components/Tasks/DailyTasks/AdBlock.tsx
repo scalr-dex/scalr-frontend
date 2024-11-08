@@ -5,7 +5,7 @@ import { useAtom } from 'jotai'
 import { useCallback } from 'react'
 import { iconNumberToComponent } from 'type/UserTask'
 
-const rewardAmount = 500
+const rewardAmount = 1000
 
 export default function () {
   const [user, setUser] = useAtom(UserAtom)

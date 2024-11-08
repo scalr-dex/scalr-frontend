@@ -19,6 +19,7 @@ import { LogLevel } from '@amplitude/analytics-types'
 import env from 'helpers/env'
 import { setSentryUser } from 'helpers/api/sentry'
 import setupMiniApp from 'helpers/setupMiniApp'
+import { init } from '@telegram-apps/sdk-react'
 
 export default function () {
   const [appStatus, setAppStatus] = useState(AppStatus.loading)
@@ -64,6 +65,7 @@ export default function () {
           setupMiniApp()
           setSentryUser(userId)
         }
+        init()
         setAppStatus(AppStatus.isTma)
       } else {
         setAppStatus(AppStatus.isElse)

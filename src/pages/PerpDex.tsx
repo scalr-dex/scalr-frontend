@@ -56,7 +56,11 @@ export default function () {
           subHeader="Take part in $SCR airdrop distribution."
           smallIcon={<ScalrCoin size={44} />}
         />
-        <img src="img/dex-scalr-3d.png" className="mx-auto h-32" />
+        <img
+          src="img/dex-scalr-3d.png"
+          className="mx-auto h-32"
+          draggable={false}
+        />
       </NoisyCard>
 
       <div className="flex flex-row gap-x-4 h-full">

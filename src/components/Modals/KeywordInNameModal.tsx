@@ -13,7 +13,7 @@ import Copy from 'components/icons/Copy'
 import { getDailyNickname } from 'helpers/api/dailyReward'
 import handleError from 'helpers/handleError'
 import { nameKeyword } from 'helpers/atoms/UserStates'
-import { useMiniApp } from '@telegram-apps/sdk-react'
+import { miniApp } from '@telegram-apps/sdk-react'
 import CheckMark from 'components/icons/CheckMark'
 
 function ModalBody() {
@@ -35,7 +35,6 @@ function ModalBody() {
 }
 
 function ModalFooter() {
-  const miniApp = useMiniApp()
   const [parent] = useAutoAnimate()
   const [loading, setLoading] = useState(false)
   const user = useAtomValue(UserAtom)
@@ -71,7 +70,7 @@ function ModalFooter() {
   const onCopy = useCallback(async () => {
     await navigator.clipboard.writeText(nameKeyword)
     miniApp.close()
-  }, [miniApp])
+  }, [])
 
   return (
     <div className="flex flex-col gap-y-4" ref={parent}>

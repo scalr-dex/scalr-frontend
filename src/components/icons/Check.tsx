@@ -13,9 +13,9 @@ export default function ({ className }: ClassNameProp) {
       <path
         d="M3.33594 11.1576L7.5026 15.3242L16.6693 5.32422"
         stroke="#4374EC"
-        stroke-width="1.07143"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeWidth="1.07143"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
     </svg>
   )

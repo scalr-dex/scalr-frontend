@@ -63,6 +63,7 @@ export default function () {
             style={{ width: 155, height: 155 }}
             src={stepToGif[step]}
             key={'step-img-' + step}
+            draggable={false}
           />
           {stepToComponent[step]}
         </div>

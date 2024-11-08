@@ -1,4 +1,3 @@
-import { useUtils } from '@telegram-apps/sdk-react'
 import Button from 'components/Button'
 import Close from 'components/icons/Close'
 import Copy from 'components/icons/Copy'
@@ -13,6 +12,7 @@ import { useCallback, useState } from 'react'
 import ButtonTypes from 'type/Button'
 import { DefaultModalProps } from 'type/Props'
 import CheckMark from 'components/icons/CheckMark'
+import { shareURL } from '@telegram-apps/sdk-react'
 
 function ModalBody() {
   return (
@@ -42,15 +42,13 @@ function ModalBody() {
   )
 }
 
-function ModalHeader({
-  onClose,
-  inviteLimit,
-  invitedUsers,
-}: {
-  onClose: () => void
-  inviteLimit: number
-  invitedUsers: number
-}) {
+function ModalHeader({ onClose }: { onClose: () => void }) {
+  const user = useAtomValue(UserAtom)
+
+  if (!user) return null
+
+  const { inviteLimit, invitedUsers } = user
+
   return (
     <div className="flex flex-row w-full pl-4 items-center justify-between">
       <div className="flex flex-row gap-x-2 items-center">
@@ -66,16 +64,18 @@ function ModalHeader({
   )
 }
 
-function ModalFooter({ telegramId }: { telegramId: number }) {
-  const utils = useUtils()
+function ModalFooter() {
+  const user = useAtomValue(UserAtom)
   const [copied, setCopied] = useState(false)
 
+  const telegramId = user?.telegramId
+
   const onShare = useCallback(() => {
-    utils.shareURL(
+    shareURL(
       `${env.VITE_APP_BASE_LINK}?startapp=${telegramId}`,
       '\nPlay with me, predict price movement, and get a token Airdrop!\n😋 +1k Points as a Daily claim gift\n🔥 +3k Points for a friend\n⭐️ +6k Points if a friend has Telegram Premium'
     )
-  }, [telegramId, utils])
+  }, [telegramId])
 
   const onCopy = useCallback(async () => {
     await navigator.clipboard.writeText(
@@ -108,24 +108,12 @@ function ModalFooter({ telegramId }: { telegramId: number }) {
 }
 
 export default function (props: DefaultModalProps) {
-  const user = useAtomValue(UserAtom)
-
-  if (!user) return null
-
-  const { inviteLimit, invitedUsers, telegramId } = user
-
   return (
     <DefaultModal
       {...props}
-      header={(onClose) => (
-        <ModalHeader
-          onClose={onClose}
-          inviteLimit={inviteLimit}
-          invitedUsers={invitedUsers}
-        />
-      )}
+      header={(onClose) => <ModalHeader onClose={onClose} />}
       body={ModalBody}
-      footer={() => <ModalFooter telegramId={telegramId} />}
+      footer={ModalFooter}
     />
   )
 }

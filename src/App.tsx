@@ -4,7 +4,6 @@ import NotFound from 'pages/NotFound'
 import Tasks from 'pages/Tasks'
 import { ToastContainer } from 'react-toastify'
 import { Router, Switch, Route, Redirect } from 'wouter'
-import { SDKProvider } from '@telegram-apps/sdk-react'
 import useSetup from 'helpers/hooks/useSetup'
 import BrowserInvite from 'pages/BrowserInvite'
 import LeaderBoards from 'pages/Leaderboards'
@@ -39,72 +38,70 @@ function AppInner({ socket }: { socket: WebSocket }) {
   const onboarded = didOnboard && onboardedS2
 
   return (
-    <SDKProvider debug={env.DEV} acceptCustomStyles>
-      <QueryClientProvider client={queryClient}>
-        <TonConnectUIProvider
-          manifestUrl={`${location.origin}/tonconnect-manifest.json`}
-          actionsConfiguration={{
-            twaReturnUrl: env.VITE_APP_BASE_LINK as `${string}://${string}`,
-          }}
-          uiPreferences={{ theme: THEME.DARK }}
-        >
-          <Router hook={useHashLocation}>
-            <div
-              className="flex flex-col relative h-[100dvh] overflow-x-hidden max-w-prose text-white z-0"
-              ref={parent}
-            >
-              <Switch>
-                {didOnboard ? (
-                  <>
-                    <Route path="/market" component={Market} />
-                    <Route path="/tasks" component={Tasks} />
-                    <Route path="/leaderboards" component={LeaderBoards} />
-                    <Route
-                      path="/perp"
-                      component={() => (
-                        <Suspense fallback={<Loader full />}>
-                          <PerpDex />
-                        </Suspense>
-                      )}
-                    />
-                    <Route path="/" component={Main} />
-                  </>
-                ) : (
+    <QueryClientProvider client={queryClient}>
+      <TonConnectUIProvider
+        manifestUrl={`${location.origin}/tonconnect-manifest.json`}
+        actionsConfiguration={{
+          twaReturnUrl: env.VITE_APP_BASE_LINK as `${string}://${string}`,
+        }}
+        uiPreferences={{ theme: THEME.DARK }}
+      >
+        <Router hook={useHashLocation}>
+          <div
+            className="flex flex-col relative h-[100dvh] overflow-x-hidden max-w-prose text-white z-0"
+            ref={parent}
+          >
+            <Switch>
+              {didOnboard ? (
+                <>
+                  <Route path="/market" component={Market} />
+                  <Route path="/tasks" component={Tasks} />
+                  <Route path="/leaderboards" component={LeaderBoards} />
                   <Route
-                    path="/"
+                    path="/perp"
                     component={() => (
-                      <Suspense fallback={<LoaderFullPage />}>
-                        <Onboarding />
+                      <Suspense fallback={<Loader full />}>
+                        <PerpDex />
                       </Suspense>
                     )}
                   />
-                )}
+                  <Route path="/" component={Main} />
+                </>
+              ) : (
+                <Route
+                  path="/"
+                  component={() => (
+                    <Suspense fallback={<LoaderFullPage />}>
+                      <Onboarding />
+                    </Suspense>
+                  )}
+                />
+              )}
 
-                <Redirect to="/" />
-                <Route path="/404" component={NotFound} />
-              </Switch>
-            </div>
-            {onboarded ? <BottomTabNavigator /> : null}
-            <ToastContainer
-              draggable
-              position="top-center"
-              pauseOnHover
-              pauseOnFocusLoss
-              closeOnClick
-              closeButton={false}
-              autoClose={3000}
-              theme="dark"
-              toastClassName="!bg-tertiary !rounded-xl !w-[96dvw] !ml-[2dvw] !shadow-super !top-4 !font-semibold"
-              draggableDirection="y"
-              hideProgressBar
-              limit={3}
-              stacked
-            />
-            <Modals />
-          </Router>
-        </TonConnectUIProvider>
-      </QueryClientProvider>
-    </SDKProvider>
+              <Redirect to="/" />
+              <Route path="/404" component={NotFound} />
+            </Switch>
+          </div>
+          {onboarded ? <BottomTabNavigator /> : null}
+          <ToastContainer
+            draggable
+            position="top-center"
+            pauseOnHover
+            pauseOnFocusLoss
+            closeOnClick
+            closeButton={false}
+            autoClose={3000}
+            theme="dark"
+            toastClassName="!bg-tertiary !rounded-xl !w-[96dvw] !ml-[2dvw] !shadow-super !top-4 !font-semibold"
+            draggableDirection="y"
+            hideProgressBar
+            limit={3}
+            stacked
+          />
+          <Modals />
+        </Router>
+      </TonConnectUIProvider>
+    </QueryClientProvider>
   )
 }
 

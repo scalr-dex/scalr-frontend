@@ -1,4 +1,4 @@
-import { useHapticFeedback } from '@telegram-apps/sdk-react'
+import { hapticFeedbackImpactOccurred } from '@telegram-apps/sdk-react'
 import Loader from 'components/Loader'
 import { useCallback } from 'react'
 import ButtonTypes, { buttonClassNames, ButtonProps } from 'type/Button'
@@ -17,16 +17,14 @@ export default function ({
   contentClassName,
   ...buttonProps
 }: ButtonProps) {
-  const impact = useHapticFeedback()
-
   const onClick = useCallback(
     (e: OnClickEvent<HTMLButtonElement>) => {
       if (!allowDisabledClick && (isLoading || disabled)) return
 
       buttonProps.onClick?.(e)
-      if (haptic) impact.impactOccurred(haptic)
+      if (haptic) hapticFeedbackImpactOccurred(haptic)
     },
-    [allowDisabledClick, buttonProps, disabled, haptic, impact, isLoading]
+    [allowDisabledClick, buttonProps, disabled, haptic, isLoading]
   )
 
   const content = (

@@ -3,8 +3,8 @@ import { BodyText, Header2 } from 'components/Text'
 import DefaultModal from 'components/Modals/DefaultModal'
 import ButtonTypes from 'type/Button'
 import { DefaultModalProps } from 'type/Props'
-import { useUtils } from '@telegram-apps/sdk-react'
 import ImageAnimatedOnLoad from 'components/ImageAnimatedOnLoad'
+import { openTelegramLink } from '@telegram-apps/sdk-react'
 
 function ModalBody() {
   return (
@@ -20,13 +20,11 @@ function ModalBody() {
 }
 
 function ModalFooter({ onClose }: { onClose: () => void }) {
-  const utils = useUtils()
-
   return (
     <div className="flex flex-col gap-y-4">
       <Button
         buttonType={ButtonTypes.secondary}
-        onClick={() => utils.openTelegramLink('https://t.me/c333line')}
+        onClick={() => openTelegramLink('https://t.me/c333line')}
       >
         Send the info
       </Button>

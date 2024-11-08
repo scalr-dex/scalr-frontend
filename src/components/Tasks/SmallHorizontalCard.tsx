@@ -24,6 +24,7 @@ export default function () {
       <img
         src="img/dex-scalr-2d.png"
         className="w-[90%] self-center absolute bottom-2 -z-10"
+        draggable={false}
       />
     </div>
   )

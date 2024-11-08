@@ -12,6 +12,7 @@ export default function ({
       src={src}
       className={`animate-fadeIn opacity-0 transition-opacity ${modalStyle} ${className}`}
       onLoad={(e) => (e.currentTarget.style.opacity = '1')}
+      draggable={false}
     />
   )
 }
