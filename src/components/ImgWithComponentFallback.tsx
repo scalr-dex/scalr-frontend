@@ -34,6 +34,7 @@ export default function ({
           setImgLoadError(true)
         }}
         loading="lazy"
+        draggable={false}
       />
       <div className={`absolute z-0 ${imageStyles}`}>{fallback(name)}</div>
     </div>
