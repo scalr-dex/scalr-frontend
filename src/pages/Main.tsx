@@ -14,7 +14,7 @@ import modalsAtom, { AvailableModals } from 'helpers/atoms/modalsAtom'
 import useTimeToDailyStreak from 'helpers/hooks/useTimeToDailyStreak'
 
 function InnerMain() {
-  useTimeToDailyStreak(true)
+  useTimeToDailyStreak()
   const data = useAtomValue(priceHistoryAtom)
 
   const lastIndex = data.length - 1

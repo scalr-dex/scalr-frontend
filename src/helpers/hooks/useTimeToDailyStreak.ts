@@ -10,6 +10,7 @@ import handleError from 'helpers/handleError'
 
 export default function (shouldAutoClaim?: boolean) {
   const [user, setUser] = useAtom(UserAtom)
+  const [loading, setLoading] = useState(false)
   const setModal = useSetAtom(modalsAtom)
   const didOnboard = useAtomValue(didOnboardAtom)
   const onboardedS2 = useAtomValue(onboardedS2Atom)
@@ -20,8 +21,6 @@ export default function (shouldAutoClaim?: boolean) {
   useCountDown(setTime)
 
   const disabled = time > 0
-
-  const [loading, setLoading] = useState(false)
 
   const onClick = useCallback(async () => {
     try {
@@ -48,9 +47,9 @@ export default function (shouldAutoClaim?: boolean) {
   }, [setUser])
 
   useEffect(() => {
-    if (!shouldAutoClaim || disabled || !onboardedS2 || !didOnboard) return
+    if (disabled || !onboardedS2 || !didOnboard) return
     setModal(AvailableModals.dailyStreak)
-    setTimeout(onClick, 300)
+    if (shouldAutoClaim) setTimeout(onClick, 300)
   }, [disabled, setModal, didOnboard, onboardedS2, onClick, shouldAutoClaim])
 
   return {

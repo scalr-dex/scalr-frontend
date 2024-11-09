@@ -35,7 +35,7 @@ function ModalBody() {
 }
 
 function ModalFooter() {
-  const { disabled, onClick, loading, formatted } = useTimeToDailyStreak()
+  const { disabled, onClick, loading, formatted } = useTimeToDailyStreak(true)
 
   return (
     <Button
