@@ -1,4 +1,3 @@
-import NotFound from 'pages/NotFound'
 import Tasks from 'pages/Tasks'
 import useSetup from 'helpers/hooks/useSetup'
 import BrowserInvite from 'pages/BrowserInvite'
@@ -11,7 +10,6 @@ import SplashScreen from 'components/SplashScreen'
 import useWebSocketData from 'helpers/hooks/useWebSocketData'
 import Main from 'pages/Main'
 import { ErrorBoundary } from '@sentry/react'
-import ErrorBoundaryFallback from 'components/ErrorBoundaryFallback'
 import { THEME, TonConnectUIProvider } from '@tonconnect/ui-react'
 import PerpDex from 'pages/PerpDex'
 import { createHashRouter, RouterProvider } from 'react-router-dom'
@@ -22,7 +20,6 @@ import LoaderFullPage from 'components/LoaderFullPage'
 const navigator = createHashRouter([
   {
     element: <Root />,
-    errorElement: <ErrorBoundaryFallback />,
     ErrorBoundary: ErrorBoundary,
     children: [
       { path: 'main', element: <Main /> },
@@ -30,6 +27,7 @@ const navigator = createHashRouter([
       { path: 'leaderboards', element: <LeaderBoards /> },
       { path: 'perp', element: <PerpDex /> },
       { path: 'onboarding', element: <Onboarding /> },
+      { path: '*', element: <Main /> },
     ],
   },
 ])
