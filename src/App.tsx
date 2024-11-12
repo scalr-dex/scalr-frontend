@@ -13,7 +13,7 @@ import queryClient from 'helpers/queryClient'
 import AppStatus from 'type/AppStatus'
 import SplashScreen from 'components/SplashScreen'
 import { useAtomValue } from 'jotai'
-import didOnboardAtom, { onboardedS2Atom } from 'helpers/atoms/UserStates'
+import { didOnboardAtom, onboardedS2Atom } from 'helpers/atoms/UserStates'
 import useWebSocketData from 'helpers/hooks/useWebSocketData'
 import Loader from 'components/Loader'
 import Main from 'pages/Main'
@@ -49,6 +49,7 @@ function AppInner({ socket }: { socket: WebSocket }) {
         <Router hook={useHashLocation}>
           <div
             className="flex flex-col relative h-[100dvh] overflow-x-hidden max-w-prose text-white z-0"
+            id="scrollable"
             ref={parent}
           >
             <Switch>

@@ -2,7 +2,7 @@ import { atomWithStorage } from 'jotai/utils'
 
 export const nameKeyword = '🌀SCALR'
 
-export default atomWithStorage('didOnboard', false, undefined, {
+export const didOnboardAtom = atomWithStorage('didOnboard', false, undefined, {
   getOnInit: true,
 })
 

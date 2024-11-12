@@ -30,6 +30,13 @@ export default function () {
             onClick={() => {
               setLocation(path)
               trackNavigation(path)
+              setTimeout(
+                () =>
+                  document
+                    .getElementById('scrollable')
+                    ?.scrollTo({ top: 0, behavior: 'smooth' }),
+                400
+              )
             }}
             className={`w-6 h-6 ${latest.match(path) ? 'text-white' : 'text-opacity-50'} hover:text-gray-300 transition-colors hover:drop-shadow`}
             key={'nav-link-' + index}

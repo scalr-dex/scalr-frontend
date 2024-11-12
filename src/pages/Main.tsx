@@ -11,8 +11,10 @@ import { useState } from 'react'
 import useImagePreloader from 'helpers/hooks/useImagePreload'
 import LoaderFullPage from 'components/LoaderFullPage'
 import modalsAtom, { AvailableModals } from 'helpers/atoms/modalsAtom'
+import useTimeToDailyStreak from 'helpers/hooks/useTimeToDailyStreak'
 
 function InnerMain() {
+  useTimeToDailyStreak()
   const data = useAtomValue(priceHistoryAtom)
 
   const lastIndex = data.length - 1
