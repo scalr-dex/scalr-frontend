@@ -36,8 +36,6 @@ function processBetsConfirmed(data: BattlesWebsocketEvents) {
       })
     }
 
-    console.log(priceHistoryWithBets)
-
     return priceHistoryWithBets
   })
 
@@ -74,8 +72,10 @@ function processBattleStart(data: BattlesWebsocketEvents) {
 
   clearPreviousBets()
   const user = readAtom(UserAtom)
-  writeAtom(battleGameAtom, {
-    lobbyId: '',
+
+  // lobbyId is written before
+  writeAtom(battleGameAtom, (prev) => ({
+    lobbyId: prev.lobbyId,
     playerScore: [],
     roundSeparators: [],
     users: [
@@ -84,7 +84,7 @@ function processBattleStart(data: BattlesWebsocketEvents) {
     ],
     gameStartTime: data.GameStartsInSeconds,
     betSize: data.BetSize,
-  })
+  }))
   navigate('/battle/versus')
 
   return true
