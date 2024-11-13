@@ -1,4 +1,5 @@
 import BattleTicketsModal from 'components/Modals/BattleTicketsModal'
+import BoostModal from 'components/Modals/BoostModal'
 import DailyRewardTimeoutModal from 'components/Modals/DailyRewardTimeoutModal'
 import DailyStreakModal from 'components/Modals/DailyStreakModal'
 import EnergyInfoModal from 'components/Modals/EnergyInfoModal'
@@ -18,6 +19,7 @@ export const modalDismissibleAtom = atom(true)
 export enum AvailableModals {
   betEnergyInfo,
   betEnergyZero,
+  boostModal,
   dailyStreak,
   dailyRewardTimeout,
   battleTickets,
@@ -34,6 +36,7 @@ export enum AvailableModals {
 export const modalToComponent = {
   [AvailableModals.betEnergyInfo]: { component: EnergyInfoModal },
   [AvailableModals.betEnergyZero]: { component: EnergyZeroModal },
+  [AvailableModals.boostModal]: { component: BoostModal },
   [AvailableModals.dailyStreak]: { component: DailyStreakModal },
   [AvailableModals.dailyRewardTimeout]: { component: DailyRewardTimeoutModal },
   [AvailableModals.battleTickets]: { component: BattleTicketsModal },

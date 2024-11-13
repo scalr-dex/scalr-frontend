@@ -1,4 +1,6 @@
+import { atom } from 'jotai'
 import { atomWithStorage } from 'jotai/utils'
+import BoostStates from 'type/BoostStates'
 
 export const nameKeyword = '🌀SCALR'
 
@@ -14,3 +16,5 @@ export const onboardedS2Atom = atomWithStorage(
     getOnInit: true,
   }
 )
+
+export const boostStateAtom = atom(BoostStates.disabled)

@@ -45,6 +45,7 @@ export interface ClientUser {
   lastLoginDate: Date
   nicknameClaimAvailable: boolean
   betEnergy: number
+  boosts: number
   level: {
     current: number
     betSize: number

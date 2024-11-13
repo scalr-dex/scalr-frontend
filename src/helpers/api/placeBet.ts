@@ -11,10 +11,17 @@ export function upgradeLevel() {
   return betController.get('upgrade').json<ServerUserLevelData>()
 }
 
-export default async function ({ direction }: { direction: BetDirection }) {
+export default async function ({
+  direction,
+  shouldBoost,
+}: {
+  direction: BetDirection
+  shouldBoost: boolean
+}) {
   try {
     const json = {
       direction: BetDirection[direction],
+      multiplier_enabled: shouldBoost,
     }
 
     await backendKy().post('bet', { json })

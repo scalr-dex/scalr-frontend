@@ -103,6 +103,7 @@ async function setupUser() {
       last_login_date,
       nickname_claim_available,
       bet_energy_left,
+      multiplier_count,
       bet_level,
       bet_loss,
       bet_size,
@@ -129,6 +130,7 @@ async function setupUser() {
       lastLoginDate: new Date(last_login_date),
       nicknameClaimAvailable: nickname_claim_available,
       betEnergy: bet_energy_left,
+      boosts: multiplier_count,
       level: {
         current: bet_level,
         betSize: bet_size,

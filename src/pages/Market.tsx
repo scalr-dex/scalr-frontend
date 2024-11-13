@@ -32,7 +32,7 @@ export default function () {
         handleError({
           e,
           toastMessage:
-            typeof e === 'string' && e.includes('ERR_ALREADY_CALLED')
+            'type' in e && e.type === 'ERR_ALREADY_CALLED'
               ? 'Please wait before making a new transaction'
               : 'Failed to process your transaction',
         })

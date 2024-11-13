@@ -13,7 +13,7 @@ export default function ({ amount }: { amount: number }) {
   const gap = amount >= 100000000 ? 'gap-x-1.5' : 'gap-x-2'
 
   return (
-    <div className={`flex flex-row items-center ${gap}`}>
+    <div className={`flex flex-row items-center ${gap} max-w-30`}>
       <ScalrCoin size={fontSize + 8} />
       <MotionNumber value={amount} style={{ fontSize, fontWeight: 700 }} />
     </div>
