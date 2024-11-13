@@ -1,6 +1,6 @@
 import Star from 'components/icons/Star'
 import { BodyText } from 'components/Text'
-import { ChildrenProp } from 'type/Props'
+import { ChildrenProp, OnClickPropVoid } from 'type/Props'
 
 export default function ({
   children,
@@ -9,13 +9,15 @@ export default function ({
   badgeText = '1+1',
   priceFloat,
   backgroundImage,
-}: ChildrenProp & {
-  price: number
-  backgroundImage?: string
-  bestOffer?: boolean
-  badgeText?: string
-  priceFloat?: boolean
-}) {
+  onClick,
+}: ChildrenProp &
+  OnClickPropVoid & {
+    price: number
+    backgroundImage?: string
+    bestOffer?: boolean
+    badgeText?: string
+    priceFloat?: boolean
+  }) {
   const priceStyle = priceFloat
     ? 'w-fit rounded-full px-9 mb-2 mx-auto'
     : 'w-full rounded-b-2xl'
@@ -27,7 +29,8 @@ export default function ({
         backgroundRepeat: 'no-repeat',
         backgroundSize: 'contain',
       }}
-      className="relative flex flex-col rounded-2xl h-44 w-full border border-white/5 bg-primary-dark hover:scale-105 transition-transform cursor-pointer"
+      className="relative flex flex-col rounded-2xl h-44 w-full border border-white/5 bg-primary-dark hover:scale-105 active:scale-[1.03] transition-transform cursor-pointer"
+      onClick={onClick}
     >
       {badgeText ? (
         <div className="absolute -top-3 left-1/2 transform -translate-x-1/2 bg-accent-alt-bg px-2 rounded-full shadow-super">
