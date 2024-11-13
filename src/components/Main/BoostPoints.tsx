@@ -54,7 +54,7 @@ export default function ({ boosts = 0 }: { boosts: number | undefined }) {
     : '-mr-px'
 
   return (
-    <div className={wrapper}>
+    <div className={wrapper} style={{ display: 'none' }}>
       <ButtonSmall
         buttonType={ButtonTypes.neutral}
         className={`relative transition-all h-8 !min-w-8 ${stateToStyle[state]} m-1.5 z-10`}
