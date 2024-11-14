@@ -15,12 +15,8 @@ function ModalBody() {
       />
       <Header3>Scalr Win Multiplier 🚀</Header3>
       <div>
-        <p>Daily Claim refill a Scalr Win Multiplier.</p>
         <p>Click it to activate if available.</p>
-        <p>
-          Win up to x15 on your next bet. If you lose, only the regular amount
-          is lost 🤑
-        </p>
+        <p>Win up to x15 on your next bet.</p>
       </div>
     </div>
   )

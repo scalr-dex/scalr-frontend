@@ -5,6 +5,7 @@ import { hapticFeedbackNotificationOccurred } from '@telegram-apps/sdk-react'
 import { readAtom, writeAtom } from 'helpers/atoms/atomStore'
 import UserAtom from 'helpers/atoms/UserAtom'
 import modalsAtom, { AvailableModals } from 'helpers/atoms/modalsAtom'
+import handleBoostState from 'helpers/onBalanceChange/handleBoostState'
 
 export default function balanceChangeToast(delta: number, lost: boolean) {
   hapticFeedbackNotificationOccurred(lost ? 'error' : 'success')
@@ -20,4 +21,6 @@ export default function balanceChangeToast(delta: number, lost: boolean) {
   } else {
     void successConfetti()
   }
+
+  handleBoostState()
 }
