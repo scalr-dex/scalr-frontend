@@ -4,6 +4,7 @@ import Cup from 'components/icons/Cup'
 import DollarCoin from 'components/icons/DollarCoin'
 import { trackNavigation } from 'helpers/api/analytics'
 import GiftWithNotifications from 'components/icons/GiftWithNotifications'
+import ShopHouse from 'components/icons/ShopHouse'
 
 const buttons = [
   { path: '/', component: <MainSquare /> },
@@ -13,6 +14,7 @@ const buttons = [
     component: <GiftWithNotifications />,
   },
   { path: 'perp', component: <DollarCoin /> },
+  { path: 'market', component: <ShopHouse /> },
 ]
 
 export default function () {

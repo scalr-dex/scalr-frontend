@@ -15,6 +15,9 @@ import BetEnergy from 'components/Main/BetEnergy'
 import modalsAtom, { AvailableModals } from 'helpers/atoms/modalsAtom'
 import LevelUpgrade from 'components/Main/LevelUpgrade'
 import DailyClaim from 'components/Main/DailyClaim'
+import BoostPoints from 'components/Main/BoostPoints'
+import BoostStates from 'type/BoostStates'
+import { boostStateAtom } from 'helpers/atoms/UserStates'
 
 export default function ({
   loading,
@@ -28,6 +31,7 @@ export default function ({
   const [userBet, setUserBet] = useAtom(userBetAtom)
   const [processingBet, setProcessingBet] = useState(false)
   const setModal = useSetAtom(modalsAtom)
+  const [boostState, setBoostState] = useAtom(boostStateAtom)
 
   const disabled = loading || processingBet || !userBalance
 
@@ -46,7 +50,10 @@ export default function ({
 
       setProcessingBet(true)
 
-      const success = await placeBet({ direction })
+      const shouldBoost = boostState === BoostStates.activated
+      setBoostState(shouldBoost ? BoostStates.locked : BoostStates.betNoBoost)
+
+      const success = await placeBet({ direction, shouldBoost })
 
       setProcessingBet(false)
       if (!success) {
@@ -62,7 +69,16 @@ export default function ({
       })
       setTimeout(() => setUserBet(null), roundDurationMs)
     },
-    [roundStart, user, userBalance, setUser, setUserBet, setModal]
+    [
+      roundStart,
+      user,
+      userBalance,
+      boostState,
+      setBoostState,
+      setUser,
+      setUserBet,
+      setModal,
+    ]
   )
 
   return (
@@ -74,7 +90,10 @@ export default function ({
           <BetEnergy betEnergy={user?.betEnergy} />
         </div>
 
-        <DailyClaim />
+        <div className="flex flex-row gap-x-1.5">
+          <BoostPoints boosts={user?.boosts} />
+          <DailyClaim />
+        </div>
       </div>
       {userBet ? (
         <div className="flex flex-col gap-y-2">

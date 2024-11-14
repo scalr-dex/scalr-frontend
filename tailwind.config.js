@@ -89,6 +89,7 @@ module.exports = {
       },
       colors: {
         primary: '#0E121B',
+        'primary-dark': '#121721',
         secondary: '#171D26',
         tertiary: '#1D232F',
 
@@ -104,6 +105,7 @@ module.exports = {
         'accent-dimmed': '#B1C9F7',
         'accent-dark': '#133D8D',
         'accent-alt': '#00FFFF',
+        'accent-alt-bg': '#113D3D',
         success: '#23CFB2',
         'success-light': '#CBECDE',
         'success-alt': '#E5FCB4',
