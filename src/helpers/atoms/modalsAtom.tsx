@@ -12,6 +12,7 @@ import PerpDexInfoModal from 'components/Modals/PerpDex/PerpDexInfoModal'
 import ScalrAirdropModal from 'components/Modals/PerpDex/ScalrAirdropModal'
 import TriangleAccelerated from 'components/Modals/PerpDex/TriangleAccelerated'
 import SeasonStats from 'components/Modals/SeasonStats'
+import SpecialOfferModal from 'components/Modals/SpecialOfferModal'
 import { atom } from 'jotai'
 
 export const modalDismissibleAtom = atom(true)
@@ -31,6 +32,7 @@ export enum AvailableModals {
   leaderBoardInfo,
   season1stats,
   levelUpgrade,
+  specialOffer,
 }
 
 export const modalToComponent = {
@@ -48,6 +50,7 @@ export const modalToComponent = {
   [AvailableModals.leaderBoardInfo]: { component: LeaderBoardsFaqModal },
   [AvailableModals.season1stats]: { component: SeasonStats },
   [AvailableModals.levelUpgrade]: { component: LevelUpgradeModal },
+  [AvailableModals.specialOffer]: { component: SpecialOfferModal },
 }
 
 export default atom<AvailableModals | null>(null)

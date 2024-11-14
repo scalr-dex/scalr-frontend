@@ -1,5 +1,4 @@
 import { useQuery } from '@tanstack/react-query'
-import { openInvoice } from '@telegram-apps/sdk-react'
 import FooterSafeArea from 'components/FooterSafeArea'
 import Level1 from 'components/icons/market/Level1'
 import Level2 from 'components/icons/market/Level2'
@@ -9,34 +8,27 @@ import MarketCard from 'components/Market/MarketCard'
 import MarketSection from 'components/Market/MarketSection'
 import PointsReward from 'components/Market/PointsReward'
 import { Header2 } from 'components/Text'
+import dayjs from 'dayjs'
 import { getMarketEntries } from 'helpers/api/market'
-import handleError from 'helpers/handleError'
-import { successConfetti } from 'helpers/shootConfetti'
+import UserAtom from 'helpers/atoms/UserAtom'
+import { specialOfferExpiryUnix } from 'helpers/atoms/UserStates'
+import handleStarPayment from 'helpers/telegram/handleStarPayment'
+import { useAtomValue } from 'jotai'
 import { useCallback } from 'react'
 
 export default function () {
+  const user = useAtomValue(UserAtom)
+  const specialDisabled =
+    dayjs(specialOfferExpiryUnix).diff(dayjs()) < 0 || !!user?.premiumEndDate
   const query = useQuery({
     queryKey: ['market-data'],
     queryFn: getMarketEntries,
   })
 
   const onClick = useCallback(
-    async (id: number) => {
-      try {
-        if (!query.data) return
-
-        const status = await openInvoice(query.data[id].buy_link, 'url')
-        if (status === 'paid') await successConfetti()
-        if (status === 'failed') throw Error('Stars payment failed')
-      } catch (e) {
-        handleError({
-          e,
-          toastMessage:
-            'type' in e && e.type === 'ERR_ALREADY_CALLED'
-              ? 'Please wait before making a new transaction'
-              : 'Failed to process your transaction',
-        })
-      }
+    (id: number) => {
+      if (!query.data) return
+      void handleStarPayment(query.data[id].buy_link)
     },
     [query.data]
   )
@@ -66,6 +58,7 @@ export default function () {
         subHeader="Get extra energy, boosters, and higher claims daily."
       >
         <MarketCard
+          disabled={specialDisabled}
           onClick={() => onClick(6)}
           price={40}
           priceFloat

@@ -90,6 +90,8 @@ async function setupUser() {
       searchParams: { code: initData.startParam || '' },
     })
 
+    const res = await response.json<ServerUser>()
+
     const {
       ticket,
       claim_amount,
@@ -111,7 +113,8 @@ async function setupUser() {
       bet_win,
       can_claim_daily_reward,
       points,
-    } = await response.json<ServerUser>()
+      premium_end_date,
+    } = res
 
     const clientUser: ClientUser = {
       ticket,
@@ -131,6 +134,7 @@ async function setupUser() {
       nicknameClaimAvailable: nickname_claim_available,
       betEnergy: bet_energy_left,
       boosts: multiplier_count,
+      premiumEndDate: new Date(premium_end_date),
       level: {
         current: bet_level,
         betSize: bet_size,

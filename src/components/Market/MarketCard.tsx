@@ -9,10 +9,12 @@ export default function ({
   badgeText = '1+1',
   priceFloat,
   backgroundImage,
+  disabled,
   onClick,
 }: ChildrenProp &
   OnClickPropVoid & {
     price: number
+    disabled?: boolean
     backgroundImage?: string
     bestOffer?: boolean
     badgeText?: string
@@ -29,8 +31,12 @@ export default function ({
         backgroundRepeat: 'no-repeat',
         backgroundSize: 'contain',
       }}
-      className="relative flex flex-col rounded-2xl h-44 w-full border border-white/5 bg-primary-dark hover:scale-105 active:scale-[1.03] transition-transform cursor-pointer"
-      onClick={onClick}
+      className="relative flex flex-col rounded-2xl h-44 w-full border border-white/5 bg-primary-dark aria-disabled:opacity-50 hover:scale-105 active:scale-[1.03] transition-transform aria-disabled:cursor-not-allowed cursor-pointer"
+      onClick={() => {
+        if (disabled) return
+        onClick?.()
+      }}
+      aria-disabled={disabled}
     >
       {badgeText ? (
         <div className="absolute -top-3 left-1/2 transform -translate-x-1/2 bg-accent-alt-bg px-2 rounded-full shadow-super">

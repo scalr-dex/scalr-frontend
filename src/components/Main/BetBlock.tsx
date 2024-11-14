@@ -90,7 +90,7 @@ export default function ({
           <BetEnergy betEnergy={user?.betEnergy} />
         </div>
 
-        <div className="flex flex-row gap-x-1.5">
+        <div className="flex flex-row items-center gap-x-1.5">
           <BoostPoints boosts={user?.boosts} />
           <DailyClaim />
         </div>

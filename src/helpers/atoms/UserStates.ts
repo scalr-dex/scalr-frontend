@@ -18,3 +18,6 @@ export const onboardedS2Atom = atomWithStorage(
 )
 
 export const boostStateAtom = atom(BoostStates.disabled)
+export const specialOfferExpiryUnix = 1732449600000
+export const specialOfferInvoiceLink =
+  'https://t.me/$LNEnnELloEnKCgAA3RdBk2lmjLk'

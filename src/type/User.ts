@@ -26,6 +26,7 @@ export interface ServerUser extends ServerUserLevelData {
   last_login_date: string
   nickname_claim_available: boolean
   bet_energy_left: number
+  premium_end_date: string
 }
 
 export interface ClientUser {
@@ -46,6 +47,7 @@ export interface ClientUser {
   nicknameClaimAvailable: boolean
   betEnergy: number
   boosts: number
+  premiumEndDate: Date
   level: {
     current: number
     betSize: number

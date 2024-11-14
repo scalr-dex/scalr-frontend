@@ -9,6 +9,7 @@ import modalsAtom, { AvailableModals } from 'helpers/atoms/modalsAtom'
 import { userBetAtom } from 'helpers/atoms/UserAtom'
 import { useAtomValue, useSetAtom } from 'jotai'
 import MotionNumber from '@number-flow/react'
+import SpecialOffer from 'components/icons/SpecialOffer'
 
 export default function ({ price }: { price?: number }) {
   const setModal = useSetAtom(modalsAtom)
@@ -53,13 +54,16 @@ export default function ({ price }: { price?: number }) {
         </div>
       </div>
 
-      <div className="flex flex-row items-center gap-x-2 h-8">
-        <DocumentPaper
-          size={20}
-          onClick={() => setModal(AvailableModals.season1stats)}
-        />
-        <DailyStreakButton small />
-        <BattleTicketButton small />
+      <div className="flex flex-col items-end">
+        <div className="flex flex-row items-center gap-x-2 h-8">
+          <DocumentPaper
+            size={20}
+            onClick={() => setModal(AvailableModals.season1stats)}
+          />
+          <DailyStreakButton small />
+          <BattleTicketButton small />
+        </div>
+        <SpecialOffer onClick={() => setModal(AvailableModals.specialOffer)} />
       </div>
     </div>
   )
