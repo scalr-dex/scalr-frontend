@@ -77,6 +77,17 @@ tc-root {
   background: linear-gradient(to right, #3af3ff, #4986fb, #8160e1);
 }
 
+.bg-warm-gradient {
+  background: linear-gradient(
+    to right,
+    #fc7169,
+    #ff67b9 25%,
+    #e8b5f5 50%,
+    #ffac5f 75%,
+    #ff8d24
+  );
+}
+
 .bg-blue-vignette {
   background: radial-gradient(ellipse at left, #133d8d60, transparent 50%),
     radial-gradient(circle at right, #133d8d70, transparent 60%);

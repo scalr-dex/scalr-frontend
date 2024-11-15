@@ -33,7 +33,7 @@ function ModalBody() {
         </BodyText>
 
         <div className="flex flex-row gap-x-2">
-          <Check className="mr-1" />
+          <Check className="mr-1 text-accent" />
 
           <span className="line-through text-white/50">
             {user.level.betWin}
@@ -46,7 +46,7 @@ function ModalBody() {
         </div>
 
         <div className="flex flex-row gap-x-2">
-          <Check className="mr-1" />
+          <Check className="mr-1 text-accent" />
 
           <span className="line-through text-white/50">
             {user.level.betLoss}

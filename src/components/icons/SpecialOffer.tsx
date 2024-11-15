@@ -8,7 +8,7 @@ export default function ({ onClick }: OnClickPropVoid) {
       viewBox="0 0 94 54"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
-      className="cursor-pointer hover:scale-105 active:scale-[1.03]"
+      className="cursor-pointer hover:scale-105 active:scale-[1.03] transition-transform"
       onClick={onClick}
     >
       <path

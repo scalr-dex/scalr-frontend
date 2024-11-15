@@ -13,6 +13,7 @@ import ScalrAirdropModal from 'components/Modals/PerpDex/ScalrAirdropModal'
 import TriangleAccelerated from 'components/Modals/PerpDex/TriangleAccelerated'
 import SeasonStats from 'components/Modals/SeasonStats'
 import SpecialOfferModal from 'components/Modals/SpecialOfferModal'
+import SuccessOrderModal from 'components/Modals/SuccessOrderModal'
 import { atom } from 'jotai'
 
 export const modalDismissibleAtom = atom(true)
@@ -33,6 +34,7 @@ export enum AvailableModals {
   season1stats,
   levelUpgrade,
   specialOffer,
+  successOrder,
 }
 
 export const modalToComponent = {
@@ -51,6 +53,7 @@ export const modalToComponent = {
   [AvailableModals.season1stats]: { component: SeasonStats },
   [AvailableModals.levelUpgrade]: { component: LevelUpgradeModal },
   [AvailableModals.specialOffer]: { component: SpecialOfferModal },
+  [AvailableModals.successOrder]: { component: SuccessOrderModal },
 }
 
 export default atom<AvailableModals | null>(null)
