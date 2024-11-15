@@ -16,6 +16,14 @@ export const onboardedS2Atom = atomWithStorage(
     getOnInit: true,
   }
 )
+export const didSeeSpecialOfferAtom = atomWithStorage(
+  'didSeeSpecialOffer',
+  false,
+  undefined,
+  {
+    getOnInit: true,
+  }
+)
 
 export const boostStateAtom = atom(BoostStates.disabled)
 export const specialOfferExpiryUnix = 1732449600000

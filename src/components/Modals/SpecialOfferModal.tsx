@@ -11,10 +11,14 @@ import Battery from 'components/icons/Battery'
 import Rocket from 'components/icons/Rocket'
 import ScalrCoinDark from 'components/icons/coins/ScalrCoinDark'
 import BubbleTimer from 'components/BubbleTimer'
-import { specialOfferInvoiceLink } from 'helpers/atoms/UserStates'
+import {
+  didSeeSpecialOfferAtom,
+  specialOfferInvoiceLink,
+} from 'helpers/atoms/UserStates'
 import handleStarPayment from 'helpers/telegram/handleStarPayment'
 import { useAtomValue } from 'jotai'
 import UserAtom from 'helpers/atoms/UserAtom'
+import { writeAtom } from 'helpers/atoms/atomStore'
 
 function ModalBody() {
   return (
@@ -64,5 +68,12 @@ function ModalFooter() {
 }
 
 export default function (props: DefaultModalProps) {
-  return <DefaultModal {...props} body={ModalBody} footer={ModalFooter} />
+  return (
+    <DefaultModal
+      {...props}
+      body={ModalBody}
+      footer={ModalFooter}
+      onCloseCallback={() => writeAtom(didSeeSpecialOfferAtom, true)}
+    />
+  )
 }

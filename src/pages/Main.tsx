@@ -5,13 +5,17 @@ import priceHistoryAtom from 'helpers/atoms/priceHistoryAtom'
 import FooterSafeArea from 'components/FooterSafeArea'
 import BetBlock from 'components/Main/BetBlock'
 import Season2Modal from 'components/Modals/Season2Modal'
-import { onboardedS2Atom } from 'helpers/atoms/UserStates'
+import {
+  onboardedS2Atom,
+  didSeeSpecialOfferAtom,
+} from 'helpers/atoms/UserStates'
 import SeasonStats from 'components/Modals/SeasonStats'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import useImagePreloader from 'helpers/hooks/useImagePreload'
 import LoaderFullPage from 'components/LoaderFullPage'
 import modalsAtom, { AvailableModals } from 'helpers/atoms/modalsAtom'
 import useTimeToDailyStreak from 'helpers/hooks/useTimeToDailyStreak'
+import DailyStreakModal from 'components/Modals/DailyStreakModal'
 
 function InnerMain() {
   useTimeToDailyStreak()
@@ -36,10 +40,18 @@ const mainPreloadList = ['img/season2.png', 'img/utya-win.png']
 
 export default function () {
   const setModal = useSetAtom(modalsAtom)
+  const didSeeSpecialOffer = useAtomValue(didSeeSpecialOfferAtom)
   const [onboardedS2, setOnboardedS2] = useAtom(onboardedS2Atom)
   const [showS2Modal, setShowS2Modal] = useState(!onboardedS2)
+  const [showDailyStreak, setShowDailyStreak] = useState(false)
   const [openStatsModal, setOpenStatsModal] = useState(false)
   const { imagesPreloaded } = useImagePreloader(mainPreloadList)
+
+  useEffect(() => {
+    if (!onboardedS2 || didSeeSpecialOffer) return
+
+    setModal(AvailableModals.specialOffer)
+  }, [didSeeSpecialOffer, onboardedS2, setModal])
 
   if (!imagesPreloaded) return <LoaderFullPage />
 
@@ -56,8 +68,14 @@ export default function () {
         showModal={openStatsModal}
         setShowModal={setOpenStatsModal}
         onCloseCallback={() => {
-          setOnboardedS2(true)
-          setTimeout(() => setModal(AvailableModals.dailyStreak), 200)
+          setTimeout(() => setShowDailyStreak(true), 200)
+        }}
+      />
+      <DailyStreakModal
+        showModal={showDailyStreak}
+        setShowModal={setShowDailyStreak}
+        onCloseCallback={() => {
+          setTimeout(() => setOnboardedS2(true), 200)
         }}
       />
     </div>
