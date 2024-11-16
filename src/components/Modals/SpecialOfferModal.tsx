@@ -52,11 +52,9 @@ function ModalFooter() {
     void handleStarPayment(specialOfferInvoiceLink)
   }, [])
 
-  const subscriptionActive = (() => {
-    const endDate = new Date(user.premiumEndDate);
-    return endDate.getTime() > Date.now();
-  })();
-  
+  const subscriptionActive = user?.premiumEndDate
+  ? new Date(user.premiumEndDate).getTime() > Date.now()
+  : false;  
 
   return (
     <Button
