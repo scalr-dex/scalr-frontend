@@ -19,7 +19,11 @@ import { useCallback } from 'react'
 export default function () {
   const user = useAtomValue(UserAtom)
   const specialDisabled =
-    dayjs(specialOfferExpiryUnix).diff(dayjs()) < 0 || !!user?.premiumEndDate
+  dayjs(specialOfferExpiryUnix).diff(dayjs()) < 0 ||
+  (user?.premiumEndDate
+    ? new Date(user.premiumEndDate).getTime() > Date.now()
+    : false);
+    
   const query = useQuery({
     queryKey: ['market-data'],
     queryFn: getMarketEntries,

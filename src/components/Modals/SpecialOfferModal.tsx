@@ -64,7 +64,7 @@ function ModalFooter() {
       className="h-12.5"
       iconRight={subscriptionActive ? null : <PillAmount />}
     >
-      {user?.premiumEndDate ? 'Active' : 'Purchase for'}
+      {user?.premiumEndDate ? 'Activate' : 'Purchase for'}
     </Button>
   )
 }
