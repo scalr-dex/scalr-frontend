@@ -17,7 +17,7 @@ import {
 } from 'helpers/atoms/UserStates'
 import handleStarPayment from 'helpers/telegram/handleStarPayment'
 import { useAtomValue } from 'jotai'
-import UserAtom from 'helpers/atoms/UserAtom'
+import { specialOfferDisabledAtom } from 'helpers/atoms/UserAtom'
 import { writeAtom } from 'helpers/atoms/atomStore'
 
 function ModalBody() {
@@ -47,24 +47,20 @@ function ModalBody() {
 }
 
 function ModalFooter() {
-  const user = useAtomValue(UserAtom)
+  const disabledSpecial = useAtomValue(specialOfferDisabledAtom)
   const onClick = useCallback(() => {
     void handleStarPayment(specialOfferInvoiceLink)
   }, [])
 
-  const subscriptionActive = user?.premiumEndDate
-  ? new Date(user.premiumEndDate).getTime() > Date.now()
-  : false;  
-
   return (
     <Button
       onClick={onClick}
-      disabled={subscriptionActive}
-      buttonType={subscriptionActive ? ButtonTypes.secondary : ButtonTypes.alt}
+      disabled={disabledSpecial}
+      buttonType={disabledSpecial ? ButtonTypes.secondary : ButtonTypes.alt}
       className="h-12.5"
-      iconRight={subscriptionActive ? null : <PillAmount />}
+      iconRight={disabledSpecial ? null : <PillAmount />}
     >
-      {user?.premiumEndDate ? 'Activate' : 'Purchase for'}
+      {disabledSpecial ? 'Activated' : 'Purchase for'}
     </Button>
   )
 }

@@ -1,4 +1,4 @@
-import { specialOfferExpiryUnix } from 'helpers/atoms/UserStates'
+import { specialOfferExpiryUnix } from 'helpers/atoms/UserAtom'
 import { ChildrenProp } from 'type/Props'
 import { BodyText, Header3 } from 'components/Text'
 import dayjs from 'dayjs'

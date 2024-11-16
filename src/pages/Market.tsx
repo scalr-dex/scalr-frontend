@@ -8,22 +8,15 @@ import MarketCard from 'components/Market/MarketCard'
 import MarketSection from 'components/Market/MarketSection'
 import PointsReward from 'components/Market/PointsReward'
 import { Header2 } from 'components/Text'
-import dayjs from 'dayjs'
 import { getMarketEntries } from 'helpers/api/market'
-import UserAtom from 'helpers/atoms/UserAtom'
-import { specialOfferExpiryUnix } from 'helpers/atoms/UserStates'
+import { specialOfferDisabledAtom } from 'helpers/atoms/UserAtom'
 import handleStarPayment from 'helpers/telegram/handleStarPayment'
 import { useAtomValue } from 'jotai'
 import { useCallback } from 'react'
 
 export default function () {
-  const user = useAtomValue(UserAtom)
-  const specialDisabled =
-  dayjs(specialOfferExpiryUnix).diff(dayjs()) < 0 ||
-  (user?.premiumEndDate
-    ? new Date(user.premiumEndDate).getTime() > Date.now()
-    : false);
-    
+  const specialDisabled = useAtomValue(specialOfferDisabledAtom)
+
   const query = useQuery({
     queryKey: ['market-data'],
     queryFn: getMarketEntries,

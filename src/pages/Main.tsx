@@ -14,11 +14,10 @@ import { useEffect, useState } from 'react'
 import useImagePreloader from 'helpers/hooks/useImagePreload'
 import LoaderFullPage from 'components/LoaderFullPage'
 import modalsAtom, { AvailableModals } from 'helpers/atoms/modalsAtom'
-import useTimeToDailyStreak from 'helpers/hooks/useTimeToDailyStreak'
 import DailyStreakModal from 'components/Modals/DailyStreakModal'
+import useTimeToDailyStreak from 'helpers/hooks/useTimeToDailyStreak'
 
 function InnerMain() {
-  useTimeToDailyStreak()
   const data = useAtomValue(priceHistoryAtom)
 
   const lastIndex = data.length - 1
@@ -39,6 +38,7 @@ function InnerMain() {
 const mainPreloadList = ['img/season2.png', 'img/utya-win.png']
 
 export default function () {
+  const { disabled: dailyStreakDisabled } = useTimeToDailyStreak(false, true)
   const setModal = useSetAtom(modalsAtom)
   const didSeeSpecialOffer = useAtomValue(didSeeSpecialOfferAtom)
   const [onboardedS2, setOnboardedS2] = useAtom(onboardedS2Atom)
@@ -48,10 +48,10 @@ export default function () {
   const { imagesPreloaded } = useImagePreloader(mainPreloadList)
 
   useEffect(() => {
-    if (!onboardedS2 || didSeeSpecialOffer) return
+    if (!onboardedS2 || didSeeSpecialOffer || !dailyStreakDisabled) return
 
     setModal(AvailableModals.specialOffer)
-  }, [didSeeSpecialOffer, onboardedS2, setModal])
+  }, [dailyStreakDisabled, didSeeSpecialOffer, onboardedS2, setModal])
 
   if (!imagesPreloaded) return <LoaderFullPage />
 

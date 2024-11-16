@@ -6,12 +6,13 @@ import StonksArrow from 'components/icons/StonksArrow'
 import DailyStreakButton from 'components/Tasks/DailyStreakButton'
 import { Header2, Header4 } from 'components/Text'
 import modalsAtom, { AvailableModals } from 'helpers/atoms/modalsAtom'
-import { userBetAtom } from 'helpers/atoms/UserAtom'
+import { specialOfferDisabledAtom, userBetAtom } from 'helpers/atoms/UserAtom'
 import { useAtomValue, useSetAtom } from 'jotai'
 import MotionNumber from '@number-flow/react'
 import SpecialOffer from 'components/icons/SpecialOffer'
 
 export default function ({ price }: { price?: number }) {
+  const specialOfferDisabled = useAtomValue(specialOfferDisabledAtom)
   const setModal = useSetAtom(modalsAtom)
   const roundStartPrice = useAtomValue(userBetAtom)
   const shouldDisplayDelta = price && roundStartPrice?.value
@@ -63,7 +64,11 @@ export default function ({ price }: { price?: number }) {
           <DailyStreakButton small />
           <BattleTicketButton small />
         </div>
-        <SpecialOffer onClick={() => setModal(AvailableModals.specialOffer)} />
+        {specialOfferDisabled ? null : (
+          <SpecialOffer
+            onClick={() => setModal(AvailableModals.specialOffer)}
+          />
+        )}
       </div>
     </div>
   )
