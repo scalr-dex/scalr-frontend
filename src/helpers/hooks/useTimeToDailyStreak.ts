@@ -8,7 +8,7 @@ import UserAtom from 'helpers/atoms/UserAtom'
 import { getDailyStreak } from 'helpers/api/dailyReward'
 import handleError from 'helpers/handleError'
 
-export default function (shouldAutoClaim?: boolean, opensOutside?: boolean) {
+export default function (shouldAutoClaim?: boolean) {
   const [user, setUser] = useAtom(UserAtom)
   const [loading, setLoading] = useState(false)
   const setModal = useSetAtom(modalsAtom)
@@ -47,18 +47,10 @@ export default function (shouldAutoClaim?: boolean, opensOutside?: boolean) {
   }, [setUser])
 
   useEffect(() => {
-    if (disabled || !onboardedS2 || !didOnboard || opensOutside) return
+    if (disabled || !onboardedS2 || !didOnboard) return
     setModal(AvailableModals.dailyStreak)
     if (shouldAutoClaim) setTimeout(onClick, 300)
-  }, [
-    disabled,
-    setModal,
-    didOnboard,
-    onboardedS2,
-    onClick,
-    shouldAutoClaim,
-    opensOutside,
-  ])
+  }, [disabled, setModal, didOnboard, onboardedS2, onClick, shouldAutoClaim])
 
   return {
     disabled,
