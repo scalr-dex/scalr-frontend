@@ -30,6 +30,7 @@ export default function ({
         backgroundImage,
         backgroundRepeat: 'no-repeat',
         backgroundSize: 'contain',
+        backgroundPosition: '50% 50%',
       }}
       className="relative flex flex-col rounded-2xl h-44 w-full border border-white/5 bg-primary-dark aria-disabled:opacity-50 hover:scale-105 active:scale-[1.03] transition-transform aria-disabled:cursor-not-allowed cursor-pointer"
       onClick={() => {

@@ -48,7 +48,7 @@ function AppInner({ socket }: { socket: WebSocket }) {
       >
         <Router hook={useHashLocation}>
           <div
-            className="flex flex-col relative h-[100dvh] overflow-x-hidden max-w-prose text-white z-0"
+            className="flex flex-col relative h-[100dvh] overflow-x-hidden max-w-prose text-white z-0 mx-auto"
             id="scrollable"
             ref={parent}
           >
@@ -91,9 +91,10 @@ function AppInner({ socket }: { socket: WebSocket }) {
             pauseOnFocusLoss
             closeOnClick
             closeButton={false}
-            autoClose={3000}
+            // autoClose={3000}
+            autoClose={false}
             theme="dark"
-            toastClassName="!bg-tertiary !rounded-xl !w-[96dvw] !ml-[2dvw] !shadow-super !top-4 !font-semibold"
+            toastClassName="!bg-tertiary !rounded-xl !w-[96dvw] !ml-[2dvw] md:!w-full md:!ml-auto !max-w-prose !shadow-super !top-4 !font-semibold"
             draggableDirection="y"
             hideProgressBar
             limit={3}
