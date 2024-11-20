@@ -21,6 +21,16 @@ import { specialOfferDisabledAtom } from 'helpers/atoms/UserAtom'
 import { writeAtom } from 'helpers/atoms/atomStore'
 
 function ModalBody() {
+  const { expired, userBoughtExpired, premiumTimeLeft, timerTime } =
+    useAtomValue(specialOfferDisabledAtom)
+
+  const text =
+    expired && userBoughtExpired
+      ? 'The offer has expired'
+      : premiumTimeLeft > 0
+        ? 'Premium time left'
+        : 'Purchase extra daily energy, multipliers, and claims for 1 week!'
+
   return (
     <div className="flex flex-col gap-y-8 text-center items-center justify-center">
       <ImageAnimatedOnLoad src="img/special-7days.png" forModal />
@@ -37,30 +47,30 @@ function ModalBody() {
             <ScalrCoinDark size={16} />
           </PillAmount>
         </div>
-        <Header2>
-          Purchase extra daily energy, multipliers, and claims for 1 week!
-        </Header2>
+        <Header2>{text}</Header2>
       </div>
-      <BubbleTimer />
+      <BubbleTimer {...timerTime} />
     </div>
   )
 }
 
 function ModalFooter() {
-  const disabledSpecial = useAtomValue(specialOfferDisabledAtom)
+  const { expired, userBoughtExpired } = useAtomValue(specialOfferDisabledAtom)
   const onClick = useCallback(() => {
     void handleStarPayment(specialOfferInvoiceLink)
   }, [])
 
+  const disabled = expired || !userBoughtExpired
+
   return (
     <Button
       onClick={onClick}
-      disabled={disabledSpecial}
-      buttonType={disabledSpecial ? ButtonTypes.secondary : ButtonTypes.alt}
+      disabled={disabled}
+      buttonType={disabled ? ButtonTypes.secondary : ButtonTypes.alt}
       className="h-12.5"
-      iconRight={disabledSpecial ? null : <PillAmount />}
+      iconRight={disabled ? null : <PillAmount />}
     >
-      {disabledSpecial ? 'Activated' : 'Purchase for'}
+      {disabled ? 'Activated' : 'Purchase for'}
     </Button>
   )
 }

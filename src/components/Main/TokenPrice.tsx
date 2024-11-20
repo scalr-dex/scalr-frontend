@@ -12,7 +12,7 @@ import MotionNumber from '@number-flow/react'
 import SpecialOffer from 'components/icons/SpecialOffer'
 
 export default function ({ price }: { price?: number }) {
-  const specialOfferDisabled = useAtomValue(specialOfferDisabledAtom)
+  const { expired, userBoughtExpired } = useAtomValue(specialOfferDisabledAtom)
   const setModal = useSetAtom(modalsAtom)
   const roundStartPrice = useAtomValue(userBetAtom)
   const shouldDisplayDelta = price && roundStartPrice?.value
@@ -64,7 +64,7 @@ export default function ({ price }: { price?: number }) {
           <DailyStreakButton small />
           <BattleTicketButton small />
         </div>
-        {specialOfferDisabled ? null : (
+        {expired && userBoughtExpired ? null : (
           <SpecialOffer
             onClick={() => setModal(AvailableModals.specialOffer)}
           />

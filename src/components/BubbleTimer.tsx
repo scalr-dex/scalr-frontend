@@ -1,7 +1,5 @@
-import { specialOfferExpiryUnix } from 'helpers/atoms/UserAtom'
 import { ChildrenProp } from 'type/Props'
 import { BodyText, Header3 } from 'components/Text'
-import dayjs from 'dayjs'
 
 function Bubble({ children, subText }: ChildrenProp & { subText: string }) {
   return (
@@ -14,17 +12,15 @@ function Bubble({ children, subText }: ChildrenProp & { subText: string }) {
   )
 }
 
-const minuteInMs = 1000 * 60
-const hourInMs = minuteInMs * 60
-const dayInMs = hourInMs * 24
-
-export default function () {
-  const totalDiff = dayjs(specialOfferExpiryUnix).diff(dayjs())
-
-  const days = Math.floor(totalDiff / dayInMs)
-  const hours = Math.floor((totalDiff % dayInMs) / hourInMs)
-  const minutes = Math.floor((totalDiff % hourInMs) / minuteInMs)
-
+export default function ({
+  days,
+  hours,
+  minutes,
+}: {
+  days: number
+  hours: number
+  minutes: number
+}) {
   return (
     <div className="flex flex-row gap-x-2 w-full">
       <Bubble subText="Days">{days}</Bubble>

@@ -15,7 +15,7 @@ import { useAtomValue } from 'jotai'
 import { useCallback } from 'react'
 
 export default function () {
-  const specialDisabled = useAtomValue(specialOfferDisabledAtom)
+  const { expired, premiumTimeLeft } = useAtomValue(specialOfferDisabledAtom)
 
   const query = useQuery({
     queryKey: ['market-data'],
@@ -55,7 +55,7 @@ export default function () {
         subHeader="Get extra energy, boosters, and higher claims daily."
       >
         <MarketCard
-          disabled={specialDisabled}
+          disabled={expired || premiumTimeLeft > 0}
           onClick={() => onClick(6)}
           price={40}
           priceFloat
