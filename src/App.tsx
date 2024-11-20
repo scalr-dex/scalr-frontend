@@ -91,8 +91,7 @@ function AppInner({ socket }: { socket: WebSocket }) {
             pauseOnFocusLoss
             closeOnClick
             closeButton={false}
-            // autoClose={3000}
-            autoClose={false}
+            autoClose={3000}
             theme="dark"
             toastClassName="!bg-tertiary !rounded-xl !w-[96dvw] !ml-[2dvw] md:!w-full md:!ml-auto !max-w-prose !shadow-super !top-4 !font-semibold"
             draggableDirection="y"
