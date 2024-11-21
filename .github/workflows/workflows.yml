@@ -9,10 +9,11 @@ env:
   SENTRY_URL: ${{ secrets.SENTRY_URL }}
   VITE_BACKEND_URL: ${{ secrets.VITE_BACKEND_URL }}
   VITE_AMPLITUDE_API_KEY: ${{ secrets.VITE_AMPLITUDE_API_KEY }}
-  VITE_VITE_ANALYTICS_KEY: ${{ secrets.VITE_ANALYTICS_KEY }}
+  VITE_ANALYTICS_KEY: ${{ secrets.VITE_ANALYTICS_KEY }}
   VITE_APP_BASE_LINK: ${{ secrets.VITE_APP_BASE_LINK }}
   VITE_SENTRY_DSN: ${{ secrets.VITE_SENTRY_DSN }}
   VITE_ADSGRAM_BLOCK_ID: ${{ secrets.VITE_ADSGRAM_BLOCK_ID }}
+  VITE_SPOT_AD_KEY: ${{secrets.VITE_SPOT_AD_KEY }}
 
 jobs:
   build-and-lint-code:
