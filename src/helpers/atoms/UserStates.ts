@@ -26,6 +26,7 @@ export const didSeeSpecialOfferAtom = atomWithStorage(
 )
 
 export const boostStateAtom = atom(BoostStates.disabled)
+export const kingMessageAtom = atom('')
 export const oneLevelInvoiceLink = 'https://t.me/$q1YRfULloEnBCgAA60fdNf5Ak7k'
 export const specialOfferInvoiceLink =
   'https://t.me/$LNEnnELloEnKCgAA3RdBk2lmjLk'

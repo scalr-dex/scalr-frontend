@@ -57,7 +57,7 @@ function ModalBody() {
 function ModalFooter() {
   const { expired, userBoughtExpired } = useAtomValue(specialOfferDisabledAtom)
   const onClick = useCallback(() => {
-    void handleStarPayment(specialOfferInvoiceLink)
+    void handleStarPayment({ link: specialOfferInvoiceLink })
   }, [])
 
   const disabled = expired || !userBoughtExpired

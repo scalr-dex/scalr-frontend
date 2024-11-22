@@ -103,7 +103,7 @@ function ModalFooter() {
   const onStarsUpgrade = useCallback(async () => {
     try {
       setStarsLoading(true)
-      await handleStarPayment(oneLevelInvoiceLink)
+      await handleStarPayment({ link: oneLevelInvoiceLink })
     } catch (e) {
       handleError({ e, toastMessage: 'Failed to upgrade' })
     } finally {
