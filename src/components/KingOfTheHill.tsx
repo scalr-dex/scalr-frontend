@@ -68,7 +68,12 @@ export default function KingOfTheHill(
             </BodyText>
           </div>
         </div>
-        <Timer diffTime={started.valueOf()} step={-1} format="HH:mm:ss" />
+        <Timer
+          diffTime={started.valueOf()}
+          step={-1}
+          format="HH:mm:ss"
+          className="text-center w-24"
+        />
       </div>
 
       <Button
