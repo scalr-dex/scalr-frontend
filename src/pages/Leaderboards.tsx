@@ -8,6 +8,7 @@ import useLeaderBoard from 'helpers/hooks/useLeaderBoard'
 import { useAtomValue, useSetAtom } from 'jotai'
 import FooterSafeArea from 'components/FooterSafeArea'
 import modalsAtom, { AvailableModals } from 'helpers/atoms/modalsAtom'
+import KingOfTheHill from 'components/KingOfTheHill'
 
 export default function () {
   const setModalOpen = useSetAtom(modalsAtom)
@@ -32,6 +33,7 @@ export default function () {
         userRank={data?.user?.user_rank}
         loading={loading}
       />
+      <KingOfTheHill king={data?.king} loading={loading} />
       <UserList users={data?.lb} loading={loading} />
       <FooterSafeArea />
     </div>

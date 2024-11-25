@@ -14,6 +14,7 @@ export default function ({
   contentClassName,
   bodyWrapperClassName,
   footerWrapperClassName,
+  repositionInputs = false,
 }: DefaultModalProps & {
   header?: (onClose: () => void) => ReactNode | null
   body: (onClose: () => void) => ReactNode | null
@@ -21,6 +22,7 @@ export default function ({
   contentClassName?: ClassName
   bodyWrapperClassName?: ClassName
   footerWrapperClassName?: ClassName
+  repositionInputs?: boolean
 }) {
   const onClose = useCallback(() => {
     onCloseCallback?.()
@@ -32,7 +34,7 @@ export default function ({
       open={showModal}
       onOpenChange={(open) => (open ? null : onClose())}
       dismissible={dismissible}
-      repositionInputs={false}
+      repositionInputs={repositionInputs}
     >
       <Drawer.Portal>
         <Drawer.Description>Modal</Drawer.Description>

@@ -48,7 +48,7 @@ function AppInner({ socket }: { socket: WebSocket }) {
       >
         <Router hook={useHashLocation}>
           <div
-            className="flex flex-col relative h-[100dvh] overflow-x-hidden max-w-prose text-white z-0 mx-auto"
+            className="flex flex-col relative h-[100dvh] max-w-prose text-white z-0 mx-auto"
             id="scrollable"
             ref={parent}
           >

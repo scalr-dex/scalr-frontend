@@ -5,6 +5,7 @@ import DailyStreakModal from 'components/Modals/DailyStreakModal'
 import EnergyInfoModal from 'components/Modals/EnergyInfoModal'
 import EnergyZeroModal from 'components/Modals/EnergyZeroModal'
 import InviteFriendsModal from 'components/Modals/InviteFriendsModal'
+import KingModal from 'components/Modals/KingModal'
 import LeaderBoardsFaqModal from 'components/Modals/LeaderBoardsFaqModal'
 import LevelUpgradeModal from 'components/Modals/LevelUpgradeModal'
 import PartnershipModal from 'components/Modals/PerpDex/PartnershipModal'
@@ -35,6 +36,7 @@ export enum AvailableModals {
   levelUpgrade,
   specialOffer,
   successOrder,
+  kingOfTheHill,
 }
 
 export const modalToComponent = {
@@ -54,6 +56,7 @@ export const modalToComponent = {
   [AvailableModals.levelUpgrade]: { component: LevelUpgradeModal },
   [AvailableModals.specialOffer]: { component: SpecialOfferModal },
   [AvailableModals.successOrder]: { component: SuccessOrderModal },
+  [AvailableModals.kingOfTheHill]: { component: KingModal },
 }
 
 export default atom<AvailableModals | null>(null)

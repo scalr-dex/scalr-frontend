@@ -106,7 +106,7 @@ export default function ({
                 <b className="text-success">UP</b>
               )}
             </BodyText>
-            <Timer endTime={userBet.endTime} className="w-16" />
+            <Timer diffTime={userBet.endTime} className="w-16" />
           </div>
         </div>
       ) : (

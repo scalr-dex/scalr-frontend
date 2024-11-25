@@ -97,6 +97,7 @@ module.exports = {
         'controls-tertiary-hover': '#3E4149',
         'controls-tertiary-focus': '#727B89',
         'controls-tertiary-disabled': '#2B343F',
+        'controls-input': '#1F2531',
 
         accent: '#4374EC',
         'accent-hover': '#6D9EFC',

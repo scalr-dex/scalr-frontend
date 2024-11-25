@@ -1,6 +1,7 @@
 import ImgWithComponentFallback from 'components/ImgWithComponentFallback'
 import { AccentText } from 'components/Text'
 import formatUSA from 'helpers/formatters/formatUSA'
+import { openUserChat } from 'helpers/safeOpenLink'
 import { LeaderBoardUser } from 'type/LeaderBoardResponse'
 
 export default function ({
@@ -16,10 +17,14 @@ export default function ({
     : ''
 
   const name = item.name || item.telegram_id
+  const canBeOpened = !!item.username
 
   return (
     <div className="flex flex-row justify-between items-center px-4 py-3 bg-tertiary border-b border-white border-opacity-5 h-14 first:rounded-t-xl last:rounded-b-xl">
-      <div className="flex flex-row gap-x-3 items-center">
+      <div
+        className={`flex flex-row gap-x-3 items-center ${canBeOpened ? 'cursor-pointer' : ''}`}
+        onClick={() => canBeOpened && openUserChat(item.username)}
+      >
         <ImgWithComponentFallback imgUrl={item.userPfp} name={String(name)} />
         <AccentText className="font-semibold truncate max-w-28">
           {name}

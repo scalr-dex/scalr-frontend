@@ -25,7 +25,7 @@ export default function () {
   const onClick = useCallback(
     (id: number) => {
       if (!query.data) return
-      void handleStarPayment(query.data[id].buy_link)
+      void handleStarPayment({ link: query.data[id].buy_link })
     },
     [query.data]
   )
