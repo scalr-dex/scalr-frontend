@@ -9,14 +9,10 @@ import MarketSection from 'components/Market/MarketSection'
 import PointsReward from 'components/Market/PointsReward'
 import { Header2 } from 'components/Text'
 import { getMarketEntries } from 'helpers/api/market'
-import { specialOfferDisabledAtom } from 'helpers/atoms/UserAtom'
 import handleStarPayment from 'helpers/telegram/handleStarPayment'
-import { useAtomValue } from 'jotai'
 import { useCallback } from 'react'
 
 export default function () {
-  const { expired, premiumTimeLeft } = useAtomValue(specialOfferDisabledAtom)
-
   const query = useQuery({
     queryKey: ['market-data'],
     queryFn: getMarketEntries,
@@ -48,20 +44,6 @@ export default function () {
         <MarketCard price={500} onClick={() => onClick(2)}>
           <Level3 />
         </MarketCard>
-      </MarketSection>
-
-      <MarketSection
-        header="One-Week Boosts"
-        subHeader="Get extra energy, boosters, and higher claims daily."
-      >
-        <MarketCard
-          disabled={expired || premiumTimeLeft > 0}
-          onClick={() => onClick(6)}
-          price={40}
-          priceFloat
-          backgroundImage='url("img/market/7-days-boost.png")'
-          badgeText=""
-        />
       </MarketSection>
 
       <MarketSection
