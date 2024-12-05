@@ -26,6 +26,7 @@ import PerpDex from 'pages/PerpDex'
 import { lazy, Suspense } from 'react'
 import Modals from 'components/Modals'
 import Market from 'pages/Market'
+import DiscoveryPage from 'pages/DiscoveryPage'
 
 const Onboarding = lazy(() => import('pages/Onboarding'))
 
@@ -58,6 +59,7 @@ function AppInner({ socket }: { socket: WebSocket }) {
                   <Route path="/market" component={Market} />
                   <Route path="/tasks" component={Tasks} />
                   <Route path="/leaderboards" component={LeaderBoards} />
+                  <Route path="/discovery" component={DiscoveryPage} />
                   <Route
                     path="/perp"
                     component={() => (
