@@ -5,7 +5,7 @@ export const timeInMs = {
   day: 1000 * 60 * 60 * 24,
 }
 
-export function formatDuration(totalSeconds: number, format: string) {
+export function formatDuration(totalSeconds: number, format = 'HH mm') {
   const hours = Math.floor(totalSeconds / 3600)
   const minutes = Math.floor((totalSeconds % 3600) / 60)
   const seconds = totalSeconds % 60
