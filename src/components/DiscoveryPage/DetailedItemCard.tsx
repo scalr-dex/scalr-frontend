@@ -38,15 +38,15 @@ export default function DetailedItemCard({
   const splitted = formatDuration(seconds).split(' ')
   const formatted = splitted[0] + 'h' + ' ' + splitted[1] + 'm'
 
-  const smartKol = smart_wallets / kol_wallets || 0
-
   return (
     <div className="rounded-xl bg-tertiary border border-white-16 p-3 grid grid-cols-3 gap-4">
       <LabelWithData label="MCap" dataColor="#93C5FD">
         {market_cap}
       </LabelWithData>
       <LabelWithData label="Gem">{blue_chip_risk}</LabelWithData>
-      <LabelWithData label="Smart/KOL">{smartKol}</LabelWithData>
+      <LabelWithData label="Smart/KOL">
+        {smart_wallets}/{kol_wallets}
+      </LabelWithData>
       <LabelWithData label="Liquidity">{liquidity}</LabelWithData>
       <LabelWithData label="Holders">{holders}</LabelWithData>
       <LabelWithData label="Rugpull">{rugpull_risk}</LabelWithData>
