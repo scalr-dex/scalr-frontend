@@ -1,4 +1,4 @@
-export default function SolanaLogo() {
+export default function SolanaIcon() {
   return (
     <svg
       width="16"

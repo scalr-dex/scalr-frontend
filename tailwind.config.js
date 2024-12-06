@@ -104,6 +104,7 @@ module.exports = {
         'accent-focus': '#427AE4',
         'accent-disabled': '#345FB2',
         'accent-dimmed': '#B1C9F7',
+        'accent-dimmed-dark': '#93C5FD',
         'accent-dark': '#133D8D',
         'accent-alt': '#00FFFF',
         'accent-alt-bg': '#113D3D',
@@ -114,6 +115,7 @@ module.exports = {
         error: '#F3617D',
 
         alt: '#FFE792',
+        'alt-dimmed': '#FFDB58',
         'alt-hover': '#d9c47c',
         'alt-active': '#baa96b',
         'alt-dark': '#FF9341',

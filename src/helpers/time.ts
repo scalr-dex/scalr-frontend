@@ -6,14 +6,19 @@ export const timeInMs = {
 }
 
 export function formatDuration(totalSeconds: number, format = 'HH mm') {
+  const days = Math.floor(totalSeconds / 86400)
   const hours = Math.floor(totalSeconds / 3600)
   const minutes = Math.floor((totalSeconds % 3600) / 60)
   const seconds = totalSeconds % 60
+
+  const daysString = String(days).padStart(2, '0')
 
   const hoursString =
     hours < 100 ? String(hours).padStart(2, '0') : String(hours)
 
   return format
+    .replace('DD', daysString)
+    .replace('D', String(days))
     .replace('HH', hoursString)
     .replace('H', String(hours))
     .replace('mm', String(minutes).padStart(2, '0'))

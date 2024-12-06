@@ -11,7 +11,8 @@ import CheckMark from 'components/icons/CheckMark'
 export default function DiscoveryItem(item: DiscoveryFeedItem) {
   const [copied, setCopied] = useState(false)
 
-  const { name, price, price_change_1h, contract_address, image_url } = item
+  const { name, price, price_change_1h, contract_address, image_url, chain } =
+    item
 
   const positivePriceChange = price_change_1h > 0
 
@@ -27,7 +28,11 @@ export default function DiscoveryItem(item: DiscoveryFeedItem) {
       <div className="flex flex-col gap-y-4">
         <div className="flex items-center justify-between">
           <div className="flex gap-x-3">
-            <TokenImageWithChain imgUrl={image_url} tokenName={name} />
+            <TokenImageWithChain
+              imgUrl={image_url}
+              tokenName={name}
+              chain={chain}
+            />
             <div className="flex flex-col gap-y-1">
               <BodyText className="font-semibold">{name}</BodyText>
               <BodyText className="flex gap-x-1 items-center text-sm text-white/50">

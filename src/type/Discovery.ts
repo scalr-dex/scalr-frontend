@@ -1,3 +1,5 @@
+import { AvailableChains } from 'type/ChainLogos'
+
 export interface DiscoveryTab {
   label: string
   isActive?: boolean
@@ -8,7 +10,7 @@ export interface DiscoveryFeedItem {
   id: number
   name: string
   ticker: string
-  chain: string
+  chain: AvailableChains
   market_cap: number
   liquidity: number
   one_hour_volume: number

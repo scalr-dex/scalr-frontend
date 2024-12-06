@@ -44,7 +44,12 @@ It's already ${priceChangeFormatted}% in the last hour!
       >
         Details
       </Button>
-      <Button buttonType={ButtonTypes.neutral}>Trade</Button>
+      <Button
+        buttonType={ButtonTypes.neutral}
+        onClick={() => safeOpenLink(link)}
+      >
+        Trade
+      </Button>
       <Button
         buttonType={ButtonTypes.neutral}
         className="!w-16"
