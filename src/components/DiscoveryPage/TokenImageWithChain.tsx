@@ -10,7 +10,6 @@ export default function TokenImageWithChain({
   imgUrl: string
   chain: AvailableChains
 }) {
-  console.log(chain)
   return (
     <div className="relative w-12 h-12">
       <ImgWithComponentFallback size={12} imgUrl={imgUrl} name={tokenName} />
