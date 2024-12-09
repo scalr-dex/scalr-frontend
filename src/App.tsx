@@ -59,7 +59,6 @@ function AppInner({ socket }: { socket: WebSocket }) {
                   <Route path="/market" component={Market} />
                   <Route path="/tasks" component={Tasks} />
                   <Route path="/leaderboards" component={LeaderBoards} />
-                  <Route path="/discovery" component={DiscoveryPage} />
                   <Route
                     path="/perp"
                     component={() => (
