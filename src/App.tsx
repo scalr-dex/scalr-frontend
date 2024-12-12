@@ -26,7 +26,6 @@ import PerpDex from 'pages/PerpDex'
 import { lazy, Suspense } from 'react'
 import Modals from 'components/Modals'
 import Market from 'pages/Market'
-import DiscoveryPage from 'pages/DiscoveryPage'
 
 const Onboarding = lazy(() => import('pages/Onboarding'))
 

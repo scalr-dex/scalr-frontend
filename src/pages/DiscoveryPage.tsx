@@ -1,5 +1,5 @@
 import DiscoveryFeed from 'components/DiscoveryPage/DiscoveryFeed'
-import TabSelect from 'components/DiscoveryPage/TabSelect'
+import TabSelect from 'componentsPage/TabSelect'
 import FooterSafeArea from 'components/FooterSafeArea'
 import { Header3 } from 'components/Text'
 

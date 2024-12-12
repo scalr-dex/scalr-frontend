@@ -5,7 +5,7 @@ import DollarCoin from 'components/icons/DollarCoin'
 import { trackNavigation } from 'helpers/api/analytics'
 import GiftWithNotifications from 'components/icons/GiftWithNotifications'
 import ShopHouse from 'components/icons/ShopHouse'
-import Globe from 'components/icons/Globe'
+// import Globe from 'components/icons/Globe'
 
 const buttons = [
   { path: '/', component: <MainSquare /> },
@@ -16,7 +16,7 @@ const buttons = [
   },
   { path: 'perp', component: <DollarCoin /> },
   { path: 'market', component: <ShopHouse /> },
-  { path: 'discovery', component: <Globe /> },
+  // { path: 'discovery', component: <Globe /> },
 ]
 
 export default function () {
