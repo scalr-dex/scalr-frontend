@@ -1,20 +1,19 @@
-import Gift from 'components/icons/Gift'
+import Star from 'components/icons/Star'
 import { Header1 } from 'components/Text'
 
 export default function () {
   return (
     <div className="max-w-96 mt-8">
       <Header1 className="text-center">
-        <p>Earn points and</p>
-        <p>participate in a massive</p>
+        <p>Discover the next</p>
         <p>
           <span className="inline-block mr-2 text-accent">
-            <Gift className="inline mr-2" />
-            airdrop
+            <Star className="inline mr-2" />
+            gem
           </span>
-          for
+          memecoins
         </p>
-        <p className="appearance-none text-center">Scalr DEX users</p>
+        <p className="appearance-none text-center">with Scalr</p>
       </Header1>
     </div>
   )

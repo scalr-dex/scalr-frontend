@@ -19,9 +19,9 @@ function ModalBody() {
         <span className="italic">inviting friends</span>. Instantly add rewards
         to your daily claim total.
       </BodyText>
-      <BodyText className="text-controls-tertiary-focus">
+      {/* <BodyText className="text-controls-tertiary-focus">
         Claimed amounts count toward the $SCR airdrop distribution 👀
-      </BodyText>
+      </BodyText> */}
     </>
   )
 }
