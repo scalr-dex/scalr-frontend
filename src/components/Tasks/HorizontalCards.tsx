@@ -12,8 +12,6 @@ export default function () {
       ref={container}
     >
       <SmallHorizontalCard />
-      {/* <SmallHorizontalCard />
-      <SmallHorizontalCard /> */}
     </div>
   )
 }

@@ -16,7 +16,6 @@ const buttons = [
   },
   { path: 'perp', component: <DollarCoin /> },
   { path: 'market', component: <ShopHouse /> },
-  // { path: 'discovery', component: <Globe /> },
 ]
 
 export default function () {

@@ -1,4 +1,4 @@
-import { AccentText, Header1 } from 'components/Text'
+import { Header1 } from 'components/Text'
 
 export default function () {
   return (
@@ -8,10 +8,6 @@ export default function () {
         <p>complete tasks,</p>
         <p>and invite friends</p>
       </Header1>
-
-      {/* <AccentText className="flex w-full justify-center text-center mt-5">
-        To earn points to get Scalr DEX airdrop.
-      </AccentText> */}
     </div>
   )
 }
