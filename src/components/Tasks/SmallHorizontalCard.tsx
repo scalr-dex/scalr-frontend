@@ -15,9 +15,9 @@ export default function () {
       className="shrink-0 rounded-2xl relative w-80 h-36 p-4 active:opacity-85 hover:opacity-90 transition-all will-change-transform cursor-pointer"
     >
       <div className="flex flex-col gap-y-2">
-        <Header3>Scalr Airdrop</Header3>
+        <Header3>Scalr Discovery</Header3>
         <BodyText className="text-white/50 text-sm font-semibold">
-          Take part in $SCR airdrop distribution
+          Uncover the next x100 memecoins
         </BodyText>
       </div>
 

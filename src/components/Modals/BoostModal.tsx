@@ -1,5 +1,5 @@
 import Button from 'components/Button'
-import { Header3 } from 'components/Text'
+import { BodyText, Header3 } from 'components/Text'
 import DefaultModal from 'components/Modals/DefaultModal'
 import ButtonTypes from 'type/Button'
 import { DefaultModalProps } from 'type/Props'
@@ -13,11 +13,11 @@ function ModalBody() {
         forModal
         className="mx-auto"
       />
-      <Header3>Scalr Win Multiplier 🚀</Header3>
-      <div>
-        <p>Click it to activate if available.</p>
-        <p>Win up to x15 on your next bet.</p>
-      </div>
+      <Header3>No Available Boosters ;( 🚀</Header3>
+      <BodyText>Win up to x5 on your next bet 🤑</BodyText>
+      <BodyText className="text-controls-tertiary-focus">
+        Click it to activate when available.
+      </BodyText>
     </div>
   )
 }

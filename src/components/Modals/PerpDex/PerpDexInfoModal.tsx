@@ -19,20 +19,20 @@ const showCodeInputAtom = atom(false)
 const info = [
   {
     icon: <Box />,
-    topText: 'Liquidity Efficiency',
+    topText: 'Next x100 Memecoin Today',
     bottomText:
-      'Ensures plenty of liquidity for smooth trading and less price fluctuation',
+      'Effortlessly discover the next bluechip memecoins using Scalr discovery.',
   },
   {
     icon: <TimerIcon />,
-    topText: 'Instant Orders',
-    bottomText: 'Trade execution in under 1 second.',
+    topText: 'Seamless Trading Inside',
+    bottomText: 'Execute trades in under 1 second for early movers.',
   },
   {
     icon: <Maximize />,
-    topText: 'L1 Scaling',
+    topText: 'Community Mindset',
     bottomText:
-      'Lower fees and better liquidity than other platforms, thanks to L1 scaling.',
+      'Join chats, explore feeds, and discuss tokens with like-minded degens.',
   },
 ]
 
@@ -56,12 +56,12 @@ function ModalBody() {
           <Header2
             className={`transition-all duration-500 will-change-transform ${glow}`}
           >
-            Scalr Perpetual DEX
+            Where Memecoins Meet Community
           </Header2>
           {showCodeInput ? null : (
             <span className="text-white/50">
-              A mobile-first, fast and reliable perpetual exchange designed for
-              seamless trading.
+              <p>A Telegram-first discovery app</p>
+              <p>replacing countless terminals and bots.</p>
             </span>
           )}
         </div>

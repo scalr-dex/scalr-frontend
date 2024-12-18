@@ -11,10 +11,7 @@ function ModalBody() {
       <AccentText>
         <p>The leaderboard shows your all-time points total.</p>
         <br />
-        <p>
-          Keep climbing the ranks to secure a bigger share of the airdrop
-          rewards! 💪
-        </p>
+        <p>Keep climbing the ranks to show others what you're made of! 💪</p>
       </AccentText>
     </>
   )
