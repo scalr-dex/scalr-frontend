@@ -12,6 +12,7 @@ enum ButtonTypes {
   ghost,
   neutral,
   special,
+  warmGradient,
 }
 
 export interface ButtonProps extends HTMLAttributes<HTMLButtonElement> {
@@ -42,7 +43,8 @@ export const buttonClassNames = (disabled?: boolean) => ({
   [ButtonTypes.outline]:
     'bg-secondary border border-white-16 disabled:opacity-60 focus-visible:bg-opacity-70 hover:opacity-90 active:opacity-90',
   [ButtonTypes.special]: `text-white ${disabled ? 'bg-border-gradient' : 'bg-special-gradient'} hover:opacity-90 active:opacity-90 font-medium disabled:bg-primary disabled:text-opacity-50`,
-  [ButtonTypes.alt]: `text-secondary font-semibold bg-alt hover:bg-alt-hover active:bg-alt-active disabled:opacity-50 transition-all`,
+  [ButtonTypes.warmGradient]: `text-primary ${disabled ? 'bg-border-gradient' : 'bg-warm-gradient'} hover:opacity-90 active:opacity-90 font-medium disabled:bg-primary disabled:text-opacity-50`,
+  [ButtonTypes.alt]: `text-secondary font-semibold bg-alt hover:bg-alt-hover active:bg-alt-active disabled:opacity-50`,
 })
 
 export default ButtonTypes

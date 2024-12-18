@@ -31,11 +31,12 @@ export default function () {
         onClick={() => setModal(AvailableModals.perpInfo)}
       >
         <NoisyCardBig
-          header="Scalr Perpetual DEX"
+          header="Scalr Discovery"
           subHeader={
             <>
-              <p>Join the beta with invite code</p>
-              <p>Public access coming soon.</p>
+              <p>A Telegram-first memecoins discovery</p>
+              <p>app replacing countless terminals and</p>
+              <p>bots.</p>
             </>
           }
           smallIcon={<StonksCircle />}
@@ -43,7 +44,7 @@ export default function () {
         <PerpCardBlur />
       </NoisyCard>
 
-      <NoisyCard
+      {/* <NoisyCard
         style={{
           background:
             'url(img/noise-effect.png), linear-gradient(to top, var(--accent-dark), var(--secondary), var(--secondary))',
@@ -56,8 +57,12 @@ export default function () {
           subHeader="Take part in $SCR airdrop distribution."
           smallIcon={<ScalrCoin size={44} />}
         />
-        <img src="img/dex-scalr-3d.png" className="mx-auto h-32" />
-      </NoisyCard>
+        <img
+          src="img/dex-scalr-3d.png"
+          className="mx-auto h-32"
+          draggable={false}
+        />
+      </NoisyCard> */}
 
       <div className="flex flex-row gap-x-4 h-full">
         <NoisyCard

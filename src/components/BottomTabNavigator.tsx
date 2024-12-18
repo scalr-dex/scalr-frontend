@@ -4,6 +4,8 @@ import Cup from 'components/icons/Cup'
 import DollarCoin from 'components/icons/DollarCoin'
 import { trackNavigation } from 'helpers/api/analytics'
 import GiftWithNotifications from 'components/icons/GiftWithNotifications'
+import ShopHouse from 'components/icons/ShopHouse'
+// import Globe from 'components/icons/Globe'
 
 const buttons = [
   { path: '/', component: <MainSquare /> },
@@ -13,6 +15,8 @@ const buttons = [
     component: <GiftWithNotifications />,
   },
   { path: 'perp', component: <DollarCoin /> },
+  { path: 'market', component: <ShopHouse /> },
+  // { path: 'discovery', component: <Globe /> },
 ]
 
 export default function () {
@@ -28,6 +32,13 @@ export default function () {
             onClick={() => {
               setLocation(path)
               trackNavigation(path)
+              setTimeout(
+                () =>
+                  document
+                    .getElementById('scrollable')
+                    ?.scrollTo({ top: 0, behavior: 'smooth' }),
+                400
+              )
             }}
             className={`w-6 h-6 ${latest.match(path) ? 'text-white' : 'text-opacity-50'} hover:text-gray-300 transition-colors hover:drop-shadow`}
             key={'nav-link-' + index}

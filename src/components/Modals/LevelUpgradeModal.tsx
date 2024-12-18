@@ -12,9 +12,11 @@ import handleError from 'helpers/handleError'
 import { upgradeLevel } from 'helpers/api/placeBet'
 import ScalrCoin from 'components/icons/coins/ScalrCoin'
 import Check from 'components/icons/Check'
-import Star from 'components/icons/Star'
 import formatUSA from 'helpers/formatters/formatUSA'
 import { successConfetti } from 'helpers/shootConfetti'
+import handleStarPayment from 'helpers/telegram/handleStarPayment'
+import { oneLevelInvoiceLink } from 'helpers/atoms/UserStates'
+import PillAmount from 'components/PillAmount'
 
 function ModalBody() {
   const user = useAtomValue(UserAtom)
@@ -31,7 +33,7 @@ function ModalBody() {
         </BodyText>
 
         <div className="flex flex-row gap-x-2">
-          <Check className="mr-1" />
+          <Check className="mr-1 text-accent" />
 
           <span className="line-through text-white/50">
             {user.level.betWin}
@@ -44,7 +46,7 @@ function ModalBody() {
         </div>
 
         <div className="flex flex-row gap-x-2">
-          <Check className="mr-1" />
+          <Check className="mr-1 text-accent" />
 
           <span className="line-through text-white/50">
             {user.level.betLoss}
@@ -95,46 +97,42 @@ function ModalFooter() {
       handleError({ e, toastMessage: 'Failed to upgrade' })
     } finally {
       setPointsLoading(false)
-      setStarsLoading(false)
     }
   }, [disabled, setUser])
+
+  const onStarsUpgrade = useCallback(async () => {
+    try {
+      setStarsLoading(true)
+      await handleStarPayment({ link: oneLevelInvoiceLink })
+    } catch (e) {
+      handleError({ e, toastMessage: 'Failed to upgrade' })
+    } finally {
+      setStarsLoading(false)
+    }
+  }, [])
 
   return (
     <div className="flex flex-col gap-y-4">
       <Button
-        onClick={() => {
-          setStarsLoading(true)
-          void onPointsUpgrade()
-        }}
+        onClick={onStarsUpgrade}
         buttonType={ButtonTypes.secondary}
         isLoading={starsLoading}
         disabled={pointsLoading}
-        className="h-12.5 hidden"
-        iconRight={
-          <div className="flex flex-row gap-x-1 items-center rounded-full bg-tertiary pl-1 pr-2 py-1">
-            <Star size={20} />
-            <BodyText className="font-semibold text-sm text-white">50</BodyText>
-          </div>
-        }
+        className="h-12.5"
+        iconRight={<PillAmount amount="100" />}
       >
         Upgrade for
       </Button>
       <Button
-        onClick={() => {
-          setPointsLoading(true)
-          void onPointsUpgrade()
-        }}
+        onClick={onPointsUpgrade}
         buttonType={ButtonTypes.secondary}
         isLoading={pointsLoading}
         disabled={disabled || starsLoading}
         className="h-12.5"
         iconRight={
-          <div className="flex flex-row gap-x-1 items-center rounded-full bg-tertiary pl-1 pr-2 py-1">
-            <ScalrCoin size={20} />
-            <BodyText className="font-semibold text-sm text-white">
-              {formatUSA(user?.level.betUpgradePrice || 0)}
-            </BodyText>
-          </div>
+          <PillAmount amount={formatUSA(user?.level.betUpgradePrice || 0)}>
+            <ScalrCoin size={16} />
+          </PillAmount>
         }
       >
         Upgrade for

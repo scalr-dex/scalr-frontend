@@ -2,7 +2,7 @@ import Button from 'components/Button'
 import Step1 from 'components/Onboarding/Step1'
 import { useCallback, useState } from 'react'
 import { useSetAtom } from 'jotai'
-import didOnboardAtom from 'helpers/atoms/UserStates'
+import { didOnboardAtom } from 'helpers/atoms/UserStates'
 import Step2 from 'components/Onboarding/Step2'
 import { useAutoAnimate } from '@formkit/auto-animate/react'
 import Step3 from 'components/Onboarding/Step3'
@@ -63,6 +63,7 @@ export default function () {
             style={{ width: 155, height: 155 }}
             src={stepToGif[step]}
             key={'step-img-' + step}
+            draggable={false}
           />
           {stepToComponent[step]}
         </div>

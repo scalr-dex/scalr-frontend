@@ -19,6 +19,7 @@ import { LogLevel } from '@amplitude/analytics-types'
 import env from 'helpers/env'
 import { setSentryUser } from 'helpers/api/sentry'
 import setupMiniApp from 'helpers/setupMiniApp'
+import { init } from '@telegram-apps/sdk-react'
 
 export default function () {
   const [appStatus, setAppStatus] = useState(AppStatus.loading)
@@ -64,6 +65,7 @@ export default function () {
           setupMiniApp()
           setSentryUser(userId)
         }
+        init()
         setAppStatus(AppStatus.isTma)
       } else {
         setAppStatus(AppStatus.isElse)
@@ -88,6 +90,8 @@ async function setupUser() {
       searchParams: { code: initData.startParam || '' },
     })
 
+    const res = await response.json<ServerUser>()
+
     const {
       ticket,
       claim_amount,
@@ -101,6 +105,7 @@ async function setupUser() {
       last_login_date,
       nickname_claim_available,
       bet_energy_left,
+      multiplier_count,
       bet_level,
       bet_loss,
       bet_size,
@@ -108,7 +113,8 @@ async function setupUser() {
       bet_win,
       can_claim_daily_reward,
       points,
-    } = await response.json<ServerUser>()
+      premium_end_date,
+    } = res
 
     const clientUser: ClientUser = {
       ticket,
@@ -127,6 +133,8 @@ async function setupUser() {
       lastLoginDate: new Date(last_login_date),
       nicknameClaimAvailable: nickname_claim_available,
       betEnergy: bet_energy_left,
+      boosts: multiplier_count,
+      premiumEndDate: new Date(premium_end_date),
       level: {
         current: bet_level,
         betSize: bet_size,

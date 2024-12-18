@@ -18,10 +18,7 @@ function ModalBody() {
         <br />
         <p>Come back tomorrow for a fresh boost.</p>
         <br />
-        <p>
-          Meanwhile, there are other ways to stack points toward the $SCR
-          airdrop 👀
-        </p>
+        <p>Meanwhile, there are other ways to stack points 👀</p>
       </BodyText>
     </div>
   )
@@ -56,7 +53,7 @@ function ModalFooter({ onClose }: { onClose: () => void }) {
   )
 }
 
-export default function (props: DefaultModalProps) {
+export default function(props: DefaultModalProps) {
   return (
     <DefaultModal
       {...props}

@@ -4,16 +4,10 @@ import DefaultModal from 'components/Modals/DefaultModal'
 import ButtonTypes from 'type/Button'
 import { DefaultModalProps } from 'type/Props'
 import UserAtom from 'helpers/atoms/UserAtom'
-import { useAtom, useAtomValue, useSetAtom } from 'jotai'
-import { useCallback, useEffect, useState } from 'react'
-import { getDailyStreak } from 'helpers/api/dailyReward'
-import handleError from 'helpers/handleError'
-import dayjs from 'dayjs'
-import useCountDown from 'helpers/hooks/useCountDown'
+import { useAtomValue } from 'jotai'
 import ImageAnimatedOnLoad from 'components/ImageAnimatedOnLoad'
-import didOnboardAtom, { onboardedS2Atom } from 'helpers/atoms/UserStates'
 import MotionNumber from '@number-flow/react'
-import modalsAtom, { AvailableModals } from 'helpers/atoms/modalsAtom'
+import useTimeToDailyStreak from 'helpers/hooks/useTimeToDailyStreak'
 
 function ModalBody() {
   const user = useAtomValue(UserAtom)
@@ -41,48 +35,7 @@ function ModalBody() {
 }
 
 function ModalFooter() {
-  const setModal = useSetAtom(modalsAtom)
-  const didOnboard = useAtomValue(didOnboardAtom)
-  const onboardedS2 = useAtomValue(onboardedS2Atom)
-  const [loading, setLoading] = useState(false)
-  const [user, setUser] = useAtom(UserAtom)
-  const [time, setTime] = useState(
-    dayjs(user?.lastLoginDate).utc().endOf('day').diff(dayjs().utc(), 'seconds')
-  )
-
-  useCountDown(setTime)
-
-  const onClick = useCallback(async () => {
-    try {
-      setLoading(true)
-      const { last_login_date, login_days } = await getDailyStreak()
-      setUser((prev) =>
-        prev
-          ? {
-              ...prev,
-              lastLoginDate: new Date(last_login_date),
-              loginDays: login_days,
-            }
-          : null
-      )
-
-      setTime(
-        dayjs(last_login_date).utc().endOf('day').diff(dayjs().utc(), 'seconds')
-      )
-    } catch (e) {
-      handleError({ e })
-    } finally {
-      setLoading(false)
-    }
-  }, [setUser])
-
-  const disabled = time > 0
-
-  useEffect(() => {
-    if (disabled || !onboardedS2 || !didOnboard) return
-    setModal(AvailableModals.dailyStreak)
-    setTimeout(onClick, 300)
-  }, [disabled, setModal, onClick, didOnboard, onboardedS2])
+  const { disabled, onClick, loading, formatted } = useTimeToDailyStreak(true)
 
   return (
     <Button
@@ -91,7 +44,7 @@ function ModalFooter() {
       isLoading={loading}
       disabled={disabled}
     >
-      {disabled ? dayjs({ seconds: time }).format('HH:mm:ss') : 'Continue'}
+      {disabled ? formatted : 'Continue'}
     </Button>
   )
 }

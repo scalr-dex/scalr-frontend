@@ -1,4 +1,9 @@
-export default function ({ size = 16 }: { size?: number }) {
+import { OnClickPropVoid } from 'type/Props'
+
+export default function ({
+  size = 16,
+  onClick,
+}: { size?: number } & OnClickPropVoid) {
   return (
     <svg
       width={size}
@@ -6,6 +11,7 @@ export default function ({ size = 16 }: { size?: number }) {
       viewBox="0 0 16 16"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
+      onClick={onClick}
     >
       <path
         d="M12 7.33301C12 5.44767 12 4.50434 11.414 3.91901C10.8287 3.33301 9.88533 3.33301 8 3.33301H6C4.11467 3.33301 3.17133 3.33301 2.586 3.91901C2 4.50434 2 5.44767 2 7.33301V10.6663C2 12.5517 2 13.495 2.586 14.0803C3.17133 14.6663 4.11467 14.6663 6 14.6663H8C9.88533 14.6663 10.8287 14.6663 11.414 14.0803C12 13.495 12 12.5517 12 10.6663V7.33301Z"

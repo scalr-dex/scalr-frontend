@@ -45,8 +45,12 @@ function ModalBody() {
     : leagueToComponent[data.league]
 
   return (
-    <>
-      <ImageAnimatedOnLoad src="img/utya-win.png" forModal />
+    <div>
+      <ImageAnimatedOnLoad
+        src="img/utya-win.png"
+        className="mx-auto"
+        forModal
+      />
       <div className="flex flex-col gap-y-4">
         <Header2>Season 1 is over</Header2>
         <BodyText>Here are your stats:</BodyText>
@@ -88,7 +92,7 @@ function ModalBody() {
         </StatsSection>
       </div>
       <ScrollFadeOverlay />
-    </>
+    </div>
   )
 }
 

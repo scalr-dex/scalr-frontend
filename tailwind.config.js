@@ -45,6 +45,7 @@ module.exports = {
         '1/5': '20%',
         '4/5': '80%',
         1.25: '0.3125rem',
+        7.5: '1.875rem',
         12.5: '3.125rem',
         14.5: '3.625rem',
         'safe-bottom': 'var(--safe-area-bottom)',
@@ -88,6 +89,7 @@ module.exports = {
       },
       colors: {
         primary: '#0E121B',
+        'primary-dark': '#121721',
         secondary: '#171D26',
         tertiary: '#1D232F',
 
@@ -95,14 +97,17 @@ module.exports = {
         'controls-tertiary-hover': '#3E4149',
         'controls-tertiary-focus': '#727B89',
         'controls-tertiary-disabled': '#2B343F',
+        'controls-input': '#1F2531',
 
         accent: '#4374EC',
         'accent-hover': '#6D9EFC',
         'accent-focus': '#427AE4',
         'accent-disabled': '#345FB2',
         'accent-dimmed': '#B1C9F7',
+        'accent-dimmed-dark': '#93C5FD',
         'accent-dark': '#133D8D',
         'accent-alt': '#00FFFF',
+        'accent-alt-bg': '#113D3D',
         success: '#23CFB2',
         'success-light': '#CBECDE',
         'success-alt': '#E5FCB4',
@@ -110,6 +115,7 @@ module.exports = {
         error: '#F3617D',
 
         alt: '#FFE792',
+        'alt-dimmed': '#FFDB58',
         'alt-hover': '#d9c47c',
         'alt-active': '#baa96b',
         'alt-dark': '#FF9341',

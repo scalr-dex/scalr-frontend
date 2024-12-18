@@ -1,4 +1,4 @@
-import { useHapticFeedback } from '@telegram-apps/sdk-react'
+import { hapticFeedbackImpactOccurred } from '@telegram-apps/sdk-react'
 import { HTMLAttributes } from 'react'
 import { ChildrenProp } from 'type/Props'
 
@@ -68,7 +68,7 @@ export function BodyText({
   ...props
 }: ChildrenProp & HTMLAttributes<HTMLSpanElement>) {
   return (
-    <span {...props} className={className}>
+    <span {...props} className={`font-accent ${className}`}>
       {children}
     </span>
   )
@@ -85,14 +85,13 @@ export function SpecialText({
     leftIcon?: JSX.Element
     withShadow?: boolean
   }) {
-  const haptic = useHapticFeedback()
   const shadow = withShadow ? 'shadow-special' : ''
 
   return (
     <span
       {...props}
       className={`inline-block mx-2 py-2 px-4 rounded-full font-bold hover:scale-105 active:scale-105 transition-all ${className} ${shadow}`}
-      onClick={() => haptic.impactOccurred('heavy')}
+      onClick={() => hapticFeedbackImpactOccurred('heavy')}
     >
       <span className="inline-block mr-1.5 align-middle">{leftIcon}</span>
       {children}

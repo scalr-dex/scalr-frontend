@@ -15,6 +15,9 @@ import BetEnergy from 'components/Main/BetEnergy'
 import modalsAtom, { AvailableModals } from 'helpers/atoms/modalsAtom'
 import LevelUpgrade from 'components/Main/LevelUpgrade'
 import DailyClaim from 'components/Main/DailyClaim'
+import BoostPoints from 'components/Main/BoostPoints'
+import BoostStates from 'type/BoostStates'
+import { boostStateAtom } from 'helpers/atoms/UserStates'
 
 export default function ({
   loading,
@@ -28,6 +31,7 @@ export default function ({
   const [userBet, setUserBet] = useAtom(userBetAtom)
   const [processingBet, setProcessingBet] = useState(false)
   const setModal = useSetAtom(modalsAtom)
+  const [boostState, setBoostState] = useAtom(boostStateAtom)
 
   const disabled = loading || processingBet || !userBalance
 
@@ -46,7 +50,10 @@ export default function ({
 
       setProcessingBet(true)
 
-      const success = await placeBet({ direction })
+      const shouldBoost = boostState === BoostStates.activated
+      setBoostState(shouldBoost ? BoostStates.locked : BoostStates.betNoBoost)
+
+      const success = await placeBet({ direction, shouldBoost })
 
       setProcessingBet(false)
       if (!success) {
@@ -62,19 +69,31 @@ export default function ({
       })
       setTimeout(() => setUserBet(null), roundDurationMs)
     },
-    [roundStart, user, userBalance, setUser, setUserBet, setModal]
+    [
+      roundStart,
+      user,
+      userBalance,
+      boostState,
+      setBoostState,
+      setUser,
+      setUserBet,
+      setModal,
+    ]
   )
 
   return (
     <div className="flex flex-col h-28 gap-y-5 px-4">
       <div className="flex flex-row items-center justify-between">
-        <div className="flex flex-row gap-x-2">
+        <div className="flex flex-row items-center gap-x-2">
           <Points amount={userBalance} />
           <LevelUpgrade />
           <BetEnergy betEnergy={user?.betEnergy} />
         </div>
 
-        <DailyClaim />
+        <div className="flex flex-row items-center gap-x-1.5">
+          <BoostPoints boosts={user?.boosts} />
+          <DailyClaim />
+        </div>
       </div>
       {userBet ? (
         <div className="flex flex-col gap-y-2">
@@ -87,7 +106,7 @@ export default function ({
                 <b className="text-success">UP</b>
               )}
             </BodyText>
-            <Timer endTime={userBet.endTime} className="w-16" />
+            <Timer diffTime={userBet.endTime} className="w-16" />
           </div>
         </div>
       ) : (
@@ -99,7 +118,7 @@ export default function ({
             onClick={() => onBet(BetDirection.long)}
             className="border-2 border-white/50 py-2"
           >
-            Higher
+            <BodyText>Higher</BodyText>
           </Button>
           <Button
             buttonType={ButtonTypes.error}
@@ -108,7 +127,7 @@ export default function ({
             onClick={() => onBet(BetDirection.short)}
             className="border-2 border-white/50 py-2"
           >
-            Lower
+            <BodyText>Lower</BodyText>
           </Button>
         </div>
       )}

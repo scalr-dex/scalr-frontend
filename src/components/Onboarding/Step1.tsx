@@ -18,9 +18,9 @@ export default function () {
         </SpecialText>
       </Header1>
 
-      <AccentText className="flex w-full justify-center text-center mt-5">
+      {/* <AccentText className="flex w-full justify-center text-center mt-5">
         Guess correctly to win x2 or lose the half.
-      </AccentText>
+      </AccentText> */}
     </div>
   )
 }

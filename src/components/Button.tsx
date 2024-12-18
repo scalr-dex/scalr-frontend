@@ -1,4 +1,4 @@
-import { useHapticFeedback } from '@telegram-apps/sdk-react'
+import { hapticFeedbackImpactOccurred } from '@telegram-apps/sdk-react'
 import Loader from 'components/Loader'
 import { useCallback } from 'react'
 import ButtonTypes, { buttonClassNames, ButtonProps } from 'type/Button'
@@ -15,7 +15,6 @@ export default function ({
   haptic = 'medium',
   ...buttonProps
 }: ButtonProps) {
-  const impact = useHapticFeedback()
   const content = (
     <>
       {iconLeft}
@@ -29,9 +28,9 @@ export default function ({
       if (isLoading || disabled) return
 
       buttonProps.onClick?.(e)
-      if (haptic) impact.impactOccurred(haptic)
+      if (haptic) hapticFeedbackImpactOccurred(haptic)
     },
-    [buttonProps, disabled, haptic, impact, isLoading]
+    [buttonProps, disabled, haptic, isLoading]
   )
 
   const buttonStyles = buttonClassNames(disabled)[buttonType]
@@ -41,7 +40,7 @@ export default function ({
       {...buttonProps}
       disabled={disabled}
       onClick={onClick}
-      className={`flex flex-row gap-x-2 items-center justify-center w-full rounded-full p-4 transition-colors font-semibold outline-none ${buttonStyles} ${className}`}
+      className={`flex flex-row gap-x-2 items-center justify-center w-full rounded-full p-4 transition-all font-semibold outline-none ${buttonStyles} ${className}`}
     >
       {isLoading ? <Loader size={24} /> : content}
     </button>

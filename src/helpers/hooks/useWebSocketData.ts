@@ -3,7 +3,7 @@ import { useSetAtom } from 'jotai'
 import { useEffect } from 'react'
 import analyzeMessage from 'helpers/api/webSocket'
 import priceHistoryAtom from 'helpers/atoms/priceHistoryAtom'
-import balanceChangeToast from 'helpers/sendToast'
+import handleBalanceChange from 'helpers/onBalanceChange'
 
 const dataMaxLength = 40
 
@@ -26,7 +26,7 @@ export default function (socket: WebSocket) {
           balance.event === 'BetWon' || balance.event === 'BetLost'
 
         if (betChange) {
-          balanceChangeToast(balance.delta, balance.event === 'BetLost')
+          handleBalanceChange(balance.delta, balance.event === 'BetLost')
           setUserBet(null)
         }
       }
