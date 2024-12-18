@@ -32,12 +32,8 @@ export default function ({ boosts = 0 }: { boosts: number | undefined }) {
   }, [activatedOrLocked, boosts, setBoostState, state])
 
   const onClick = useCallback(() => {
-    if (
-      !boosts ||
-      state === BoostStates.disabled ||
-      state === BoostStates.locked ||
-      state === BoostStates.betNoBoost
-    ) {
+    if (state === BoostStates.locked || state === BoostStates.betNoBoost) return
+    if (!boosts || state === BoostStates.disabled) {
       setShowModal(AvailableModals.boostModal)
       return
     }

@@ -2,7 +2,6 @@ import NoisyCardBig from 'components/NoisyCardBig'
 import NoisyCard from 'components/NoisyCard'
 import NoisyCardSmall from 'components/NoisyCardSmall'
 import PerpCardBlur from 'components/icons/PerpCardBlur'
-import ScalrCoin from 'components/icons/coins/ScalrCoin'
 import StonksCircle from 'components/icons/StonksCircle'
 import Feedback from 'components/icons/Feedback'
 import Triangle from 'components/icons/socials/Triangle'
@@ -44,33 +43,13 @@ export default function () {
         <PerpCardBlur />
       </NoisyCard>
 
-      {/* <NoisyCard
-        style={{
-          background:
-            'url(img/noise-effect.png), linear-gradient(to top, var(--accent-dark), var(--secondary), var(--secondary))',
-        }}
-        onClick={() => setModal(AvailableModals.airdropInfo)}
-        className="relative p-4 h-full justify-evenly"
-      >
-        <NoisyCardBig
-          header="Scalr Airdrop"
-          subHeader="Take part in $SCR airdrop distribution."
-          smallIcon={<ScalrCoin size={44} />}
-        />
-        <img
-          src="img/dex-scalr-3d.png"
-          className="mx-auto h-32"
-          draggable={false}
-        />
-      </NoisyCard> */}
-
       <div className="flex flex-row gap-x-4 h-full">
         <NoisyCard
           style={{
             background:
               'url(img/noise-effect.png), linear-gradient(to right, #6CCAF2, #11A5E4) padding-box',
           }}
-          className="h-full p-2.5 border-5 border-white-16 shadow-inner-card-glow"
+          className="h-44 p-2.5 border-5 border-white-16 shadow-inner-card-glow"
           onClick={() => setModal(AvailableModals.triangleAccelerated)}
         >
           <NoisyCardSmall
@@ -89,7 +68,7 @@ export default function () {
             background:
               'url(img/noise-effect.png), linear-gradient(to right, #3284FE, #0B54E3) padding-box',
           }}
-          className="h-full p-2.5 border-5 border-white-16 shadow-inner-card-glow"
+          className="h-44 p-2.5 border-5 border-white-16 shadow-inner-card-glow"
           onClick={() => setModal(AvailableModals.partnershipInfo)}
         >
           <NoisyCardSmall

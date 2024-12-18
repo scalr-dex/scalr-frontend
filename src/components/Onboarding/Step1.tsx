@@ -1,5 +1,5 @@
 import LogoIcon from 'components/icons/LogoIcon'
-import { AccentText, Header1, SpecialText } from 'components/Text'
+import { Header1, SpecialText } from 'components/Text'
 import { SparklesLeft, SparklesRight } from 'components/Onboarding/Sparkles'
 
 export default function () {
@@ -17,10 +17,6 @@ export default function () {
           <SparklesRight />
         </SpecialText>
       </Header1>
-
-      {/* <AccentText className="flex w-full justify-center text-center mt-5">
-        Guess correctly to win x2 or lose the half.
-      </AccentText> */}
     </div>
   )
 }

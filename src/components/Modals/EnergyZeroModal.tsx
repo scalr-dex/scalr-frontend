@@ -53,7 +53,7 @@ function ModalFooter({ onClose }: { onClose: () => void }) {
   )
 }
 
-export default function(props: DefaultModalProps) {
+export default function (props: DefaultModalProps) {
   return (
     <DefaultModal
       {...props}

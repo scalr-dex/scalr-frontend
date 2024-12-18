@@ -12,7 +12,7 @@ export default function () {
         background:
           'url(img/noise-effect.png), linear-gradient(to top, var(--accent-dark), var(--secondary), var(--secondary))',
       }}
-      className="shrink-0 rounded-2xl relative w-80 h-36 p-4 active:opacity-85 hover:opacity-90 transition-all will-change-transform cursor-pointer"
+      className="shrink-0 rounded-2xl relative w-full h-36 p-4 active:opacity-85 hover:opacity-90 transition-all will-change-transform cursor-pointer"
     >
       <div className="flex flex-col gap-y-2">
         <Header3>Scalr Discovery</Header3>
@@ -23,7 +23,7 @@ export default function () {
 
       <img
         src="img/dex-scalr-2d.png"
-        className="w-64 self-center absolute bottom-2 -z-10"
+        className="w-64 self-center absolute bottom-2 left-1/2 -translate-x-1/2 -z-10"
         draggable={false}
       />
     </div>
