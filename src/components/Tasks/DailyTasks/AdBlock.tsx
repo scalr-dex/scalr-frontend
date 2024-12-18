@@ -1,4 +1,5 @@
 import TaskUi from 'components/Tasks/TaskUi'
+import adReward from 'helpers/api/adReward'
 import UserAtom from 'helpers/atoms/UserAtom'
 import env from 'helpers/env'
 import handleError from 'helpers/handleError'
@@ -25,16 +26,23 @@ export default function () {
   const [user, setUser] = useAtom(UserAtom)
   const hasAds = !!user?.remainingAds
 
-  const onReward = useCallback(() => {
-    setUser((prev) =>
-      prev ? { ...prev, remainingAds: prev.remainingAds - 1 } : null
-    )
-    toast.success(`Nice, you got ${rewardAmount} pts 😎`)
-  }, [setUser])
+  const onReward = useCallback(async () => {
+    if (!user?.telegramId) return
+
+    try {
+      await adReward(user.telegramId)
+      setUser((prev) =>
+        prev ? { ...prev, remainingAds: prev.remainingAds - 1 } : null
+      )
+      toast.success(`Nice, you got ${rewardAmount} pts 😎`)
+    } catch (e) {
+      handleError({ e, toastMessage: 'Error on reward, please message us ;(' })
+    }
+  }, [user?.telegramId, setUser])
 
   const onClick = useCallback(() => {
     window.showAd(env.VITE_SPOT_AD_KEY, onReward, (e) =>
-      handleError({ e, toastMessage: 'Failed to reward' })
+      handleError({ e, toastMessage: 'AD loading failed ;(' })
     )
   }, [onReward])
 
