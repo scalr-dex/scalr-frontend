@@ -5,7 +5,8 @@ export default cleanEnv(import.meta.env, {
   VITE_AMPLITUDE_API_KEY: str(),
   VITE_APP_BASE_LINK: str(),
   VITE_SENTRY_DSN: str(),
-  VITE_ANALYTICS_KEY: str({ default: 'G-EMH5CHPBXL' }),
+  VITE_ANALYTICS_KEY: str(),
   VITE_ADSGRAM_BLOCK_ID: num(),
+  VITE_SPOT_AD_KEY: str(),
   DEV: bool({ default: import.meta.env.DEV }),
 })
