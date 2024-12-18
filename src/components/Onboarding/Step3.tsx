@@ -1,4 +1,4 @@
-import Star from 'components/icons/Star'
+import StarOnboarding from 'components/icons/StarOnboarding'
 import { Header1 } from 'components/Text'
 
 export default function () {
@@ -8,7 +8,7 @@ export default function () {
         <p>Discover the next</p>
         <p>
           <span className="inline-block mr-2 text-accent">
-            <Star className="inline mr-2" />
+            <StarOnboarding className="inline mr-2" />
             gem
           </span>
           memecoins

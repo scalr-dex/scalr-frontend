@@ -3,10 +3,10 @@ import { Header2 } from 'components/Text'
 import DefaultModal from 'components/Modals/DefaultModal'
 import ButtonTypes from 'type/Button'
 import { DefaultModalProps } from 'type/Props'
-import Box from 'components/icons/Box'
+import ArrowTopSquareFilled from 'components/icons/ArrowTopSquareFilled'
+import StopwatchFilled from 'components/icons/StopwatchFilled'
+import ChattingFilled from 'components/icons/ChattingFilled'
 import IconWithTexts from 'components/IconWithTexts'
-import TimerIcon from 'components/icons/TimerIcon'
-import Maximize from 'components/icons/Maximize'
 import DexInfoStonks from 'components/DexInfoStonks'
 import PerpModalPinCode from 'components/PerpDex/PerpModalPinCode'
 import ScrollFadeOverlay from 'components/ScrollFadeOverlay'
@@ -18,18 +18,18 @@ const showCodeInputAtom = atom(false)
 
 const info = [
   {
-    icon: <Box />,
+    icon: <ArrowTopSquareFilled />,
     topText: 'Next x100 Memecoin Today',
     bottomText:
       'Effortlessly discover the next bluechip memecoins using Scalr discovery.',
   },
   {
-    icon: <TimerIcon />,
+    icon: <StopwatchFilled />,
     topText: 'Seamless Trading Inside',
     bottomText: 'Execute trades in under 1 second for early movers.',
   },
   {
-    icon: <Maximize />,
+    icon: <ChattingFilled />,
     topText: 'Community Mindset',
     bottomText:
       'Join chats, explore feeds, and discuss tokens with like-minded degens.',
