@@ -14,7 +14,7 @@ export default function () {
         </p>
         <p>and discover the next</p>
         <p className="inline-block">
-          memecoin <Gift className="inline mr-2" /> gems
+          memecoin <Gift className="inline mr-2" /> gems.
         </p>
       </Header3>
     </div>
