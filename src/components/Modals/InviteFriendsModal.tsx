@@ -73,7 +73,7 @@ function ModalFooter() {
   const onShare = useCallback(() => {
     shareURL(
       `${env.VITE_APP_BASE_LINK}?startapp=${telegramId}`,
-      '\nPlay with me, predict price movement, and get a token Airdrop!\n😋 +1k Points as a Daily claim gift\n🔥 +3k Points for a friend\n⭐️ +6k Points if a friend has Telegram Premium'
+      '\nPlay with me, predict price movement, and discover the next memecoin gems!\n😋 +1k Points as a Daily claim gift\n🔥 +3k Points for a friend\n⭐️ +6k Points if a friend has Telegram Premium'
     )
   }, [telegramId])
 
