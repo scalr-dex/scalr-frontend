@@ -8,15 +8,13 @@ export default function () {
       <Logo size={90} />
 
       <Header3 className="text-center">
-        <p>Play, complete tasks, and invite</p>
         <p>
-          friends to <span className="text-accent-alt">earn points</span> for
-          the
+          Play, invite friends,{' '}
+          <span className="text-accent-alt">earn points</span>
         </p>
-        <p>Scalr DEX massive</p>
+        <p>and discover the next</p>
         <p className="inline-block">
-          <Gift className="inline mr-2" />
-          airdrop
+          memecoin <Gift className="inline mr-2" /> gems.
         </p>
       </Header3>
     </div>

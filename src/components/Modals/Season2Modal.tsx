@@ -15,8 +15,7 @@ const bodyInfo = [
   {
     icon: <Bookmark />,
     topText: 'Saved Progress',
-    bottomText:
-      'Your achievements are saved and will count toward the final airdrop. Don’t worry.',
+    bottomText: 'Your achievements are saved and will count. Don’t worry.',
   },
   {
     icon: <MedalStar />,
