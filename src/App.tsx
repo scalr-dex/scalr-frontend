@@ -26,6 +26,7 @@ import PerpDex from 'pages/PerpDex'
 import { lazy, Suspense } from 'react'
 import Modals from 'components/Modals'
 import Market from 'pages/Market'
+import { SpotAdsProvider } from 'spot-ads-react'
 
 const Onboarding = lazy(() => import('pages/Onboarding'))
 
@@ -46,61 +47,63 @@ function AppInner({ socket }: { socket: WebSocket }) {
         }}
         uiPreferences={{ theme: THEME.DARK }}
       >
-        <Router hook={useHashLocation}>
-          <div
-            className="flex flex-col relative h-[100dvh] max-w-prose text-white z-0 mx-auto"
-            id="scrollable"
-            ref={parent}
-          >
-            <Switch>
-              {didOnboard ? (
-                <>
-                  <Route path="/market" component={Market} />
-                  <Route path="/tasks" component={Tasks} />
-                  <Route path="/leaderboards" component={LeaderBoards} />
+        <SpotAdsProvider apiKey={env.VITE_SPOT_AD_KEY}>
+          <Router hook={useHashLocation}>
+            <div
+              className="flex flex-col relative h-[100dvh] max-w-prose text-white z-0 mx-auto"
+              id="scrollable"
+              ref={parent}
+            >
+              <Switch>
+                {didOnboard ? (
+                  <>
+                    <Route path="/market" component={Market} />
+                    <Route path="/tasks" component={Tasks} />
+                    <Route path="/leaderboards" component={LeaderBoards} />
+                    <Route
+                      path="/perp"
+                      component={() => (
+                        <Suspense fallback={<Loader full />}>
+                          <PerpDex />
+                        </Suspense>
+                      )}
+                    />
+                    <Route path="/" component={Main} />
+                  </>
+                ) : (
                   <Route
-                    path="/perp"
+                    path="/"
                     component={() => (
-                      <Suspense fallback={<Loader full />}>
-                        <PerpDex />
+                      <Suspense fallback={<LoaderFullPage />}>
+                        <Onboarding />
                       </Suspense>
                     )}
                   />
-                  <Route path="/" component={Main} />
-                </>
-              ) : (
-                <Route
-                  path="/"
-                  component={() => (
-                    <Suspense fallback={<LoaderFullPage />}>
-                      <Onboarding />
-                    </Suspense>
-                  )}
-                />
-              )}
+                )}
 
-              <Redirect to="/" />
-              <Route path="/404" component={NotFound} />
-            </Switch>
-          </div>
-          {onboarded ? <BottomTabNavigator /> : null}
-          <ToastContainer
-            draggable
-            position="top-center"
-            pauseOnHover
-            pauseOnFocusLoss
-            closeOnClick
-            closeButton={false}
-            autoClose={3000}
-            theme="dark"
-            toastClassName="!bg-tertiary !rounded-xl !w-[96dvw] !ml-[2dvw] md:!w-full md:!ml-auto !max-w-prose !shadow-super !top-4 !font-semibold"
-            draggableDirection="y"
-            hideProgressBar
-            limit={3}
-            stacked
-          />
-          <Modals />
-        </Router>
+                <Redirect to="/" />
+                <Route path="/404" component={NotFound} />
+              </Switch>
+            </div>
+            {onboarded ? <BottomTabNavigator /> : null}
+            <ToastContainer
+              draggable
+              position="top-center"
+              pauseOnHover
+              pauseOnFocusLoss
+              closeOnClick
+              closeButton={false}
+              autoClose={3000}
+              theme="dark"
+              toastClassName="!bg-tertiary !rounded-xl !w-[96dvw] !ml-[2dvw] md:!w-full md:!ml-auto !max-w-prose !shadow-super !top-4 !font-semibold"
+              draggableDirection="y"
+              hideProgressBar
+              limit={3}
+              stacked
+            />
+            <Modals />
+          </Router>
+        </SpotAdsProvider>
       </TonConnectUIProvider>
     </QueryClientProvider>
   )

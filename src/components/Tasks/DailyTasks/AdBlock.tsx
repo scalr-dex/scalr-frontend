@@ -1,17 +1,16 @@
 import TaskUi from 'components/Tasks/TaskUi'
 import adReward from 'helpers/api/adReward'
 import UserAtom from 'helpers/atoms/UserAtom'
-import env from 'helpers/env'
 import handleError from 'helpers/handleError'
 import { useAtom } from 'jotai'
 import { useCallback } from 'react'
 import { toast } from 'react-toastify'
 import { iconNumberToComponent } from 'type/UserTask'
-import { useSpotAd, SpotAdsProvider } from 'spot-ads-react'
+import { useSpotAd } from 'spot-ads-react'
 
 const rewardAmount = 1000
 
-function AdTaskUi() {
+export default function AdBlock() {
   const { showAd } = useSpotAd()
 
   const [user, setUser] = useAtom(UserAtom)
@@ -51,13 +50,5 @@ function AdTaskUi() {
       onClick={onClick}
       disabled={!hasAds}
     />
-  )
-}
-
-export default function AdBlock() {
-  return (
-    <SpotAdsProvider apiKey={env.VITE_SPOT_AD_KEY}>
-      <AdTaskUi />
-    </SpotAdsProvider>
   )
 }
