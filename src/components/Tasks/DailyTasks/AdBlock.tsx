@@ -11,7 +11,7 @@ import { useSpotAd, SpotAdsProvider } from 'spot-ads-react'
 
 const rewardAmount = 1000
 
-export default function () {
+function AdTaskUi() {
   const { showAd } = useSpotAd()
 
   const [user, setUser] = useAtom(UserAtom)
@@ -43,15 +43,21 @@ export default function () {
   }, [onSuccess, showAd])
 
   return (
+    <TaskUi
+      icon={iconNumberToComponent(0)}
+      taskText="Watch short video"
+      rewardAmount={rewardAmount}
+      extraData={`Per each. ${user?.remainingAds} left today.`}
+      onClick={onClick}
+      disabled={!hasAds}
+    />
+  )
+}
+
+export default function AdBlock() {
+  return (
     <SpotAdsProvider apiKey={env.VITE_SPOT_AD_KEY}>
-      <TaskUi
-        icon={iconNumberToComponent(0)}
-        taskText="Watch short video"
-        rewardAmount={rewardAmount}
-        extraData={`Per each. ${user?.remainingAds} left today.`}
-        onClick={onClick}
-        disabled={!hasAds}
-      />
+      <AdTaskUi />
     </SpotAdsProvider>
   )
 }
