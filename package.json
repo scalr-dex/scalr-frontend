@@ -35,6 +35,7 @@
     "react-ga4": "^2.1.0",
     "react-pin-field": "^3.1.5",
     "react-toastify": "^10.0.5",
+    "spot-ads-react": "^0.3.0",
     "tailwindcss-animation-delay": "^2.0.1",
     "vaul": "^1.1.0",
     "wouter": "^3.3.1"
