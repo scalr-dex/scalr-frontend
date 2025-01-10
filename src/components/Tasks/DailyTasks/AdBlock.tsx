@@ -7,26 +7,17 @@ import { useAtom } from 'jotai'
 import { useCallback } from 'react'
 import { toast } from 'react-toastify'
 import { iconNumberToComponent } from 'type/UserTask'
-
-declare global {
-  interface Window {
-    showAd: (
-      apiKey: string,
-      onSuccess: () => void,
-      onError: (e: unknown) => void
-    ) => void
-  }
-}
-
-window.showAd = window.showAd || {}
+import { useSpotAd, SpotAdsProvider } from 'spot-ads-react'
 
 const rewardAmount = 1000
 
 export default function () {
+  const { showAd } = useSpotAd()
+
   const [user, setUser] = useAtom(UserAtom)
   const hasAds = !!user?.remainingAds
 
-  const onReward = useCallback(async () => {
+  const onSuccess = useCallback(async () => {
     if (!user?.telegramId) return
 
     try {
@@ -41,19 +32,26 @@ export default function () {
   }, [user?.telegramId, setUser])
 
   const onClick = useCallback(() => {
-    window.showAd(env.VITE_SPOT_AD_KEY, onReward, (e) =>
-      handleError({ e, toastMessage: 'AD loading failed ;(' })
-    )
-  }, [onReward])
+    showAd({
+      onSuccess,
+      onError: () =>
+        handleError({
+          e: 'Failed to show AD',
+          toastMessage: 'AD loading failed ;(',
+        }),
+    })
+  }, [onSuccess, showAd])
 
   return (
-    <TaskUi
-      icon={iconNumberToComponent(0)}
-      taskText="Watch short video"
-      rewardAmount={rewardAmount}
-      extraData={`Per each. ${user?.remainingAds} left today.`}
-      onClick={onClick}
-      disabled={!hasAds}
-    />
+    <SpotAdsProvider apiKey={env.VITE_SPOT_AD_KEY}>
+      <TaskUi
+        icon={iconNumberToComponent(0)}
+        taskText="Watch short video"
+        rewardAmount={rewardAmount}
+        extraData={`Per each. ${user?.remainingAds} left today.`}
+        onClick={onClick}
+        disabled={!hasAds}
+      />
+    </SpotAdsProvider>
   )
 }
